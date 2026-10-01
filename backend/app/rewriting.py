@@ -16,6 +16,14 @@ from preprocessing.downstream import structure_chunks
 PROMPT_VERSION = 'rewrite-baseline-v1'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
+def model_options():
+    """Server-owned allowlist; the configured default remains available to older clients."""
+    default = os.getenv('OPENAI_REWRITE_MODEL', 'gpt-4.1-mini')
+    configured = os.getenv('OPENAI_REWRITE_MODELS', 'gpt-4.1-mini,gpt-4.1,gpt-4.1-nano')
+    models = list(dict.fromkeys([default, *(m.strip() for m in configured.split(',') if m.strip())]))
+    return {'default_model': default, 'models': models}
+
+
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
@@ -60,17 +68,23 @@ class Settings:
             raise ValueError('Invalid rewrite prices')
 
     @classmethod
-    def from_env(cls):
+    def from_env(cls, selected_model=None):
         def price(name):
             return float(os.environ[name]) if os.environ.get(name) else None
-        return cls(model=os.getenv('OPENAI_REWRITE_MODEL', cls.model),
+        options = model_options()
+        model = selected_model or options['default_model']
+        if model not in options['models']:
+            raise ValueError('Model is not enabled on this server')
+        # Global price configuration applies only to the configured default model.
+        default_pricing = model == options['default_model']
+        return cls(model=model,
                    context_tokens=int(os.getenv('REWRITE_CONTEXT_TOKENS', '16000')),
                    output_tokens=int(os.getenv('REWRITE_OUTPUT_TOKENS', '4000')),
                    timeout=float(os.getenv('REWRITE_TIMEOUT_SECONDS', '45')),
                    retries=int(os.getenv('REWRITE_MAX_RETRIES', '1')),
                    max_calls=int(os.getenv('REWRITE_MAX_CALLS', '12')),
-                   input_price=price('REWRITE_INPUT_USD_PER_MILLION'),
-                   output_price=price('REWRITE_OUTPUT_USD_PER_MILLION'))
+                   input_price=price('REWRITE_INPUT_USD_PER_MILLION') if default_pricing else None,
+                   output_price=price('REWRITE_OUTPUT_USD_PER_MILLION') if default_pricing else None)
 
 class RewriteFailure(Exception):
     def __init__(self, status, message):
@@ -111,7 +125,7 @@ def validate_edits(proposal, document, chunk, allow_structure):
             raise RewriteFailure('unsupported_output', 'Model flagged unsupported additions or missing evidence; no draft applied.')
 
 
-def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None):
+def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None):
     start = time.monotonic()
     accumulated_flags = []
     telemetry = {'prompt_version': PROMPT_VERSION, 'model': None, 'status': 'started', 'calls': 0,
@@ -125,7 +139,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                 'Human review required: source quotes do not prove factual entailment.',
                 'Markdown content proposal; source HTML/CSS is not patched.'], **extra}
     try:
-        settings = settings or Settings.from_env()
+        settings = settings or Settings.from_env(model)
         telemetry['model'] = settings.model
         if document['selection']['status'] == 'source_insufficient' or not chunks or not any(editable(b) and b['type']=='paragraph' for b in document['blocks']):
             raise RewriteFailure('source_insufficient', 'Insufficient editable source prose; choose a fuller source snapshot.')

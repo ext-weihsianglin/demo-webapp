@@ -1,12 +1,11 @@
 """Upstream retention extraction, mock grading and OpenAI baseline rewriting."""
-from app.rewriting import rewrite
+from app.rewriting import rewrite, model_options
 from urllib.parse import urlparse
 from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, field_validator, model_validator
 from app.examples import catalog, load_example
 from app.extraction import UPSTREAM, extract_document, section_view
-from preprocessing.blocks import blocks_to_markdown
 
 app = FastAPI(title="Content Studio", version="0.1.0")
 
@@ -53,6 +52,15 @@ class Source(BaseModel):
         return self
 
 class DraftRequest(Source):
+    model: str | None = Field(default=None, min_length=1, max_length=200)
+
+    @field_validator('model')
+    @classmethod
+    def validate_model(cls, value):
+        if value is not None and value not in model_options()['models']:
+            raise ValueError('Choose a rewrite model enabled on this server')
+        return value
+
     allow_structure: bool = False
     tone: Literal["Preserve original", "More formal", "More conversational"] = "Preserve original"
 
@@ -60,6 +68,10 @@ class DraftRequest(Source):
 @app.get('/api/health')
 def health():
     return {"status": "ok", "mode": "openai", "grading_mode": "mock", "extraction": "retention-first-v1", "upstream_revision": UPSTREAM["revision"], "package_version": UPSTREAM["package_version"]}
+
+@app.get('/api/rewrite-models')
+def rewrite_models():
+    return model_options()
 
 @app.get('/api/examples')
 def examples():
@@ -109,7 +121,7 @@ def analyze(source: Source):
 @app.post('/api/draft')
 def draft(source: DraftRequest):
     analysis = analyze(source)
-    result = rewrite(analysis['document'], analysis['chunks'], source.query, source.tone, source.allow_structure)
+    result = rewrite(analysis['document'], analysis['chunks'], source.query, source.tone, source.allow_structure, model=source.model)
     result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
     if result['status'] != 'succeeded':
         code = 422 if result['status'] in ('source_insufficient', 'context_limit', 'abstained') else 503 if result['status'] == 'missing_credentials' else 502
