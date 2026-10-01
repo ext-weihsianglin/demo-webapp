@@ -19,7 +19,7 @@ PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text
 def model_options():
     """Server-owned allowlist; the configured default remains available to older clients."""
     default = os.getenv('OPENAI_REWRITE_MODEL', 'gpt-4.1-mini')
-    configured = os.getenv('OPENAI_REWRITE_MODELS', 'gpt-4.1-mini,gpt-4.1,gpt-4.1-nano')
+    configured = os.getenv('OPENAI_REWRITE_MODELS', 'gpt-4.1-mini,gpt-4.1,gpt-4.1-nano,gpt-5.6-sol,gpt-5.6-terra,gpt-5.6-luna,gpt-6-sol,gpt-6.1-sol,gpt-6-luna,gpt-6-astra')
     models = list(dict.fromkeys([default, *(m.strip() for m in configured.split(',') if m.strip())]))
     return {'default_model': default, 'models': models}
 
@@ -213,6 +213,8 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
         return finish(exc.status, exc.message)
     except (ValidationError, ValueError, TypeError):
         return finish('invalid_output', 'Invalid model output or server rewrite configuration; no draft applied.')
-    except APIError:
+    except APIError as exc:
         telemetry['usage_complete'] = False
+        if getattr(exc, 'code', None) == 'model_not_found':
+            return finish('model_unavailable', f'The server credentials cannot access {settings.model}. Choose another model or configure credentials with model access; no draft applied.')
         return finish('api_error', 'OpenAI request failed or timed out. Check server configuration and retry; no draft applied.')

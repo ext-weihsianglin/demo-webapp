@@ -13,7 +13,7 @@ def model_config(monkeypatch):
     monkeypatch.setenv('OPENAI_REWRITE_MODEL','gpt-4.1-mini')
     monkeypatch.delenv('OPENAI_REWRITE_MODELS', raising=False)
 
-@pytest.mark.parametrize('selected', ['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano',None])
+@pytest.mark.parametrize('selected', ['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-sol','gpt-6.1-sol','gpt-6-luna','gpt-6-astra',None])
 def test_dropdown_model_routes_to_client_and_telemetry(selected, monkeypatch):
     from app import main
     stub=StubClient()
@@ -48,3 +48,28 @@ def test_default_price_estimate_does_not_apply_to_other_models(monkeypatch):
     assert Settings.from_env('gpt-4.1-mini').input_price==1
     alternate=Settings.from_env('gpt-4.1')
     assert alternate.input_price is alternate.output_price is None
+
+
+def test_default_catalog_includes_gpt_56_and_newer_families():
+    options=client.get('/api/rewrite-models').json()
+    assert options['default_model']=='gpt-4.1-mini'
+    assert options['models']==['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-sol','gpt-6.1-sol','gpt-6-luna','gpt-6-astra']
+
+
+def test_unavailable_model_reports_access_failure_without_provider_body(monkeypatch):
+    from types import SimpleNamespace
+    import httpx
+    from openai import PermissionDeniedError
+    from app import main
+    class Unavailable:
+        def __init__(self): self.responses=self
+        def create(self,**kwargs):
+            response=httpx.Response(403,request=httpx.Request('POST','https://api.openai.com/v1/responses'))
+            raise PermissionDeniedError('sensitive provider detail',response=response,
+                body={'code':'model_not_found','type':'invalid_request_error'})
+    monkeypatch.setattr(main,'rewrite',lambda *args,**kwargs:rewrite(*args,client=Unavailable(),**kwargs))
+    response=client.post('/api/draft',json={**PAYLOAD,'model':'gpt-5.6-sol'})
+    assert response.status_code==502
+    assert response.json()['detail']['status']=='model_unavailable'
+    assert 'cannot access gpt-5.6-sol' in response.json()['detail']['summary']
+    assert 'sensitive provider detail' not in response.text
