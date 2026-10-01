@@ -2,6 +2,10 @@
 
 A mock-first Next.js + FastAPI demo for source-grounded content optimization.
 
+## Project context for future sessions
+
+Read [project context and dated handoff](docs/project-context.md) for the current scaffold, proposed extraction/rewrite integration, model verification limits and the pending PR merge condition. Repository editing guidance lives in [AGENTS.md](AGENTS.md), with scoped instructions in [backend/AGENTS.md](backend/AGENTS.md) and [frontend/AGENTS.md](frontend/AGENTS.md).
+
 ## Run
 
 Requires Node.js 20.9+ and Python 3.11+. Install `uv` for Python dependency management.
