@@ -1,21 +1,35 @@
-"""Mock workflow adapters. No remote fetching or LLM calls."""
-import hashlib
-import re
+"""Upstream retention extraction, mock grading and OpenAI baseline rewriting."""
+from app.rewriting import rewrite, model_options
 from urllib.parse import urlparse
-from bs4 import BeautifulSoup
-from fastapi import FastAPI
+from typing import Literal
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, field_validator, model_validator
+from app.examples import catalog, load_example
+from app.extraction import UPSTREAM, extract_document, section_view
 
 app = FastAPI(title="Content Studio", version="0.1.0")
 
 class Source(BaseModel):
+    example_id: str | None = None
     query: str = Field(min_length=3, max_length=1000)
     href: str = Field(max_length=2048)
     hostname: str = Field(min_length=3, max_length=255)
-    content: str = Field(min_length=20, max_length=200000)
+    content: str = Field(min_length=20, max_length=8000000)
     format: str = "html"
 
-    @field_validator("query", "href", "hostname", "content")
+    @model_validator(mode="before")
+    @classmethod
+    def resolve_example(cls, values):
+        if isinstance(values, dict) and values.get("example_id"):
+            example = load_example(values["example_id"])
+            values = dict(values)
+            for key in ("href", "hostname", "content", "format"):
+                if key in values and values[key] != example[key]:
+                    raise ValueError("Example source is read-only. Switch to your own page to edit it.")
+                values[key] = example[key]
+        return values
+
+    @field_validator("query", "href", "hostname")
     @classmethod
     def trim(cls, value):
         if not value.strip():
@@ -29,91 +43,87 @@ class Source(BaseModel):
             raise ValueError("Page URL must be an HTTP or HTTPS URL")
         if parsed.hostname.lower().removeprefix("www.") != self.hostname.lower().removeprefix("www."):
             raise ValueError("Hostname must match the page URL")
-        if self.format not in ("html", "markdown"):
-            raise ValueError("Choose HTML or Markdown")
+        if self.format not in ("html", "markdown", "text"):
+            raise ValueError("Choose HTML, Markdown or text")
+        if not self.example_id and len(self.content) > 200000:
+            raise ValueError("Custom snapshots must be at most 200,000 characters")
         if len(self.content.strip()) < 20:
             raise ValueError("Add at least 20 characters of source content")
         return self
 
 class DraftRequest(Source):
+    model: str | None = Field(default=None, min_length=1, max_length=200)
+
+    @field_validator('model')
+    @classmethod
+    def validate_model(cls, value):
+        if value is not None and value not in model_options()['models']:
+            raise ValueError('Choose a rewrite model enabled on this server')
+        return value
+
     allow_structure: bool = False
-    tone: str = "Preserve original"
+    tone: Literal["Preserve original", "More formal", "More conversational"] = "Preserve original"
 
-
-def extract(content: str, format: str):
-    # Deliberately independent of the query and citation labels.
-    metadata = {}
-    sections = []
-    if format == "html":
-        soup = BeautifulSoup(content, "html.parser")
-        metadata = {"title": soup.title.get_text(' ', strip=True) if soup.title else "Untitled page",
-                    "description": next((m.get('content', '') for m in soup.find_all('meta') if m.get('name') == 'description'), '')}
-        for el in soup.select('script, style, nav, footer, header, noscript'):
-            el.decompose()
-        body = soup.find('main') or soup.find('article') or soup
-        for el in body.find_all(['h1', 'h2', 'h3', 'p', 'li', 'table']):
-            if el.find_parent(['li', 'table']):
-                continue
-            text = el.get_text(' ', strip=True)
-            if text:
-                sections.append({"id": f"block-{len(sections)+1}", "kind": el.name, "text": text})
-        if not sections and body.get_text(' ', strip=True):
-            sections = [{"id": "block-1", "kind": "p", "text": body.get_text(' ', strip=True)}]
-    else:
-        for line in content.splitlines():
-            if line.strip():
-                heading = re.match(r'^(#{1,3})\s+', line)
-                sections.append({"id": f"block-{len(sections)+1}", "kind": f'h{len(heading[1])}' if heading else 'p', "text": re.sub(r'^#{1,6}\s+', '', line).strip()})
-        metadata['title'] = next((s['text'] for s in sections if s['kind'] == 'h1'), 'Untitled page')
-    facts = [{"source_id": s['id'], "text": s['text'], "status": "Source statement · unverified"} for s in sections if s['kind'] in ('p', 'li', 'table')]
-    return metadata, sections, facts
 
 @app.get('/api/health')
 def health():
-    return {"status": "ok", "mode": "mock"}
+    return {"status": "ok", "mode": "openai", "grading_mode": "mock", "extraction": "retention-first-v1", "upstream_revision": UPSTREAM["revision"], "package_version": UPSTREAM["package_version"]}
+
+@app.get('/api/rewrite-models')
+def rewrite_models():
+    return model_options()
+
+@app.get('/api/examples')
+def examples():
+    return catalog()
+
+@app.get('/api/examples/{snapshot_id}')
+def example(snapshot_id: str):
+    return load_example(snapshot_id)
+
+def source_origin(source):
+    if not source.example_id:
+        return {"kind": "custom"}
+    item = load_example(source.example_id)
+    return {"kind": "example", "snapshot_id": item["snapshot_id"], "split": item["split"], "manifest_hash": item["manifest_hash"], "payload_hash": item["payload_hash"]}
 
 @app.post('/api/analyze')
 def analyze(source: Source):
-    metadata, sections, facts = extract(source.content, source.format)
-    headings = [s for s in sections if s['kind'].startswith('h')]
+    parsed, chunks = extract_document(source.content, source.format, source.href, source.hostname)
+    sections = [section_view(block) for block in parsed['blocks']]
+    facts = [{"source_id": block['block_id'], "text": block['text'], "status": "Source statement · unverified"}
+             for block in parsed['blocks'] if block['text'] and block['type'] in ('paragraph', 'table', 'quote', 'list_item')]
+    headings = [block for block in parsed['blocks'] if block['type'] == 'heading']
     structure = 38 if len(headings) < 2 else 76
-    return {"mode": "mock", "snapshot_id": hashlib.sha256((source.href + source.content).encode()).hexdigest()[:16],
-            "metadata": {**metadata, "href": source.href, "hostname": source.hostname, "format": source.format},
+    metadata = parsed['source_metadata']
+    display_title = metadata.get('title') or next((block['text'] for block in headings if block['heading_level'] == 1), 'Untitled page')
+    origin = source_origin(source)
+    if source.example_id:
+        if parsed['snapshot_id'] != source.example_id:
+            # The example catalog must use the same exact payload + URL identity.
+            raise HTTPException(503, "Example identity does not match the parsed snapshot.")
+        parsed['raw_payload_reference'] = origin
+    return {"mode": "mock", "snapshot_id": parsed['snapshot_id'], "source_origin": origin,
+            "extraction": {"engine": "content-optimization-system", "upstream_revision": UPSTREAM['revision'], "package_version": UPSTREAM['package_version'], **parsed['selection']},
+            "document": parsed, "chunks": chunks,
+            "metadata": {"title": display_title, "description": metadata.get('description') or '',
+                         "href": source.href, "hostname": source.hostname, "format": source.format},
             "sections": sections, "factoids": facts,
             "grades": [{"name": "Query alignment", "score": 58, "detail": "Mock: make the target question easier to locate."},
                        {"name": "Answer clarity", "score": 64, "detail": "Mock: lead with a concise, source-backed answer."},
                        {"name": "Structural integrity", "score": structure, "detail": "Demo heading-count heuristic; production grader not connected."}],
             "structure_recommended": structure < 50,
-            "word_count": len(' '.join(s['text'] for s in sections).split()),
-            "notes": ["Extraction uses a lightweight local adapter, not the phase 1 ensemble.", "Factoids are source statements, not independently verified facts.", "Scores are illustrative; no citation uplift is predicted."]}
+            "word_count": len(parsed['text'].split()),
+            "notes": ["Extraction uses the pinned upstream retention-first parser.",
+                      "Factoids are source statements, not independently verified facts.",
+                      "Grades remain mocked; rewriting uses OpenAI. No citation uplift is predicted."]}
 
 @app.post('/api/draft')
 def draft(source: DraftRequest):
     analysis = analyze(source)
-    blocks = analysis['sections']
-    title = source.query.strip().rstrip('?')
-    if source.tone == 'More formal':
-        title = 'A guide to: ' + title[0].lower() + title[1:]
-    elif source.tone == 'More conversational':
-        title = "Let’s explore: " + title[0].lower() + title[1:]
-    rendered = []
-    changes = []
-    replaced = False
-    for block in blocks:
-        text = block['text']
-        kind = block['kind']
-        if kind == 'h1' and not replaced:
-            changes.append({"before": text, "after": title, "reason": "Align the page title with the target question.", "source_id": block['id']})
-            text = title
-            replaced = True
-        rendered.append(('#' * int(kind[1]) + ' ' if kind.startswith('h') else '- ' if kind == 'li' else '') + text)
-    if not replaced:
-        rendered.insert(0, '# ' + title)
-        changes.append({"before": '(No page heading)', "after": title, "reason": "Proposed heading for the draft; review before applying.", "source_id": "metadata"})
-    if source.allow_structure and analysis['structure_recommended']:
-        rendered.insert(1, '## At a glance')
-        changes.append({"before": '(No section heading)', "after": 'At a glance', "reason": "Optional grouping because the mock structural score is low.", "source_id": "structure"})
-    return {"mode": "mock", "markdown": '\n\n'.join(rendered), "changes": changes,
-            "summary": "Deterministic preview: title and optional heading edits only. Body claims are retained verbatim. Connect the optimizer to generate substantive rewrites.",
-            "preservation": ["Source statements retained", "No new product claims", "Original CSS and assets untouched"],
-            "review_items": ["Verify source claims before publication.", "This export is a Markdown content proposal, not a restyled or patched HTML page."]}
+    result = rewrite(analysis['document'], analysis['chunks'], source.query, source.tone, source.allow_structure, model=source.model)
+    result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
+    if result['status'] != 'succeeded':
+        code = 422 if result['status'] in ('source_insufficient', 'context_limit', 'abstained') else 503 if result['status'] == 'missing_credentials' else 502
+        raise HTTPException(code, detail=result)
+    return result
