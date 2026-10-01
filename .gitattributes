@@ -1,0 +1,2 @@
+# Unified patches use a single-space prefix for empty context lines.
+backend/packages/*.patch whitespace=-blank-at-eol

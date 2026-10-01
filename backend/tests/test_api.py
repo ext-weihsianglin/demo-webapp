@@ -8,7 +8,7 @@ def test_extraction_is_query_independent_and_removes_boilerplate():
     a = client.post('/api/analyze', json=SOURCE).json()
     b = client.post('/api/analyze', json={**SOURCE, 'query': 'Another query'}).json()
     assert a['sections'] == b['sections']
-    assert a['factoids'][0]['source_id'] == 'block-2'
+    assert a['factoids'][0]['source_id'] == 'b000001'
     assert 'Ignore me' not in str(a['sections'])
     assert 'alert' not in str(a['sections'])
     assert a['structure_recommended']

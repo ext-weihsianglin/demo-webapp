@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/ext-weihsianglin/content-optimization-system",
+  "base_revision": "3d4d35d3c32ac5b8c14983f99f92c2f633669417",
+  "version": "0.1.1",
+  "wheel": "content_optimization_exploration-0.1.1-py3-none-any.whl",
+  "wheel_sha256": "e6b146765f62ec64910c441a65ba98dda7839e21cdb2e79fccb47a8912adbb79",
+  "packaging_patch": "content-optimization-library.patch",
+  "status": "Local package build; packaging changes not published upstream"
+}

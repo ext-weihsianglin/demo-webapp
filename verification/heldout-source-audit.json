@@ -1,0 +1,949 @@
+{
+  "audit_version": "source-audit-v1",
+  "parser": {
+    "repository": "https://github.com/ext-weihsianglin/content-optimization-system",
+    "revision": "3d4d35d3c32ac5b8c14983f99f92c2f633669417",
+    "package_version": "0.1.1"
+  },
+  "manifest_hash": "ad6bf81327b68b85242432fba0416f29e27510d03ed6e7b1fb0378410d2876d5",
+  "scope": "Development diagnostics on extraction held-out snapshots; not a human gold evaluation, factual verification or coverage proof.",
+  "documents_count": 40,
+  "summary": {
+    "total_blocks": 7538,
+    "text_blocks": 5468,
+    "containers": 1850,
+    "ambiguous_mappings": 1290,
+    "unavailable_mappings": 1,
+    "boilerplate_hints": 1240,
+    "oversized_chunks": 9
+  },
+  "source_status_counts": {
+    "text_match": 4261,
+    "structure_only": 1763,
+    "source_representation_match": 35,
+    "table_cells_match": 19,
+    "normalized_text_match": 169,
+    "unresolved": 1291
+  },
+  "documents": [
+    {
+      "snapshot_id": "a2dc73dc37ac68980b5aa72560892b6dc0430656af7512cd484a71b74b19f805",
+      "hostname": "asanify.com",
+      "summary": {
+        "total_blocks": 481,
+        "text_blocks": 276,
+        "containers": 201,
+        "source_status_counts": {
+          "text_match": 255,
+          "structure_only": 193,
+          "source_representation_match": 4,
+          "table_cells_match": 2,
+          "normalized_text_match": 3,
+          "unresolved": 24
+        },
+        "ambiguous_mappings": 24,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 222,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 1,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "0cbc8a5e12709367e63cdd9579bfee14bdabd85e758cf0b1e3ed29a2f61481aa",
+      "hostname": "blog.blazingcdn.com",
+      "summary": {
+        "total_blocks": 125,
+        "text_blocks": 103,
+        "containers": 20,
+        "source_status_counts": {
+          "text_match": 94,
+          "normalized_text_match": 5,
+          "structure_only": 22,
+          "table_cells_match": 1,
+          "unresolved": 3
+        },
+        "ambiguous_mappings": 3,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 2,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "2e070a24f3bd03f803f9ebc7a3b9b99134d24ec3c463a7ba498ec2e9993dccd7",
+      "hostname": "blog.hootsuite.com",
+      "summary": {
+        "total_blocks": 363,
+        "text_blocks": 343,
+        "containers": 20,
+        "source_status_counts": {
+          "text_match": 318,
+          "normalized_text_match": 3,
+          "structure_only": 20,
+          "unresolved": 22
+        },
+        "ambiguous_mappings": 22,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 341,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "13044732d8d71e1142ab476f865238567c3d039c4fb55db97049baa6c644571b",
+      "hostname": "box.co.uk",
+      "summary": {
+        "total_blocks": 203,
+        "text_blocks": 198,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 141,
+          "normalized_text_match": 7,
+          "structure_only": 5,
+          "unresolved": 50
+        },
+        "ambiguous_mappings": 50,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 17,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 2,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "337cb41acecbb1bbc83c4119231ee10367c4d058541655db66fe2a12ece70627",
+      "hostname": "datadome.co",
+      "summary": {
+        "total_blocks": 80,
+        "text_blocks": 77,
+        "containers": 0,
+        "source_status_counts": {
+          "unresolved": 13,
+          "structure_only": 3,
+          "text_match": 58,
+          "source_representation_match": 6
+        },
+        "ambiguous_mappings": 12,
+        "unavailable_mappings": 1,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 3,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "39de57ebc8987d062e0bbceba626ab811b18f7b98434aef5611e986741c86475",
+      "hostname": "en.globes.co.il",
+      "summary": {
+        "total_blocks": 111,
+        "text_blocks": 107,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 95,
+          "structure_only": 1,
+          "unresolved": 13,
+          "normalized_text_match": 2
+        },
+        "ambiguous_mappings": 13,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 97,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 1,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "0245a9f5adabce1d3d2b21eac2bcaa20bdc1a6b581417a957e7760e9713d95a5",
+      "hostname": "erp.compare",
+      "summary": {
+        "total_blocks": 239,
+        "text_blocks": 166,
+        "containers": 73,
+        "source_status_counts": {
+          "text_match": 146,
+          "normalized_text_match": 5,
+          "structure_only": 68,
+          "unresolved": 20
+        },
+        "ambiguous_mappings": 20,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 3,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+      "hostname": "help.sainsburys.co.uk",
+      "summary": {
+        "total_blocks": 59,
+        "text_blocks": 43,
+        "containers": 10,
+        "source_status_counts": {
+          "text_match": 36,
+          "structure_only": 14,
+          "unresolved": 8,
+          "source_representation_match": 1
+        },
+        "ambiguous_mappings": 8,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 2,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "79b35c75bbcec6110534d8044f5857eb5834c90376e9c288f2ba1dd70f9e4084",
+      "hostname": "imagen-ai.com",
+      "summary": {
+        "total_blocks": 144,
+        "text_blocks": 108,
+        "containers": 33,
+        "source_status_counts": {
+          "unresolved": 38,
+          "text_match": 80,
+          "structure_only": 16,
+          "normalized_text_match": 4,
+          "source_representation_match": 6
+        },
+        "ambiguous_mappings": 38,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 9,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 17,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "5833358fb9f155c356d6c3ebc790e87d0aadd66a66d216ab80c6ce927382898e",
+      "hostname": "koinly.io",
+      "summary": {
+        "total_blocks": 3,
+        "text_blocks": 3,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 3
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "3894452f8508bed3e5b737c4e892da1e562163d80877fca6e2fd15f0d9e34767",
+      "hostname": "play.google.com",
+      "summary": {
+        "total_blocks": 2,
+        "text_blocks": 2,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 2
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "215cdeb4e2e969679089f35f1a813fcda3e08356618070ddd1b647f3f1eb26c2",
+      "hostname": "posthog.com",
+      "summary": {
+        "total_blocks": 0,
+        "text_blocks": 0,
+        "containers": 0,
+        "source_status_counts": {},
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "91c4e9e227bdee07d52330d82a502d19749f733c113116d278c0c9c88a2e5a75",
+      "hostname": "shuftipro.com",
+      "summary": {
+        "total_blocks": 14,
+        "text_blocks": 12,
+        "containers": 2,
+        "source_status_counts": {
+          "text_match": 6,
+          "normalized_text_match": 6,
+          "structure_only": 2
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "607c1afa259d0d970ab9c0e8f5da22e4583f437c2078acdffe3299f17d6059c9",
+      "hostname": "statrys.com",
+      "summary": {
+        "total_blocks": 495,
+        "text_blocks": 318,
+        "containers": 177,
+        "source_status_counts": {
+          "text_match": 281,
+          "normalized_text_match": 2,
+          "table_cells_match": 1,
+          "unresolved": 45,
+          "structure_only": 166
+        },
+        "ambiguous_mappings": 45,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 9,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "d46ebe3518f9ab607295cabdbcdd8ed937380c89676e6b0c2038627fed4298d4",
+      "hostname": "theluxurytravelexpert.com",
+      "summary": {
+        "total_blocks": 156,
+        "text_blocks": 80,
+        "containers": 46,
+        "source_status_counts": {
+          "structure_only": 48,
+          "text_match": 71,
+          "unresolved": 30,
+          "normalized_text_match": 7
+        },
+        "ambiguous_mappings": 30,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 26,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 2,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "e132b6049dadacf8fefda4a0a0ee0e0cb88b0109689e5b1a70ed16b7c33fa424",
+      "hostname": "vwo.com",
+      "summary": {
+        "total_blocks": 471,
+        "text_blocks": 340,
+        "containers": 121,
+        "source_status_counts": {
+          "text_match": 262,
+          "structure_only": 98,
+          "unresolved": 102,
+          "normalized_text_match": 5,
+          "table_cells_match": 1,
+          "source_representation_match": 3
+        },
+        "ambiguous_mappings": 102,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 20,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 24,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "3a78297d1c2e7c542d2d3b1aa7362f5d2744c35fb633e28318a96bb030e27525",
+      "hostname": "weld.app",
+      "summary": {
+        "total_blocks": 139,
+        "text_blocks": 97,
+        "containers": 42,
+        "source_status_counts": {
+          "text_match": 78,
+          "normalized_text_match": 4,
+          "unresolved": 14,
+          "structure_only": 42,
+          "table_cells_match": 1
+        },
+        "ambiguous_mappings": 14,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 1
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": [
+        "b4a5fb0b58d92edae5cac63a4a4c95c8727fd9e8ef3ff359ec9f59a86c34c316"
+      ]
+    },
+    {
+      "snapshot_id": "969a254f8a7695b5fc3b3e7d7ad1b39102fd01aa6e68bb4f1b074ab551876f6c",
+      "hostname": "www.apple.com",
+      "summary": {
+        "total_blocks": 4,
+        "text_blocks": 4,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 2,
+          "normalized_text_match": 2
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "0456867fb062b36642f8f7d8449f619ca4063f1bbc36366d34cd0f49ddb45d9b",
+      "hostname": "www.bankofamerica.com",
+      "summary": {
+        "total_blocks": 60,
+        "text_blocks": 50,
+        "containers": 10,
+        "source_status_counts": {
+          "text_match": 46,
+          "structure_only": 10,
+          "normalized_text_match": 4
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 1,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 2,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "42cc22024745d097a5c522d1baa1ccbbc73c516a34f74a785db786013f03663e",
+      "hostname": "www.bfr.bund.de",
+      "summary": {
+        "total_blocks": 76,
+        "text_blocks": 69,
+        "containers": 7,
+        "source_status_counts": {
+          "text_match": 38,
+          "normalized_text_match": 17,
+          "structure_only": 7,
+          "unresolved": 14
+        },
+        "ambiguous_mappings": 14,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 4,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 24,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "d0c251ea9f460992d087d3c7536072def3bb22f2bfe61d59eec41bc965ce036f",
+      "hostname": "www.boots-uk.com",
+      "summary": {
+        "total_blocks": 126,
+        "text_blocks": 85,
+        "containers": 41,
+        "source_status_counts": {
+          "text_match": 84,
+          "structure_only": 41,
+          "normalized_text_match": 1
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 19,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 6,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "0f17a722be9e1af05af9cd79bb836d9c106a7b780116ab6a4af23f163f16e145",
+      "hostname": "www.cox.com",
+      "summary": {
+        "total_blocks": 12,
+        "text_blocks": 12,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 6,
+          "normalized_text_match": 6
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "6deb78fc6bbbb15077880827720f87176a99363d461a883cd1f72dadad64c4d6",
+      "hostname": "www.customink.com",
+      "summary": {
+        "total_blocks": 68,
+        "text_blocks": 45,
+        "containers": 4,
+        "source_status_counts": {
+          "text_match": 43,
+          "structure_only": 23,
+          "normalized_text_match": 2
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 7,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "0a1af64bf9b1d7f9d9d44f4c8d50284af59c442b69bb7498c16548a9a9e6da76",
+      "hostname": "www.ding.com",
+      "summary": {
+        "total_blocks": 55,
+        "text_blocks": 55,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 43,
+          "unresolved": 12
+        },
+        "ambiguous_mappings": 12,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "6a473750d82dd789f25dddc417205ea133c829dee915f0689339aec3a560c5ac",
+      "hostname": "www.docusign.com",
+      "summary": {
+        "total_blocks": 248,
+        "text_blocks": 205,
+        "containers": 33,
+        "source_status_counts": {
+          "text_match": 103,
+          "normalized_text_match": 1,
+          "unresolved": 132,
+          "structure_only": 11,
+          "source_representation_match": 1
+        },
+        "ambiguous_mappings": 132,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 6,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 11,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "306fd2c63f9d78c52552a261bdf5b47958db32e74d4ba4841151d1fdc616a79f",
+      "hostname": "www.dollywood.com",
+      "summary": {
+        "total_blocks": 649,
+        "text_blocks": 377,
+        "containers": 243,
+        "source_status_counts": {
+          "text_match": 314,
+          "structure_only": 250,
+          "unresolved": 83,
+          "normalized_text_match": 2
+        },
+        "ambiguous_mappings": 83,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 31,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 43,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "78f39d63068e09af2ba4751d37b0d875fbfe83cc9cb6895a436817f386a1d399",
+      "hostname": "www.gs1india.org",
+      "summary": {
+        "total_blocks": 74,
+        "text_blocks": 63,
+        "containers": 11,
+        "source_status_counts": {
+          "structure_only": 11,
+          "text_match": 54,
+          "unresolved": 5,
+          "source_representation_match": 4
+        },
+        "ambiguous_mappings": 5,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 2,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "0bbd5a7e6de4fbba7d700f6f402ce2b05d650567a4b14df12b39166fc3f071db",
+      "hostname": "www.identityguard.com",
+      "summary": {
+        "total_blocks": 345,
+        "text_blocks": 246,
+        "containers": 97,
+        "source_status_counts": {
+          "text_match": 208,
+          "unresolved": 37,
+          "structure_only": 99,
+          "normalized_text_match": 1
+        },
+        "ambiguous_mappings": 37,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 9,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "3ef5548fa440e69013b21ad161b670b591d3bbb7eafe2620a301b59d394c42ec",
+      "hostname": "www.koyfin.com",
+      "summary": {
+        "total_blocks": 319,
+        "text_blocks": 170,
+        "containers": 144,
+        "source_status_counts": {
+          "text_match": 166,
+          "structure_only": 145,
+          "unresolved": 8
+        },
+        "ambiguous_mappings": 8,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 274,
+        "oversized_chunks": 1
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": [
+        "704e3c309a145789d04e5968222a3c81c4abc1b6984e2ab62d2a8401ea82f787"
+      ]
+    },
+    {
+      "snapshot_id": "63013e86d4ca8d114547cb18152f508b361ce6978ecef7ad9e700166fd5663b4",
+      "hostname": "www.lindy.ai",
+      "summary": {
+        "total_blocks": 3,
+        "text_blocks": 3,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 3
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "3e1e06f987225cc5a0eb6800be68242df5f6929e6ad7a890d8ce6660d398ad1c",
+      "hostname": "www.navyfederal.org",
+      "summary": {
+        "total_blocks": 152,
+        "text_blocks": 109,
+        "containers": 28,
+        "source_status_counts": {
+          "text_match": 96,
+          "structure_only": 43,
+          "table_cells_match": 1,
+          "normalized_text_match": 10,
+          "unresolved": 2
+        },
+        "ambiguous_mappings": 2,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 8,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 34,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "63aed612f624869414ba9e51c272abef242c4af5a452b569692b80c73a894a4b",
+      "hostname": "www.onemainfinancial.com",
+      "summary": {
+        "total_blocks": 97,
+        "text_blocks": 79,
+        "containers": 18,
+        "source_status_counts": {
+          "unresolved": 8,
+          "text_match": 64,
+          "normalized_text_match": 2,
+          "structure_only": 18,
+          "source_representation_match": 5
+        },
+        "ambiguous_mappings": 8,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 7,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "983cd919d25c09f509b5b55d8ec362936bc9deb2ce242fcf6c07c4a05e0465b5",
+      "hostname": "www.photoroom.com",
+      "summary": {
+        "total_blocks": 236,
+        "text_blocks": 174,
+        "containers": 26,
+        "source_status_counts": {
+          "text_match": 157,
+          "unresolved": 33,
+          "structure_only": 44,
+          "normalized_text_match": 2
+        },
+        "ambiguous_mappings": 33,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 1,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "e288beae63c9ac723358dd764e0d720217cc601aa1d474ca697de70277e1f830",
+      "hostname": "www.readycontacts.com",
+      "summary": {
+        "total_blocks": 376,
+        "text_blocks": 250,
+        "containers": 126,
+        "source_status_counts": {
+          "text_match": 141,
+          "structure_only": 107,
+          "normalized_text_match": 45,
+          "unresolved": 71,
+          "table_cells_match": 12
+        },
+        "ambiguous_mappings": 71,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 7,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 9,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "985d36a88d8a86b512af5af39c9213574575a17c528d2f021f1158601d4f366c",
+      "hostname": "www.sender.net",
+      "summary": {
+        "total_blocks": 352,
+        "text_blocks": 317,
+        "containers": 33,
+        "source_status_counts": {
+          "text_match": 286,
+          "structure_only": 33,
+          "normalized_text_match": 14,
+          "unresolved": 15,
+          "source_representation_match": 4
+        },
+        "ambiguous_mappings": 15,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 83,
+        "oversized_chunks": 6
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 2,
+      "oversized_chunk_ids": [
+        "9788d227c0b1ef9ac1b075c971b9dd235eeb74c8d57630218a8838cfe41e1082",
+        "90d39a8d3aec316d950916b5352bcef90b9d561a37edc2265b164f93311ef069",
+        "0fbf1ee9eb4a7d460314e2a87943f99a8541c22f7047846599c17ea434a0c803",
+        "d683f1f46b6232e5a91ee947380af49f9eb16d9658209f149aef8b329471f49d",
+        "0d5ded5f3524eb498912456ec746f65db6a2bafdde48d5b16c153791ae9678d5",
+        "e6dfb5eb0bb31f7135e8d513121e0727f6a609674850481a7de8d55e6f4daab3"
+      ]
+    },
+    {
+      "snapshot_id": "ef6330a55c050472d62a50c8762e1953a0d0a97522cf1355577868ddad5e6b91",
+      "hostname": "www.sweep.net",
+      "summary": {
+        "total_blocks": 125,
+        "text_blocks": 97,
+        "containers": 27,
+        "source_status_counts": {
+          "text_match": 89,
+          "structure_only": 26,
+          "unresolved": 9,
+          "normalized_text_match": 1
+        },
+        "ambiguous_mappings": 9,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 28,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 14,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "00afdea58335ce8b40cfced99816c84114a7290d4f4fb445c3cedcf3046cd9ed",
+      "hostname": "www.tigera.io",
+      "summary": {
+        "total_blocks": 421,
+        "text_blocks": 262,
+        "containers": 153,
+        "source_status_counts": {
+          "text_match": 255,
+          "structure_only": 159,
+          "unresolved": 4,
+          "normalized_text_match": 2,
+          "source_representation_match": 1
+        },
+        "ambiguous_mappings": 4,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 12,
+        "oversized_chunks": 1
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": [
+        "e7d68c695512d8c923c8b898ad5f05d78d9b3504845eb104f6d73f604581ff71"
+      ]
+    },
+    {
+      "snapshot_id": "accb8e04c4302511a8114e2ac743ef404cd169a67ddb3821dfa08064343a54e2",
+      "hostname": "www.universalorlando.com",
+      "summary": {
+        "total_blocks": 2,
+        "text_blocks": 1,
+        "containers": 0,
+        "source_status_counts": {
+          "text_match": 1,
+          "structure_only": 1
+        },
+        "ambiguous_mappings": 0,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 1,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 1,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "b0194a3d79477dc777c0039dc673e93756e0a0fe09ba49bfc6af88d709fc823a",
+      "hostname": "www.vanta.com",
+      "summary": {
+        "total_blocks": 559,
+        "text_blocks": 458,
+        "containers": 80,
+        "source_status_counts": {
+          "structure_only": 7,
+          "text_match": 78,
+          "unresolved": 474
+        },
+        "ambiguous_mappings": 474,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 0,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 0,
+      "oversized_chunk_ids": []
+    },
+    {
+      "snapshot_id": "fa572562accda653da503c2d2534bce45513a8f6e0e6ec3756f057f7457aae86",
+      "hostname": "www.wellsfargo.com",
+      "summary": {
+        "total_blocks": 94,
+        "text_blocks": 64,
+        "containers": 24,
+        "source_status_counts": {
+          "text_match": 58,
+          "unresolved": 2,
+          "structure_only": 30,
+          "normalized_text_match": 4
+        },
+        "ambiguous_mappings": 2,
+        "unavailable_mappings": 0,
+        "boilerplate_hints": 3,
+        "oversized_chunks": 0
+      },
+      "failed_checks": [],
+      "comparison_review_blocks": [],
+      "hidden_source_hints": 21,
+      "oversized_chunk_ids": []
+    }
+  ]
+}
