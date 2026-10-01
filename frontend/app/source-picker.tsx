@@ -8,6 +8,11 @@ export type Example = {
   href: string;
   title: string;
   query: string;
+  queries?: string[];
+  query_record_count?: number;
+  unusable_query_count?: number;
+  query_scope?: string;
+  query_records?: {query:string;href:string;usable:boolean}[];
   format: string;
   split: 'heldout';
   characters: number;
@@ -66,8 +71,8 @@ export function SourcePicker({ mode, selected, onMode, onExample, onLoading }: {
           {examples.filter(example => example.hostname === activeHost).map(example => <option key={example.snapshot_id} value={example.snapshot_id}>{example.title}</option>)}
         </select>
       </div>}
-      {selected && <p className="source-help"><strong>Held-out source</strong> · {selected.snapshot_id.slice(0, 12)}<br/>Try the original query or enter your own. The saved source stays unchanged.</p>}
+      {selected && <div><p className="source-help"><strong>Held-out source</strong> · {selected.snapshot_id.slice(0, 12)}<br/>{selected.query_scope === 'host' ? `${selected.query_record_count} host prompt records loaded together · ${selected.queries?.length} distinct usable queries. Duplicates counted once. ${selected.unusable_query_count || 0} unusable records excluded from scoring.` : 'Legacy bundle: one query loaded. Rebuild the example bundle to include all host prompts.'} The queries may reference other pages on this host. Edit the set freely; the saved source stays unchanged.</p>{selected.query_records && <details><summary>Original host prompt provenance</summary><ol>{selected.query_records.map((record, i) => <li key={i}>{record.query || '[blank prompt]'}{!record.usable && ' · unusable'}<br/><span className="muted">{record.href}</span></li>)}</ol></details>}</div>}
     </>}
-    {mode === 'custom' && <p className="source-help">Enter your own target query and paste a saved page below.</p>}
+    {mode === 'custom' && <p className="source-help">Enter your target queries and paste a saved page below.</p>}
   </div>;
 }

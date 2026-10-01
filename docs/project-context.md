@@ -71,3 +71,12 @@ For a future session: inspect current instructions, branch/worktrees, PR state a
 ## Follow-up boundaries
 
 GEPA/prompt optimization and retrieval memory should follow the measured baseline behind the rewriting interface. Reserve separate rewrite final test data first. Relevance selection may reduce navigation-heavy token cost, but must assess omissions explicitly. Broader structural edits, HTML patching/source-layout preview, calibrated graders and prospective citation-frequency/rank experiments are separate workstreams. Generate shared frontend types from OpenAPI when the contract stabilizes.
+
+
+## Multi-query flow (2026-10-01)
+
+Current branch adds the complete host prompt set to the existing source-verification/real-rewrite integration. The new example bundle joins all ten frozen records per host across hash-verified shards, keeps their provenance, excludes unusable prompts explicitly and deduplicates exact trimmed text. The selected immutable snapshot does not change. Custom requests/UI also support multiple queries.
+
+`app/scoring.py` reuses the bundled upstream `lr-retention-v2` feature implementation and the trusted frozen v2 model (SHA-256 recorded in README). It scores every distinct query, reports the equal-weight mean/minimum, and rescoring compares the original and proposed structured documents with unchanged source inventory/metadata. The model is local ignored data; unavailable/invalid models return visible unavailability. These are sampled within-host top-class predictions among already-cited pages, not actual citation probabilities or causal rewrite gains; extraction-held-out is not a P1 final-test claim.
+
+`rewrite-multiquery-v1.txt` and every user JSON payload include the entire target-query set plus whole-document P1 feedback. One coordinated proposal aims to improve the mean while avoiding individual regressions, followed by per-query rescoring and explicit regression reporting. No iterative optimization, GEPA or memory is installed. The frozen baseline prompt/reports remain unchanged. Queries for other pages on a host require missing-evidence review rather than fabricated answers.

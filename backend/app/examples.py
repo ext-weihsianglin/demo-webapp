@@ -21,6 +21,17 @@ def catalog():
         rows = data["examples"]
         if not re.fullmatch(r"[a-f0-9]{64}", data["manifest_hash"]):
             raise ValueError("Invalid manifest identity")
+        if data.get("bundle_version") == 2:
+            for row in rows:
+                records = row["query_records"]
+                digest = hashlib.sha256(json.dumps(records, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+                if row["query_scope"] != "host" or row["query_record_count"] != len(records) or len(records) != 10 or digest != row["query_set_hash"]:
+                    raise ValueError("Invalid host query provenance")
+                if any(record["usable"] != (3 <= len(record["query"].strip()) <= 1000) for record in records):
+                    raise ValueError("Invalid usable query annotation")
+                expected = list(dict.fromkeys(record["query"].strip() for record in records if record["usable"]))
+                if row["queries"] != expected or row["unusable_query_count"] != sum(not r["usable"] for r in records):
+                    raise ValueError("Invalid deduplicated query set")
         if any(row["split"] != "heldout" or not re.fullmatch(r"[a-f0-9]{64}", row["snapshot_id"]) for row in rows):
             raise ValueError("Invalid held-out catalog")
     except (OSError, ValueError, KeyError, TypeError):

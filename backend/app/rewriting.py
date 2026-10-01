@@ -13,7 +13,7 @@ import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
 
-PROMPT_VERSION = 'rewrite-baseline-v1'
+PROMPT_VERSION = 'rewrite-multiquery-v1'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 def model_options():
@@ -125,7 +125,8 @@ def validate_edits(proposal, document, chunk, allow_structure):
             raise RewriteFailure('unsupported_output', 'Model flagged unsupported additions or missing evidence; no draft applied.')
 
 
-def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None):
+def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None):
+    queries = list(dict.fromkeys([query] if isinstance(query, str) else query))
     start = time.monotonic()
     accumulated_flags = []
     telemetry = {'prompt_version': PROMPT_VERSION, 'model': None, 'status': 'started', 'calls': 0,
@@ -154,7 +155,9 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
         blocks = {b['block_id']: b for b in document['blocks']}
         requests = []
         for chunk in chunks:
-            payload = {'target_query': query, 'editorial_tone': tone, 'allow_structure': allow_structure,
+            payload = {'target_queries': queries, 'p1_feedback': p1_feedback or {'status': 'unavailable'},
+                       'optimization_objective': 'Increase the equal-weight mean P1 score across every distinct target query; avoid per-query regressions. Preserve source evidence even if scores cannot improve.',
+                       'editorial_tone': tone, 'allow_structure': allow_structure,
                        'snapshot_id': document['snapshot_id'], 'extraction': document['selection'],
                        'source_metadata': document['source_metadata'], 'heading_outline': document.get('outline', []),
                        'chunk': chunk, 'blocks': [{**blocks[i], 'editable': editable(blocks[i])} for i in chunk['block_ids']]}
@@ -194,7 +197,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
         if len({e.block_id for e in edits}) != len(edits):
             raise RewriteFailure('invalid_output', 'Duplicate edits across chunks.')
         if not any(blocks[e.block_id]['type']=='paragraph' for e in edits):
-            raise RewriteFailure('abstained', 'Model supplied no substantive body edits; source may not answer the target query.')
+            raise RewriteFailure('abstained', 'Model supplied no substantive body edits; source may not answer the target queries.')
         result = deepcopy(document)
         by_id = {b['block_id']: b for b in result['blocks']}
         for edit in edits:

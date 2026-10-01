@@ -1,6 +1,6 @@
 # Content Studio
 
-A Next.js + FastAPI demo with baseline OpenAI rewriting and mock grading for source-grounded content optimization.
+A Next.js + FastAPI demo with multi-query OpenAI rewriting, frozen P1 scoring and mock editorial grading for source-grounded content optimization.
 
 ## Project context for future sessions
 
@@ -32,9 +32,9 @@ Next.js proxies `/api/*` to FastAPI; set `API_URL` in `frontend/.env.local` to o
 
 ## UX
 
-1. Choose **Your own page** to enter a target query, page URL (`href`), hostname, and HTML, Markdown, or text snapshot. Or choose **Held-out examples**, select a host and saved page, and use its original query or write your own. “Host” is represented by page URL + hostname, matching the adjacent research schema.
-2. Inspect sections, chunks, source statements (“factoids”), and metadata. Compare blocks with the saved source, filter review hints, and export the extraction report or original snapshot.
-3. Optionally open draft tools, select a model and editorial tone, then review attributed OpenAI edits or export Markdown. Source changes invalidate previous analysis and drafts.
+1. Choose **Your own page** to enter target queries (one per line), page URL (`href`), hostname, and HTML, Markdown, or text snapshot. Or choose **Held-out examples**, select a host and saved page, and load all distinct usable prompts from its ten host records or write your own query set. “Host” is represented by page URL + hostname, matching the adjacent research schema.
+2. Inspect sections, chunks, source statements (“factoids”), and metadata. Review P1 scores for every target query. Compare blocks with the saved source, filter review hints, and export the extraction report or original snapshot.
+3. Optionally open draft tools, select a model and editorial tone, then review attributed OpenAI edits, every query’s before/after P1 scores and any regressions, or export Markdown. Source changes invalidate previous analysis and drafts.
 
 The running-shoes example is illustrative, with no invented product rankings or performance claims. Submitted content is processed in memory and never fetched or executed. Draft generation sends retained source blocks/chunks and metadata to OpenAI with `store=False`; do not submit source data you cannot send to that provider. Page HTML is displayed only as escaped text. The draft preview uses the app's editorial styling; it does **not** reproduce arbitrary source CSS. Original files and styles are never modified.
 
@@ -51,7 +51,7 @@ uv run python scripts/prepare_examples.py --research-root /path/to/content-optim
 
 This packages only the designated `heldout` split, checks development/held-out
 host and payload isolation, verifies source hashes and original parquet rows, and
-preserves the original queries. It does not resample or fetch live pages. The
+preserves all ten original host prompt records and their source URLs/shard rows. Usable prompts are trimmed and deduplicated by exact text; blank/invalid prompts are explicitly counted and excluded. No citation labels enter scoring or generation. It does not resample or fetch live pages. The
 current manifest provides 40 hosts/pages. The generated bundle lives in
 `backend/data/examples/`, is excluded from Git, and is not overwritten on reruns.
 Use `--output /new/path` to prepare another bundle and set
@@ -60,10 +60,9 @@ the environment are resolved relative to the backend process working directory.
 
 `GET /api/examples` lists host/page/query metadata without payloads or citation
 labels; `GET /api/examples/{snapshot_id}` loads a hash-verified saved snapshot.
-Analysis and draft requests can supply `{example_id, query}` instead of custom
-source fields. Saved content is read-only; custom queries are allowed. Responses
+Analysis and draft requests can supply `{example_id}` to use the prepared host query set, or `{example_id, queries: ["Query one?", "Query two?"]}` to override it. Custom snapshots use `queries` alongside the source fields. The legacy single `query` remains supported, but cannot accompany `queries`. The API accepts 1–20 distinct usable queries, each 3–1,000 characters. Saved content is read-only; custom queries are allowed. Responses
 carry `source_origin` with the original snapshot, split, manifest and payload
-identities. Both modes invoke the installed research retention parser. Grades remain mocked; rewriting uses the versioned OpenAI baseline.
+identities. Both modes invoke the installed research retention parser. P1 scores use the pinned upstream model when installed; editorial grades remain mocked. Rewriting uses the versioned multi-query OpenAI baseline.
 
 Custom input remains usable without a bundle. Its limit is 200,000 characters;
 saved examples support up to 8,000,000 characters without truncation. Switching
@@ -74,10 +73,23 @@ These examples are held out for the extraction benchmark. Interactive prompt
 experimentation is exploratory; it does not establish an untouched P2 rewrite
 test set. Reserve separate examples when measuring GEPA or memory improvements.
 
+## Frozen P1 model
+
+Install the trusted v2 artifact locally (raw research data and models remain outside Git):
+
+```sh
+cd backend
+uv run python scripts/prepare_p1.py --model /path/to/content-optimization-system/data/trad_ml_scorer/v2/model.joblib
+```
+
+The pinned SHA-256 is `f78ca1f8e51f147a5b52a16cafed6819d165f18eff8bf6e0f5ed61cf5c918b92`. The default installed path is `backend/data/scoring/model.joblib`; `P1_MODEL_PATH` can point elsewhere but must contain those same trusted bytes. The installer refuses an existing output. No model is retrained or substituted. Source inspection and custom snapshots still work without the model.
+
+P1 predicts the sampled within-host top class among already-cited pages. Scores are shown on a 0–100 scale for comparison, not as citation probabilities. Extraction-held-out hosts are not necessarily P1-test-held-out. All ten host records stay visible in provenance; distinct usable queries receive equal weight. Some prompts refer to other URLs on the host. No new snapshot is sampled and the selected original payload stays unchanged.
+
 ## What is real vs. mocked
 
-- **Real:** API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, frontend/API round trips, review/export.
-- **Mock:** query alignment and answer clarity scores; structural score uses only heading count. No predicted score gain or citation uplift. There is no automatic demo rewrite fallback.
+- **Real:** frozen upstream P1 v2 scoring when the trusted model is installed, complete query-set feedback in rewriting, before/after per-query comparisons, API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, frontend/API round trips, review/export.
+- **Mock:** query alignment and answer clarity scores; structural score uses only heading count. P1 changes are classifier-score changes, not measured citation uplift. There is no automatic demo rewrite fallback.
 - **Not connected:** optional clean extraction candidates, calibrated graders, phase 2 GEPA or prompt-optimized model, persistent runs, live URL fetching, source-style rendering, HTML patching.
 
 ## Integration boundaries
@@ -107,9 +119,9 @@ Validated draft generation uses the library's `blocks_to_markdown` so nested lis
 code whitespace and table spans survive export. Source metadata and JSON-LD remain
 separate from generated body content.
 
-Replace `/api/analyze` mock grades with query-aware graders after extraction. Preserve disagreements/abstention and structural diagnostics; do not treat relative within-host citation labels as absolute probabilities.
+`app/scoring.py` invokes the installed upstream P1 v2 feature implementation for each distinct target query. It verifies the trusted model SHA-256 and fitted parser/feature fingerprints before use. Both source and proposal are scored as structured documents with the same original source inventory and metadata, without reparsing exported Markdown. Missing/incompatible models produce explicit unavailability, never mock P1 values. Preserve disagreements/abstention and structural diagnostics; do not treat relative within-host labels as citation probabilities.
 
-`backend/app/rewriting.py` owns generation, token budgeting, source validation and rendering, independently of extraction and the endpoint. Its hand-written prompt is `backend/app/prompts/rewrite-baseline-v1.txt`. No GEPA or retrieval memory is included. All source/query/metadata content is untrusted data in the user message; the fixed editorial/security instructions are separate.
+`backend/app/rewriting.py` owns generation, token budgeting, source validation and rendering, independently of extraction and the endpoint. Its current hand-written prompt is `backend/app/prompts/rewrite-multiquery-v1.txt`; `rewrite-baseline-v1.txt` remains the frozen historical baseline. Every chunk request includes all distinct target queries and whole-page P1 feedback. The objective is their equal-weight mean while avoiding individual regressions. This is one proposal followed by rescoring, not an iterative optimizer or a guarantee of improvement on every query. Unsupported host queries remain missing-evidence review items; they do not justify invented content. No GEPA or retrieval memory is included. All source/query/metadata content is untrusted data in the user message; the fixed editorial/security instructions are separate.
 
 For now request and response types live beside the API and frontend. Generate TypeScript types from FastAPI OpenAPI when the contracts stabilize. All state is ephemeral and refresh resets the demo.
 
@@ -154,7 +166,7 @@ uv run --env-file .env python scripts/evaluate_rewriting.py --live --output eval
 uv run --env-file .env python scripts/evaluate_rewriting.py --live --example-id SNAPSHOT_ID --example-query "A source-supported query" --output evaluation/new-report.json
 ```
 
-Without `--live`, evaluation makes no API calls and records `not_run`. `evaluation/samples.json` freezes the custom source. `evaluation/baseline-report.json` records the custom success and original held-out-query abstention. `evaluation/heldout-supported-query-report.json` records the held-out success with an edited supported query, including source identity; `evaluation/baseline-review.md` records human review and limitations. Reports contain source data, so choose export destinations appropriately. Exact evidence validity, unchanged blocks, metadata, structure, body changes, qualifier-term omissions and query-term presence are repeatable checks. Lexical proxies are not semantic quality scores. Factual support, omissions and query usefulness require human review. Mock grades and relative citation labels never enter generation or evaluation and are not measured uplift. Interactive extraction-held-out examples are exploratory; reserve separate rewrite final test data before any GEPA/memory optimization.
+Without `--live`, evaluation makes no API calls and records `not_run`. `evaluation/samples.json` freezes the custom source. `evaluation/baseline-report.json` records the custom success and original held-out-query abstention. `evaluation/heldout-supported-query-report.json` records the held-out success with an edited supported query, including source identity; `evaluation/baseline-review.md` records human review and limitations. Reports contain source data, so choose export destinations appropriately. Exact evidence validity, unchanged blocks, metadata, structure, body changes, qualifier-term omissions and query-term presence are repeatable checks. Lexical proxies are not semantic quality scores. Factual support, omissions and query usefulness require human review. Mock editorial grades and raw citation labels never enter generation or evaluation; frozen P1 predictions now enter the multi-query rewrite feedback and are not measured uplift. Interactive extraction-held-out examples are exploratory; reserve separate rewrite final test data before any GEPA/memory optimization.
 
 ### Extraction verification
 
