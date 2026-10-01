@@ -1,0 +1,25 @@
+{
+  "branch": "deck/web-app-workstream",
+  "base": "6423dcf",
+  "files": {
+    ".gitignore": "699090c244007e49e3a666fc3e10b115d90675a7a4f82e108ea39bcab290d690",
+    "README.md": "158a07b548f57668bd0a6f61814c6e589ecbdcf2c616ae493af5fafa53af6884",
+    "backend/app/main.py": "6853881fe901852b82e2b61ecfc603c0cf7fc190ff90e79b2f144123c2646999",
+    "backend/app/extraction.py": "1bdcebcc471f8d01f05f026a867e92e2efa499a29c6e2934a878dd5258516404",
+    "backend/app/examples.py": "5a00a43cab78244f653601de6497686cd8e5347c9dc19863a8822cbf7c88dcb7",
+    "backend/pyproject.toml": "9090839b065faa00555d780c6547962a84ae884ce914bfd779b2b0ee74b5d392",
+    "backend/uv.lock": "3508e39226b865b24eba06b8fee365ef685899bd8952bdd6df6f1515497a7503",
+    "backend/.env.example": "240a212750e5eb2258b394667d6559aa2748ede4ead04afe9d82335ec8952941",
+    "backend/tests/test_api.py": "64975d9b5fb7fa925bbca22209cd071e557bc1d663919c1cda5f214a5f775eaa",
+    "backend/tests/test_extraction.py": "4ef2a9bd272ad9ce845bcdce6e6aff0a4ae9ab530da4492514afcfb59fc7d845",
+    "backend/tests/test_examples.py": "04bbea43e08c1a89a406f3426e5a90dc6a5ac99a71a037371abbe805571580de",
+    "frontend/app/page.tsx": "c940cd81431fce4e187a440cda39b6977838f26376097bf84343d053310b52fd",
+    "frontend/app/globals.css": "3e4b0d8a895a7a2d2205117efe9c9ae3d72b27b149d78a8bf119665467ee0775",
+    "frontend/app/extraction-view.tsx": "894ec7d5044e43170a1cf640f58fc28800118c59a7192c9fa8a3442eb0c270a8",
+    "frontend/app/source-picker.tsx": "28f4bbccccf2ab7098dc8b6fcb1328572ee3be33c7a2959b3de7859ac65e44c1",
+    "backend/packages/provenance.json": "61c101f10215d41b2f67170c06408722e57df267d2092981bdeba69debe2b1bb",
+    "backend/packages/content-optimization-library.patch": "78323bae8b1b1fa840a400ed9daf30a53e3d244bfc8aa0451a764ebbe9091d12",
+    "backend/packages/content_optimization_exploration-0.1.1-py3-none-any.whl": "e6b146765f62ec64910c441a65ba98dda7839e21cdb2e79fccb47a8912adbb79",
+    "backend/scripts/prepare_examples.py": "0b0992af67fe8aa9843713b88d46e549f1419934a372820d73df22aa7dcc1b98"
+  }
+}

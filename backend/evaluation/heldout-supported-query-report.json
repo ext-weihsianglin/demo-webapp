@@ -1,0 +1,2498 @@
+{
+  "prompt_version": "rewrite-baseline-v1",
+  "live_enabled": true,
+  "quality_scope": "Exploratory baseline; lexical proxies are not quality grades. Human review required. No measured citation uplift.",
+  "runs": [
+    {
+      "sample": {
+        "id": "extraction-heldout-7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+        "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+        "payload_hash": "c32f7acbebbbf43f2f3bd9559cc38c0563b1c3bb0a22ea5c80a0f4bbd812dfaf",
+        "href": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices",
+        "hostname": "help.sainsburys.co.uk",
+        "format": "html",
+        "split": "heldout",
+        "title": "Why are prices different between your large and convenience stores?",
+        "query": "Why do prices differ between Sainsbury’s large supermarkets and local convenience stores?",
+        "characters": 28146,
+        "content": "<html id=\"yext-html\" lang=\"en-GB\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><link rel=\"dns-prefetch\" href=\"//www.yext-pixel.com\"><link rel=\"dns-prefetch\" href=\"//a.cdnmktg.com\"><link rel=\"dns-prefetch\" href=\"//a.mktgcdn.com\"><link rel=\"dns-prefetch\" href=\"//dynl.mktgcdn.com\"><link rel=\"dns-prefetch\" href=\"//dynm.mktgcdn.com\"><link rel=\"dns-prefetch\" href=\"//www.google-analytics.com\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=5\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"description\" content=\" in Why are prices different between your large and convenience stores?, Prices &amp; PaymentHome.\"><meta name=\"keywords\" content=\"\"><meta property=\"og:title\" content=\"Why are prices different between your large and convenience stores?\"><meta property=\"og:description\" content=\" in Why are prices different between your large and convenience stores?, Prices &amp; PaymentHome.\"><meta property=\"og:image\" content=\"https://help.sainsburys.co.uk/permanent-b0b701/assets/images/logo.3eb6efa2.svg\"><meta property=\"og:type\" content=\"website\"><meta property=\"og:url\" content=\"https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices\"><meta name=\"twitter:card\" content=\"summary\"><link rel=\"canonical\" href=\"https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices\"><title>Why are prices different between your large and convenience stores?</title><link rel=\"shortcut icon\" href=\"../../permanent-b0b701/assets/images/favicon.cd522791.ico\"><script type=\"text/javascript\" async=\"\" src=\"https://www.googletagmanager.com/gtag/js?id=DC-9427595&amp;cx=c&amp;gtm=4e5a71\"></script><script type=\"text/javascript\" async=\"\" charset=\"utf-8\" id=\"utag_374\" src=\"https://www.googletagmanager.com/gtag/js\"></script><script src=\"//tags.tiqcdn.com/utag/sainsburys/groceries/prod/utag.js\" type=\"text/javascript\" async=\"\"></script><script>window.Yext = (function(Yext){Yext[\"baseUrl\"] = \"../../\"; return Yext;})(window.Yext || {});</script><script>window.Yext = (function(Yext){Yext[\"locale\"] = \"en_GB\"; return Yext;})(window.Yext || {});</script><script>window.Yext = (function(Yext){Yext[\"pageLevel\"] = \"helpArticle\"; return Yext;})(window.Yext || {});</script><script type=\"application/json\" id=\"monitoring-data\">{\"isStaging\":false,\"siteDomain\":\"help.sainsburys.co.uk\",\"siteId\":23737,\"soyTemplateName\":\"helpArticle.layout\"}</script><script>window.yextAnalyticsEnabled=true;window.enableYextAnalytics=window.enableYextAnalytics||function(){window.yextAnalyticsEnabled=true};</script><link rel=\"stylesheet\" type=\"text/css\" href=\"https://assets.sitescdn.net/answers/v1.8.2/answers.css\"><script>function initAnswers() {var apiKey = '5295de161feec2b9e1ca6f483e9f77dd'; var experienceKey = 'sainsburys-answers'; var experienceVersion = false ? 'STAGING' : 'PRODUCTION'; var locale = 'en_GB' ? 'en_GB' : 'en_GB'; var businessId = '3141402'; var answersEl = document.querySelector('.js-answers-container'); var answersSearchEl = document.querySelector('.js-search-answers-container'); ANSWERS.init({apiKey: apiKey, experienceKey: experienceKey, experienceVersion: experienceVersion, locale: locale, businessId: businessId, onReady: function () {if (answersEl) {ANSWERS.addComponent('SearchBar', {container: '.js-answers-container', name: 'hero', placeholderText: 'Start your search here', customIconUrl: '../../permanent-b0b701/assets/images/search.0fb32e0c.png', redirectUrl: '../../help/answers',});}if ('helpArticle' == 'helpArticle' && answersSearchEl) {ANSWERS.addComponent('SearchBar', {container: '.js-search-answers-container', name: 'search', placeholderText: 'Start your search here', customIconUrl: '../../permanent-b0b701/assets/images/search.0fb32e0c.png', redirectUrl: '../../help/answers',});}}});}</script><script src=\"https://assets.sitescdn.net/answers/v1.12.0/answers.min.js\" onload=\"ANSWERS.domReady(initAnswers)\" async=\"\" defer=\"\"></script><script nomodule=\"\" src=\"../../permanent-b0b701/i18nBundle_en_GB_es5.64c80e3c.js\" defer=\"\"></script><script crossorigin=\"use-credentials\" type=\"module\" src=\"../../permanent-b0b701/i18nBundle_en_GB_es6.1bb66a5e.js\"></script><!--- webpack-soy-plugin entry=\"es6/primary/helpArticle/index\" ---><script crossorigin=\"use-credentials\" type=\"module\" src=\"../../permanent-b0b701/node_modules~es6/primary/answers/index~es6/primary/category/index~es6/primary/cityList/index~es6/pri~8d2a957d.d44ba48e.js\" defer=\"\" data-webpack-inline=\"\"></script><script crossorigin=\"use-credentials\" type=\"module\" src=\"../../permanent-b0b701/yext~es6/primary/answers/index~es6/primary/category/index~es6/primary/cityList/index~es6/primary/hel~0316db2f.146085b2.js\" defer=\"\" data-webpack-inline=\"\"></script><link rel=\"stylesheet\" type=\"text/css\" href=\"../../permanent-b0b701/es6/primary/helpArticle/index.bc5cbe90.css\" data-webpack-inline-force=\"\"><script crossorigin=\"use-credentials\" type=\"module\" src=\"../../permanent-b0b701/es6/primary/helpArticle/index.a3caf8af.js\" defer=\"\" data-webpack-inline=\"\"></script><!--- webpack-soy-plugin end ---><!--- webpack-soy-plugin entry=\"es5/primary/helpArticle/index\" ---><script nomodule=\"\" src=\"../../permanent-b0b701/node_modules~es5/primary/answers/index~es5/primary/category/index~es5/primary/cityList/index~es5/pri~71039fb2.a91cceaa.js\" defer=\"\" data-webpack-inline=\"\"></script><script nomodule=\"\" src=\"../../permanent-b0b701/yext~es5/primary/answers/index~es5/primary/category/index~es5/primary/cityList/index~es5/primary/hel~0e220927.3d2d9c1a.js\" defer=\"\" data-webpack-inline=\"\"></script><script nomodule=\"\" src=\"../../permanent-b0b701/es5/primary/helpArticle/index.fb1539b2.js\" defer=\"\" data-webpack-inline=\"\"></script><!--- webpack-soy-plugin end ---><link id=\"page-url\" itemprop=\"url\" href=\"https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices\"><script>(function(w,d,y){w['YextAnalyticsObject']=y; w[y]=w[y]||function(){(w[y].q=w[y].q||[]).push(arguments)}; w[y]('create',3141402,23737,false);})(window, document, 'ya');</script><script>ya('set',{\"ids\":29122298,\"pageSetId\":\"Help Articles\"});ya('pageview');</script><script src=\"//tags.tiqcdn.com/utag/sainsburys/groceries/prod/utag.sync.js\"></script><script src=\"https://cdn-ukwest.onetrust.com/scripttemplates/202409.2.0/otBannerSdk.js\" async=\"\" type=\"text/javascript\"></script><script type=\"text/javascript\" async=\"\" charset=\"utf-8\" id=\"utag_sainsburys.groceries_351\" src=\"//tags.tiqcdn.com/utag/sainsburys/groceries/prod/utag.351.js?utv=ut4.44.202510090946\"></script><script type=\"text/javascript\" async=\"\" charset=\"utf-8\" id=\"utag_sainsburys.groceries_282\" src=\"//tags.tiqcdn.com/utag/sainsburys/groceries/prod/utag.282.js?utv=ut4.44.202510090946\"></script><script type=\"text/javascript\" async=\"\" charset=\"utf-8\" id=\"utag_sainsburys.groceries_289\" src=\"//tags.tiqcdn.com/utag/sainsburys/groceries/prod/utag.289.js?utv=ut4.44.202510090946\"></script><script type=\"text/javascript\" async=\"\" charset=\"utf-8\" id=\"tiqapp\" src=\"//tags.tiqcdn.com/utag/tiqapp/utag.v.js?a=sainsburys/groceries/202510090946&amp;cb=1760020160210\"></script><script src=\"https://cdn-ukwest.onetrust.com/scripttemplates/202409.2.0/otBannerSdk.js\" async=\"\" type=\"text/javascript\"></script></head><body id=\"yext\" class=\"Text\"><script type=\"text/javascript\">window.digitalData = {}; window.digitalData.event = []; window.digitalData.page = {}; window.digitalData.page.pageInfo = {}; window.digitalData.page.pageInfo.pageName = 'help:pricespayment:conveniencestoreprices'; window.digitalData.page.pageInfo.newPageTemplate = 'help'; window.digitalData.page.pageInfo.rendering = window.matchMedia('(max-width: 767px)').matches ? 'mobile' : 'web'; window.digitalData.page.pageInfo.userTimestamp = (function(){var date = new Date(); var nowUTC = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()); var options = {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Europe/London'}; var nowGB = new Intl.DateTimeFormat('en-GB', options).format(nowUTC); var nowGBDate = nowGB.split(',')[0].split('/').reverse().join('-'); var nowGBTime = nowGB.split(',')[1]; return nowGBDate + nowGBTime;})(); (function(a,b,c,d){a='//tags.tiqcdn.com/utag/sainsburys/groceries/prod/utag.js'; b=document; c='script'; d=b.createElement(c); d.src=a; d.type='text/java'+c; d.async=true; a=b.getElementsByTagName(c)[0]; a.parentNode.insertBefore(d,a)})();</script><script type=\"text/javascript\">window.addEventListener('load', () => {let script = document.createElement('script'); script.src = 'https://cdn-ukwest.onetrust.com/scripttemplates/otSDKStub.js'; script.type = 'text/javascript'; script.charset = 'UTF-8'; script.setAttribute('data-domain-script', \"6b09e000-c446-45d2-a1c5-dec334eb1627\"); script.innerHTML = 'function OptanonWrapper(){}'; document.body.appendChild(script);})</script><a href=\"#first-anchor\" class=\"sr-only sr-only-focusable\" id=\"skip-nav\">Skip to content</a><a href=\"#open-chat-button\" class=\"sr-only sr-only-focusable\" id=\"skip-to-chat\">Skip to Chat</a><div class=\"js-notification-banner\" data-banner-yext-id=\"82864865\"></div><header class=\"Header\" id=\"Header\" data-ya-scope=\"header\"><div class=\"Header-container\"><div class=\"Header-logo\"><a href=\"../../help\" class=\"Link Header-link\" data-ya-track=\"logoLink\"><div class=\"Image Header-image ObjectFit-container\" style=\"background-size: contain; background-position: center center; background-image: url(&quot;../../permanent-b0b701/assets/images/logo.3eb6efa2.svg&quot;);\"><img class=\"ObjectFit-image\" src=\"../../permanent-b0b701/assets/images/logo.3eb6efa2.svg\" alt=\"Go to corporate site\" loading=\"eager\"></div></a></div><div class=\"Header-content\"><ul class=\"Header-menu\"><li class=\"Header-menuItem\"><a href=\"https://stockchecker.sainsburys.co.uk/\" class=\"Link Header-link\" data-ya-track=\"link1\"><span class=\"Header-linkText\">Stock Checker</span></a></li><li class=\"Header-menuItem\"><a href=\"https://www.sainsburys.co.uk/\" class=\"Link Header-link\" data-ya-track=\"link2\"><span class=\"Header-linkText\">Sainsbury’s Home</span></a></li><li class=\"Header-menuItem\"><a href=\"https://stores.sainsburys.co.uk/\" class=\"Link Header-link\" data-ya-track=\"link3\"><span class=\"Header-linkText\">Store Locator</span></a></li></ul></div></div></header><div class=\"Breadcrumbs-section\"><div class=\"Breadcrumbs-container\"></div></div><main id=\"main\" class=\"Main\" itemscope=\"\" itemtype=\"http://schema.org/Article\" itemid=\"https://help.sainsburys.co.uk/#29122298\" itemref=\"page-url\"><a href=\"#skip-nav\" class=\"sr-only sr-only-focusable\" id=\"first-anchor\">Return to Nav</a><div class=\"Main-content\"><div class=\"Hero\" data-ya-scope=\"hero\" style=\"background-image: url(//dynl.mktgcdn.com/p/TyCpGZmTFojFvYcNeIaFM1mrSzIA9GQgTnbbAmEqBb0/1110x276.png)\"><div class=\"Hero-container\"><div class=\"Hero-contentContainer\"><div class=\"Hero-content\"><div class=\"Hero-answersContainer js-answers-container component yxt-Answers-component yxt-SearchBar-wrapper\"><div class=\"yxt-SearchBar\">  <div class=\"yxt-SearchBar-container\">      <form class=\"yxt-SearchBar-form\">        <label class=\"sr-only\" for=\"yxt-SearchBar-input--hero\" id=\"yxt-SearchBar-inputLabel--hero\">          Conduct a search        </label>        <input class=\"js-yext-query yxt-SearchBar-input\" id=\"yxt-SearchBar-input--hero\" type=\"text\" name=\"query\" value=\"\" placeholder=\"Start your search here\" aria-label=\"Conduct a search\" aria-autocomplete=\"list\" aria-controls=\"yxt-SearchBar-autocomplete--hero\" aria-describedby=\"instructions\" aria-haspopup=\"listbox\" autocomplete=\"off\" autocorrect=\"off\" spellcheck=\"false\">        <div id=\"instructions\" class=\"yxt-SearchBar-instructions sr-only\">          When autocomplete results are available, use up and down arrows to review and enter to select.        </div>        <button type=\"button\" class=\"js-yxt-SearchBar-clear yxt-SearchBar-clear yxt-SearchBar--hidden\" data-eventtype=\"SEARCH_CLEAR_BUTTON\" data-eventoptions=\"{}\" data-is-analytics-attached=\"true\">          <div class=\"Icon Icon--close \" aria-hidden=\"true\">                      </div>          <span class=\"yxt-SearchBar-clearButtonText sr-only\">            Clear          </span>        </button>        <button type=\"submit\" class=\"js-yext-submit yxt-SearchBar-button\">                      <div class=\"yxt-SearchBar-buttonImage js-yxt-SearchBar-buttonImage js-yxt-SearchBar-Icon\">              <div class=\"Icon Icon--custom \" aria-hidden=\"true\">                  <img src=\"../../permanent-b0b701/assets/images/search.0fb32e0c.png\" alt=\"\" class=\"Icon-image\">              </div>  </div>          <span class=\"yxt-SearchBar-buttonText sr-only\">            Submit          </span>        </button>      </form>    <div id=\"yxt-SearchBar-autocomplete--hero\" class=\"yxt-SearchBar-autocomplete component yxt-Answers-component\"><div class=\"yxt-AutoComplete-wrapper js-yxt-AutoComplete-wrapper\" aria-expanded=\"false\">  <span class=\"yxt-AutoComplete-resultsCount sr-only\" aria-live=\"assertive\">  </span></div></div>  </div></div></div></div></div></div></div><div class=\"ImportantInformation ImportantInformation--articlesNoneRelated\" data-ya-scope=\"important-information\"><div class=\"ImportantInformation-container\"><h1 class=\"ImportantInformation-sectionTitle is-hidden\" itemprop=\"name\">Why are prices different between your large and convenience stores?</h1><div class=\"ImportantInformation-content\"><div class=\"ImportantInformation-descriptionSection\"><div class=\"ImportantInformation-sectionTitle\">Why are prices different between your large and convenience stores?</div><div class=\"ImportantInformation-description\" itemprop=\"description\"><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>We're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers.  </span></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Different sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores. </span></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>These, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores.</span></p></div></div><div class=\"ImportantInformation-cardsSection\"><div class=\"ImportantInformation-cardContent\"><h2 class=\"ImportantInformation-cardSectionTitle\">Important information</h2><div class=\"ImportantInformation-cards\"><div class=\"Card\" itemprop=\"makesOffer\" itemscope=\"\" itemtype=\"http://schema.org/Offer\"><a class=\"Card-link\" href=\"https://help.sainsburys.co.uk/help/info-of-interest/product-recall-notices\" data-ya-track=\"link#\" itemprop=\"url\"><div class=\"Card-imageWrapper\"><img class=\"Card-image js-lazy\" data-src=\"//dynl.mktgcdn.com/p/Ew40gDVlVzUFxm6AaFns4362BNXD-0E1eEE9wr-LX2g/600x176.png\" alt=\"\" itemprop=\"image\"></div><span class=\"Card-info\"><span class=\"Card-title\" itemprop=\"name\">Product Recalls</span><span class=\"Card-action\">View more</span></span></a></div></div></div></div></div></div></div><div id=\"you-might-also-find-the-following-articles-helpful\" class=\"HelpArticlesList\" data-ya-scope=\"help-articles\"><div class=\"HelpArticlesList-container\"><h2 class=\"HelpArticlesList-title\">You might also find the following articles helpful</h2><ul class=\"HelpArticlesList-list\"><li class=\"HelpArticlesList-listItem\"><a class=\"HelpArticlesList-link\" href=\"../../help/prices-payment/deliveroo_uber\" data-ya-track=\"link1\"><span class=\"HelpArticlesList-linkText\">Why are prices different when ordering from Deliveroo and Uber?</span></a></li><li class=\"HelpArticlesList-listItem\"><a class=\"HelpArticlesList-link\" href=\"../../help/prices-payment/petrol-prices\" data-ya-track=\"link2\"><span class=\"HelpArticlesList-linkText\">Why do petrol prices vary from store to store?</span></a></li><li class=\"HelpArticlesList-listItem\"><a class=\"HelpArticlesList-link\" href=\"../../help/prices-payment/regular-price-changes\" data-ya-track=\"link3\"><span class=\"HelpArticlesList-linkText\">Why do you do so many price changes?</span></a></li></ul></div></div><div class=\"Feedback\" data-ya-scope=\"feedback\"><div class=\"Feedback-container\"><h2 class=\"Feedback-title js-feedback-title\">Did this answer your question?</h2><div class=\"Feedback-content\"><div class=\"Feedback-buttons js-feedback-buttons\"><button class=\"Feedback-button js-feedback-button\" data-ya-track=\"1\">Yes</button><button class=\"Feedback-button js-feedback-button\" data-ya-track=\"0\">No</button></div><div class=\"Feedback-textContainer js-feedback-text is-hidden\"><div class=\"Feedback-text1\">Thank you for rating this answer</div><div class=\"Feedback-text2\">We'll use this to help improve our service.</div></div></div></div></div><div class=\"Search\" data-ya-scope=\"search\"><div class=\"Search-container\"><div class=\"Search-content\"><h2 class=\"Search-title\">Still couldn’t find an answer?</h2><div class=\"Search-answersContainer js-search-answers-container component yxt-Answers-component yxt-SearchBar-wrapper\"><div class=\"yxt-SearchBar\">  <div class=\"yxt-SearchBar-container\">      <form class=\"yxt-SearchBar-form\">        <label class=\"sr-only\" for=\"yxt-SearchBar-input--search\" id=\"yxt-SearchBar-inputLabel--search\">          Conduct a search        </label>        <input class=\"js-yext-query yxt-SearchBar-input\" id=\"yxt-SearchBar-input--search\" type=\"text\" name=\"query\" value=\"\" placeholder=\"Start your search here\" aria-label=\"Conduct a search\" aria-autocomplete=\"list\" aria-controls=\"yxt-SearchBar-autocomplete--search\" aria-describedby=\"instructions\" aria-haspopup=\"listbox\" autocomplete=\"off\" autocorrect=\"off\" spellcheck=\"false\">        <div id=\"instructions\" class=\"yxt-SearchBar-instructions sr-only\">          When autocomplete results are available, use up and down arrows to review and enter to select.        </div>        <button type=\"button\" class=\"js-yxt-SearchBar-clear yxt-SearchBar-clear yxt-SearchBar--hidden\" data-eventtype=\"SEARCH_CLEAR_BUTTON\" data-eventoptions=\"{}\" data-is-analytics-attached=\"true\">          <div class=\"Icon Icon--close \" aria-hidden=\"true\">                      </div>          <span class=\"yxt-SearchBar-clearButtonText sr-only\">            Clear          </span>        </button>        <button type=\"submit\" class=\"js-yext-submit yxt-SearchBar-button\">                      <div class=\"yxt-SearchBar-buttonImage js-yxt-SearchBar-buttonImage js-yxt-SearchBar-Icon\">              <div class=\"Icon Icon--custom \" aria-hidden=\"true\">                  <img src=\"../../permanent-b0b701/assets/images/search.0fb32e0c.png\" alt=\"\" class=\"Icon-image\">              </div>  </div>          <span class=\"yxt-SearchBar-buttonText sr-only\">            Submit          </span>        </button>      </form>    <div id=\"yxt-SearchBar-autocomplete--search\" class=\"yxt-SearchBar-autocomplete component yxt-Answers-component\"><div class=\"yxt-AutoComplete-wrapper js-yxt-AutoComplete-wrapper\" aria-expanded=\"false\">  <span class=\"yxt-AutoComplete-resultsCount sr-only\" aria-live=\"assertive\">  </span></div></div>  </div></div></div></div></div></div><div class=\"GetMore\" data-ya-scope=\"getmore\"><div class=\"GetMore-container\"><div class=\"GetMore-content\"><h2 class=\"GetMore-title\">Get more from Sainsbury's</h2><div class=\"GetMore-itemsWrapper\"><div class=\"Card\" itemprop=\"makesOffer\" itemscope=\"\" itemtype=\"http://schema.org/Offer\"><a class=\"Card-link\" href=\"https://www.sainsburys.co.uk/gol-ui/groceries/occasions-by-sainsburys/c:1046171\" data-ya-track=\"link1\" itemprop=\"url\"><div class=\"Card-imageWrapper\"><img class=\"Card-image js-lazy\" data-src=\"//dynl.mktgcdn.com/p/B0vQFgCgJN4Ru4mCL_OvGYCG2D7c1YjaN9ED5Y2okm8/600x337.jpg\" alt=\"Occasions by Sainsbury's\" itemprop=\"image\"></div><span class=\"Card-info\"><span class=\"Card-title\" itemprop=\"name\">Occasions by Sainsbury's</span><span class=\"Card-action\">View more</span></span></a></div><div class=\"Card\" itemprop=\"makesOffer\" itemscope=\"\" itemtype=\"http://schema.org/Offer\"><a class=\"Card-link\" href=\"https://www.sainsburysenergy.com/?utm_source=sainsburys&amp;utm_medium=website&amp;utm_campaign=help_get_more\" data-ya-track=\"link2\" itemprop=\"url\"><div class=\"Card-imageWrapper\"><img class=\"Card-image js-lazy\" data-src=\"//dynl.mktgcdn.com/p/c2hHiid1sHfb_v7RqvvwnQfVDsHphDzCEgJHaus4juI/600x338.png\" alt=\"\" itemprop=\"image\"></div><span class=\"Card-info\"><span class=\"Card-title\" itemprop=\"name\">Energy</span><span class=\"Card-action\">View more</span></span></a></div><div class=\"Card\" itemprop=\"makesOffer\" itemscope=\"\" itemtype=\"http://schema.org/Offer\"><a class=\"Card-link\" href=\"https://recipes.sainsburys.co.uk/?_ga=2.172476323.1268926258.1571302195-837805215.1570797584\" data-ya-track=\"link3\" itemprop=\"url\"><div class=\"Card-imageWrapper\"><img class=\"Card-image js-lazy\" data-src=\"//dynl.mktgcdn.com/p/76Npde11RmCSk1E7hbcFwlxjaMDdp15Abe9UXPVKzU0/600x337.jpg\" alt=\"Recipes\" itemprop=\"image\"></div><span class=\"Card-info\"><span class=\"Card-title\" itemprop=\"name\">Recipes</span><span class=\"Card-action\">View more</span></span></a></div><div class=\"Card\" itemprop=\"makesOffer\" itemscope=\"\" itemtype=\"http://schema.org/Offer\"><a class=\"Card-link\" href=\"https://chopchopapp.co.uk/?shortlink=3cb75292&amp;pid=.co.uk%20tile&amp;c=Chop%20Chop%20.co.uk%20tile\" data-ya-track=\"link4\" itemprop=\"url\"><div class=\"Card-imageWrapper\"><img class=\"Card-image js-lazy\" data-src=\"//dynl.mktgcdn.com/p/iMk_9YjCtr4MwFGEmeA3DzIiDqlTxw2ZmbyAmC9cZvU/600x338.jpg\" alt=\"Chop Chop\" itemprop=\"image\"></div><span class=\"Card-info\"><span class=\"Card-title\" itemprop=\"name\">Check if we deliver to you</span><span class=\"Card-action\">View more</span></span></a></div></div></div></div></div><div class=\"ContactModal\"><div class=\"c-Modal js-Modal\" data-open-buttons=\"js-contact-show-form-button\" data-close-on-outside-click=\"true\" data-overlay=\"true\"><div class=\"c-Modal-content\"><div class=\"ContactModal-header\"><div class=\"ContactModal-headerTitleRow\"><div class=\"ContactModal-headerTitle\">Contact Information</div><div class=\"ContactModal-closeButton c-Modal-closeButton\" tabindex=\"0\" data-ya-track=\"close-modal\"><img class=\"ContactModal-closeButtonIcon js-lazy\" data-src=\"../../permanent-b0b701/assets/images/close-modal.1842620e.svg\" alt=\"\"></div></div><div class=\"ContactModal-headerInfo\"><p>The team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond.</p><p>Contacting us about a refund?<br>You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store.</p><ul><li>denotes a required field</li></ul></div></div><div class=\"c-Modal-messageWrapper\"><iframe class=\"ContactModal-iframe\" tabindex=\"0\" src=\"https://yext-suidb.formstack.com/forms/sainsburys_contact_form?field119041725=careline.webform@sainsburys.co.uk\" title=\"Sainsbury's Contact Form\"></iframe></div></div></div></div></div></main><script type=\"module\">          import { mount } from \"https://chat.sainsburys.co.uk/sainsburys/chat.js\";          /**          * Initializes the chat container and appends it to the body.          * @returns {HTMLElement} The created container element.          */          const initializeChatContainer = () => {            const container = document.createElement('div')            container.id = 'chat-container'            document.body.appendChild(container)            return container          }          /**          * Attaches a \"Skip to Chat\" accessibility link to the DOM.          * If the #skip-nav element exists, it appends the link after it.          * Otherwise, it prepends the link as the first child of the <body>.          */          const attachSkipChatLink = () => {            // Create the \"Skip to Chat\" link element            const skipChatLink = document.createElement('a')            skipChatLink.href = '#open-chat-button'            skipChatLink.className = 'sr-only sr-only-focusable'            skipChatLink.id = 'skip-to-chat'            skipChatLink.textContent = 'Skip to Chat'            // Insert the link in the appropriate location            const skipNavLink = document.querySelector('#skip-nav')            if (skipNavLink) {              skipNavLink.insertAdjacentElement('afterend', skipChatLink)            } else {              document.body.insertBefore(skipChatLink, document.body.firstChild)            }          }          document.addEventListener('DOMContentLoaded', async () => {            try {              // Initialize the chat container              const container = initializeChatContainer()              // Mount the chat widget              await mount(container)              // Observe for the #open-chat-button element              pollForElement('#open-chat-button', attachSkipChatLink)            } catch (error) {              console.error('Error initializing the chat widget:', error)            }          })          /**          * Waits for a specific element to appear in the DOM and executes a callback.          * @param {string} selector - The CSS selector of the target element.          * @param {Function} callback - The function to execute when the element is found.          */          function pollForElement(selector, callback, interval = 500, timeout = 10000) {            const startTime = Date.now()            const intervalId = setInterval(() => {              const element = document.querySelector(selector)              if (element) {                clearInterval(intervalId)                callback()              } else if (Date.now() - startTime > timeout) {                clearInterval(intervalId)                console.warn(`Timeout: Element ${selector} not found.`)              }            }, interval)          }        </script><img src=\"https://www.yext-pixel.com/store_pagespixel?product=storepages&amp;v=1760020160411&amp;pageurl=%2Fhelp%2Fprices-payment%2Fconvenience-store-prices&amp;pagesReferrer=https%3A%2F%2Fwww.facebook.com%2F&amp;businessids=3141402&amp;siteId=23737&amp;isStaging=false&amp;ids=29122298&amp;pageSetId=Help%20Articles&amp;eventType=pageview\" alt=\"\" style=\"width: 0px; height: 0px; position: absolute;\"><script src=\"https://cdn-ukwest.onetrust.com/scripttemplates/otSDKStub.js\" charset=\"UTF-8\" data-domain-script=\"6b09e000-c446-45d2-a1c5-dec334eb1627\"></script><script id=\"yext-answers-templates\" async=\"\" src=\"https://assets.sitescdn.net/answers/v1.12.0/answerstemplates.compiled.min.js\"></script><div id=\"chat-container\"><div class=\"ds-theme--sainsburys\" data-brand=\"sainsburys\"><button class=\"ds-c-button ds-c-button--primary ds-c-button--rounded ds-c-button--md ds-c-button--sr-only ds-c-button--icon Z4zAgvuSNC2GKY7gh7h_\" data-testid=\"open-chat-button\" data-pkgid=\"@sainsburys-tech/fable-4.5.0-button\" id=\"open-chat-button\"><span class=\"ds-c-button__icon\"></span><span class=\"ds-c-button__icon--sr-only\">Open Chat</span></button></div></div><script src=\"https://cdn-ukwest.onetrust.com/scripttemplates/otSDKStub.js\" type=\"text/javascript\" charset=\"UTF-8\" data-domain-script=\"6b09e000-c446-45d2-a1c5-dec334eb1627\">function OptanonWrapper(){}</script><div id=\"onetrust-consent-sdk\" data-nosnippet=\"true\"><div class=\"onetrust-pc-dark-filter ot-fade-in\" style=\"z-index:2147483645;\"></div></div></body></html>",
+        "manifest_hash": "ad6bf81327b68b85242432fba0416f29e27510d03ed6e7b1fb0378410d2876d5"
+      },
+      "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+      "original_document": {
+        "schema_version": "downstream-document-v1",
+        "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+        "source": {
+          "payload_hash": "c32f7acbebbbf43f2f3bd9559cc38c0563b1c3bb0a22ea5c80a0f4bbd812dfaf",
+          "href": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices",
+          "hostname": "help.sainsburys.co.uk",
+          "format": "html",
+          "source_file": null,
+          "source_file_hash": null,
+          "source_row": null
+        },
+        "raw_payload_path": null,
+        "selection": {
+          "policy": "retention-first-v1",
+          "human_validated": false,
+          "quality_flags": [],
+          "status": "selected",
+          "method": "conservative_dom",
+          "reasons": [
+            "Preserve content and structure before downstream relevance decisions; flagged content remains available. Boilerplate is expected."
+          ]
+        },
+        "source_metadata": {
+          "title": "Why are prices different between your large and convenience stores?",
+          "language": "en-GB",
+          "direction": null,
+          "description": " in Why are prices different between your large and convenience stores?, Prices & PaymentHome.",
+          "canonical": {
+            "target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices",
+            "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+          },
+          "headings": [
+            "Why are prices different between your large and convenience stores?",
+            "Important information",
+            "You might also find the following articles helpful",
+            "Did this answer your question?",
+            "Still couldn’t find an answer?",
+            "Get more from Sainsbury's"
+          ],
+          "quality_flags": [],
+          "jsonld": [],
+          "counts": {
+            "headings": 6,
+            "lists": 3,
+            "list_items": 7,
+            "tables": 0,
+            "links": 15,
+            "images": 10,
+            "code": 0,
+            "semantic_containers": 2,
+            "scripts": 33,
+            "body_words": 352
+          },
+          "visibility": [
+            {
+              "source_locator": {
+                "dom_path": "/html[1]"
+              },
+              "attributes": {
+                "lang": "en-GB"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[1]/a[1]/div[1]"
+              },
+              "attributes": {
+                "style": "background-size: contain; background-position: center center; background-image: url(\"../../permanent-b0b701/assets/images/logo.3eb6efa2.svg\");"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[1]"
+              },
+              "attributes": {
+                "style": "background-image: url(//dynl.mktgcdn.com/p/TyCpGZmTFojFvYcNeIaFM1mrSzIA9GQgTnbbAmEqBb0/1110x276.png)"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/button[1]/div[1]"
+              },
+              "attributes": {
+                "aria-hidden": "true"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/button[2]/div[1]/div[1]"
+              },
+              "attributes": {
+                "aria-hidden": "true"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[1]"
+              },
+              "attributes": {
+                "style": "font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;",
+                "dir": "ltr"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[2]"
+              },
+              "attributes": {
+                "style": "font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;",
+                "dir": "ltr"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[3]"
+              },
+              "attributes": {
+                "style": "font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;",
+                "dir": "ltr"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[4]"
+              },
+              "attributes": {
+                "style": "font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;",
+                "dir": "ltr"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/button[1]/div[1]"
+              },
+              "attributes": {
+                "aria-hidden": "true"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/button[2]/div[1]/div[1]"
+              },
+              "attributes": {
+                "aria-hidden": "true"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/img[1]"
+              },
+              "attributes": {
+                "style": "width: 0px; height: 0px; position: absolute;"
+              },
+              "computed_visibility": "unknown"
+            },
+            {
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/div[4]/div[1]"
+              },
+              "attributes": {
+                "style": "z-index:2147483645;"
+              },
+              "computed_visibility": "unknown"
+            }
+          ],
+          "metadata": {
+            "viewport": [
+              "width=device-width, initial-scale=1, maximum-scale=5"
+            ],
+            "format-detection": [
+              "telephone=no"
+            ],
+            "description": [
+              " in Why are prices different between your large and convenience stores?, Prices & PaymentHome."
+            ],
+            "keywords": [
+              ""
+            ],
+            "og:title": [
+              "Why are prices different between your large and convenience stores?"
+            ],
+            "og:description": [
+              " in Why are prices different between your large and convenience stores?, Prices & PaymentHome."
+            ],
+            "og:image": [
+              "https://help.sainsburys.co.uk/permanent-b0b701/assets/images/logo.3eb6efa2.svg"
+            ],
+            "og:type": [
+              "website"
+            ],
+            "og:url": [
+              "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+            ],
+            "twitter:card": [
+              "summary"
+            ]
+          }
+        },
+        "blocks": [
+          {
+            "block_id": "b000000",
+            "order": 0,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Skip to contentSkip to Chat",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Skip to content",
+                "target": "#first-anchor",
+                "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#first-anchor"
+              },
+              {
+                "text": "Skip to Chat",
+                "target": "#open-chat-button",
+                "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#open-chat-button"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]"
+            },
+            "mapping_status": "normalized_match",
+            "inline_markdown": "[Skip to content](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#first-anchor>)[Skip to Chat](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#open-chat-button>)"
+          },
+          {
+            "block_id": "b000001",
+            "order": 1,
+            "parent_id": null,
+            "type": "image",
+            "text": "Go to corporate site",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[1]/a[1]/div[1]/img[1]"
+            },
+            "mapping_status": "exact",
+            "target": "../../permanent-b0b701/assets/images/logo.3eb6efa2.svg",
+            "resolved_target": "https://help.sainsburys.co.uk/permanent-b0b701/assets/images/logo.3eb6efa2.svg"
+          },
+          {
+            "block_id": "b000002",
+            "order": 2,
+            "parent_id": null,
+            "type": "list",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]"
+            },
+            "mapping_status": "exact",
+            "ordered": false,
+            "start": 1
+          },
+          {
+            "block_id": "b000003",
+            "order": 3,
+            "parent_id": "b000002",
+            "type": "list_item",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[1]"
+            },
+            "mapping_status": "exact"
+          },
+          {
+            "block_id": "b000004",
+            "order": 4,
+            "parent_id": "b000003",
+            "type": "paragraph",
+            "text": "Stock Checker",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Stock Checker",
+                "target": "https://stockchecker.sainsburys.co.uk/",
+                "resolved_target": "https://stockchecker.sainsburys.co.uk/"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "[Stock Checker](<https://stockchecker.sainsburys.co.uk/>)"
+          },
+          {
+            "block_id": "b000005",
+            "order": 5,
+            "parent_id": "b000002",
+            "type": "list_item",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[2]"
+            },
+            "mapping_status": "exact"
+          },
+          {
+            "block_id": "b000006",
+            "order": 6,
+            "parent_id": "b000005",
+            "type": "paragraph",
+            "text": "Sainsbury’s Home",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Sainsbury’s Home",
+                "target": "https://www.sainsburys.co.uk/",
+                "resolved_target": "https://www.sainsburys.co.uk/"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[2]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "[Sainsbury’s Home](<https://www.sainsburys.co.uk/>)"
+          },
+          {
+            "block_id": "b000007",
+            "order": 7,
+            "parent_id": "b000002",
+            "type": "list_item",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[3]"
+            },
+            "mapping_status": "exact"
+          },
+          {
+            "block_id": "b000008",
+            "order": 8,
+            "parent_id": "b000007",
+            "type": "paragraph",
+            "text": "Store Locator",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Store Locator",
+                "target": "https://stores.sainsburys.co.uk/",
+                "resolved_target": "https://stores.sainsburys.co.uk/"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[3]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "[Store Locator](<https://stores.sainsburys.co.uk/>)"
+          },
+          {
+            "block_id": "b000009",
+            "order": 9,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Return to Nav",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Return to Nav",
+                "target": "#skip-nav",
+                "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#skip-nav"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "[Return to Nav](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#skip-nav>)"
+          },
+          {
+            "block_id": "b000010",
+            "order": 10,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Conduct a search",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Conduct a search"
+          },
+          {
+            "block_id": "b000011",
+            "order": 11,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "When autocomplete results are available, use up and down arrows to review and enter to select.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": null,
+            "mapping_status": "ambiguous",
+            "inline_markdown": "When autocomplete results are available, use up and down arrows to review and enter to select."
+          },
+          {
+            "block_id": "b000012",
+            "order": 12,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Clear",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": null,
+            "mapping_status": "ambiguous",
+            "inline_markdown": "Clear"
+          },
+          {
+            "block_id": "b000013",
+            "order": 13,
+            "parent_id": null,
+            "type": "image",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": null,
+            "mapping_status": "ambiguous",
+            "target": "../../permanent-b0b701/assets/images/search.0fb32e0c.png",
+            "resolved_target": "https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png"
+          },
+          {
+            "block_id": "b000014",
+            "order": 14,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Submit",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": null,
+            "mapping_status": "ambiguous",
+            "inline_markdown": "Submit"
+          },
+          {
+            "block_id": "b000015",
+            "order": 15,
+            "parent_id": null,
+            "type": "heading",
+            "text": "Why are prices different between your large and convenience stores?",
+            "heading_level": 1,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/h1[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Why are prices different between your large and convenience stores?"
+          },
+          {
+            "block_id": "b000016",
+            "order": 16,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Why are prices different between your large and convenience stores?",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Why are prices different between your large and convenience stores?"
+          },
+          {
+            "block_id": "b000017",
+            "order": 17,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "We're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "We're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers."
+          },
+          {
+            "block_id": "b000018",
+            "order": 18,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Different sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[3]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Different sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores."
+          },
+          {
+            "block_id": "b000019",
+            "order": 19,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "These, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[4]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "These, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores."
+          },
+          {
+            "block_id": "b000020",
+            "order": 20,
+            "parent_id": null,
+            "type": "heading",
+            "text": "Important information",
+            "heading_level": 2,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/h2[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Important information"
+          },
+          {
+            "block_id": "b000021",
+            "order": 21,
+            "parent_id": null,
+            "type": "image",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]/div[1]/img[1]"
+            },
+            "mapping_status": "exact",
+            "target": "",
+            "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+          },
+          {
+            "block_id": "b000022",
+            "order": 22,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Product RecallsView more",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Product RecallsView more"
+          },
+          {
+            "block_id": "b000023",
+            "order": 23,
+            "parent_id": null,
+            "type": "heading",
+            "text": "You might also find the following articles helpful",
+            "heading_level": 2,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/h2[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "You might also find the following articles helpful"
+          },
+          {
+            "block_id": "b000024",
+            "order": 24,
+            "parent_id": null,
+            "type": "list",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]"
+            },
+            "mapping_status": "exact",
+            "ordered": false,
+            "start": 1
+          },
+          {
+            "block_id": "b000025",
+            "order": 25,
+            "parent_id": "b000024",
+            "type": "list_item",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[1]"
+            },
+            "mapping_status": "exact"
+          },
+          {
+            "block_id": "b000026",
+            "order": 26,
+            "parent_id": "b000025",
+            "type": "paragraph",
+            "text": "Why are prices different when ordering from Deliveroo and Uber?",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Why are prices different when ordering from Deliveroo and Uber?",
+                "target": "../../help/prices-payment/deliveroo_uber",
+                "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/deliveroo_uber"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "[Why are prices different when ordering from Deliveroo and Uber?](<https://help.sainsburys.co.uk/help/prices-payment/deliveroo_uber>)"
+          },
+          {
+            "block_id": "b000027",
+            "order": 27,
+            "parent_id": "b000024",
+            "type": "list_item",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[2]"
+            },
+            "mapping_status": "exact"
+          },
+          {
+            "block_id": "b000028",
+            "order": 28,
+            "parent_id": "b000027",
+            "type": "paragraph",
+            "text": "Why do petrol prices vary from store to store?",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Why do petrol prices vary from store to store?",
+                "target": "../../help/prices-payment/petrol-prices",
+                "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/petrol-prices"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[2]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "[Why do petrol prices vary from store to store?](<https://help.sainsburys.co.uk/help/prices-payment/petrol-prices>)"
+          },
+          {
+            "block_id": "b000029",
+            "order": 29,
+            "parent_id": "b000024",
+            "type": "list_item",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[3]"
+            },
+            "mapping_status": "exact"
+          },
+          {
+            "block_id": "b000030",
+            "order": 30,
+            "parent_id": "b000029",
+            "type": "paragraph",
+            "text": "Why do you do so many price changes?",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Why do you do so many price changes?",
+                "target": "../../help/prices-payment/regular-price-changes",
+                "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/regular-price-changes"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[3]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "[Why do you do so many price changes?](<https://help.sainsburys.co.uk/help/prices-payment/regular-price-changes>)"
+          },
+          {
+            "block_id": "b000031",
+            "order": 31,
+            "parent_id": null,
+            "type": "heading",
+            "text": "Did this answer your question?",
+            "heading_level": 2,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[4]/div[1]/h2[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Did this answer your question?"
+          },
+          {
+            "block_id": "b000032",
+            "order": 32,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "YesNo",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[4]/div[1]/div[1]/div[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "YesNo"
+          },
+          {
+            "block_id": "b000033",
+            "order": 33,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Thank you for rating this answer",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Thank you for rating this answer"
+          },
+          {
+            "block_id": "b000034",
+            "order": 34,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "We'll use this to help improve our service.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[2]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "We'll use this to help improve our service."
+          },
+          {
+            "block_id": "b000035",
+            "order": 35,
+            "parent_id": null,
+            "type": "heading",
+            "text": "Still couldn’t find an answer?",
+            "heading_level": 2,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[5]/div[1]/div[1]/h2[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Still couldn’t find an answer?"
+          },
+          {
+            "block_id": "b000036",
+            "order": 36,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Conduct a search",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Conduct a search"
+          },
+          {
+            "block_id": "b000037",
+            "order": 37,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "When autocomplete results are available, use up and down arrows to review and enter to select.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": null,
+            "mapping_status": "ambiguous",
+            "inline_markdown": "When autocomplete results are available, use up and down arrows to review and enter to select."
+          },
+          {
+            "block_id": "b000038",
+            "order": 38,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Clear",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": null,
+            "mapping_status": "ambiguous",
+            "inline_markdown": "Clear"
+          },
+          {
+            "block_id": "b000039",
+            "order": 39,
+            "parent_id": null,
+            "type": "image",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": null,
+            "mapping_status": "ambiguous",
+            "target": "../../permanent-b0b701/assets/images/search.0fb32e0c.png",
+            "resolved_target": "https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png"
+          },
+          {
+            "block_id": "b000040",
+            "order": 40,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Submit",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": null,
+            "mapping_status": "ambiguous",
+            "inline_markdown": "Submit"
+          },
+          {
+            "block_id": "b000041",
+            "order": 41,
+            "parent_id": null,
+            "type": "heading",
+            "text": "Get more from Sainsbury's",
+            "heading_level": 2,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/h2[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Get more from Sainsbury's"
+          },
+          {
+            "block_id": "b000042",
+            "order": 42,
+            "parent_id": null,
+            "type": "image",
+            "text": "Occasions by Sainsbury's",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[1]/a[1]/div[1]/img[1]"
+            },
+            "mapping_status": "exact",
+            "target": "",
+            "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+          },
+          {
+            "block_id": "b000043",
+            "order": 43,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Occasions by Sainsbury'sView more",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[1]/a[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Occasions by Sainsbury'sView more"
+          },
+          {
+            "block_id": "b000044",
+            "order": 44,
+            "parent_id": null,
+            "type": "image",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/img[1]"
+            },
+            "mapping_status": "exact",
+            "target": "",
+            "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+          },
+          {
+            "block_id": "b000045",
+            "order": 45,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "EnergyView more",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[2]/a[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "EnergyView more"
+          },
+          {
+            "block_id": "b000046",
+            "order": 46,
+            "parent_id": null,
+            "type": "image",
+            "text": "Recipes",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/a[1]/div[1]/img[1]"
+            },
+            "mapping_status": "exact",
+            "target": "",
+            "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+          },
+          {
+            "block_id": "b000047",
+            "order": 47,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "RecipesView more",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/a[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "RecipesView more"
+          },
+          {
+            "block_id": "b000048",
+            "order": 48,
+            "parent_id": null,
+            "type": "image",
+            "text": "Chop Chop",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[4]/a[1]/div[1]/img[1]"
+            },
+            "mapping_status": "exact",
+            "target": "",
+            "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+          },
+          {
+            "block_id": "b000049",
+            "order": 49,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Check if we deliver to youView more",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[4]/a[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Check if we deliver to youView more"
+          },
+          {
+            "block_id": "b000050",
+            "order": 50,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Contact Information",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Contact Information"
+          },
+          {
+            "block_id": "b000051",
+            "order": 51,
+            "parent_id": null,
+            "type": "image",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[2]/img[1]"
+            },
+            "mapping_status": "exact",
+            "target": "",
+            "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+          },
+          {
+            "block_id": "b000052",
+            "order": 52,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "The team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/p[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "The team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond."
+          },
+          {
+            "block_id": "b000053",
+            "order": 53,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Contacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/p[2]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Contacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store."
+          },
+          {
+            "block_id": "b000054",
+            "order": 54,
+            "parent_id": null,
+            "type": "list",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/ul[1]"
+            },
+            "mapping_status": "exact",
+            "ordered": false,
+            "start": 1
+          },
+          {
+            "block_id": "b000055",
+            "order": 55,
+            "parent_id": "b000054",
+            "type": "list_item",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[1]"
+            },
+            "mapping_status": "exact"
+          },
+          {
+            "block_id": "b000056",
+            "order": 56,
+            "parent_id": "b000055",
+            "type": "paragraph",
+            "text": "denotes a required field",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "denotes a required field"
+          },
+          {
+            "block_id": "b000057",
+            "order": 57,
+            "parent_id": null,
+            "type": "image",
+            "text": "",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/img[1]"
+            },
+            "mapping_status": "exact",
+            "target": "https://www.yext-pixel.com/store_pagespixel?product=storepages&v=1760020160411&pageurl=%2Fhelp%2Fprices-payment%2Fconvenience-store-prices&pagesReferrer=https%3A%2F%2Fwww.facebook.com%2F&businessids=3141402&siteId=23737&isStaging=false&ids=29122298&pageSetId=Help%20Articles&eventType=pageview",
+            "resolved_target": "https://www.yext-pixel.com/store_pagespixel?product=storepages&v=1760020160411&pageurl=%2Fhelp%2Fprices-payment%2Fconvenience-store-prices&pagesReferrer=https%3A%2F%2Fwww.facebook.com%2F&businessids=3141402&siteId=23737&isStaging=false&ids=29122298&pageSetId=Help%20Articles&eventType=pageview"
+          },
+          {
+            "block_id": "b000058",
+            "order": 58,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Open Chat",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[3]/div[1]"
+            },
+            "mapping_status": "exact",
+            "inline_markdown": "Open Chat"
+          }
+        ],
+        "outline": [
+          {
+            "block_id": "b000015",
+            "level": 1,
+            "text": "Why are prices different between your large and convenience stores?",
+            "parent_heading_id": null
+          },
+          {
+            "block_id": "b000020",
+            "level": 2,
+            "text": "Important information",
+            "parent_heading_id": "b000015"
+          },
+          {
+            "block_id": "b000023",
+            "level": 2,
+            "text": "You might also find the following articles helpful",
+            "parent_heading_id": "b000015"
+          },
+          {
+            "block_id": "b000031",
+            "level": 2,
+            "text": "Did this answer your question?",
+            "parent_heading_id": "b000015"
+          },
+          {
+            "block_id": "b000035",
+            "level": 2,
+            "text": "Still couldn’t find an answer?",
+            "parent_heading_id": "b000015"
+          },
+          {
+            "block_id": "b000041",
+            "level": 2,
+            "text": "Get more from Sainsbury's",
+            "parent_heading_id": "b000015"
+          }
+        ],
+        "chunk_ids": [
+          "e156b8dc3bced0ff8b7cc752f68bc493f6f82e68290792a44aba57d1e03579ee",
+          "0a85be20451c13f0f9a4831753c8e780873acc49c3f749e3af47bf01f078abf6",
+          "8d5a34478a604c05e584b94b98843093743525dfb12f958c6703fa0a9b4056bd",
+          "3fdb0397fd96e63ab9d6b0e9c399fd0ad51e8c78c31f0a80746375fda35ed05a",
+          "f4e682bd20b8b0be194ddabd1bbf00fd3f2be6f7c22eebb0486f16723e18983a",
+          "7fc520b14165672dfdcdc4a48cac31192bb101b17c1f8666562c952b429efe4f",
+          "22dae6012f7a9d7e24ca9b81c12060831ecc9edc38e0949100ddde877cb297e6"
+        ],
+        "text": "Skip to contentSkip to Chat\n\nGo to corporate site\n\nStock Checker\n\nSainsbury’s Home\n\nStore Locator\n\nReturn to Nav\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\nSubmit\n\nWhy are prices different between your large and convenience stores?\n\nWhy are prices different between your large and convenience stores?\n\nWe're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers.\n\nDifferent sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores.\n\nThese, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores.\n\nImportant information\n\nProduct RecallsView more\n\nYou might also find the following articles helpful\n\nWhy are prices different when ordering from Deliveroo and Uber?\n\nWhy do petrol prices vary from store to store?\n\nWhy do you do so many price changes?\n\nDid this answer your question?\n\nYesNo\n\nThank you for rating this answer\n\nWe'll use this to help improve our service.\n\nStill couldn’t find an answer?\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\nSubmit\n\nGet more from Sainsbury's\n\nOccasions by Sainsbury's\n\nOccasions by Sainsbury'sView more\n\nEnergyView more\n\nRecipes\n\nRecipesView more\n\nChop Chop\n\nCheck if we deliver to youView more\n\nContact Information\n\nThe team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond.\n\nContacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store.\n\ndenotes a required field\n\nOpen Chat",
+        "markdown": "[Skip to content](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#first-anchor>)[Skip to Chat](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#open-chat-button>)\n\n![Go to corporate site](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/logo.3eb6efa2.svg>)\n\n- [Stock Checker](<https://stockchecker.sainsburys.co.uk/>)\n- [Sainsbury’s Home](<https://www.sainsburys.co.uk/>)\n- [Store Locator](<https://stores.sainsburys.co.uk/>)\n\n[Return to Nav](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#skip-nav>)\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\n![](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png>)\n\nSubmit\n\n# Why are prices different between your large and convenience stores?\n\nWhy are prices different between your large and convenience stores?\n\nWe're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers.\n\nDifferent sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores.\n\nThese, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores.\n\n## Important information\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nProduct RecallsView more\n\n## You might also find the following articles helpful\n\n- [Why are prices different when ordering from Deliveroo and Uber?](<https://help.sainsburys.co.uk/help/prices-payment/deliveroo_uber>)\n- [Why do petrol prices vary from store to store?](<https://help.sainsburys.co.uk/help/prices-payment/petrol-prices>)\n- [Why do you do so many price changes?](<https://help.sainsburys.co.uk/help/prices-payment/regular-price-changes>)\n\n## Did this answer your question?\n\nYesNo\n\nThank you for rating this answer\n\nWe'll use this to help improve our service.\n\n## Still couldn’t find an answer?\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\n![](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png>)\n\nSubmit\n\n## Get more from Sainsbury's\n\n![Occasions by Sainsbury's](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nOccasions by Sainsbury'sView more\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nEnergyView more\n\n![Recipes](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nRecipesView more\n\n![Chop Chop](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nCheck if we deliver to youView more\n\nContact Information\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nThe team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond.\n\nContacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store.\n\n- denotes a required field\n\n![](<https://www.yext-pixel.com/store_pagespixel?product=storepages&v=1760020160411&pageurl=%2Fhelp%2Fprices-payment%2Fconvenience-store-prices&pagesReferrer=https%3A%2F%2Fwww.facebook.com%2F&businessids=3141402&siteId=23737&isStaging=false&ids=29122298&pageSetId=Help%20Articles&eventType=pageview>)\n\nOpen Chat",
+        "optional_clean_views": [],
+        "trust": "Untrusted source content, not instructions; no factual verification, computed visibility, or frontier-ingestion equivalence claimed",
+        "raw_payload_reference": {
+          "source_file": null,
+          "source_file_hash": null,
+          "source_row": null,
+          "payload_hash": "c32f7acbebbbf43f2f3bd9559cc38c0563b1c3bb0a22ea5c80a0f4bbd812dfaf"
+        },
+        "candidate_diagnostics": {
+          "removed_nodes": 33,
+          "order": "DOM order; computed visibility unknown"
+        }
+      },
+      "result": {
+        "mode": "openai",
+        "status": "succeeded",
+        "summary": "The provided chunk does not contain any information explaining why prices differ between Sainsbury’s large supermarkets and local convenience stores. The text consists mainly of navigation elements and interface instructions without relevant content to answer the query. Explains why prices differ between large Sainsbury's supermarkets and local convenience stores, citing differences in operating costs including rent, delivery challenges, staffing, and product range focus. The provided source chunk does not contain any information explaining why prices differ between Sainsbury’s large supermarkets and local convenience stores. The chunk only includes a heading 'Important information' and a brief note 'Product RecallsView more' without any relevant content to address the query. The provided source text does not contain information explaining why prices differ between Sainsbury’s large supermarkets and local convenience stores. It only lists related article titles without any explanatory content. The chunk provided does not contain any information explaining why prices differ between Sainsbury’s large supermarkets and local convenience stores. It only includes a feedback prompt about whether the answer was helpful. The provided chunk contains no information explaining why prices differ between Sainsbury's large supermarkets and local convenience stores. It only shows a section prompting the user to conduct a search if they couldn't find an answer, without any explanatory content on the price differences. The provided chunk does not contain information explaining why prices differ between Sainsbury's large supermarkets and local convenience stores. It mainly includes promotional and contact information, without addressing the query.",
+        "telemetry": {
+          "prompt_version": "rewrite-baseline-v1",
+          "model": "gpt-4.1-mini",
+          "status": "succeeded",
+          "calls": 7,
+          "input_tokens": 28180,
+          "output_tokens": 864,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "tokenizer": "o200k_base",
+          "budgeted_input_tokens": 31463,
+          "latency_ms": 13263
+        },
+        "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+        "review_items": [
+          "Human review required: source quotes do not prove factual entailment.",
+          "Markdown content proposal; source HTML/CSS is not patched.",
+          "missing_evidence",
+          "missing_evidence",
+          "missing_evidence",
+          "missing_evidence",
+          "missing_evidence",
+          "missing_evidence"
+        ],
+        "document": {
+          "schema_version": "downstream-document-v1",
+          "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+          "source": {
+            "payload_hash": "c32f7acbebbbf43f2f3bd9559cc38c0563b1c3bb0a22ea5c80a0f4bbd812dfaf",
+            "href": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices",
+            "hostname": "help.sainsburys.co.uk",
+            "format": "html",
+            "source_file": null,
+            "source_file_hash": null,
+            "source_row": null
+          },
+          "raw_payload_path": null,
+          "selection": {
+            "policy": "retention-first-v1",
+            "human_validated": false,
+            "quality_flags": [],
+            "status": "selected",
+            "method": "conservative_dom",
+            "reasons": [
+              "Preserve content and structure before downstream relevance decisions; flagged content remains available. Boilerplate is expected."
+            ]
+          },
+          "source_metadata": {
+            "title": "Why are prices different between your large and convenience stores?",
+            "language": "en-GB",
+            "direction": null,
+            "description": " in Why are prices different between your large and convenience stores?, Prices & PaymentHome.",
+            "canonical": {
+              "target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices",
+              "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+            },
+            "headings": [
+              "Why are prices different between your large and convenience stores?",
+              "Important information",
+              "You might also find the following articles helpful",
+              "Did this answer your question?",
+              "Still couldn’t find an answer?",
+              "Get more from Sainsbury's"
+            ],
+            "quality_flags": [],
+            "jsonld": [],
+            "counts": {
+              "headings": 6,
+              "lists": 3,
+              "list_items": 7,
+              "tables": 0,
+              "links": 15,
+              "images": 10,
+              "code": 0,
+              "semantic_containers": 2,
+              "scripts": 33,
+              "body_words": 352
+            },
+            "visibility": [
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]"
+                },
+                "attributes": {
+                  "lang": "en-GB"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[1]/a[1]/div[1]"
+                },
+                "attributes": {
+                  "style": "background-size: contain; background-position: center center; background-image: url(\"../../permanent-b0b701/assets/images/logo.3eb6efa2.svg\");"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[1]"
+                },
+                "attributes": {
+                  "style": "background-image: url(//dynl.mktgcdn.com/p/TyCpGZmTFojFvYcNeIaFM1mrSzIA9GQgTnbbAmEqBb0/1110x276.png)"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/button[1]/div[1]"
+                },
+                "attributes": {
+                  "aria-hidden": "true"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/button[2]/div[1]/div[1]"
+                },
+                "attributes": {
+                  "aria-hidden": "true"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[1]"
+                },
+                "attributes": {
+                  "style": "font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;",
+                  "dir": "ltr"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[2]"
+                },
+                "attributes": {
+                  "style": "font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;",
+                  "dir": "ltr"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[3]"
+                },
+                "attributes": {
+                  "style": "font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;",
+                  "dir": "ltr"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[4]"
+                },
+                "attributes": {
+                  "style": "font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;",
+                  "dir": "ltr"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/button[1]/div[1]"
+                },
+                "attributes": {
+                  "aria-hidden": "true"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/button[2]/div[1]/div[1]"
+                },
+                "attributes": {
+                  "aria-hidden": "true"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/img[1]"
+                },
+                "attributes": {
+                  "style": "width: 0px; height: 0px; position: absolute;"
+                },
+                "computed_visibility": "unknown"
+              },
+              {
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[4]/div[1]"
+                },
+                "attributes": {
+                  "style": "z-index:2147483645;"
+                },
+                "computed_visibility": "unknown"
+              }
+            ],
+            "metadata": {
+              "viewport": [
+                "width=device-width, initial-scale=1, maximum-scale=5"
+              ],
+              "format-detection": [
+                "telephone=no"
+              ],
+              "description": [
+                " in Why are prices different between your large and convenience stores?, Prices & PaymentHome."
+              ],
+              "keywords": [
+                ""
+              ],
+              "og:title": [
+                "Why are prices different between your large and convenience stores?"
+              ],
+              "og:description": [
+                " in Why are prices different between your large and convenience stores?, Prices & PaymentHome."
+              ],
+              "og:image": [
+                "https://help.sainsburys.co.uk/permanent-b0b701/assets/images/logo.3eb6efa2.svg"
+              ],
+              "og:type": [
+                "website"
+              ],
+              "og:url": [
+                "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+              ],
+              "twitter:card": [
+                "summary"
+              ]
+            }
+          },
+          "blocks": [
+            {
+              "block_id": "b000000",
+              "order": 0,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Skip to contentSkip to Chat",
+              "heading_level": null,
+              "links": [
+                {
+                  "text": "Skip to content",
+                  "target": "#first-anchor",
+                  "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#first-anchor"
+                },
+                {
+                  "text": "Skip to Chat",
+                  "target": "#open-chat-button",
+                  "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#open-chat-button"
+                }
+              ],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]"
+              },
+              "mapping_status": "normalized_match",
+              "inline_markdown": "[Skip to content](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#first-anchor>)[Skip to Chat](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#open-chat-button>)"
+            },
+            {
+              "block_id": "b000001",
+              "order": 1,
+              "parent_id": null,
+              "type": "image",
+              "text": "Go to corporate site",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[1]/a[1]/div[1]/img[1]"
+              },
+              "mapping_status": "exact",
+              "target": "../../permanent-b0b701/assets/images/logo.3eb6efa2.svg",
+              "resolved_target": "https://help.sainsburys.co.uk/permanent-b0b701/assets/images/logo.3eb6efa2.svg"
+            },
+            {
+              "block_id": "b000002",
+              "order": 2,
+              "parent_id": null,
+              "type": "list",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]"
+              },
+              "mapping_status": "exact",
+              "ordered": false,
+              "start": 1
+            },
+            {
+              "block_id": "b000003",
+              "order": 3,
+              "parent_id": "b000002",
+              "type": "list_item",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[1]"
+              },
+              "mapping_status": "exact"
+            },
+            {
+              "block_id": "b000004",
+              "order": 4,
+              "parent_id": "b000003",
+              "type": "paragraph",
+              "text": "Stock Checker",
+              "heading_level": null,
+              "links": [
+                {
+                  "text": "Stock Checker",
+                  "target": "https://stockchecker.sainsburys.co.uk/",
+                  "resolved_target": "https://stockchecker.sainsburys.co.uk/"
+                }
+              ],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "[Stock Checker](<https://stockchecker.sainsburys.co.uk/>)"
+            },
+            {
+              "block_id": "b000005",
+              "order": 5,
+              "parent_id": "b000002",
+              "type": "list_item",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[2]"
+              },
+              "mapping_status": "exact"
+            },
+            {
+              "block_id": "b000006",
+              "order": 6,
+              "parent_id": "b000005",
+              "type": "paragraph",
+              "text": "Sainsbury’s Home",
+              "heading_level": null,
+              "links": [
+                {
+                  "text": "Sainsbury’s Home",
+                  "target": "https://www.sainsburys.co.uk/",
+                  "resolved_target": "https://www.sainsburys.co.uk/"
+                }
+              ],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[2]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "[Sainsbury’s Home](<https://www.sainsburys.co.uk/>)"
+            },
+            {
+              "block_id": "b000007",
+              "order": 7,
+              "parent_id": "b000002",
+              "type": "list_item",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[3]"
+              },
+              "mapping_status": "exact"
+            },
+            {
+              "block_id": "b000008",
+              "order": 8,
+              "parent_id": "b000007",
+              "type": "paragraph",
+              "text": "Store Locator",
+              "heading_level": null,
+              "links": [
+                {
+                  "text": "Store Locator",
+                  "target": "https://stores.sainsburys.co.uk/",
+                  "resolved_target": "https://stores.sainsburys.co.uk/"
+                }
+              ],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/header[1]/div[1]/div[2]/ul[1]/li[3]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "[Store Locator](<https://stores.sainsburys.co.uk/>)"
+            },
+            {
+              "block_id": "b000009",
+              "order": 9,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Return to Nav",
+              "heading_level": null,
+              "links": [
+                {
+                  "text": "Return to Nav",
+                  "target": "#skip-nav",
+                  "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#skip-nav"
+                }
+              ],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "[Return to Nav](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#skip-nav>)"
+            },
+            {
+              "block_id": "b000010",
+              "order": 10,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Conduct a search",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Conduct a search"
+            },
+            {
+              "block_id": "b000011",
+              "order": 11,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "When autocomplete results are available, use up and down arrows to review and enter to select.",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": null,
+              "mapping_status": "ambiguous",
+              "inline_markdown": "When autocomplete results are available, use up and down arrows to review and enter to select."
+            },
+            {
+              "block_id": "b000012",
+              "order": 12,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Clear",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": null,
+              "mapping_status": "ambiguous",
+              "inline_markdown": "Clear"
+            },
+            {
+              "block_id": "b000013",
+              "order": 13,
+              "parent_id": null,
+              "type": "image",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": null,
+              "mapping_status": "ambiguous",
+              "target": "../../permanent-b0b701/assets/images/search.0fb32e0c.png",
+              "resolved_target": "https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png"
+            },
+            {
+              "block_id": "b000014",
+              "order": 14,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Submit",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": null,
+              "mapping_status": "ambiguous",
+              "inline_markdown": "Submit"
+            },
+            {
+              "block_id": "b000015",
+              "order": 15,
+              "parent_id": null,
+              "type": "heading",
+              "text": "Why are prices different between your large and convenience stores?",
+              "heading_level": 1,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/h1[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Why are prices different between your large and convenience stores?"
+            },
+            {
+              "block_id": "b000016",
+              "order": 16,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Why are prices different between your large and convenience stores?",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Why are prices different between your large and convenience stores?"
+            },
+            {
+              "block_id": "b000017",
+              "order": 17,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "We're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers.",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "We're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers."
+            },
+            {
+              "block_id": "b000018",
+              "order": 18,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Different sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores.",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[3]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Different sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores."
+            },
+            {
+              "block_id": "b000019",
+              "order": 19,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Prices differ between Sainsbury's large supermarkets and local convenience stores because of varying operational and running costs associated with store size and location. Smaller stores often have higher rents due to their locations, and delivering products to local stores can be more challenging. Additionally, costs related to staffing, local business rates, and the emphasis on convenience products in local stores contribute to price differences compared to larger supermarkets.",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/p[4]"
+              },
+              "mapping_status": "exact"
+            },
+            {
+              "block_id": "b000020",
+              "order": 20,
+              "parent_id": null,
+              "type": "heading",
+              "text": "Important information",
+              "heading_level": 2,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/h2[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Important information"
+            },
+            {
+              "block_id": "b000021",
+              "order": 21,
+              "parent_id": null,
+              "type": "image",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]/div[1]/img[1]"
+              },
+              "mapping_status": "exact",
+              "target": "",
+              "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+            },
+            {
+              "block_id": "b000022",
+              "order": 22,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Product RecallsView more",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Product RecallsView more"
+            },
+            {
+              "block_id": "b000023",
+              "order": 23,
+              "parent_id": null,
+              "type": "heading",
+              "text": "You might also find the following articles helpful",
+              "heading_level": 2,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/h2[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "You might also find the following articles helpful"
+            },
+            {
+              "block_id": "b000024",
+              "order": 24,
+              "parent_id": null,
+              "type": "list",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]"
+              },
+              "mapping_status": "exact",
+              "ordered": false,
+              "start": 1
+            },
+            {
+              "block_id": "b000025",
+              "order": 25,
+              "parent_id": "b000024",
+              "type": "list_item",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[1]"
+              },
+              "mapping_status": "exact"
+            },
+            {
+              "block_id": "b000026",
+              "order": 26,
+              "parent_id": "b000025",
+              "type": "paragraph",
+              "text": "Why are prices different when ordering from Deliveroo and Uber?",
+              "heading_level": null,
+              "links": [
+                {
+                  "text": "Why are prices different when ordering from Deliveroo and Uber?",
+                  "target": "../../help/prices-payment/deliveroo_uber",
+                  "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/deliveroo_uber"
+                }
+              ],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "[Why are prices different when ordering from Deliveroo and Uber?](<https://help.sainsburys.co.uk/help/prices-payment/deliveroo_uber>)"
+            },
+            {
+              "block_id": "b000027",
+              "order": 27,
+              "parent_id": "b000024",
+              "type": "list_item",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[2]"
+              },
+              "mapping_status": "exact"
+            },
+            {
+              "block_id": "b000028",
+              "order": 28,
+              "parent_id": "b000027",
+              "type": "paragraph",
+              "text": "Why do petrol prices vary from store to store?",
+              "heading_level": null,
+              "links": [
+                {
+                  "text": "Why do petrol prices vary from store to store?",
+                  "target": "../../help/prices-payment/petrol-prices",
+                  "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/petrol-prices"
+                }
+              ],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[2]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "[Why do petrol prices vary from store to store?](<https://help.sainsburys.co.uk/help/prices-payment/petrol-prices>)"
+            },
+            {
+              "block_id": "b000029",
+              "order": 29,
+              "parent_id": "b000024",
+              "type": "list_item",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[3]"
+              },
+              "mapping_status": "exact"
+            },
+            {
+              "block_id": "b000030",
+              "order": 30,
+              "parent_id": "b000029",
+              "type": "paragraph",
+              "text": "Why do you do so many price changes?",
+              "heading_level": null,
+              "links": [
+                {
+                  "text": "Why do you do so many price changes?",
+                  "target": "../../help/prices-payment/regular-price-changes",
+                  "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/regular-price-changes"
+                }
+              ],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/ul[1]/li[3]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "[Why do you do so many price changes?](<https://help.sainsburys.co.uk/help/prices-payment/regular-price-changes>)"
+            },
+            {
+              "block_id": "b000031",
+              "order": 31,
+              "parent_id": null,
+              "type": "heading",
+              "text": "Did this answer your question?",
+              "heading_level": 2,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[4]/div[1]/h2[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Did this answer your question?"
+            },
+            {
+              "block_id": "b000032",
+              "order": 32,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "YesNo",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[4]/div[1]/div[1]/div[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "YesNo"
+            },
+            {
+              "block_id": "b000033",
+              "order": 33,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Thank you for rating this answer",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Thank you for rating this answer"
+            },
+            {
+              "block_id": "b000034",
+              "order": 34,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "We'll use this to help improve our service.",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[2]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "We'll use this to help improve our service."
+            },
+            {
+              "block_id": "b000035",
+              "order": 35,
+              "parent_id": null,
+              "type": "heading",
+              "text": "Still couldn’t find an answer?",
+              "heading_level": 2,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[5]/div[1]/div[1]/h2[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Still couldn’t find an answer?"
+            },
+            {
+              "block_id": "b000036",
+              "order": 36,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Conduct a search",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Conduct a search"
+            },
+            {
+              "block_id": "b000037",
+              "order": 37,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "When autocomplete results are available, use up and down arrows to review and enter to select.",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": null,
+              "mapping_status": "ambiguous",
+              "inline_markdown": "When autocomplete results are available, use up and down arrows to review and enter to select."
+            },
+            {
+              "block_id": "b000038",
+              "order": 38,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Clear",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": null,
+              "mapping_status": "ambiguous",
+              "inline_markdown": "Clear"
+            },
+            {
+              "block_id": "b000039",
+              "order": 39,
+              "parent_id": null,
+              "type": "image",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": null,
+              "mapping_status": "ambiguous",
+              "target": "../../permanent-b0b701/assets/images/search.0fb32e0c.png",
+              "resolved_target": "https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png"
+            },
+            {
+              "block_id": "b000040",
+              "order": 40,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Submit",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": null,
+              "mapping_status": "ambiguous",
+              "inline_markdown": "Submit"
+            },
+            {
+              "block_id": "b000041",
+              "order": 41,
+              "parent_id": null,
+              "type": "heading",
+              "text": "Get more from Sainsbury's",
+              "heading_level": 2,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/h2[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Get more from Sainsbury's"
+            },
+            {
+              "block_id": "b000042",
+              "order": 42,
+              "parent_id": null,
+              "type": "image",
+              "text": "Occasions by Sainsbury's",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[1]/a[1]/div[1]/img[1]"
+              },
+              "mapping_status": "exact",
+              "target": "",
+              "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+            },
+            {
+              "block_id": "b000043",
+              "order": 43,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Occasions by Sainsbury'sView more",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[1]/a[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Occasions by Sainsbury'sView more"
+            },
+            {
+              "block_id": "b000044",
+              "order": 44,
+              "parent_id": null,
+              "type": "image",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/img[1]"
+              },
+              "mapping_status": "exact",
+              "target": "",
+              "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+            },
+            {
+              "block_id": "b000045",
+              "order": 45,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "EnergyView more",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[2]/a[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "EnergyView more"
+            },
+            {
+              "block_id": "b000046",
+              "order": 46,
+              "parent_id": null,
+              "type": "image",
+              "text": "Recipes",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/a[1]/div[1]/img[1]"
+              },
+              "mapping_status": "exact",
+              "target": "",
+              "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+            },
+            {
+              "block_id": "b000047",
+              "order": 47,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "RecipesView more",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/a[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "RecipesView more"
+            },
+            {
+              "block_id": "b000048",
+              "order": 48,
+              "parent_id": null,
+              "type": "image",
+              "text": "Chop Chop",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[4]/a[1]/div[1]/img[1]"
+              },
+              "mapping_status": "exact",
+              "target": "",
+              "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+            },
+            {
+              "block_id": "b000049",
+              "order": 49,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Check if we deliver to youView more",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[4]/a[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Check if we deliver to youView more"
+            },
+            {
+              "block_id": "b000050",
+              "order": 50,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Contact Information",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Contact Information"
+            },
+            {
+              "block_id": "b000051",
+              "order": 51,
+              "parent_id": null,
+              "type": "image",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[2]/img[1]"
+              },
+              "mapping_status": "exact",
+              "target": "",
+              "resolved_target": "https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices"
+            },
+            {
+              "block_id": "b000052",
+              "order": 52,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "The team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond.",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/p[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "The team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond."
+            },
+            {
+              "block_id": "b000053",
+              "order": 53,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Contacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store.",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/p[2]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Contacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store."
+            },
+            {
+              "block_id": "b000054",
+              "order": 54,
+              "parent_id": null,
+              "type": "list",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/ul[1]"
+              },
+              "mapping_status": "exact",
+              "ordered": false,
+              "start": 1
+            },
+            {
+              "block_id": "b000055",
+              "order": 55,
+              "parent_id": "b000054",
+              "type": "list_item",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[1]"
+              },
+              "mapping_status": "exact"
+            },
+            {
+              "block_id": "b000056",
+              "order": 56,
+              "parent_id": "b000055",
+              "type": "paragraph",
+              "text": "denotes a required field",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/main[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "denotes a required field"
+            },
+            {
+              "block_id": "b000057",
+              "order": 57,
+              "parent_id": null,
+              "type": "image",
+              "text": "",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/img[1]"
+              },
+              "mapping_status": "exact",
+              "target": "https://www.yext-pixel.com/store_pagespixel?product=storepages&v=1760020160411&pageurl=%2Fhelp%2Fprices-payment%2Fconvenience-store-prices&pagesReferrer=https%3A%2F%2Fwww.facebook.com%2F&businessids=3141402&siteId=23737&isStaging=false&ids=29122298&pageSetId=Help%20Articles&eventType=pageview",
+              "resolved_target": "https://www.yext-pixel.com/store_pagespixel?product=storepages&v=1760020160411&pageurl=%2Fhelp%2Fprices-payment%2Fconvenience-store-prices&pagesReferrer=https%3A%2F%2Fwww.facebook.com%2F&businessids=3141402&siteId=23737&isStaging=false&ids=29122298&pageSetId=Help%20Articles&eventType=pageview"
+            },
+            {
+              "block_id": "b000058",
+              "order": 58,
+              "parent_id": null,
+              "type": "paragraph",
+              "text": "Open Chat",
+              "heading_level": null,
+              "links": [],
+              "table": null,
+              "source_locator": {
+                "dom_path": "/html[1]/body[1]/div[3]/div[1]"
+              },
+              "mapping_status": "exact",
+              "inline_markdown": "Open Chat"
+            }
+          ],
+          "outline": [
+            {
+              "block_id": "b000015",
+              "level": 1,
+              "text": "Why are prices different between your large and convenience stores?",
+              "parent_heading_id": null
+            },
+            {
+              "block_id": "b000020",
+              "level": 2,
+              "text": "Important information",
+              "parent_heading_id": "b000015"
+            },
+            {
+              "block_id": "b000023",
+              "level": 2,
+              "text": "You might also find the following articles helpful",
+              "parent_heading_id": "b000015"
+            },
+            {
+              "block_id": "b000031",
+              "level": 2,
+              "text": "Did this answer your question?",
+              "parent_heading_id": "b000015"
+            },
+            {
+              "block_id": "b000035",
+              "level": 2,
+              "text": "Still couldn’t find an answer?",
+              "parent_heading_id": "b000015"
+            },
+            {
+              "block_id": "b000041",
+              "level": 2,
+              "text": "Get more from Sainsbury's",
+              "parent_heading_id": "b000015"
+            }
+          ],
+          "chunk_ids": [
+            "e156b8dc3bced0ff8b7cc752f68bc493f6f82e68290792a44aba57d1e03579ee",
+            "0a85be20451c13f0f9a4831753c8e780873acc49c3f749e3af47bf01f078abf6",
+            "8d5a34478a604c05e584b94b98843093743525dfb12f958c6703fa0a9b4056bd",
+            "3fdb0397fd96e63ab9d6b0e9c399fd0ad51e8c78c31f0a80746375fda35ed05a",
+            "f4e682bd20b8b0be194ddabd1bbf00fd3f2be6f7c22eebb0486f16723e18983a",
+            "7fc520b14165672dfdcdc4a48cac31192bb101b17c1f8666562c952b429efe4f",
+            "22dae6012f7a9d7e24ca9b81c12060831ecc9edc38e0949100ddde877cb297e6"
+          ],
+          "text": "Skip to contentSkip to Chat\n\nGo to corporate site\n\nStock Checker\n\nSainsbury’s Home\n\nStore Locator\n\nReturn to Nav\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\nSubmit\n\nWhy are prices different between your large and convenience stores?\n\nWhy are prices different between your large and convenience stores?\n\nWe're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers.\n\nDifferent sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores.\n\nThese, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores.\n\nImportant information\n\nProduct RecallsView more\n\nYou might also find the following articles helpful\n\nWhy are prices different when ordering from Deliveroo and Uber?\n\nWhy do petrol prices vary from store to store?\n\nWhy do you do so many price changes?\n\nDid this answer your question?\n\nYesNo\n\nThank you for rating this answer\n\nWe'll use this to help improve our service.\n\nStill couldn’t find an answer?\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\nSubmit\n\nGet more from Sainsbury's\n\nOccasions by Sainsbury's\n\nOccasions by Sainsbury'sView more\n\nEnergyView more\n\nRecipes\n\nRecipesView more\n\nChop Chop\n\nCheck if we deliver to youView more\n\nContact Information\n\nThe team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond.\n\nContacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store.\n\ndenotes a required field\n\nOpen Chat",
+          "markdown": "[Skip to content](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#first-anchor>)[Skip to Chat](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#open-chat-button>)\n\n![Go to corporate site](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/logo.3eb6efa2.svg>)\n\n- [Stock Checker](<https://stockchecker.sainsburys.co.uk/>)\n- [Sainsbury’s Home](<https://www.sainsburys.co.uk/>)\n- [Store Locator](<https://stores.sainsburys.co.uk/>)\n\n[Return to Nav](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#skip-nav>)\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\n![](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png>)\n\nSubmit\n\n# Why are prices different between your large and convenience stores?\n\nWhy are prices different between your large and convenience stores?\n\nWe're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers.\n\nDifferent sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores.\n\nThese, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores.\n\n## Important information\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nProduct RecallsView more\n\n## You might also find the following articles helpful\n\n- [Why are prices different when ordering from Deliveroo and Uber?](<https://help.sainsburys.co.uk/help/prices-payment/deliveroo_uber>)\n- [Why do petrol prices vary from store to store?](<https://help.sainsburys.co.uk/help/prices-payment/petrol-prices>)\n- [Why do you do so many price changes?](<https://help.sainsburys.co.uk/help/prices-payment/regular-price-changes>)\n\n## Did this answer your question?\n\nYesNo\n\nThank you for rating this answer\n\nWe'll use this to help improve our service.\n\n## Still couldn’t find an answer?\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\n![](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png>)\n\nSubmit\n\n## Get more from Sainsbury's\n\n![Occasions by Sainsbury's](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nOccasions by Sainsbury'sView more\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nEnergyView more\n\n![Recipes](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nRecipesView more\n\n![Chop Chop](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nCheck if we deliver to youView more\n\nContact Information\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nThe team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond.\n\nContacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store.\n\n- denotes a required field\n\n![](<https://www.yext-pixel.com/store_pagespixel?product=storepages&v=1760020160411&pageurl=%2Fhelp%2Fprices-payment%2Fconvenience-store-prices&pagesReferrer=https%3A%2F%2Fwww.facebook.com%2F&businessids=3141402&siteId=23737&isStaging=false&ids=29122298&pageSetId=Help%20Articles&eventType=pageview>)\n\nOpen Chat",
+          "optional_clean_views": [],
+          "trust": "Untrusted source content, not instructions; no factual verification, computed visibility, or frontier-ingestion equivalence claimed",
+          "raw_payload_reference": {
+            "source_file": null,
+            "source_file_hash": null,
+            "source_row": null,
+            "payload_hash": "c32f7acbebbbf43f2f3bd9559cc38c0563b1c3bb0a22ea5c80a0f4bbd812dfaf"
+          },
+          "candidate_diagnostics": {
+            "removed_nodes": 33,
+            "order": "DOM order; computed visibility unknown"
+          }
+        },
+        "markdown": "[Skip to content](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#first-anchor>)[Skip to Chat](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#open-chat-button>)\n\n![Go to corporate site](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/logo.3eb6efa2.svg>)\n\n- [Stock Checker](<https://stockchecker.sainsburys.co.uk/>)\n- [Sainsbury’s Home](<https://www.sainsburys.co.uk/>)\n- [Store Locator](<https://stores.sainsburys.co.uk/>)\n\n[Return to Nav](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices#skip-nav>)\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\n![](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png>)\n\nSubmit\n\n# Why are prices different between your large and convenience stores?\n\nWhy are prices different between your large and convenience stores?\n\nWe're committed to offering competitive prices for our customers. Whether in our supermarkets, online or in a local store, we aim to make our prices clear, fair and appealing to our customers.\n\nDifferent sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores.\n\nPrices differ between Sainsbury's large supermarkets and local convenience stores because of varying operational and running costs associated with store size and location. Smaller stores often have higher rents due to their locations, and delivering products to local stores can be more challenging. Additionally, costs related to staffing, local business rates, and the emphasis on convenience products in local stores contribute to price differences compared to larger supermarkets.\n\n## Important information\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nProduct RecallsView more\n\n## You might also find the following articles helpful\n\n- [Why are prices different when ordering from Deliveroo and Uber?](<https://help.sainsburys.co.uk/help/prices-payment/deliveroo_uber>)\n- [Why do petrol prices vary from store to store?](<https://help.sainsburys.co.uk/help/prices-payment/petrol-prices>)\n- [Why do you do so many price changes?](<https://help.sainsburys.co.uk/help/prices-payment/regular-price-changes>)\n\n## Did this answer your question?\n\nYesNo\n\nThank you for rating this answer\n\nWe'll use this to help improve our service.\n\n## Still couldn’t find an answer?\n\nConduct a search\n\nWhen autocomplete results are available, use up and down arrows to review and enter to select.\n\nClear\n\n![](<https://help.sainsburys.co.uk/permanent-b0b701/assets/images/search.0fb32e0c.png>)\n\nSubmit\n\n## Get more from Sainsbury's\n\n![Occasions by Sainsbury's](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nOccasions by Sainsbury'sView more\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nEnergyView more\n\n![Recipes](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nRecipesView more\n\n![Chop Chop](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nCheck if we deliver to youView more\n\nContact Information\n\n![](<https://help.sainsburys.co.uk/help/prices-payment/convenience-store-prices>)\n\nThe team will review your complaint and aim to be in touch within 3 days, but please bear in mind that over a weekend or bank holiday it may take longer to respond.\n\nContacting us about a refund? You'll need to give us a call on 0800 328 1700 if you ordered online. If purchased in store, please call 0800 63 62 62 or speak with a colleague next time you're in store.\n\n- denotes a required field\n\n![](<https://www.yext-pixel.com/store_pagespixel?product=storepages&v=1760020160411&pageurl=%2Fhelp%2Fprices-payment%2Fconvenience-store-prices&pagesReferrer=https%3A%2F%2Fwww.facebook.com%2F&businessids=3141402&siteId=23737&isStaging=false&ids=29122298&pageSetId=Help%20Articles&eventType=pageview>)\n\nOpen Chat",
+        "changes": [
+          {
+            "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+            "chunk_id": "0a85be20451c13f0f9a4831753c8e780873acc49c3f749e3af47bf01f078abf6",
+            "block_id": "b000019",
+            "before": "These, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores.",
+            "after": "Prices differ between Sainsbury's large supermarkets and local convenience stores because of varying operational and running costs associated with store size and location. Smaller stores often have higher rents due to their locations, and delivering products to local stores can be more challenging. Additionally, costs related to staffing, local business rates, and the emphasis on convenience products in local stores contribute to price differences compared to larger supermarkets.",
+            "reason": "Rewrites to directly answer the query with a clear explanation of the factors causing price differences between large supermarkets and local convenience stores.",
+            "evidence": [
+              {
+                "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+                "block_id": "b000018",
+                "quote": "Different sizes of stores have very different operational requirements and running costs. Rents, for example, are often more expensive in our smaller stores due to their locations. It can also be more of a challenge to deliver products to our local stores."
+              },
+              {
+                "snapshot_id": "7d0697a9fd2a62f7c74418d819be1662f3ea691c373253af32e6919ce00714c9",
+                "block_id": "b000019",
+                "quote": "These, and other factors such as staffing, local rates and a focus on convenience products mean there are differences in price between our supermarkets and local stores."
+              }
+            ],
+            "review_flags": [],
+            "heading_level": null,
+            "source_id": "b000019"
+          }
+        ],
+        "preservation": [
+          "Tables, lists, code, links and source metadata retained",
+          "Original snapshot remains intact"
+        ]
+      },
+      "checks": {
+        "valid_evidence_quotes": true,
+        "factual_support": "Exact quote/reference validation passed; human entailment review required.",
+        "omission_proxy_missing_terms": [],
+        "query_usefulness_proxy_terms_present": {},
+        "substantive_body_edit_count": 1,
+        "structure_preserved": true,
+        "unchanged_blocks_preserved": true,
+        "metadata_preserved": true,
+        "citation_uplift": "Not measured; mock grades and relative labels are not citation uplift."
+      },
+      "input_unchanged": true
+    }
+  ]
+}

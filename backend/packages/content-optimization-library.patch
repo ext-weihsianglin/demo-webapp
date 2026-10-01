@@ -1,0 +1,156 @@
+diff --git a/README.md b/README.md
+index 4e33f70..415ff7a 100644
+--- a/README.md
++++ b/README.md
+@@ -1,5 +1,28 @@
+ # Citation dataset exploration
+ 
++## Python library
++
++This repository is installable as `content-optimization-exploration` (Python 3.12+).
++Application consumers can install a pinned Git revision with `uv add` and import
++the retention parser:
++
++```python
++from preprocessing.api import parse_snapshot
++
++document, chunks = parse_snapshot(
++    saved_html, "https://example.com/page", "example.com", source_format="html"
++)
++```
++
++This calls the existing source inventory, HTML/native adapters, retention selection,
++document builder and chunker. Omit `source_format` to use the existing format
++classifier. Inputs are saved snapshots; no fetching or inference is performed.
++The return value preserves structured blocks, source metadata, quality flags,
++source identity, heading outlines and chunk IDs. Flags do not discard content.
++Consumers own raw snapshot storage and model token budgeting. The API does not
++invent an evaluation-cache path for submitted content. Existing extraction and
++scoring behavior and frozen artifacts are unchanged.
++
+ Preliminary analysis for `project-brief.md`, before choosing a content-generation prototype.
+ 
+ ## Setup
+diff --git a/preprocessing/api.py b/preprocessing/api.py
+new file mode 100644
+index 0000000..48bc92e
+--- /dev/null
++++ b/preprocessing/api.py
+@@ -0,0 +1,32 @@
++"""Importable retention-first parser for saved snapshots and ephemeral inputs."""
++from preprocessing.adapters.local import extract_conservative, extract_markdown_text
++from preprocessing.downstream import document
++from preprocessing.quality import classify_payload, source_inventory
++from preprocessing.schema import Snapshot, snapshot_identity
++
++PARSER_REVISION = "3d4d35d3c32ac5b8c14983f99f92c2f633669417"
++
++
++def parse_snapshot(payload, href, hostname="", *, source_format=None, source=None):
++    """Return (document, chunks) using the existing inventory/adapters/selection.
++
++    Source format may be supplied by a snapshot manifest or input form; otherwise
++    it is classified using the existing heuristic. No query or label is accepted.
++    The raw payload remains the caller's responsibility; no page is fetched or
++    saved, and no evaluation-cache path is invented for an ephemeral input.
++    """
++    format_name = source_format if source_format is not None else classify_payload(payload)
++    payload_hash, identity = snapshot_identity(payload, href)
++    snapshot = Snapshot(identity, payload_hash, href, hostname, payload, format_name)
++    inventory = source_inventory(payload, href, format_name)
++    candidate = extract_conservative(snapshot) if format_name == "html" else extract_markdown_text(snapshot)
++    provenance = {**(source or {}), "payload_hash": payload_hash, "href": href,
++                  "hostname": hostname, "format": format_name}
++    for key in ("source_file", "source_file_hash", "source_row"):
++        provenance.setdefault(key, None)
++    parsed, chunks = document(snapshot, provenance, [candidate.to_dict()], inventory)
++    parsed["raw_payload_path"] = None
++    parsed["raw_payload_reference"] = {key: provenance[key] for key in
++                                     ("source_file", "source_file_hash", "source_row", "payload_hash")}
++    parsed["candidate_diagnostics"] = candidate.diagnostics
++    return parsed, chunks
+diff --git a/pyproject.toml b/pyproject.toml
+index f377634..0b50ace 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,6 +1,6 @@
+ [project]
+ name = "content-optimization-exploration"
+-version = "0.1.0"
++version = "0.1.1"
+ description = "Reproducible preliminary analysis of the citation dataset"
+ requires-python = ">=3.12"
+ dependencies = [
+@@ -16,8 +16,15 @@ dependencies = [
+     "trafilatura>=2.2.0",
+ ]
+ 
+-[tool.uv]
+-package = false
++[build-system]
++requires = ["hatchling>=1.27,<2"]
++build-backend = "hatchling.build"
++
++[tool.hatch.build.targets.wheel]
++packages = ["preprocessing", "trad_ml_scorer", "scripts"]
++
++[tool.hatch.build.targets.sdist]
++include = ["preprocessing", "trad_ml_scorer/**/*.py", "scripts/**/*.py", "scripts/report_template.html", "pyproject.toml", "README.md"]
+ 
+ [dependency-groups]
+ dev = [
+diff --git a/tests/test_library_api.py b/tests/test_library_api.py
+new file mode 100644
+index 0000000..8a566ea
+--- /dev/null
++++ b/tests/test_library_api.py
+@@ -0,0 +1,34 @@
++from preprocessing.api import parse_snapshot
++from preprocessing.adapters.local import extract_conservative, extract_markdown_text
++from preprocessing.downstream import document
++from preprocessing.quality import source_inventory
++from preprocessing.schema import Snapshot, snapshot_identity
++
++
++def test_api_matches_original_pipeline_and_does_not_invent_cache_path():
++    payload = '<main><h1>Title</h1><ul><li>Parent<ul><li>Child</li></ul></li></ul><pre>  code\n</pre></main>'
++    href = 'https://example.com/page'
++    parsed, chunks = parse_snapshot(payload, href, 'example.com', source_format='html')
++    payload_hash, identity = snapshot_identity(payload, href)
++    snapshot = Snapshot(identity, payload_hash, href, 'example.com', payload, 'html')
++    source = {'payload_hash': payload_hash, 'href': href, 'hostname': 'example.com', 'format': 'html',
++              'source_file': None, 'source_file_hash': None, 'source_row': None}
++    expected, expected_chunks = document(snapshot, source, [extract_conservative(snapshot).to_dict()], source_inventory(payload, href, 'html'))
++    assert {key: parsed[key] for key in expected if key != 'raw_payload_path'} == {key: expected[key] for key in expected if key != 'raw_payload_path'}
++    assert chunks == expected_chunks
++    assert parsed['raw_payload_path'] is None
++
++
++def test_native_formats_flags_and_insufficient_source():
++    parsed, chunks = parse_snapshot('# Heading\n\n- Parent\n  - Child', 'https://example.com')
++    assert parsed['selection']['method'] == 'markdown_text'
++    assert 'list' in {block['type'] for block in parsed['blocks']}
++    assert [identity for chunk in chunks for identity in chunk['block_ids']] == [block['block_id'] for block in parsed['blocks']]
++    plain, _ = parse_snapshot('# Literal plain text', 'https://example.com', source_format='text')
++    assert plain['blocks'][0]['type'] == 'paragraph'
++    flagged, _ = parse_snapshot('<p>Access denied but keep this caveat.</p>', 'https://example.com')
++    assert flagged['selection']['status'] == 'needs_review'
++    assert flagged['blocks']
++    empty, chunks = parse_snapshot('<html><body><script>run()</script></body></html>', 'https://example.com')
++    assert empty['selection']['status'] == 'source_insufficient'
++    assert empty['blocks'] == chunks == []
+diff --git a/uv.lock b/uv.lock
+index 6b4c01d..bced894 100644
+--- a/uv.lock
++++ b/uv.lock
+@@ -184,8 +184,8 @@ wheels = [
+ 
+ [[package]]
+ name = "content-optimization-exploration"
+-version = "0.1.0"
+-source = { virtual = "." }
++version = "0.1.1"
++source = { editable = "." }
+ dependencies = [
+     { name = "beautifulsoup4" },
+     { name = "duckdb" },

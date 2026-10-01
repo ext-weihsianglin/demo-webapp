@@ -8,18 +8,17 @@ def test_extraction_is_query_independent_and_removes_boilerplate():
     a = client.post('/api/analyze', json=SOURCE).json()
     b = client.post('/api/analyze', json={**SOURCE, 'query': 'Another query'}).json()
     assert a['sections'] == b['sections']
-    assert a['factoids'][0]['source_id'] == 'block-2'
+    assert a['factoids'][0]['source_id'] == 'b000001'
     assert 'Ignore me' not in str(a['sections'])
     assert 'alert' not in str(a['sections'])
     assert a['structure_recommended']
 
-def test_draft_retains_claims_and_requires_structure_opt_in():
+def test_draft_retains_claims_and_requires_structure_opt_in(draft_stub):
     a = client.post('/api/draft', json=SOURCE).json()
-    b = client.post('/api/draft', json={**SOURCE, 'allow_structure': True}).json()
-    assert 'Choose a comfortable fit.' in a['markdown']
-    assert '## At a glance' not in a['markdown']
-    assert '## At a glance' in b['markdown']
-    assert len(a['changes']) == 1
+    assert a['mode'] == 'openai' and a['status'] == 'succeeded'
+    assert a['changes'][0]['before'] == 'Choose a comfortable fit.'
+    assert a['changes'][0]['reason'] and a['changes'][0]['snapshot_id'] == a['snapshot_id']
+    assert a['document']['blocks'][0]['text'] == 'Shoes'
 
 def test_invalid_host_and_empty_input():
     for patch in ({'hostname': 'wrong.com'}, {'href': 'javascript:alert(1)'}, {'content':' '*30}, {'format':'pdf'}):

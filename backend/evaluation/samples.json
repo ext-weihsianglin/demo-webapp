@@ -1,0 +1,14 @@
+{
+  "version": "rewrite-baseline-samples-v1",
+  "role": "Exploratory baseline only; reserve separate P2 final test data before optimization.",
+  "samples": [{
+    "id": "custom-road-shoes",
+    "query": "How should I choose shoes for everyday road runs?",
+    "href": "https://stride.example/journal/running-shoes",
+    "hostname": "stride.example",
+    "format": "html",
+    "content": "<html><head><title>Running shoes</title><script type=\"application/ld+json\">{\"@type\":\"Article\",\"name\":\"Running shoes\"}</script></head><body><main><h1>Running shoes</h1><p>The best running shoe depends on your fit, preferred cushioning, and the surfaces you run on.</p><p>For everyday road runs, look for a comfortable fit and cushioning that feels natural. For trails, prioritize grip suited to the terrain.</p><p>Try shoes on with your usual running socks. Leave enough room for your toes, and check that your heel feels secure.</p><p>Compare comfort, fit, and intended use before choosing. There is no single shoe that is best for every runner.</p><ul><li>Check fit<ul><li>Check toe room</li></ul></li></ul><pre>  preserve\n    whitespace\n</pre><table><tr><th colspan=\"2\">Source checklist</th></tr><tr><td>Fit</td><td>Comfort</td></tr></table><p><a href=\"/fit\">Fit guide</a></p></main></body></html>",
+    "qualifiers": ["no single", "trails", "socks", "heel"],
+    "query_terms": ["road", "fit", "cushioning"]
+  }]
+}
