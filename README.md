@@ -2,10 +2,6 @@
 
 A Next.js + FastAPI demo with baseline OpenAI rewriting and mock grading for source-grounded content optimization.
 
-## Project context for future sessions
-
-Read [project context and dated handoff](docs/project-context.md) for architecture, extraction provenance, model verification limits and the pending PR merge condition. Repository editing guidance lives in [AGENTS.md](AGENTS.md), with scoped instructions in [backend/AGENTS.md](backend/AGENTS.md) and [frontend/AGENTS.md](frontend/AGENTS.md).
-
 ## Run
 
 Requires Node.js 20.9+ and Python 3.12+. Install `uv` for Python dependency management.
@@ -76,7 +72,7 @@ test set. Reserve separate examples when measuring GEPA or memory improvements.
 
 ## What is real vs. mocked
 
-- **Real:** API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, OpenAI draft proposals when the selected model is accessible, frontend/API round trips, review/export.
+- **Real:** API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, frontend/API round trips, review/export.
 - **Mock:** query alignment and answer clarity scores; structural score uses only heading count. No predicted score gain or citation uplift. There is no automatic demo rewrite fallback.
 - **Not connected:** optional clean extraction candidates, calibrated graders, phase 2 GEPA or prompt-optimized model, persistent runs, live URL fetching, source-style rendering, HTML patching.
 
