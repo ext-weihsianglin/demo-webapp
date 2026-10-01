@@ -13,8 +13,8 @@ def source(content, format="html"):
     return {"query": "What does this page explain?", "href": "https://example.com/docs", "hostname": "example.com", "format": format, "content": content}
 
 
-def test_api_uses_installed_parser_and_preserves_structure_in_drafts():
-    payload = source('<html><head><title>Plans</title><script type="application/ld+json">{"@type":"Product","name":"Source metadata"}</script></head><body><main><h1>Plans</h1><ul><li>Parent<ul><li>Child</li></ul></li></ul><pre>  first\n    second\n</pre><table><tr><th colspan="2">Limits</th></tr><tr><td>10</td><td>20</td></tr></table></main></body></html>')
+def test_api_uses_installed_parser_and_preserves_structure_in_drafts(draft_stub):
+    payload = source('<html><head><title>Plans</title><script type="application/ld+json">{"@type":"Product","name":"Source metadata"}</script></head><body><main><h1>Plans</h1><p>Choose a comfortable fit for road runs.</p><ul><li>Parent<ul><li>Child</li></ul></li></ul><pre>  first\n    second\n</pre><table><tr><th colspan="2">Limits</th></tr><tr><td>10</td><td>20</td></tr></table></main></body></html>')
     expected, chunks = parse_snapshot(payload['content'], payload['href'], payload['hostname'], source_format='html')
     response = client.post('/api/analyze', json=payload).json()
     assert response['document'] == expected

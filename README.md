@@ -1,6 +1,10 @@
 # Content Studio
 
-A mock-first Next.js + FastAPI demo for source-grounded content optimization.
+A Next.js + FastAPI demo with baseline OpenAI rewriting and mock grading for source-grounded content optimization.
+
+## Project context for future sessions
+
+Read [project context and dated handoff](docs/project-context.md) for current architecture, workstream provenance, model verification limits and the historical handoff. Repository editing guidance lives in [AGENTS.md](AGENTS.md), with scoped instructions in [backend/AGENTS.md](backend/AGENTS.md) and [frontend/AGENTS.md](frontend/AGENTS.md).
 
 ## Run
 
@@ -11,7 +15,8 @@ Terminal 1:
 ```sh
 cd backend
 uv sync --dev
-uv run uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+cp .env.example .env  # Set OPENAI_API_KEY here for drafting.
+uv run uvicorn app.main:app --env-file .env --reload --host 127.0.0.1 --port 8000
 ```
 
 Terminal 2:
@@ -23,15 +28,15 @@ npm run dev
 ```
 
 Open http://localhost:3000. API documentation: http://127.0.0.1:8000/docs.
-Next.js proxies `/api/*` to FastAPI; set `API_URL` in `frontend/.env.local` to override the backend address. No API keys required.
+Next.js proxies `/api/*` to FastAPI; set `API_URL` in `frontend/.env.local` to override the backend address. Analysis requires no API key. Draft generation requires server-side `OPENAI_API_KEY`.
 
 ## UX
 
 1. Choose **Your own page** to enter a target query, page URL (`href`), hostname, and HTML, Markdown, or text snapshot. Or choose **Held-out examples**, select a host and saved page, and use its original query or write your own. “Host” is represented by page URL + hostname, matching the adjacent research schema.
 2. Inspect sections, chunks, source statements (“factoids”), and metadata. Compare blocks with the saved source, filter review hints, and export the extraction report or original snapshot.
-3. Optionally open the mock draft tools, choose editorial tone and structural permission, then review or export the Markdown proposal. Source changes invalidate previous analysis and drafts.
+3. Optionally open draft tools, select a model and editorial tone, then review attributed OpenAI edits or export Markdown. Source changes invalidate previous analysis and drafts.
 
-The running-shoes example is illustrative, with no invented product rankings or performance claims. Submitted content is processed in memory and not fetched, persisted, executed, or sent to an LLM. Page HTML is displayed only as escaped text. The draft preview uses the app's editorial styling; it does **not** reproduce arbitrary source CSS. Original files and styles are never modified.
+The running-shoes example is illustrative, with no invented product rankings or performance claims. Submitted content is processed in memory and never fetched or executed. Draft generation sends retained source blocks/chunks and metadata to OpenAI with `store=False`; do not submit source data you cannot send to that provider. Page HTML is displayed only as escaped text. The draft preview uses the app's editorial styling; it does **not** reproduce arbitrary source CSS. Original files and styles are never modified.
 
 ## Held-out examples
 
@@ -58,8 +63,7 @@ labels; `GET /api/examples/{snapshot_id}` loads a hash-verified saved snapshot.
 Analysis and draft requests can supply `{example_id, query}` instead of custom
 source fields. Saved content is read-only; custom queries are allowed. Responses
 carry `source_origin` with the original snapshot, split, manifest and payload
-identities. Both modes invoke the installed research retention parser. Grades and
-rewriting remain mocked.
+identities. Both modes invoke the installed research retention parser. Grades remain mocked; rewriting uses the versioned OpenAI baseline.
 
 Custom input remains usable without a bundle. Its limit is 200,000 characters;
 saved examples support up to 8,000,000 characters without truncation. Switching
@@ -73,7 +77,7 @@ test set. Reserve separate examples when measuring GEPA or memory improvements.
 ## What is real vs. mocked
 
 - **Real:** API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, frontend/API round trips, review/export.
-- **Mock:** query alignment and answer clarity scores; structural score uses only heading count. Draft generation deterministically changes the title (with simple tone variants) and optionally adds a heading for low-structure pages. Body text is retained, not substantively rewritten. No predicted score gain or citation uplift.
+- **Mock:** query alignment and answer clarity scores; structural score uses only heading count. No predicted score gain or citation uplift. There is no automatic demo rewrite fallback.
 - **Not connected:** optional clean extraction candidates, calibrated graders, phase 2 GEPA or prompt-optimized model, persistent runs, live URL fetching, source-style rendering, HTML patching.
 
 ## Integration boundaries
@@ -99,13 +103,13 @@ and not yet published upstream. This keeps the app runnable without a sibling
 checkout or temporary path; a pinned Git dependency can replace the wheel after
 the packaging changes are published. No extraction code is copied into the app.
 
-Mock draft generation uses the library's `blocks_to_markdown` so nested lists,
+Validated draft generation uses the library's `blocks_to_markdown` so nested lists,
 code whitespace and table spans survive export. Source metadata and JSON-LD remain
 separate from generated body content.
 
 Replace `/api/analyze` mock grades with query-aware graders after extraction. Preserve disagreements/abstention and structural diagnostics; do not treat relative within-host citation labels as absolute probabilities.
 
-Replace `/api/draft` with an optimizer adapter consuming extracted blocks, approved facts, query, grades, tone, and structural permission. Return proposed patches plus source evidence and change reasons. Add factual consistency checks and explicit review for unsupported additions. A future HTML patch adapter should target text nodes and preserve CSS/classes/assets; restructuring should remain opt-in.
+`backend/app/rewriting.py` owns generation, token budgeting, source validation and rendering, independently of extraction and the endpoint. Its hand-written prompt is `backend/app/prompts/rewrite-baseline-v1.txt`. No GEPA or retrieval memory is included. All source/query/metadata content is untrusted data in the user message; the fixed editorial/security instructions are separate.
 
 For now request and response types live beside the API and frontend. Generate TypeScript types from FastAPI OpenAPI when the contracts stabilize. All state is ephemeral and refresh resets the demo.
 
@@ -124,11 +128,39 @@ uv run pytest -q
 
 Tests cover query-independent extraction, boilerplate removal, source traceability, source-claim retention, structural opt-in, untrusted text, Markdown, and invalid inputs.
 
+## OpenAI rewrite setup and limits
+
+Copy `backend/.env.example` to `backend/.env` and set `OPENAI_API_KEY` there, or export it into the backend process. Start uvicorn with `--env-file .env` as above. The key is server-only; never put it in frontend variables. `OPENAI_REWRITE_MODEL` defaults to `gpt-4.1-mini` and must support Responses structured outputs. `OPENAI_REWRITE_MODELS` configures the dropdown allowlist (comma-separated; defaults to `gpt-4.1-mini,gpt-4.1,gpt-4.1-nano,gpt-5.6-sol,gpt-5.6-terra,gpt-5.6-luna,gpt-6-sol,gpt-6.1-sol,gpt-6-luna,gpt-6-astra`). The configured default is always included. `GET /api/rewrite-models` exposes the choices without credentials. Draft requests may supply `model`; omitted values use the server default, and unlisted values are rejected before generation. The GPT-5.6 family choices use their API IDs: `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna` (see [official model documentation](https://developers.openai.com/api/docs/models/gpt-5.6-sol)). Newer choices include `gpt-6-sol`, `gpt-6.1-sol`, `gpt-6-luna`, and `gpt-6-astra` (see the [official model catalog](https://developers.openai.com/api/docs/models)). These reasoning models use the provider’s default reasoning effort; their reasoning tokens count toward the output cap, so increase `REWRITE_OUTPUT_TOKENS` within the context budget if a run reports incomplete output. Account/model access errors remain visible. See [GPT-5.6+ verification limits](backend/evaluation/model-support-verification.md): current credentials lack access to the new model IDs, so live support is not yet confirmed. Changing the model clears the previous draft. Configuration is read per request. The client uses bounded timeout (45 seconds per attempt), one retry (maximum two), no external tools, and `store=False`. See [OpenAI structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
+
+`REWRITE_CONTEXT_TOKENS` (16,000) includes instructions, JSON source payload, output schema, a 256-token overhead allowance and `REWRITE_OUTPUT_TOKENS` (4,000). This is an application cap; set it within the selected model's verified capacity. Tokenization uses tiktoken's model encoding, with an explicitly reported `o200k_base` fallback for unknown aliases. Whole extraction chunks are processed sequentially, at most `REWRITE_MAX_CALLS` (12). Oversized tables, code and nested-list groups cause a visible context-limit failure if they do not fit; no source is silently truncated or omitted. Calls made before a later failure may incur charges; no partial draft is applied.
+
+Only plain top-level paragraphs and headings can be rewritten. Linked or inline-formatted blocks, tables, code, lists and metadata stay unchanged. Structural permission permits changing levels of existing headings; block insertion/deletion/reordering is intentionally outside this baseline. Every edit includes exact before text, snapshot/chunk/block identities, source evidence quotes, a reason and review flags. Validation proves references/quotes match source, **not** factual entailment. Human reviewers must check support, qualifiers and omissions before applying a proposal. Model-flagged unsupported additions or missing evidence prevent draft application. Extraction review flags remain visible.
+
+Missing credentials, API errors/timeouts, refusals, incomplete/invalid output, unsupported output, context limits and insufficient evidence return explicit failure status and telemetry in the HTTP error's `detail`. There is no silent mock fallback. Successful drafts require a body edit. The UI renders escaped structured blocks and provides Markdown export; it does not patch HTML or reproduce source CSS. Model/prompt version, aggregate input/output usage, elapsed time and failure status are returned. Cost is unavailable unless both `REWRITE_INPUT_USD_PER_MILLION` and `REWRITE_OUTPUT_USD_PER_MILLION` are configured; these prices apply only to the configured default model, and other model choices report cost unavailable. Estimates exclude discounts/cached-token pricing and are not billing records.
+
+## Frozen exploratory rewrite baseline
+
+From the backend directory:
+
+```sh
+uv run pytest -q
+# Explicitly enables a credentialed smoke test:
+RUN_OPENAI_LIVE=1 uv run pytest -q tests/test_live_rewriting.py
+# Verify explicit dropdown models (optional comma-separated list):
+RUN_OPENAI_LIVE=1 RUN_OPENAI_LIVE_MODELS=gpt-5.6-sol,gpt-6.1-sol uv run pytest -q tests/test_live_rewriting.py
+# Explicitly enables real calls and writes full sources, proposals, telemetry and checks:
+uv run --env-file .env python scripts/evaluate_rewriting.py --live --output evaluation/new-report.json
+# Add an extraction held-out example; its original query is editable interactively:
+uv run --env-file .env python scripts/evaluate_rewriting.py --live --example-id SNAPSHOT_ID --example-query "A source-supported query" --output evaluation/new-report.json
+```
+
+Without `--live`, evaluation makes no API calls and records `not_run`. `evaluation/samples.json` freezes the custom source. `evaluation/baseline-report.json` records the custom success and original held-out-query abstention. `evaluation/heldout-supported-query-report.json` records the held-out success with an edited supported query, including source identity; `evaluation/baseline-review.md` records human review and limitations. Reports contain source data, so choose export destinations appropriately. Exact evidence validity, unchanged blocks, metadata, structure, body changes, qualifier-term omissions and query-term presence are repeatable checks. Lexical proxies are not semantic quality scores. Factual support, omissions and query usefulness require human review. Mock grades and relative citation labels never enter generation or evaluation and are not measured uplift. Interactive extraction-held-out examples are exploratory; reserve separate rewrite final test data before any GEPA/memory optimization.
+
 ### Extraction verification
 
 The default analysis view compares extraction with the saved snapshot. Sections expose typed blocks, parent relationships, mapping status and lazy **Compare with source** previews. Filters highlight ambiguous mappings, hidden-source attributes and possible boilerplate without removing content. Chunks preserve block order and show inferred heading context and oversized groups. **Source statements** is the display name for the compatibility `factoids` field: these are copied passages, not atomic or independently verified facts. Metadata separates copied source fields from computed inventory and heuristics. Source previews are escaped text; HTML fragments are DOM serializations, with that normalization explicitly labeled.
 
-Mechanical checks cover chunk partition/order, nested groups, chunk text/counts, passage copies, exact snapshot identity, source title/meta tags and raw JSON-LD mappings. These checks do not prove completeness, factual truth, relevance or rendered visibility. A matching substring also does not certify semantic grouping. Unresolved mappings remain unresolved even when candidate matching text is found. Mock grading and draft controls are available separately through **Open mock draft tools**.
+Mechanical checks cover chunk partition/order, nested groups, chunk text/counts, passage copies, exact snapshot identity, source title/meta tags and raw JSON-LD mappings. These checks do not prove completeness, factual truth, relevance or rendered visibility. A matching substring also does not certify semantic grouping. Unresolved mappings remain unresolved even when candidate matching text is found. Mock grades and real OpenAI draft controls are available separately through **Open draft tools**. Source inspection does not require rewrite-model configuration or an API key. Proposed draft blocks retain references to the original snapshot but do not receive source-match badges.
 
 Reproduce the 40-example diagnostics from an installed example bundle:
 
@@ -141,4 +173,4 @@ The checked-in report is a development diagnostic on the extraction held-out sli
 
 Priorities for improving the research parser: establish more precise source ranges for ambiguous paragraphs; distinguish article content from navigation/sidebar/footer without losing source content; make chunk heading context respect DOM regions; and introduce atomic claim extraction only with explicit source references and separate factual verification. Measure omissions against human annotations before claiming extraction coverage improvements. Keep this pinned parser and frozen examples unchanged while collecting review findings.
 
-Upstream follow-ups: [source mappings #7](https://github.com/ext-weihsianglin/content-optimization-system/issues/7), [chunk heading context #8](https://github.com/ext-weihsianglin/content-optimization-system/issues/8), [oversized chunk consumption #9](https://github.com/ext-weihsianglin/content-optimization-system/issues/9), and [inline semantics #10](https://github.com/ext-weihsianglin/content-optimization-system/issues/10). Real P2 OpenAI orchestration remains deferred in [demo-webapp #1](https://github.com/ext-weihsianglin/demo-webapp/issues/1). No Markdownify substitution is included in this workstream.
+Upstream follow-ups: [source mappings #7](https://github.com/ext-weihsianglin/content-optimization-system/issues/7), [chunk heading context #8](https://github.com/ext-weihsianglin/content-optimization-system/issues/8), [oversized chunk consumption #9](https://github.com/ext-weihsianglin/content-optimization-system/issues/9), and [inline semantics #10](https://github.com/ext-weihsianglin/content-optimization-system/issues/10). Real P2 OpenAI orchestration was merged in [demo-webapp PR #2](https://github.com/ext-weihsianglin/demo-webapp/pull/2). No Markdownify substitution is included in this workstream.

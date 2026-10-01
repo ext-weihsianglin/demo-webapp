@@ -25,21 +25,22 @@ export function ExtractionStatus({ extraction }: { extraction: Extraction }) {
   </div>;
 }
 
-export function StructuredBlocks({ blocks, source, verification }: { blocks: ParsedBlock[]; source:object; verification:Verification }) {
+export function StructuredBlocks({ blocks, source, verification, variant = 'source' }: { blocks: ParsedBlock[]; source?:object; verification?:Verification; variant?:'source'|'proposal' }) {
   const [filter,setFilter]=useState('all');
-  const visible=blocks.filter(block=>blockMatchesReviewFilter(block,verification.blocks[block.block_id],filter));
-  return <><p className="tab-explanation">Sections are typed source blocks, including structural containers. Review them against the saved snapshot.</p><label className="review-filter">Show <select value={filter} onChange={event=>setFilter(event.target.value)}><option value="all">All blocks</option><option value="text">Blocks with text</option><option value="mapping">Mapping review</option><option value="boilerplate">Boilerplate hints</option><option value="hidden">Hidden-source hints</option></select><span>{visible.length} / {blocks.length} blocks</span></label>{visible.map(block => <div className="block" key={block.block_id}>
+  const sourceVerification=variant==='source'?verification:undefined;
+  const visible=blocks.filter(block=>blockMatchesReviewFilter(block,sourceVerification?.blocks[block.block_id],sourceVerification?filter:'all'));
+  return <>{sourceVerification&&<><p className="tab-explanation">Sections are typed source blocks, including structural containers. Review them against the saved snapshot.</p><label className="review-filter">Show <select value={filter} onChange={event=>setFilter(event.target.value)}><option value="all">All blocks</option><option value="text">Blocks with text</option><option value="mapping">Mapping review</option><option value="boilerplate">Boilerplate hints</option><option value="hidden">Hidden-source hints</option></select><span>{visible.length} / {blocks.length} blocks</span></label></>}{visible.map(block => <div className="block" key={block.block_id}>
     <span className="block-kind">{block.type === 'heading' ? `h${block.heading_level}` : block.type}</span>
     <div className="block-content">
-      <small>{block.block_id}{block.parent_id ? ` · Parent: ${block.parent_id}` : ''} · {block.mapping_status.replaceAll('_', ' ')}</small>
+      <small>{block.block_id}{block.parent_id ? ` · Parent: ${block.parent_id}` : ''} · {variant==='proposal'?'Original source mapping: ':''}{block.mapping_status.replaceAll('_', ' ')}</small>
       {block.type === 'code' ? <pre>{block.text}</pre> : block.table ? <div className="source-table"><table>
         {block.table.caption && <caption>{block.table.caption}</caption>}
         <tbody>{Array.from({ length: block.table.rows }, (_, row) => <tr key={row}>{block.table!.cells.filter(cell => cell.row === row).map(cell => cell.is_header
           ? <th key={cell.column} rowSpan={cell.rowspan} colSpan={cell.colspan}>{cell.text}</th>
           : <td key={cell.column} rowSpan={cell.rowspan} colSpan={cell.colspan}>{cell.text}</td>)}</tr>)}</tbody>
       </table></div> : block.text ? <p>{block.text}</p> : <p className="source-help">{block.type} container</p>}
-      <SourceEvidence blockId={block.block_id} source={source} check={verification.blocks[block.block_id]}/>
-      {block.source_locator && <details><summary>Source location</summary><pre>{JSON.stringify(block.source_locator, null, 2)}</pre></details>}
+      {source&&sourceVerification&&<SourceEvidence blockId={block.block_id} source={source} check={sourceVerification.blocks[block.block_id]}/>}
+      {block.source_locator && <details><summary>{variant==='proposal'?'Original source location':'Source location'}</summary><pre>{JSON.stringify(block.source_locator, null, 2)}</pre></details>}
       {block.links.length > 0 && <details><summary>{block.links.length} source links</summary>{block.links.map((link, index) => <p key={index}>{link.text} · {link.resolved_target}</p>)}</details>}
     </div>
   </div>)}</>;

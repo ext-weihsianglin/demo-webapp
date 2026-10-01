@@ -1,5 +1,8 @@
 # PR #2 / PR #3 semantic integration review
 
+**Historical preview:** PR #2 is now merged into `main`, and PR #3 has resolved the conflicts against `020d2d6`. Current implementation and production browser evidence are in [pr3-deployment-verification.md](pr3-deployment-verification.md). The review below records the earlier isolated trial, not a remaining unresolved merge.
+
+
 Reviewed on 2026-10-01. Latest default branch is `main`, not `master`. At review time it points to `6423dcf`; `git merge origin/main` on the PR #3 branch reports **Already up to date**. No PR was merged into the default branch.
 
 Inputs:

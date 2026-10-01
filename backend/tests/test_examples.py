@@ -21,7 +21,7 @@ def bundle(tmp_path, monkeypatch):
     return tmp_path, example, content
 
 
-def test_examples_support_custom_queries_and_keep_original_identity(bundle):
+def test_examples_support_custom_queries_and_keep_original_identity(bundle, draft_stub):
     _, example, content = bundle
     listing = client.get("/api/examples").json()
     assert listing["examples"] == [example]
@@ -35,7 +35,7 @@ def test_examples_support_custom_queries_and_keep_original_identity(bundle):
     original = client.post("/api/analyze", json={**payload, "query": example["query"]}).json()
     assert original["sections"] == analysis.json()["sections"]
     draft = client.post("/api/draft", json=payload).json()
-    assert "Keep this original qualified claim." in draft["markdown"]
+    assert draft["changes"][0]["before"] == "Keep this original qualified claim."
     assert draft["source_origin"] == analysis.json()["source_origin"]
     assert client.post("/api/analyze", json={**payload, "content": "Changed source content must detach."}).status_code == 422
 

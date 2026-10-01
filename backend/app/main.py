@@ -1,11 +1,11 @@
-"""Upstream retention extraction with mock grading and draft generation."""
-from copy import deepcopy
+"""Upstream retention extraction, mock grading and OpenAI baseline rewriting."""
+from app.rewriting import rewrite, model_options
 from urllib.parse import urlparse
+from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, field_validator, model_validator
 from app.examples import catalog, load_example
 from app.extraction import UPSTREAM, extract_document, section_view
-from preprocessing.blocks import blocks_to_markdown
 from app.verification import SourceInspector, verify_document
 
 app = FastAPI(title="Content Studio", version="0.1.0")
@@ -52,17 +52,30 @@ class Source(BaseModel):
             raise ValueError("Add at least 20 characters of source content")
         return self
 
-class DraftRequest(Source):
-    allow_structure: bool = False
-    tone: str = "Preserve original"
-
 class EvidenceRequest(Source):
     block_id: str = Field(min_length=1, max_length=64)
+
+class DraftRequest(Source):
+    model: str | None = Field(default=None, min_length=1, max_length=200)
+
+    @field_validator('model')
+    @classmethod
+    def validate_model(cls, value):
+        if value is not None and value not in model_options()['models']:
+            raise ValueError('Choose a rewrite model enabled on this server')
+        return value
+
+    allow_structure: bool = False
+    tone: Literal["Preserve original", "More formal", "More conversational"] = "Preserve original"
 
 
 @app.get('/api/health')
 def health():
-    return {"status": "ok", "mode": "mock", "extraction": "retention-first-v1", "upstream_revision": UPSTREAM["revision"], "package_version": UPSTREAM["package_version"]}
+    return {"status": "ok", "mode": "openai", "grading_mode": "mock", "extraction": "retention-first-v1", "upstream_revision": UPSTREAM["revision"], "package_version": UPSTREAM["package_version"]}
+
+@app.get('/api/rewrite-models')
+def rewrite_models():
+    return model_options()
 
 @app.get('/api/examples')
 def examples():
@@ -108,7 +121,7 @@ def analyze(source: Source):
             "word_count": len(parsed['text'].split()),
             "notes": ["Extraction uses the pinned upstream retention-first parser.",
                       "Factoids are source statements, not independently verified facts.",
-                      "Grading and rewriting remain mocked; no citation uplift is predicted."]}
+                      "Grades remain mocked; rewriting uses OpenAI. No citation uplift is predicted."]}
 
 @app.post('/api/evidence')
 def evidence(source: EvidenceRequest):
@@ -122,34 +135,9 @@ def evidence(source: EvidenceRequest):
 @app.post('/api/draft')
 def draft(source: DraftRequest):
     analysis = analyze(source)
-    blocks = deepcopy(analysis['document']['blocks'])
-    if not blocks:
-        raise HTTPException(422, 'No retained source content is available for a draft.')
-    title = source.query.strip().rstrip('?')
-    if source.tone == 'More formal':
-        title = 'A guide to: ' + title[0].lower() + title[1:]
-    elif source.tone == 'More conversational':
-        title = "Let’s explore: " + title[0].lower() + title[1:]
-    changes = []
-    replaced = False
-    for block in blocks:
-        text = block['text']
-        if block['type'] == 'heading' and block['heading_level'] == 1 and not replaced:
-            changes.append({"before": text, "after": title, "reason": "Align the page title with the target question.", "source_id": block['block_id']})
-            block['text'] = title
-            block.pop('inline_markdown', None)
-            replaced = True
-    markdown = blocks_to_markdown(blocks)
-    if not replaced:
-        markdown = '# ' + title + '\n\n' + markdown
-        changes.append({"before": '(No page heading)', "after": title, "reason": "Proposed heading for the draft; review before applying.", "source_id": "metadata"})
-    if source.allow_structure and analysis['structure_recommended']:
-        heading, separator, body = markdown.partition('\n\n')
-        markdown = heading + '\n\n## At a glance' + (separator + body if separator else '')
-        changes.append({"before": '(No section heading)', "after": 'At a glance', "reason": "Optional grouping because the mock structural score is low.", "source_id": "structure"})
-    return {"mode": "mock", "markdown": markdown, "changes": changes,
-            "source_origin": analysis['source_origin'], "snapshot_id": analysis['snapshot_id'],
-            "extraction": analysis['extraction'],
-            "summary": "Deterministic preview: title and optional heading edits only. Body claims are retained verbatim. Connect the optimizer to generate substantive rewrites.",
-            "preservation": ["Source statements retained", "No new product claims", "Original CSS and assets untouched"],
-            "review_items": [*analysis['extraction']['quality_flags'], "Verify source claims before publication.", "This export is a Markdown content proposal, not a restyled or patched HTML page."]}
+    result = rewrite(analysis['document'], analysis['chunks'], source.query, source.tone, source.allow_structure, model=source.model)
+    result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
+    if result['status'] != 'succeeded':
+        code = 422 if result['status'] in ('source_insufficient', 'context_limit', 'abstained') else 503 if result['status'] == 'missing_credentials' else 502
+        raise HTTPException(code, detail=result)
+    return result
