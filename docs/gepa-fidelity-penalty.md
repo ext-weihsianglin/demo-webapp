@@ -24,6 +24,6 @@ The run manifest freezes the reward version, exact weights and aggregation polic
 
 ## Scope and review
 
-This change applies to **GEPA research evaluation**. Ordinary Content Studio drafting retains its factual gate. Mechanical output/schema, snapshot/block/evidence identities, protected content and language checks still apply in research. The research-only switch for self-reported factual flags is server-owned and is not an ordinary draft request field. Source-relative fidelity remains a fallible judgment.
+This change applies to **GEPA research evaluation**. After reconciliation with merged PR #17, ordinary Content Studio drafting retains generated drafts and displays fidelity findings for human review. Mechanical output/schema, snapshot/block/evidence identities, protected content and language checks still apply in research. The research-only switch for self-reported factual flags is server-owned and is not an ordinary draft request field. Source-relative fidelity remains a fallible judgment.
 
 The dashboard exposes both weights, raw P1, mean deduction, mean reward and pages with factual concerns. Page details and reflection traces expose the reasons. No full optimization or live provider call was required for this implementation. The v7.1-compatible frozen dataset still needs preparation before another full run.

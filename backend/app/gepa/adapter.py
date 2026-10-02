@@ -53,7 +53,7 @@ source block IDs and deductions are included in Feedback.reward_components.
 Use those reasons to fix specific added claims, omissions, changed numbers or lost
 qualifiers in the next procedure. A lower penalty can improve reward even before
 raw P1 improves. Inspect both signals. Penalties are research feedback, not permission
-to invent facts. Ordinary drafts still require whole-proposal fidelity approval.
+to invent facts. Ordinary drafts retain fidelity findings for explicit human review.
 
 Never weaken the fixed security, factual, schema, evidence, same-chunk, protected
 content or language constraints. Preserve scope, attribution, qualifications,

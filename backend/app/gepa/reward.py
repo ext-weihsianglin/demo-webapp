@@ -6,7 +6,7 @@ def policy(unsupported=0.05, uncertain=0.02):
     return {'version':VERSION,'unsupported_per_edit':unsupported,'uncertain_per_edit':uncertain,
             'formula':'raw_p1 - sum(per_edit_penalties)',
             'aggregation':'one strongest verdict per edited block; no division by edit count',
-            'scope':'research_only','ordinary_draft_policy':'whole_proposal_fidelity_gate'}
+            'scope':'research_only','ordinary_draft_policy':'retain_draft_with_fidelity_review'}
 
 
 def components(raw_p1, findings, changes, config):
