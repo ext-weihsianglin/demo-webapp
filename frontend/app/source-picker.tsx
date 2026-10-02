@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { readApiResponse } from './api-client';
 
 export type Example = {
   snapshot_id: string;
@@ -39,10 +40,7 @@ export function SourcePicker({ mode, selected, onMode, onExample, onLoading }: {
     setMessage('Loading saved examples…');
     setFailed(false);
     fetch('/api/examples', { signal: controller.signal })
-      .then(async response => {
-        if (!response.ok) throw new Error('Saved examples are unavailable. Check the API connection.');
-        return response.json();
-      })
+      .then(readApiResponse)
       .then(data => { setExamples(data.examples); setMessage(data.message); })
       .catch(error => { if (!controller.signal.aborted) { setFailed(true); setMessage(error.message); } })
       .finally(() => { if (!controller.signal.aborted) onLoading(false); });
