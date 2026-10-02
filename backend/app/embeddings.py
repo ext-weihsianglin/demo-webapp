@@ -8,11 +8,12 @@ import json
 import os
 from pathlib import Path
 import tempfile
+import threading
 
 import numpy as np
 from preprocessing.downstream import structure_chunks
 from representations import SERIALIZER_VERSION
-from representations.cache import VectorCache, embedding_config, request_key
+from representations.cache import VectorCache, CacheBusyError, embedding_config, request_key
 from representations.config import load_config
 from representations.inputs import document_units, make_unit
 from representations.providers import HTTPProvider, ProviderError, validated_vectors
@@ -21,6 +22,24 @@ from representations.storage import digest
 from trad_ml_scorer.semantic_features import original_cosines, section_summary
 
 EMBEDDING_IDENTITY = 'e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea'
+_WRITE_LOCK = threading.RLock()
+
+
+def request_locations(store, keys):
+    """Read only needed keys from the pinned upstream catalog, preserving locations.
+
+    The upstream cache still owns byte/hash/vector validation and writes. Group
+    parameterized lookups to stay below SQLite's portable parameter limit.
+    """
+    keys = list(keys)
+    output = {}
+    for offset in range(0, len(keys), 400):
+        batch = keys[offset:offset+400]
+        placeholders = ','.join('?' for _ in batch)
+        output.update({rid:(shard,row,sha,dimensions) for rid,shard,row,sha,dimensions in store.db.execute(
+            'SELECT request_id, shard, row_number, sha256, dimensions FROM vectors '
+            f'WHERE model_identity=? AND request_id IN ({placeholders})', (store.identity,*batch))})
+    return output
 
 
 class EmbeddingUnavailable(ValueError):
@@ -64,7 +83,7 @@ def semantic_features(document, queries, *, provider=None, cache_root=None, befo
     store = VectorCache(cache_root, cfg)
     try:
         requests = {request_key(u, cfg): u for u in units if u['status'] == 'ready'}
-        locations = store.locations()
+        locations = request_locations(store, requests)
         missing = [(key, unit) for key, unit in requests.items() if key not in locations]
         telemetry.update(cached_requests=len(requests) - len(missing), missing_requests=len(missing))
         if missing and provider is None and os.getenv('P1_ENABLE_LIVE_EMBEDDINGS') != '1':
@@ -74,9 +93,9 @@ def semantic_features(document, queries, *, provider=None, cache_root=None, befo
             raise EmbeddingUnavailable('embedding_request_limit', telemetry)
         if missing:
             provider = provider or HTTPProvider(cfg)
-            with store.writer(cache_root):
+            with _WRITE_LOCK, store.writer(cache_root):
                 # Recheck after locking; another request might have completed.
-                locations = store.locations()
+                locations = request_locations(store, requests)
                 for role in ('query', 'document'):
                     pending = [(key, unit) for key, unit in missing if key not in locations and unit['role'] == role]
                     while pending:
@@ -117,6 +136,8 @@ def semantic_features(document, queries, *, provider=None, cache_root=None, befo
                 row.update(section_summary(original_cosines(query, np.stack(sections))))
                 rows.append(row)
         return rows, telemetry
+    except CacheBusyError:
+        raise EmbeddingUnavailable('embedding_cache_busy', telemetry) from None
     except ProviderError as error:
         raise EmbeddingUnavailable('embedding_provider_error', {**telemetry, 'provider_error': error.reason}) from None
     finally:

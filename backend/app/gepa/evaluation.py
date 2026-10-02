@@ -101,9 +101,12 @@ class PageEvaluator:
         if self.scorer:
             value = self.scorer(document,page['content'],page['format'],page['queries'])
             result[phase] = value.get('embedding')
-            return value
-        return score_document(document,page['content'],page['format'],page['queries'],
-            before_call=self.budget.check,on_embedding=lambda usage: result.update({phase:usage}))
+        else:
+            value = score_document(document,page['content'],page['format'],page['queries'],
+                before_call=self.budget.check,on_embedding=lambda usage: result.update({phase:usage}))
+        if value['status'] != 'scored':
+            result['scoring_unavailable'] = {'phase':phase,**value}
+        return value
 
     def evaluate(self, pages, prompt):
         missing = [p for p in pages if (prompt['prompt_hash'], p['snapshot_id']) not in self.cache]

@@ -81,3 +81,48 @@ def test_stop_between_embedding_batches_prevents_next_provider_call(tmp_path):
                           cache_root=tmp_path, before_call=budget.check, on_telemetry=telemetry.append)
     assert len(provider.calls) == 1
     assert telemetry[0]['calls'] == 1 and telemetry[0]['input_tokens'] > 0
+
+
+def test_online_cache_lookup_is_bounded_and_matches_upstream_index(tmp_path):
+    from app.embeddings import request_locations
+    from representations.cache import VectorCache
+    from representations.config import load_config
+    store = VectorCache(tmp_path, load_config()['models']['openai-large'])
+    try:
+        rows = [(f'key-{i}', store.identity, 'vectors.npy', i, 'hash', 3072) for i in range(2000)]
+        store.db.executemany('INSERT INTO vectors VALUES (?, ?, ?, ?, ?, ?)', rows)
+        store.db.commit()
+        keys = {f'key-{i}' for i in range(1200)} | {'missing'}
+        statements = []
+        store.db.set_trace_callback(statements.append)
+        result = request_locations(store, keys)
+        assert set(result) == keys - {'missing'}
+        reads = [s for s in statements if s.startswith('SELECT')]
+        assert len(reads) >= 2 and all('request_id IN (' in s for s in reads)
+        store.db.set_trace_callback(None)
+        assert result == {k:v for k,v in store.locations().items() if k in keys}
+    finally:
+        store.close()
+
+
+def test_parallel_cold_scores_wait_for_local_cache_writer(tmp_path):
+    import threading
+    from concurrent.futures import ThreadPoolExecutor, TimeoutError
+    entered, release = threading.Event(), threading.Event()
+    class SlowProvider(StubEmbeddings):
+        def embed(self, texts, role):
+            entered.set()
+            assert release.wait(3)
+            return super().embed(texts, role)
+    provider = SlowProvider()
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        first = pool.submit(semantic_features, parsed(), ['How to choose shoes?'], provider=provider, cache_root=tmp_path)
+        assert entered.wait(2)
+        second = pool.submit(semantic_features, parsed(), ['What traction do I need?'], provider=provider, cache_root=tmp_path)
+        try:
+            with pytest.raises(TimeoutError):
+                second.result(.2)
+        finally:
+            release.set()
+        assert len(first.result()[0]) == 1
+        assert len(second.result()[0]) == 1

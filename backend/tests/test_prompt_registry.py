@@ -38,3 +38,16 @@ def test_selected_pointer_hash_must_match_candidate(tmp_path):
     path.write_text(json.dumps(pointer))
     with pytest.raises(ValueError, match='Selected'):
         registry.resolve(None, 'gpt-4.1-mini')
+
+
+def test_candidate_and_promoted_default_survive_a_fresh_registry_process(tmp_path):
+    import json, subprocess, sys
+    registry = PromptRegistry(tmp_path)
+    candidate = registry.create('gpt-4.1-mini', 'Clarify only source-supported answers.', 'run-1', [])
+    registry.promote(candidate['id'], candidate['model'])
+    code = "from app.prompt_registry import PromptRegistry; import json,sys; r=PromptRegistry(sys.argv[1]); print(json.dumps(r.resolve(None,'gpt-4.1-mini')))"
+    result = subprocess.run([sys.executable, '-c', code, str(tmp_path)], cwd=__import__('pathlib').Path(__file__).resolve().parents[1], check=True, text=True, capture_output=True)
+    restored = json.loads(result.stdout)
+    assert restored['id'] == candidate['id']
+    assert restored['effective_prompt'] == candidate['effective_prompt']
+    assert restored['prompt_hash'] == candidate['prompt_hash']
