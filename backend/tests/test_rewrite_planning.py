@@ -50,9 +50,10 @@ def test_batched_edits_cannot_use_evidence_from_another_original_chunk():
     document,chunks=many_chunks()
     def cross_chunk(proposal,response,data):
         edit=proposal['edits'][0]
-        other=next(c for c in data['chunks'] if c['chunk_id']!=edit['chunk_id'])
+        own=next(c for c in data['chunks'] if edit['block_id'] in c['block_ids'])
+        other=next(c for c in data['chunks'] if c['chunk_id']!=own['chunk_id'])
         block=next(b for b in data['editable_blocks'] + data['read_only_context'] if b['block_id'] in other['block_ids'] and b['text'])
-        edit['evidence']=[{'snapshot_id':data['snapshot_id'],'block_id':block['block_id'],'quote':block['text']}]
+        edit['evidence']=[{'block_id':block['block_id']}]
     result=rewrite(document,chunks,QUERIES,'Preserve original',False,client=StubClient(cross_chunk))
     assert result['status']=='invalid_output' and 'document' not in result
 
@@ -86,7 +87,7 @@ def test_real_qa_snapshot_fits_default_budget_without_truncation():
 def test_unchanged_edit_is_validated_but_does_not_count_as_a_body_rewrite():
     document,chunks=many_chunks()
     def unchanged(proposal,response,data):
-        proposal['edits'][0]['after']=proposal['edits'][0]['before']
+        proposal['edits'][0]['after']=next(b['text'] for b in data['editable_blocks'] if b['block_id']==proposal['edits'][0]['block_id'])
     result=rewrite(document,chunks,QUERIES,'Preserve original',False,client=StubClient(unchanged))
     assert result['status']=='abstained' and result['telemetry']['ignored_unchanged_edits']>0
     assert 'document' not in result
@@ -104,12 +105,11 @@ def test_protected_edit_rejected_with_bounded_provider_schema():
     def protected_edit(proposal,response,data):
         edit=proposal['edits'][0]
         edit['block_id']=protected['block_id']
-        edit['before']=protected['text']
-        edit['chunk_id']=next(c['chunk_id'] for c in chunks if protected['block_id'] in c['block_ids'])
     stub=StubClient(protected_edit)
     result=rewrite(document,chunks,QUERIES,'Preserve original',False,client=stub)
     assert result['status']=='invalid_output' and 'document' not in result
     schema=stub.requests[0]['text']['format']['schema']
-    assert protected['block_id'] not in schema['$defs']['Edit']['properties']['block_id']['enum']
-    assert schema['$defs']['Edit']['properties']['heading_level']=={'type':'null'}
-    assert 'enum' not in schema['$defs']['Evidence']['properties']['quote']
+    for branch in schema['$defs']['ProviderEdit']['anyOf']:
+        assert protected['block_id'] not in branch['properties']['block_id']['enum']
+        assert branch['properties']['heading_level']=={'type':'null'}
+    assert set(schema['$defs']['EvidenceReference']['properties'])=={'block_id'}

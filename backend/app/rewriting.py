@@ -13,7 +13,7 @@ import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
 
-PROMPT_VERSION = 'rewrite-page-v4'
+PROMPT_VERSION = 'rewrite-page-v5'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 def model_options():
@@ -49,6 +49,46 @@ class Proposal(StrictModel):
     edits: list[Edit]
     review_flags: list[str]
 
+class EvidenceReference(StrictModel):
+    block_id: str
+
+class ProviderEdit(StrictModel):
+    block_id: str
+    after: str = Field(min_length=1, max_length=20000)
+    reason: str = Field(min_length=1, max_length=2000)
+    evidence: list[EvidenceReference] = Field(min_length=1)
+    review_flags: list[str]
+    heading_level: int | None = Field(ge=1, le=6)
+
+class ProviderProposal(StrictModel):
+    status: Literal['proposed', 'abstained']
+    summary: str
+    edits: list[ProviderEdit]
+    review_flags: list[str]
+
+
+def assemble_proposal(proposal, document, chunks):
+    """Resolve model-selected IDs to immutable source data, never model-written quotes."""
+    blocks = {b['block_id']: b for b in document['blocks']}
+    memberships = {identity: c['chunk_id'] for c in chunks for identity in c['block_ids']}
+    edits = []
+    for edit in proposal.edits:
+        source = blocks.get(edit.block_id)
+        if source is None or edit.block_id not in memberships:
+            raise RewriteFailure('invalid_output', 'Unknown edit block ID.', {'edit_block_id': edit.block_id, 'checks_failed': ['unknown_edit_block']})
+        evidence = []
+        for reference in edit.evidence:
+            block = blocks.get(reference.block_id)
+            if block is None:
+                raise RewriteFailure('invalid_output', 'Unknown evidence block ID.', {'edit_block_id': edit.block_id, 'evidence_block_id': reference.block_id, 'checks_failed': ['unknown_block']})
+            if not block['text'].strip():
+                raise RewriteFailure('invalid_output', 'Selected evidence block has no text.', {'edit_block_id': edit.block_id, 'evidence_block_id': reference.block_id, 'checks_failed': ['empty_quote']})
+            evidence.append(Evidence(snapshot_id=document['snapshot_id'], block_id=reference.block_id, quote=block['text']))
+        edits.append(Edit(**edit.model_dump(exclude={'evidence'}), before=source['text'],
+                          snapshot_id=document['snapshot_id'], chunk_id=memberships[edit.block_id], evidence=evidence))
+    return Proposal(status=proposal.status, summary=proposal.summary, review_flags=proposal.review_flags, edits=edits)
+
+
 @dataclass(frozen=True)
 class Settings:
     model: str = 'gpt-4.1-mini'
@@ -83,8 +123,8 @@ class Settings:
                    output_price=price('REWRITE_OUTPUT_USD_PER_MILLION') if default_pricing else None)
 
 class RewriteFailure(Exception):
-    def __init__(self, status, message):
-        self.status, self.message = status, message
+    def __init__(self, status, message, details=None):
+        self.status, self.message, self.details = status, message, details
         super().__init__(message)
 
 
@@ -113,11 +153,21 @@ def validate_edits(proposal, document, chunk, allow_structure):
             raise RewriteFailure('invalid_output', 'Prose edits must retain one nonempty block and a reason.')
         if edit.heading_level is not None and (b['type'] != 'heading' or not allow_structure):
             raise RewriteFailure('invalid_output', 'Structural change requires explicit permission.')
-        for evidence in edit.evidence:
+        for evidence_index, evidence in enumerate(edit.evidence):
             source = blocks.get(evidence.block_id)
-            if (evidence.snapshot_id != document['snapshot_id'] or evidence.block_id not in chunk['block_ids']
-                    or source is None or not evidence.quote.strip() or evidence.quote not in source['text']):
-                raise RewriteFailure('invalid_output', 'Evidence must quote a valid source block in this chunk.')
+            checks = {
+                'snapshot_mismatch': evidence.snapshot_id != document['snapshot_id'],
+                'unknown_block': source is None,
+                'cross_chunk_evidence': source is not None and evidence.block_id not in chunk['block_ids'],
+                'empty_quote': not evidence.quote.strip(),
+                'quote_mismatch': source is not None and bool(evidence.quote.strip()) and evidence.quote not in source['text'],
+            }
+            failures = [name for name, failed in checks.items() if failed]
+            if failures:
+                details = {'edit_block_id': edit.block_id, 'evidence_block_id': evidence.block_id,
+                           'evidence_index': evidence_index, 'checks_failed': failures}
+                raise RewriteFailure('invalid_output',
+                    f'Evidence for edit {edit.block_id} failed: {", ".join(failures)}. No draft applied.', details)
         # Evidence validity is mechanical, not a semantic entailment guarantee.
         if any(f in edit.review_flags for f in ('unsupported_addition', 'missing_evidence')):
             raise RewriteFailure('unsupported_output', 'Model flagged unsupported additions or missing evidence; no draft applied.')
@@ -127,15 +177,34 @@ def validate_edits(proposal, document, chunk, allow_structure):
 
 def response_schema(document, batch, allow_structure=False):
     """Keep the provider schema bounded; validate source identities/text locally."""
-    schema = Proposal.model_json_schema()
+    schema = ProviderProposal.model_json_schema()
+    blocks = {b['block_id']: b for b in document['blocks']}
     allowed = [b['block_id'] for b in document['blocks'] if editable(b)]
-    # Bound schema growth for very large custom pages; server checks always apply.
-    if allowed and len(allowed) <= 900 and sum(map(len, allowed)) <= 10000:
-        schema['$defs']['Edit']['properties']['block_id']['enum'] = allowed
-    for name in ('Edit', 'Evidence'):
-        schema['$defs'][name]['properties']['snapshot_id']['enum'] = [document['snapshot_id']]
+    base = schema['$defs']['ProviderEdit']
     if not allow_structure:
-        schema['$defs']['Edit']['properties']['heading_level'] = {'type': 'null'}
+        base['properties']['heading_level'] = {'type': 'null'}
+    branches = []
+    enum_count = 0
+    enum_characters = 0
+    for chunk in batch:
+        targets = [i for i in chunk['block_ids'] if editable(blocks[i])]
+        evidence_ids = [i for i in chunk['block_ids'] if blocks[i]['text'].strip()]
+        if not targets or not evidence_ids:
+            continue
+        branch = deepcopy(base)
+        branch['properties']['block_id']['enum'] = targets
+        branch['properties']['evidence']['items'] = {
+            'type': 'object', 'properties': {'block_id': {'type': 'string', 'enum': evidence_ids}},
+            'required': ['block_id'], 'additionalProperties': False}
+        branches.append(branch)
+        enum_count += len(targets) + len(evidence_ids)
+        enum_characters += sum(map(len, targets + evidence_ids))
+    # Bounded nested alternatives bind each edit target to its own chunk evidence.
+    # For unusually large pages, retain strict server validation without oversized schemas.
+    if branches and len(branches) <= 100 and enum_count <= 900 and enum_characters <= 10000:
+        schema['$defs']['ProviderEdit'] = {'anyOf': branches}
+    elif allowed and len(allowed) <= 900 and sum(map(len, allowed)) <= 10000:
+        base['properties']['block_id']['enum'] = allowed
     return schema
 
 
@@ -151,13 +220,14 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
 
     def serialize(batch):
         ids = [i for chunk in batch for i in chunk['block_ids']]
-        chunk_for = {i: chunk['chunk_id'] for chunk in batch for i in chunk['block_ids']}
+        chunk_alias = {chunk['chunk_id']: f'c{index:03d}' for index, chunk in enumerate(batch)}
+        chunk_for = {i: chunk_alias[chunk['chunk_id']] for chunk in batch for i in chunk['block_ids']}
         payload = {'task': 'Rewrite this entire page in one coordinated proposal for all target queries.', 'scope': 'whole_page', 'target_queries': queries, 'p1_feedback': p1_feedback or {'status': 'unavailable'},
                    'optimization_objective': 'Increase the equal-weight mean P1 score across every distinct target query; avoid per-query regressions. Preserve source evidence even if scores cannot improve.',
                    'editorial_tone': tone, 'allow_structure': allow_structure,
                    'snapshot_id': document['snapshot_id'], 'extraction': document['selection'],
                    'source_metadata': metadata, 'heading_outline': document.get('outline', []),
-                   'chunks': [{k: chunk[k] for k in ('chunk_id', 'order', 'block_ids', 'heading_path')} for chunk in batch],
+                   'chunks': [{**{k: chunk[k] for k in ('order', 'block_ids', 'heading_path')}, 'chunk_id': chunk_alias[chunk['chunk_id']]} for chunk in batch],
                    'edit_boundary': 'Return edits only for IDs in editable_blocks. Never return edits for read_only_context. Read-only content may supply evidence from the same original chunk but must remain unchanged.',
                    'editable_blocks': [], 'read_only_context': []}
         for identity in ids:
@@ -200,7 +270,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
             telemetry['estimated_cost_usd'] = (telemetry['input_tokens']*settings.input_price + telemetry['output_tokens']*settings.output_price)/1_000_000
         return {'mode': 'openai', 'status': status, 'summary': message, 'telemetry': telemetry,
                 'snapshot_id': document['snapshot_id'], 'review_items': [*document['selection']['quality_flags'], *accumulated_flags,
-                'Human review required: source quotes do not prove factual entailment.',
+                'Human review required: evidence passages are copied by the backend from model-selected block IDs; this does not prove factual entailment.',
                 'Markdown content proposal; source HTML/CSS is not patched.'], **extra}
     try:
         settings = settings or Settings.from_env(model)
@@ -242,7 +312,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                 raise RewriteFailure('refused', 'The model refused this rewrite.')
             if response.status != 'completed':
                 raise RewriteFailure('incomplete_output', 'The model did not complete its output; no partial draft applied.')
-            proposal = Proposal.model_validate_json(response.output_text)
+            proposal = assemble_proposal(ProviderProposal.model_validate_json(response.output_text), document, chunks)
             accumulated_flags.extend(proposal.review_flags)
             accumulated_flags.extend(f for e in proposal.edits for f in e.review_flags)
             batch_ids = {chunk['chunk_id'] for chunk in batch}
@@ -275,8 +345,13 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                         preservation=['Tables, lists, code, links and source metadata retained', 'Original snapshot remains intact'])
         return output
     except RewriteFailure as exc:
+        if exc.details:
+            telemetry['validation_error'] = exc.details
         return finish(exc.status, exc.message)
-    except (ValidationError, ValueError, TypeError):
+    except ValidationError as exc:
+        telemetry['validation_error'] = {'checks_failed': ['schema_validation'], 'fields': [{'location': list(e['loc']), 'type': e['type']} for e in exc.errors()]}
+        return finish('invalid_output', 'Invalid structured proposal; no draft applied.')
+    except (ValueError, TypeError):
         return finish('invalid_output', 'Invalid model output or server rewrite configuration; no draft applied.')
     except APIError as exc:
         telemetry['usage_complete'] = False
