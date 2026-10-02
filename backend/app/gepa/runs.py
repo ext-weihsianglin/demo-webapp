@@ -8,14 +8,15 @@ import threading
 
 from gepa import optimize
 from pydantic import BaseModel, ConfigDict, Field, model_validator
-from app.prompt_registry import PromptRegistry
+from app.prompt_registry import PromptRegistry, PROCEDURE_CONTRACT
 from app.rewriting import model_options, Settings, EDIT_BOUNDARY_VERSION
 from app.fidelity import PROMPT as GATE_PROMPT, MODEL as GATE_MODEL, SCHEMA_VERSION, OUTPUT_BUDGET, BATCH_SIZE, REASONING_EFFORT, SCHEMA_LIMITS
+from app.request_budget import PROFILE as REQUEST_BUDGET_PROFILE
 from app.prompt_registry import digest
 from app.gepa.datasets import load_dataset, root
 from app.gepa.storage import RunStore, safe_id
 from app.gepa.evaluation import AttemptBudget, PageEvaluator, RunStopped, SEMANTIC_REWRITE_FAILURES
-from app.gepa.adapter import Adapter, Callbacks, REFLECTION_PROMPT, reflection_settings
+from app.gepa.adapter import Adapter, Callbacks, REFLECTION_PROMPT, reflection_settings, reflection_instructions
 
 TERMINAL={'completed','stopped','failed','interrupted'}
 
@@ -36,6 +37,7 @@ class RunConfig(BaseModel):
     reflection_batch: int=Field(default=2,ge=1,le=20)
     attempts: int=Field(default=100,ge=30,le=2000)
     concurrency: int=Field(default=10,ge=1,le=20)
+    strategy_characters: int=Field(default=6000,ge=1000,le=16000)
     length_multiplier: float=Field(default=1.5,ge=1,le=3)
     consecutive_failures: int=Field(default=3,ge=1,le=20)
     failure_rate: float=Field(default=.2,gt=0,le=1)
@@ -77,6 +79,8 @@ class RunManager:
             raise ValueError('Backend OPENAI_API_KEY unavailable')
         data=load_dataset(config.dataset_id)
         baseline=self.registry.resolve(config.prompt_id or self.registry.baseline(config.model)['id'],config.model)
+        if len(baseline['editorial_strategy']) > config.strategy_characters:
+            raise ValueError('Seed procedure exceeds configured strategy character limit')
         settings=Settings.from_env(config.model)
         with self.lock:
             if self.active:
@@ -93,6 +97,10 @@ class RunManager:
                 'fidelity':fidelity_profile(),
                 'semantic_rewrite_failures':sorted(SEMANTIC_REWRITE_FAILURES),
                 'reflection_prompt_hash':digest(REFLECTION_PROMPT),
+                'reflection_instruction_hash':digest(reflection_instructions(self.registry.fixed)),
+                'component_contract':PROCEDURE_CONTRACT,
+                'component_profile':self.registry.procedure_contract,
+                'request_budget':REQUEST_BUDGET_PROFILE,
                 'reflection_settings':reflection_settings(config.reflection_model),
                 'gepa_version':importlib.metadata.version('gepa'),
                 'cache_scope':'per_run','merge_enabled':False,'created_at':datetime.now(timezone.utc).isoformat()}
@@ -192,11 +200,16 @@ class RunManager:
         boundary=manifest.get('edit_boundary_version')
         summary['edit_boundary_version']=boundary
         summary['fidelity_policy']=manifest.get('fidelity')
+        summary['component_contract']=manifest.get('component_contract')
         summary['promotion_block_reason']=(
             'This run uses an older or unrecorded edit boundary. Evaluate again before promotion.'
             if boundary != EDIT_BOUNDARY_VERSION else
             'This run uses an older or unrecorded fidelity policy. Evaluate again before promotion.'
-            if manifest.get('fidelity') != fidelity_profile() else None)
+            if manifest.get('fidelity') != fidelity_profile() else
+            'This run uses an older or unrecorded strategy component contract. Evaluate again before promotion.'
+            if manifest.get('component_contract') != PROCEDURE_CONTRACT or manifest.get('component_profile') != self.registry.procedure_contract else
+            'This run uses an older or unrecorded request budget. Evaluate again before promotion.'
+            if manifest.get('request_budget') != REQUEST_BUDGET_PROFILE else None)
         rejections={record['candidate_id']:record for path in store.path.glob('source-review-*.json')
                     for record in [store.read(path.stem)]}
         summary['source_rejections']=rejections

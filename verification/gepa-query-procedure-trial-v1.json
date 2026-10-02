@@ -1,0 +1,24 @@
+{
+  "purpose": "Two-proposal monitoring trial for issue #9 procedure/context slice; grounded few-shot examples remain disabled",
+  "run_id": "06880b29841e4dd69c589b7095e00663",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-5-mini",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 2,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "strategy_characters": 6000,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 2,
+    "enable_live_calls": true
+  },
+  "initial_status": "preflighting",
+  "heldout_calls": 0,
+  "promotion": false
+}

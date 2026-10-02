@@ -8,6 +8,7 @@ from typing import Literal
 from openai import OpenAI, APIError
 from pydantic import BaseModel, ConfigDict
 import tiktoken
+from app.request_budget import input_tokens, CONTEXT_TOKENS
 from app.prompt_registry import digest
 
 MODEL = 'gpt-5'
@@ -91,14 +92,15 @@ def _check_batch(document, changes, *, client=None):
         'required':sorted(ids),'additionalProperties':False}},
         'required':['edits'],'additionalProperties':False,'$defs':definitions}
     output_tokens = min(OUTPUT_BUDGET['maximum'],max(OUTPUT_BUDGET['minimum'],len(ids)*OUTPUT_BUDGET['per_edit']))
-    usage.update(schema_version=SCHEMA_VERSION,schema_hash=digest(json.dumps(schema,sort_keys=True)),output_limit=output_tokens)
+    usage.update(context_tokens=CONTEXT_TOKENS,schema_version=SCHEMA_VERSION,schema_hash=digest(json.dumps(schema,sort_keys=True)),output_limit=output_tokens)
     enum_count=sum(len(values) for values in chunk_sources.values())+3*len(chunks)
     if (enum_count>SCHEMA_LIMITS['enum_values'] or len(json.dumps(schema))>SCHEMA_LIMITS['schema_characters']
             or any(len(values)>250 and sum(len(v) for v in values)>SCHEMA_LIMITS['large_enum_characters']
                    for values in chunk_sources.values())):
         return finish('unavailable', 'fidelity_schema_limit')
-    tokens = len(tiktoken.get_encoding('o200k_base').encode(PROMPT + payload + json.dumps(schema)))
-    if tokens + output_tokens > 128000:
+    tokens = input_tokens(PROMPT,payload,schema,tiktoken.get_encoding('o200k_base'))
+    usage['budgeted_input_tokens']=tokens
+    if tokens + output_tokens > CONTEXT_TOKENS:
         return finish('unavailable', 'fidelity_context_limit')
     if client is None:
         if not os.getenv('OPENAI_API_KEY'):

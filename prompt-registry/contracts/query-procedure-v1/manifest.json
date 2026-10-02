@@ -1,0 +1,11 @@
+{
+  "version": "query-procedure-v1",
+  "fixed_contract": "rewrite-page-v7",
+  "fixed_sha256": "0c2fd406c60caea3927db3ff16718d4f99f3552f5d1b66cde3f578b9afa73278",
+  "mutable_region": "a complete reusable procedure before the unchanged fixed P2 instructions",
+  "default_character_limit": 6000,
+  "allowed_character_limit": [1000, 16000],
+  "optimization_context": "bounded reflection rationale and trace reference, supplied as untrusted user JSON",
+  "source_context": "complete retained reflection documents, with all target queries and original chunk membership",
+  "few_shot_policy": "disabled pending grounded-example provenance and audit support"
+}

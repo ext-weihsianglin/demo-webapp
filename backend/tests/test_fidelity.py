@@ -25,6 +25,17 @@ def changes():
              'after':'The treatment will help.','evidence':[{'block_id':'b1','quote':'The treatment may help.'}]}]
 
 
+def test_oversized_judge_source_fails_before_dispatch_without_truncation():
+    doc=document();doc['blocks'][0]['text']=' factual evidence '*130000
+    class Forbidden(Judge):
+        def create(self, **request):
+            raise AssertionError('Oversized fidelity request was dispatched')
+    result=check_fidelity(doc,changes(),client=Forbidden('supported'))
+    assert result['status']=='unavailable' and result['reason']=='fidelity_context_limit'
+    assert result['telemetry']['calls']==0
+    assert len(doc['blocks'][0]['text'])>1000000
+
+
 @pytest.mark.parametrize('verdict,status',[('supported','passed'),('unsupported','rejected'),('uncertain','rejected')])
 def test_gate_returns_explicit_outcome_without_partial_acceptance(verdict,status):
     assert check_fidelity(document(),changes(),client=Judge(verdict))['status']==status

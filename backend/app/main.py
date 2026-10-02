@@ -182,7 +182,7 @@ def draft(source: DraftRequest):
     except (ValueError, OSError, KeyError):
         raise HTTPException(400, 'Prompt is missing, changed or incompatible with the selected model.') from None
     analysis = analyze(source)
-    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=analysis['p1'], prompt=prompt['effective_prompt'], prompt_id=prompt['id'])
+    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=analysis['p1'], prompt=prompt['effective_prompt'], prompt_id=prompt['id'], optimization_context=prompt.get('optimization_context'))
     result['telemetry'].update(prompt_id=prompt['id'], prompt_hash=prompt['prompt_hash'], contract_version=prompt['contract_version'])
     result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
     if result['status'] != 'succeeded':

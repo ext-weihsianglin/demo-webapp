@@ -31,6 +31,19 @@ def test_http_research_requires_explicit_live_flag_and_exports_promotable_result
     exported=client.get('/api/gepa/runs/'+identity+'/export').json()
     assert exported['manifest']['gepa_version']=='0.1.4'
     assert exported['summary']['usage']['rewrite']['calls']==64
+    traces=client.get('/api/gepa/runs/'+identity+'/reflection-traces')
+    assert traces.status_code==200
+    trace=traces.json()['traces'][0]
+    assert trace['input']['examples']['editorial_strategy'][0]['Inputs']['source_scope']=='whole_page'
+    assert manager.registry.fixed in trace['instructions']
+    assert trace['input']['examples']['editorial_strategy'][0]['Inputs']['queries']==['How should I choose road shoes?']
+    import json
+    proposals=[json.loads(request['input'][0]['content']) for request in manager.client.requests]
+    evolved=[p for p in proposals if p['optimization_context']]
+    assert evolved and evolved[0]['optimization_context']['rationale']=='Clarify answer wording.'
+    assert evolved[0]['target_queries']==['How should I choose road shoes?']
+    assert evolved[0]['p1_feedback']['mean_score']==.2
+    assert 'examples' not in evolved[0]['optimization_context']
     assert client.post('/api/prompts/'+result['recommendation']+'/promote',json={'run_id':identity}).status_code==200
     assert client.post('/api/gepa/runs/'+identity+'/stop').status_code==200
 

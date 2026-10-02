@@ -12,6 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
+from app.request_budget import input_tokens
 from app.language_guard import confident_language, compare_language
 from app.source_context import protected_roles, container_roles
 
@@ -272,7 +273,7 @@ def parse_provider_proposal(raw, document):
     return proposal, duplicates
 
 
-def plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback=None, *, prompt=None):
+def plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback=None, *, prompt=None, optimization_context=None):
     """Build exactly one whole-page request, preserving all text and queries.
 
     Source locators, HTML serialization, JSON-LD and visibility diagnostics are
@@ -289,6 +290,7 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
         payload = {'task': 'Rewrite this entire page in one coordinated proposal for all target queries.', 'scope': 'whole_page', 'target_queries': queries, 'p1_feedback': p1_feedback or {'status': 'unavailable'},
                    'optimization_objective': 'Increase the equal-weight mean P1 score across every distinct target query; avoid per-query regressions. Preserve source evidence even if scores cannot improve.',
                    'editorial_tone': tone, 'allow_structure': allow_structure,
+                   'optimization_context': optimization_context or {},
                    'language_policy': {'mode': 'preserve_each_source_block', 'translation_allowed': False, 'target_queries_do_not_set_output_language': True},
                    'snapshot_id': document['snapshot_id'], 'extraction': document['selection'],
                    'source_metadata': metadata, 'heading_outline': document.get('outline', []),
@@ -303,7 +305,7 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
                 item['source_language_hint'] = confident_language(block['text'])
             payload['editable_blocks' if editable(block, document) else 'read_only_context'].append(item)
         data = json.dumps(payload, ensure_ascii=False)
-        count = len(encoding.encode((PROMPT if prompt is None else prompt) + data + json.dumps(response_schema(document, batch, allow_structure)))) + 256
+        count = input_tokens(PROMPT if prompt is None else prompt, data, response_schema(document, batch, allow_structure), encoding)
         # Estimate space if each editable block receives one ordinary edit.
         # Output remains strictly capped, and incomplete output never applies.
         output_estimate = 256
@@ -325,7 +327,7 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
     return [request]
 
 
-def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None, prompt=None, prompt_id=None):
+def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None, prompt=None, prompt_id=None, optimization_context=None):
     effective_prompt = PROMPT if prompt is None else prompt
     queries = list(dict.fromkeys([query] if isinstance(query, str) else query))
     start = time.monotonic()
@@ -355,7 +357,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
             encoding = tiktoken.get_encoding('o200k_base')
             telemetry['tokenizer'] = 'o200k_base (fallback; verify model compatibility)'
         blocks = {b['block_id']: b for b in document['blocks']}
-        requests = plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback, prompt=effective_prompt)
+        requests = plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback, prompt=effective_prompt, optimization_context=optimization_context)
         telemetry.update(budgeted_input_tokens=sum(r[2] for r in requests),
                          planned_calls=len(requests), original_chunks=len(chunks),
                          context_tokens=settings.context_tokens, output_reserve_tokens=settings.output_tokens)

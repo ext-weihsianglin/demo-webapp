@@ -65,6 +65,15 @@ def events(identity: str,after: int=Query(default=0,ge=0)):
     return invoke(lambda:{'events':manager.store(identity).events(after)})
 
 
+@router.get('/api/gepa/runs/{identity}/reflection-traces')
+def reflection_traces(identity: str):
+    def read():
+        store=manager.store(identity)
+        store.read('manifest')
+        return {'traces':[store.read(path.stem) for path in sorted(store.path.glob('reflection-input-*.json'))]}
+    return invoke(read)
+
+
 @router.get('/api/gepa/runs/{identity}/candidates/{candidate_id}')
 def candidate(identity: str,candidate_id: str):
     def read():

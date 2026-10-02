@@ -51,3 +51,26 @@ def test_candidate_and_promoted_default_survive_a_fresh_registry_process(tmp_pat
     assert restored['id'] == candidate['id']
     assert restored['effective_prompt'] == candidate['effective_prompt']
     assert restored['prompt_hash'] == candidate['prompt_hash']
+
+
+def test_procedure_contract_supports_long_instructions_without_changing_fixed_guards(tmp_path):
+    registry = PromptRegistry(tmp_path)
+    baseline = registry.baseline('gpt-4.1-mini')
+    legacy = registry.create('gpt-4.1-mini', 'Clarify supported answers.', 'old', [])
+    procedure = '\n'.join(f'{i}. Map each query intent to existing evidence; preserve qualifiers.' for i in range(15))
+    context = {'rationale':'Map every intent to source evidence before editing.',
+        'reflection_model':'gpt-5-mini','reflection_instruction_hash':'a'*64,
+        'reflection_trace':{'run_id':'new','artifact':'reflection-input-1'}}
+    candidate = registry.create('gpt-4.1-mini', procedure, 'new', [baseline['id']], character_limit=6000,
+        optimization_context=context)
+    assert candidate['characters'] > 501
+    assert candidate['component_contract'] == 'query-procedure-v1'
+    assert candidate['contract_hash'] == baseline['contract_hash']
+    assert candidate['effective_prompt'] == procedure + '\n\n' + registry.fixed
+    registry.promote(candidate['id'], candidate['model'])
+    restored = PromptRegistry(tmp_path).resolve(None, candidate['model'])
+    assert restored == candidate
+    assert restored['optimization_context'] == context
+    assert registry.resolve(legacy['id'], legacy['model']) == legacy
+    with pytest.raises(ValueError, match='length'):
+        registry.create('gpt-4.1-mini', 'x' * 6001, 'new', [], character_limit=6000)

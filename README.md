@@ -247,3 +247,6 @@ uv run python scripts/smoke_gepa.py --live --dataset validation-90-v1 \
 ```
 
 It uses one reflection-page rewrite and one reflection mutation, with no selection evaluation or promotion. Ordinary tests use stub clients. See [implementation spec](docs/gepa-spec.md) for invariants and [implementation handoff](docs/gepa-implementation.md) for choices and verification limits.
+
+
+New GEPA runs use a query-driven procedure component (6,000 characters by default, configurable in the research tab). Expand **Reflection requests, queries and score feedback** to inspect saved complete reflection requests; candidate details show the rationale, trace reference and prompt diff. Complete-request token checks cover rewriting, reflection and fidelity. Grounded few-shot examples remain disabled. See [current implementation limits](docs/gepa-implementation.md#query-driven-procedure-monitoring--2026-10-02).

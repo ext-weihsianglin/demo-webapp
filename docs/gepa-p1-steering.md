@@ -33,3 +33,8 @@ The fixed-query report's coherent edits had small and variable average effects: 
 Our [three fixed answer-first controls](../verification/gepa-answer-first-benchmark-v1.json) passed the v4 judge but averaged only +0.000023 P1. The [offline feature explanation](../verification/gepa-answer-first-feature-explanation-v1.json) reproduces all query predictions within 1e-12 using cached vectors and independently verifies that feature contributions sum to each logit change. Between 38 and 42 of 55 raw inputs remained unchanged. The small scores are reproduced by the actual model; this check does not prove an achievable ceiling.
 
 Validation after the guidance edit: 162 backend tests passed, two opt-in checks skipped. A [live reflection-only smoke](../verification/gepa-v7-steering-reflection-smoke-v1.json) uses saved reflection outcomes, no rewrite or held-out calls, and a separate diagnostic registry; it verifies request composition without claiming improved drafts. Stronger P1 gains, adherence to the generated strategy, safe promotion and fixed-pair held-out superiority still require a fresh real GEPA trial and source review.
+
+
+### Issue #9 policy update — 2026-10-02
+
+The query-procedure-v1 implementation supersedes earlier two-heading/three-paragraph steering and the 501-character mutation limit for new runs. Reflection may propose substantive query/evidence analysis procedures up to the configured 6,000-character default, using complete source pages. The fixed edit, evidence and fidelity contract is unchanged. Grounded few-shot examples remain disabled pending provenance checks. See [the implementation record](gepa-implementation.md#query-driven-procedure-monitoring--2026-10-02).

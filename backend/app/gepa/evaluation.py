@@ -148,7 +148,7 @@ class PageEvaluator:
             result['original'] = before
             outcome = rewrite(document,chunks,page['queries'],'Preserve original',False,
                 model=prompt['model'], prompt=prompt['effective_prompt'],prompt_id=prompt['id'],
-                p1_feedback=before,settings=self.settings,client=GuardedClient(self._client(),self.budget,token))
+                p1_feedback=before,optimization_context=prompt.get('optimization_context'),settings=self.settings,client=GuardedClient(self._client(),self.budget,token))
             result.update(rewrite=outcome, original_document=document)
             after = before
             failure = outcome['status'] not in ('succeeded','abstained')
