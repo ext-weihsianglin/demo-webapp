@@ -97,3 +97,7 @@ User requested one OpenAI call per page. Current `rewrite-page-v3.txt` plans ove
 Removed source-sized before/quote enums from the provider schema; editable block IDs use a bounded enum when within the schema size allowance; exact source identity/text/evidence and protected-block checks remain server-side. Heading levels use a null-only schema when structural permission is off. Historical batching reports are not evidence of the current flow.
 
 Validation: 69 backend tests passed, one opt-in live suite test skipped. A separate explicit live schema check completed. Final Asanify request through the frontend proxy made exactly one gpt-4.1 call (55,207 input / 7,689 output tokens), but returned HTTP 502 because a proposed evidence quote/reference failed same-chunk exact-source validation. No draft was applied. This remains a generation reliability limitation, not a context or schema error. See `verification/whole-page-rewrite.json`.
+
+## Explicit edit boundary
+
+`rewrite-page-v4` separates the user payload into `editable_blocks` and `read_only_context`. System instructions and the user edit boundary prohibit read-only edit targets; source order/chunk IDs remain available across the partition. All source text is retained once. The existing bounded editable-ID schema and server enforcement remain active; read-only blocks may support exact same-chunk evidence but cannot be changed. Tests check disjoint/exhaustive partitioning, schema IDs and protected-content preservation. This prompt change does not establish that every live model response will validate.

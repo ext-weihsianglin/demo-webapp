@@ -36,8 +36,8 @@ def test_pack_whole_chunks_and_keep_every_query_and_block_text_once():
         assert payload['scope']=='whole_page'
         assert 'jsonld' not in payload['source_metadata'] and 'visibility' not in payload['source_metadata']
         assert all('text' not in c and 'markdown' not in c for c in payload['chunks'])
-        assert all('source_locator' not in b for b in payload['blocks'])
-        received.extend((b['block_id'],b['text']) for b in payload['blocks'])
+        assert all('source_locator' not in b for b in sorted(payload['editable_blocks'] + payload['read_only_context'], key=lambda b: b['order']))
+        received.extend((b['block_id'],b['text']) for b in sorted(payload['editable_blocks'] + payload['read_only_context'], key=lambda b: b['order']))
     assert received==[(b['block_id'],b['text']) for b in document['blocks']]
     assert document==original
     stub=StubClient();result=rewrite(document,chunks,QUERIES,'Preserve original',False,client=stub)
@@ -51,7 +51,7 @@ def test_batched_edits_cannot_use_evidence_from_another_original_chunk():
     def cross_chunk(proposal,response,data):
         edit=proposal['edits'][0]
         other=next(c for c in data['chunks'] if c['chunk_id']!=edit['chunk_id'])
-        block=next(b for b in data['blocks'] if b['block_id'] in other['block_ids'] and b['text'])
+        block=next(b for b in data['editable_blocks'] + data['read_only_context'] if b['block_id'] in other['block_ids'] and b['text'])
         edit['evidence']=[{'snapshot_id':data['snapshot_id'],'block_id':block['block_id'],'quote':block['text']}]
     result=rewrite(document,chunks,QUERIES,'Preserve original',False,client=StubClient(cross_chunk))
     assert result['status']=='invalid_output' and 'document' not in result

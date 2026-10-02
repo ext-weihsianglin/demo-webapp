@@ -13,7 +13,7 @@ import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
 
-PROMPT_VERSION = 'rewrite-page-v3'
+PROMPT_VERSION = 'rewrite-page-v4'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 def model_options():
@@ -158,8 +158,13 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
                    'snapshot_id': document['snapshot_id'], 'extraction': document['selection'],
                    'source_metadata': metadata, 'heading_outline': document.get('outline', []),
                    'chunks': [{k: chunk[k] for k in ('chunk_id', 'order', 'block_ids', 'heading_path')} for chunk in batch],
-                   'blocks': [{**{k: blocks[i].get(k) for k in ('block_id', 'order', 'parent_id', 'type', 'text', 'heading_level')},
-                               'editable': editable(blocks[i]), 'chunk_id': chunk_for[i]} for i in ids]}
+                   'edit_boundary': 'Return edits only for IDs in editable_blocks. Never return edits for read_only_context. Read-only content may supply evidence from the same original chunk but must remain unchanged.',
+                   'editable_blocks': [], 'read_only_context': []}
+        for identity in ids:
+            block = blocks[identity]
+            item = {k: block.get(k) for k in ('block_id', 'order', 'parent_id', 'type', 'text', 'heading_level')}
+            item['chunk_id'] = chunk_for[identity]
+            payload['editable_blocks' if editable(block) else 'read_only_context'].append(item)
         data = json.dumps(payload, ensure_ascii=False)
         count = len(encoding.encode(PROMPT + data + json.dumps(response_schema(document, batch, allow_structure)))) + 256
         # Estimate space if each editable block receives one ordinary edit.
