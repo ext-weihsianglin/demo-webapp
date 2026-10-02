@@ -1,0 +1,35 @@
+{
+  "http_status": 502,
+  "status": "invalid_output",
+  "telemetry": {
+    "prompt_version": "rewrite-page-v6",
+    "model": "gpt-4.1-mini",
+    "status": "invalid_output",
+    "calls": 1,
+    "input_tokens": 18936,
+    "output_tokens": 3476,
+    "estimated_cost_usd": null,
+    "usage_complete": true,
+    "tokenizer": "o200k_base",
+    "budgeted_input_tokens": 22050,
+    "planned_calls": 1,
+    "original_chunks": 22,
+    "context_tokens": 128000,
+    "output_reserve_tokens": 16000,
+    "ignored_unchanged_edits": 0,
+    "language_unverified_edits": 2,
+    "validation_error": {
+      "edit_block_id": "b000026",
+      "checks_failed": [
+        "language_changed"
+      ],
+      "status": "changed",
+      "source_language": "en",
+      "proposed_language": "eo"
+    },
+    "latency_ms": 24498
+  },
+  "changes": 0,
+  "detector": "Discarded low-accuracy prototype",
+  "interpretation": "False language-change rejection of English technical prose; superseded by language-guard-live-high-accuracy.json."
+}

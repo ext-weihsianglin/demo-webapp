@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.extraction import extract_document
 from app.examples import load_example
 from app.rewriting import rewrite, PROMPT_VERSION
+from app.scoring import score_document, compare_scores
 
 
 def checks(original, result, sample):
@@ -30,22 +31,31 @@ def checks(original, result, sample):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--live',action='store_true');parser.add_argument('--example-id');parser.add_argument('--example-query');parser.add_argument('--only-example',action='store_true');parser.add_argument('--output',default='evaluation/baseline-report.json');parser.add_argument('--samples',default='evaluation/samples.json');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--live',action='store_true');parser.add_argument('--example-id');parser.add_argument('--example-query', action='append', help='Repeat to override the full example query set');parser.add_argument('--only-example',action='store_true');parser.add_argument('--output',required=True);parser.add_argument('--samples',default='evaluation/samples.json');args=parser.parse_args()
+    if Path(args.output).exists():
+        parser.error('Output exists; choose a fresh path to preserve frozen reports')
     samples=json.loads(Path(args.samples).read_text())['samples']
     if args.only_example:
         samples=[]
     if args.example_id:
         samples.append({'id':'extraction-heldout-'+args.example_id,**load_example(args.example_id)})
     if args.example_query and args.example_id:
-        samples[-1]['query']=args.example_query
+        samples[-1]['queries']=args.example_query
     report={'prompt_version':PROMPT_VERSION,'live_enabled':args.live,'quality_scope':'Exploratory baseline; lexical proxies are not quality grades. Human review required. No measured citation uplift.','runs':[]}
     for sample in samples:
         document,chunks=extract_document(sample['content'],sample['format'],sample['href'],sample['hostname']); before=deepcopy(document)
+        queries=list(dict.fromkeys(q.strip() for q in sample.get('queries', [sample.get('query','')]) if q.strip()))
+        if not queries:
+            raise ValueError('Sample has no usable target queries')
+        p1_before=score_document(document,sample['content'],sample['format'],queries)
         if args.live:
-            result=rewrite(document,chunks,sample['query'],'Preserve original',False)
+            result=rewrite(document,chunks,queries,'Preserve original',False,p1_feedback=p1_before)
+            if result['status']=='succeeded':
+                p1_after=score_document(result['document'],sample['content'],sample['format'],queries)
+                result.update(p1_before=p1_before,p1_after=p1_after,p1_comparison=compare_scores(p1_before,p1_after))
         else:
             result={'status':'not_run','summary':'Pass --live to enable OpenAI calls. Stub tests do not measure rewrite quality.'}
-        report['runs'].append({'sample':sample,'snapshot_id':document['snapshot_id'],'original_document':before,'result':result,'checks':checks(before,result,sample),'input_unchanged':before==document})
+        report['runs'].append({'sample':sample,'target_queries':queries,'p1_before':p1_before,'snapshot_id':document['snapshot_id'],'original_document':before,'result':result,'checks':checks(before,result,sample),'input_unchanged':before==document})
     path=Path(args.output);path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
     print(json.dumps({'report':str(path),'statuses':[r['result']['status'] for r in report['runs']]}))
     return 0 if all(r['result']['status']=='succeeded' for r in report['runs']) else 1

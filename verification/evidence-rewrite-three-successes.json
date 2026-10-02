@@ -1,0 +1,123 @@
+{
+  "snapshot_id": "0cbc8a5e12709367e63cdd9579bfee14bdabd85e758cf0b1e3ed29a2f61481aa",
+  "host": "blog.blazingcdn.com",
+  "endpoint": "http://127.0.0.1:3005/api/draft",
+  "model": "gpt-4.1-mini",
+  "consecutive_successes": 3,
+  "runs": [
+    {
+      "attempt": 1,
+      "http_status": 200,
+      "status": "succeeded",
+      "summary": "Rewrote major content blocks to present a clear, comprehensive, and directly citable comparison and analysis of CDN providers, focusing on best content delivery options for CMS, top always-on content pipeline providers, top streaming CDNs, best cloud infrastructure, scalable networks for large audiences, user comparisons of Azure, Cloudflare, IBM, product leadership in CDNs, top software dev tools relevance, and CDN techniques to reduce page latency including advice in Japanese. The edits maintain original tone while improving clarity, directness, and support for queries.",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v5",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 18272,
+        "output_tokens": 2590,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 21386,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "ignored_unchanged_edits": 0,
+        "latency_ms": 18514
+      },
+      "changes": 17,
+      "checks": {
+        "one_call": true,
+        "protected_blocks_unchanged": true,
+        "metadata_unchanged": true,
+        "block_order_unchanged": true,
+        "exact_original_before": true,
+        "same_chunk_exact_evidence": true,
+        "all_queries_scored": true
+      },
+      "query_count": 9,
+      "mean_p1_delta": 0.022632700484217283,
+      "query_regressions": 1
+    },
+    {
+      "attempt": 2,
+      "http_status": 200,
+      "status": "succeeded",
+      "summary": "Clarify and consolidate the page to provide clear, direct insights on the best content delivery options for CMS, top providers with always-on pipelines, top streaming CDNs, cloud infrastructure for global performance, scalable CDNs for large audiences, user latency comparisons of Azure, Cloudflare, and IBM, best CDNs for product leadership, top software dev tools, and methods to reduce page latency using CDNs, supported by detailed analysis and data.",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v5",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 18272,
+        "output_tokens": 1903,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 21386,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "ignored_unchanged_edits": 0,
+        "latency_ms": 12729
+      },
+      "changes": 12,
+      "checks": {
+        "one_call": true,
+        "protected_blocks_unchanged": true,
+        "metadata_unchanged": true,
+        "block_order_unchanged": true,
+        "exact_original_before": true,
+        "same_chunk_exact_evidence": true,
+        "all_queries_scored": true
+      },
+      "query_count": 9,
+      "mean_p1_delta": 0.022240302792083,
+      "query_regressions": 0
+    },
+    {
+      "attempt": 3,
+      "http_status": 200,
+      "status": "succeeded",
+      "summary": "Enhance clarity and directness in explaining the best content delivery options for CMS, top providers for always-on content pipelines, fastest CDN for streaming, best cloud infrastructure for global performance, scalable CDN for large audiences, and detailed user comparisons of latency and performance across Azure, Cloudflare, and IBM. Also improve coverage on product leadership in CDN, top software development tools, and explicit advice on reducing page delay via CDN, including the Japanese language query. Strengthen the integration and focus on these queries throughout the page for better comprehensiveness and ease of citation.",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v5",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 18272,
+        "output_tokens": 2470,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 21386,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "ignored_unchanged_edits": 0,
+        "latency_ms": 16332
+      },
+      "changes": 16,
+      "checks": {
+        "one_call": true,
+        "protected_blocks_unchanged": true,
+        "metadata_unchanged": true,
+        "block_order_unchanged": true,
+        "exact_original_before": true,
+        "same_chunk_exact_evidence": true,
+        "all_queries_scored": true
+      },
+      "query_count": 9,
+      "mean_p1_delta": 0.010880211421010477,
+      "query_regressions": 2
+    }
+  ],
+  "root_cause": "Captured v4 reproduction assigned an edit to the wrong chunk and attached paragraph quotations to heading IDs; one quotation contained an invented ellipsis. Later v5 ID-only replay exposed cross-chunk evidence selection.",
+  "fix": "Server resolves original before text, chunk/snapshot identity and evidence passages from model-selected block IDs; bounded schema alternatives bind edit targets to same-chunk evidence; server validation remains active. Short request-local chunk aliases replace repeated hashes.",
+  "limits": "API success and mechanical integrity, not factual entailment or guaranteed score gains. Some rewritten language claims query coverage more strongly than the original; human editorial review remains necessary. No browser-button interaction included in this three-run check."
+}

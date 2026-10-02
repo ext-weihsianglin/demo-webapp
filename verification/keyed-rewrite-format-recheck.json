@@ -1,0 +1,129 @@
+{
+  "prompt_version": "rewrite-page-v7",
+  "live": true,
+  "scope": "Exploratory checks of extraction-held-out examples; not a reserved P2 quality benchmark.",
+  "runs": [
+    {
+      "snapshot_id": "0cbc8a5e12709367e63cdd9579bfee14bdabd85e758cf0b1e3ed29a2f61481aa",
+      "hostname": "blog.blazingcdn.com",
+      "payload_hash": "d4db4935d48c97394540d463b0f8b256e5acd3e3b743db69f024b88780faf42a",
+      "query_count": 9,
+      "model": "gpt-4.1-mini",
+      "status": "succeeded",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 20038,
+        "output_tokens": 6348,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 23946,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 15,
+        "language_unverified_edits": 7,
+        "latency_ms": 42857
+      },
+      "change_count": 48,
+      "checks": {
+        "one_call": true,
+        "unique_edits": true,
+        "unchanged_blocks_exact": true,
+        "metadata_exact": true,
+        "structure_exact": true,
+        "original_before_exact": true,
+        "evidence_exact_same_chunk": true,
+        "body_edit": true
+      },
+      "p1_comparison": {
+        "status": "scored",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "best content delivery options for CMS",
+            "score": 0.5760325154816741,
+            "before": 0.5760325154816741,
+            "after": 0.6451961040509332,
+            "delta": 0.06916358856925908
+          },
+          {
+            "query_index": 1,
+            "query": "What are the top providers for always-on content pipelines?",
+            "score": 0.5037273268886783,
+            "before": 0.5037273268886783,
+            "after": 0.5724251076151466,
+            "delta": 0.06869778072646837
+          },
+          {
+            "query_index": 2,
+            "query": "What's the top content delivery network for fast streaming?",
+            "score": 0.4931585425976171,
+            "before": 0.4931585425976171,
+            "after": 0.5349366982755815,
+            "delta": 0.041778155677964446
+          },
+          {
+            "query_index": 3,
+            "query": "best cloud infrastructure for global performance",
+            "score": 0.5818165399585059,
+            "before": 0.5818165399585059,
+            "after": 0.6411384881433168,
+            "delta": 0.059321948184810847
+          },
+          {
+            "query_index": 4,
+            "query": "Best scalable content delivery network for large audiences",
+            "score": 0.6220519456900999,
+            "before": 0.6220519456900999,
+            "after": 0.6713624249104447,
+            "delta": 0.049310479220344816
+          },
+          {
+            "query_index": 5,
+            "query": "How do users compare latency and performance across Azure, Cloudflare, and IBM solutions?",
+            "score": 0.5202417332972096,
+            "before": 0.5202417332972096,
+            "after": 0.5320695656887683,
+            "delta": 0.011827832391558712
+          },
+          {
+            "query_index": 6,
+            "query": "Best content delivery network for product leadership",
+            "score": 0.6348404341912471,
+            "before": 0.6348404341912471,
+            "after": 0.6778927816388337,
+            "delta": 0.04305234744758657
+          },
+          {
+            "query_index": 7,
+            "query": "top software dev tools",
+            "score": 0.45882979380942324,
+            "before": 0.45882979380942324,
+            "after": 0.485432516216188,
+            "delta": 0.026602722406764756
+          },
+          {
+            "query_index": 8,
+            "query": "CDNを活用してページ遅延を減らす方法",
+            "score": 0.4443661708533967,
+            "before": 0.4443661708533967,
+            "after": 0.4447668799337244,
+            "delta": 0.00040070908032768804
+          }
+        ],
+        "mean_before": 0.5372294447519835,
+        "mean_after": 0.5783578407192153,
+        "mean_delta": 0.04112839596723172,
+        "regression_count": 0,
+        "improvement_count": 9
+      }
+    }
+  ]
+}

@@ -16,9 +16,15 @@ The current scaffold uses `app/page.tsx` and deterministic mock generation. The 
 
 - `app/page.tsx` manages the source/analyze/review flow; `source-picker.tsx` handles saved examples; `extraction-view.tsx` renders escaped structured data.
 - Read model options from `/api/rewrite-models`; do not hardcode another frontend catalog or put credentials in frontend configuration. Send the selected ID in draft requests and show the returned model in telemetry.
-- Clear stale drafts when the source/query/model changes. Disable model selection during generation. Saved example payloads are read-only while their query remains editable.
+- Clear stale drafts when the source/query/model changes. Disable model selection during generation. Saved example payloads are read-only while their target queries remain editable. Preload every distinct usable host prompt from version-2 bundles and keep all original record provenance visible.
 - Preserve source warnings and distinguish OpenAI proposals, mock grades and provider failures. A listed model is not evidence of account access. Do not present a failed generation or substituted model as success.
 - Render source/model text as escaped content; avoid injecting arbitrary HTML. Preserve structured table spans, code whitespace, nested list relationships and visible source links. Markdown export is a content proposal, not patched source HTML.
 - Keep snapshot/chunk/block references, evidence quotes and edit reasons reviewable. Do not claim that exact source quotes establish factual verification or citation uplift.
 
 For UI changes run `npm run build` and `npm run typecheck`. The root README documents the backend proxy and setup. Do not overwrite other sessions' generated files or modify the Next.js instruction block to remove its requirements.
+
+## Current reconciliation
+
+PR #2 is merged into main. The checkout combines real OpenAI draft orchestration with source verification; historical scaffold/open-PR descriptions above are dated context. Source analysis/evidence must remain independent of rewrite configuration. Keep proposed content distinct from the original snapshot and never attach original-source match badges to rewritten text.
+
+`p1-scores.tsx` shows real frozen P1 values independently of mock editorial grades. Show every distinct target query and its before/after change, including regressions. Duplicate trimmed queries are counted once. Missing models or insufficient source must show unavailability rather than mock P1 values. Do not equate classifier score changes with citation uplift.

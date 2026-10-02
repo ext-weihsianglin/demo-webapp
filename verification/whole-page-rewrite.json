@@ -1,0 +1,25 @@
+{
+  "scenario": "Asanify held-out page, all 10 target queries, gpt-4.1, whole-page rewrite",
+  "http_status": 502,
+  "status": "invalid_output",
+  "summary": "Evidence must quote a valid source block in this chunk.",
+  "telemetry": {
+    "prompt_version": "rewrite-page-v3",
+    "model": "gpt-4.1",
+    "status": "invalid_output",
+    "calls": 1,
+    "input_tokens": 55207,
+    "output_tokens": 7689,
+    "estimated_cost_usd": null,
+    "usage_complete": true,
+    "tokenizer": "o200k_base",
+    "budgeted_input_tokens": 55703,
+    "planned_calls": 1,
+    "original_chunks": 33,
+    "context_tokens": 128000,
+    "output_reserve_tokens": 16000,
+    "latency_ms": 66013
+  },
+  "validation": "69 backend tests passed; 1 opt-in live suite test skipped. Separate explicit live schema check completed. Full-page live request failed exact evidence validation; no draft applied.",
+  "limitations": "Not a passing end-to-end draft or quality result. Source quote matching is not entailment."
+}

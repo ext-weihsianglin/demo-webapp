@@ -23,3 +23,7 @@ git diff --check
 ```
 
 Run checks appropriate to the change; documentation-only edits need link/content and diff checks, not live calls or a full rebuild. Keep frozen baseline reports intact and write new evaluation runs to new paths. Record meaningful verification limits in the handoff when they change.
+
+## Current reconciliation
+
+PR #2 is merged into main. The checkout combines real OpenAI draft orchestration with source verification; historical scaffold/open-PR descriptions above are dated context. Source analysis/evidence must remain independent of rewrite configuration. Keep proposed content distinct from the original snapshot and never attach original-source match badges to rewritten text.

@@ -5,13 +5,16 @@ from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, field_validator, model_validator
 from app.examples import catalog, load_example
+from app.scoring import score_document, compare_scores
 from app.extraction import UPSTREAM, extract_document, section_view
+from app.verification import SourceInspector, verify_document
 
 app = FastAPI(title="Content Studio", version="0.1.0")
 
 class Source(BaseModel):
     example_id: str | None = None
-    query: str = Field(min_length=3, max_length=1000)
+    query: str | None = Field(default=None, min_length=3, max_length=1000)
+    queries: list[str] = Field(default_factory=list, max_length=20)
     href: str = Field(max_length=2048)
     hostname: str = Field(min_length=3, max_length=255)
     content: str = Field(min_length=20, max_length=8000000)
@@ -27,17 +30,38 @@ class Source(BaseModel):
                 if key in values and values[key] != example[key]:
                     raise ValueError("Example source is read-only. Switch to your own page to edit it.")
                 values[key] = example[key]
+        if isinstance(values, dict):
+            values = dict(values)
+            if "queries" not in values:
+                if values.get("query") is not None:
+                    values["queries"] = [values["query"]]
+                elif values.get("example_id"):
+                    values["queries"] = example.get("queries", [example["query"]])
+            elif values.get("query") is not None:
+                raise ValueError("Send queries or the legacy query field, not both")
         return values
+
+    @field_validator("queries")
+    @classmethod
+    def validate_queries(cls, values):
+        values = [value.strip() for value in values]
+        if not values or any(not 3 <= len(value) <= 1000 for value in values):
+            raise ValueError("Provide 1–20 target queries, each 3–1,000 characters")
+        return list(dict.fromkeys(values))
 
     @field_validator("query", "href", "hostname")
     @classmethod
     def trim(cls, value):
+        if value is None:
+            return value
         if not value.strip():
             raise ValueError("Must not be blank")
         return value.strip()
 
     @model_validator(mode="after")
     def validate_source(self):
+        if not self.queries:
+            raise ValueError("Provide at least one usable target query")
         parsed = urlparse(self.href)
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
             raise ValueError("Page URL must be an HTTP or HTTPS URL")
@@ -50,6 +74,9 @@ class Source(BaseModel):
         if len(self.content.strip()) < 20:
             raise ValueError("Add at least 20 characters of source content")
         return self
+
+class EvidenceRequest(Source):
+    block_id: str = Field(min_length=1, max_length=64)
 
 class DraftRequest(Source):
     model: str | None = Field(default=None, min_length=1, max_length=200)
@@ -67,11 +94,14 @@ class DraftRequest(Source):
 
 @app.get('/api/health')
 def health():
-    return {"status": "ok", "mode": "openai", "grading_mode": "mock", "extraction": "retention-first-v1", "upstream_revision": UPSTREAM["revision"], "package_version": UPSTREAM["package_version"]}
+    return {"status": "ok", "mode": "openai", "grading_mode": "frozen-p1-with-mock-editorial-grades", "extraction": "retention-first-v1", "upstream_revision": UPSTREAM["revision"], "package_version": UPSTREAM["package_version"]}
 
 @app.get('/api/rewrite-models')
 def rewrite_models():
-    return model_options()
+    try:
+        return model_options()
+    except ValueError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
 
 @app.get('/api/examples')
 def examples():
@@ -103,9 +133,11 @@ def analyze(source: Source):
             # The example catalog must use the same exact payload + URL identity.
             raise HTTPException(503, "Example identity does not match the parsed snapshot.")
         parsed['raw_payload_reference'] = origin
-    return {"mode": "mock", "snapshot_id": parsed['snapshot_id'], "source_origin": origin,
+    return {"mode": "source-analysis", "target_queries": source.queries,
+            "p1": score_document(parsed, source.content, source.format, source.queries), "snapshot_id": parsed['snapshot_id'], "source_origin": origin,
             "extraction": {"engine": "content-optimization-system", "upstream_revision": UPSTREAM['revision'], "package_version": UPSTREAM['package_version'], **parsed['selection']},
             "document": parsed, "chunks": chunks,
+            "verification": verify_document(source.content, source.format, parsed, chunks, facts),
             "metadata": {"title": display_title, "description": metadata.get('description') or '',
                          "href": source.href, "hostname": source.hostname, "format": source.format},
             "sections": sections, "factoids": facts,
@@ -116,14 +148,26 @@ def analyze(source: Source):
             "word_count": len(parsed['text'].split()),
             "notes": ["Extraction uses the pinned upstream retention-first parser.",
                       "Factoids are source statements, not independently verified facts.",
-                      "Grades remain mocked; rewriting uses OpenAI. No citation uplift is predicted."]}
+                      "P1 estimates the sampled within-host top class among already-cited pages, not citation likelihood or uplift. Editorial grades remain mocked."]}
+
+@app.post('/api/evidence')
+def evidence(source: EvidenceRequest):
+    parsed, _ = extract_document(source.content, source.format, source.href, source.hostname)
+    block = next((block for block in parsed['blocks'] if block['block_id'] == source.block_id), None)
+    if block is None:
+        raise HTTPException(404, 'Block not found in this source snapshot.')
+    return {"snapshot_id": parsed['snapshot_id'], "block_id": block['block_id'],
+            **SourceInspector(source.content, source.format).inspect(block, include_preview=True)}
 
 @app.post('/api/draft')
 def draft(source: DraftRequest):
     analysis = analyze(source)
-    result = rewrite(analysis['document'], analysis['chunks'], source.query, source.tone, source.allow_structure, model=source.model)
+    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=analysis['p1'])
     result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
     if result['status'] != 'succeeded':
         code = 422 if result['status'] in ('source_insufficient', 'context_limit', 'abstained') else 503 if result['status'] == 'missing_credentials' else 502
         raise HTTPException(code, detail=result)
+    after = score_document(result['document'], source.content, source.format, source.queries)
+    result.update(target_queries=source.queries, p1_before=analysis['p1'], p1_after=after,
+                  p1_comparison=compare_scores(analysis['p1'], after))
     return result

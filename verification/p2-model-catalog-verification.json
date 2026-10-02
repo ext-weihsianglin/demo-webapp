@@ -1,0 +1,180 @@
+{
+  "snapshot_id": "0cbc8a5e12709367e63cdd9579bfee14bdabd85e758cf0b1e3ed29a2f61481aa",
+  "queries": [
+    "best content delivery options for CMS",
+    "What are the top providers for always-on content pipelines?",
+    "What's the top content delivery network for fast streaming?",
+    "best cloud infrastructure for global performance",
+    "Best scalable content delivery network for large audiences",
+    "How do users compare latency and performance across Azure, Cloudflare, and IBM solutions?",
+    "Best content delivery network for product leadership",
+    "top software dev tools",
+    "CDN\u3092\u6d3b\u7528\u3057\u3066\u30da\u30fc\u30b8\u9045\u5ef6\u3092\u6e1b\u3089\u3059\u65b9\u6cd5"
+  ],
+  "results": [
+    {
+      "model": "gpt-4.1-mini",
+      "status": "abstained",
+      "summary": "Model supplied no substantive body edits; source may not answer the target queries.",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v6",
+        "model": "gpt-4.1-mini",
+        "status": "abstained",
+        "calls": 1,
+        "input_tokens": 18928,
+        "output_tokens": 2127,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 22042,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "ignored_unchanged_edits": 0,
+        "language_unverified_edits": 8,
+        "latency_ms": 15179
+      },
+      "changes": 0
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "status": "succeeded",
+      "summary": "Validated body rewrite completed",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v6",
+        "model": "gpt-4.1-nano",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 18928,
+        "output_tokens": 4692,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 22042,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "ignored_unchanged_edits": 0,
+        "language_unverified_edits": 12,
+        "latency_ms": 28865
+      },
+      "changes": 49
+    },
+    {
+      "model": "gpt-4.1",
+      "status": "succeeded",
+      "summary": "Validated body rewrite completed",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v6",
+        "model": "gpt-4.1",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 18928,
+        "output_tokens": 5760,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 22042,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "ignored_unchanged_edits": 5,
+        "language_unverified_edits": 1,
+        "latency_ms": 34579
+      },
+      "changes": 41
+    },
+    {
+      "model": "gpt-5-mini",
+      "status": "succeeded",
+      "summary": "Validated body rewrite completed",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v6",
+        "model": "gpt-5-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 18926,
+        "output_tokens": 7284,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 22042,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "ignored_unchanged_edits": 0,
+        "latency_ms": 57333
+      },
+      "changes": 10
+    },
+    {
+      "model": "gpt-5",
+      "status": "succeeded",
+      "summary": "Validated body rewrite completed",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v6",
+        "model": "gpt-5",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 18926,
+        "output_tokens": 7776,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 22042,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "ignored_unchanged_edits": 0,
+        "latency_ms": 74494
+      },
+      "changes": 8
+    },
+    {
+      "model": "gpt-5-nano",
+      "status": "invalid_output",
+      "summary": "Invalid source reference for block b000099: snapshot_match=True, chunk_match=True, member=True, duplicate=True.",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v6",
+        "model": "gpt-5-nano",
+        "status": "invalid_output",
+        "calls": 1,
+        "input_tokens": 18926,
+        "output_tokens": 11001,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 22042,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "latency_ms": 72766
+      },
+      "changes": 0
+    }
+  ],
+  "account_catalog": [
+    "gpt-4.1",
+    "gpt-4.1-mini",
+    "gpt-4.1-nano",
+    "gpt-5",
+    "gpt-5-mini",
+    "gpt-5-nano"
+  ],
+  "enabled_models": [
+    "gpt-4.1-mini",
+    "gpt-4.1",
+    "gpt-4.1-nano",
+    "gpt-5",
+    "gpt-5-mini"
+  ],
+  "default_model": "gpt-4.1-mini",
+  "decision": "Keep gpt-4.1-mini based on successful v6 live evidence in language-guard-live-high-accuracy.json despite abstention on this run. Exclude gpt-5-nano because the tested rewrite contained duplicate edits. Exclude unavailable GPT-5.6/GPT-6 IDs.",
+  "limits": "One saved page is a compatibility diagnostic, not a reliability or quality benchmark. Models may still abstain or fail validation; other credentials can have different access."
+}
