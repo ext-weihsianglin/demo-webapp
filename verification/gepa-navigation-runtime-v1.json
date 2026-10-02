@@ -1,0 +1,20 @@
+{
+  "new_run_id": "71b7bcc18908404786683dee6d500ca1",
+  "edit_boundary_version": "body-content-v3",
+  "historical_run": "bd1c877280164b8c9367eabb4093dd30",
+  "historical_boundary": "body-content-v2",
+  "historical_promotion_compatible": false,
+  "historical_promotion_http_status": 400,
+  "rejection": {
+    "detail": "Research configuration or frozen artifact is invalid/unavailable"
+  },
+  "selected_id": "gpt-4.1-mini--rewrite-page-v7",
+  "unchanged_manifest_fields": [
+    "page_roles",
+    "baseline",
+    "fidelity",
+    "reflection_prompt_hash",
+    "config"
+  ],
+  "scope": "Restarted actual backend/proxy. No historical scores rewritten; fresh baseline/candidate evaluation running, no new superiority claim."
+}
