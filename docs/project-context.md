@@ -1,5 +1,14 @@
 # Project context and session handoff
 
+## Selectable query-aware QA prompt — 2026-10-02
+
+The shipped GPT-4.1 mini catalog now includes **Experimental f2ef0597**, preserving
+Baseline v7 as the default and all fixed guards. [QA instructions and evidence](query-aware-prompt-qa.md)
+record the exact tested prompt, three-page comparison and unsupported edits.
+The earlier live experiment used unmerged body-content-v5/advisory-fidelity work;
+this registry addition does not include those changes or establish quality uplift.
+Catalog-to-draft wiring is verified with stub providers; no new live run or deployment.
+
 ## V7.1 scoring and explanation integration — 2026-10-02 UTC
 
 The checkout retains its keyed `rewrite-page-v7` proposal contract and verified model catalog. It imports research revision `6a9606d3febaf62f76c8448c44f91a120107e5a6` through package 0.3.0. Historical wheels and reports are preserved. Packaging and explicit-format/tuple API adaptations are recorded in `backend/packages/provenance-v3.json` and `content-optimization-library-v3.patch`; `build_upstream_package.py` reproduces the build.

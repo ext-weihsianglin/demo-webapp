@@ -152,3 +152,45 @@ def test_scoring_intervention_is_request_local_and_inventory_stays_original(tmp_
     assert observations[0]['source_metadata']==doc['source_metadata']
     assert observations[0]['snapshot_id']==doc['snapshot_id']
     assert doc==before
+
+
+def test_shipped_qa_body_draft_and_url_experiment_remain_independent(monkeypatch, draft_stub):
+    from app import main
+    from app.prompt_registry import ROOT, PromptRegistry
+    from test_shipped_prompt import CANDIDATE, PROMPT_HASH
+    monkeypatch.setenv('PROMPT_REGISTRY_ROOT', str(ROOT))
+    monkeypatch.setenv('P1_MODEL_PATH', '/nonexistent/issue14-model.joblib')
+    source = {'href':'https://example.com/journal/123.html?lang=en#fit', 'hostname':'example.com',
+              'queries':['How should I choose road shoes?', 'Hotels in Paris?'], 'format':'html',
+              'content':'<head><link rel="canonical" href="https://example.com/canonical" /></head><main><h1>Road shoe fit</h1><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main>'}
+    client = TestClient(main.app)
+    original = client.post('/api/analyze', json=source).json()
+    captured = []
+    stubbed_rewrite = main.rewrite
+    def capture(*args, **kwargs):
+        captured.append(kwargs)
+        return stubbed_rewrite(*args, **kwargs)
+    monkeypatch.setattr(main, 'rewrite', capture)
+    response = client.post('/api/draft', json={**source, 'model':'gpt-4.1-mini', 'prompt_id':CANDIDATE})
+    assert response.status_code == 200, response.text
+    draft = response.json()
+    assert draft['telemetry']['prompt_hash'] == PROMPT_HASH
+    assert draft['document']['source'] == original['document']['source']
+    assert draft['document']['source_metadata'] == original['document']['source_metadata']
+    body = {'status':'proposed', 'summary':draft['summary'], 'review_flags':[],
+            'edits':[{k:v for k,v in change.items() if k != 'source_id'} for change in draft['changes']]}
+    response = client.post('/api/url-proposals', json={**source, 'opt_in':True, 'body_proposal':body})
+    assert response.status_code == 200, response.text
+    report = response.json()
+    assert len(captured) == 1  # URL experiment never invokes the body rewriter or its prompt.
+    assert report['snapshot_id'] == original['snapshot_id']
+    assert report['original_href'] == source['href']
+    assert report['source_metadata'] == original['document']['source_metadata']
+    assert report['source_metadata']['canonical']['resolved_target'] == 'https://example.com/canonical'
+    assert report['target_queries'] == source['queries']
+    assert report['body_only'] is not None and all(c['combined'] is not None for c in report['candidates'])
+    assert report['candidates'][1]['proposed_href'] == 'https://example.com/journal/road-shoe-fit.html?lang=en#fit'
+    assert report['candidates'][1]['evidence'][0]['text'] == 'Road shoe fit'
+    assert 'not re-certified' in report['body_fidelity']
+    assert PromptRegistry(ROOT).resolve(None, 'gpt-4.1-mini')['id'] == 'gpt-4.1-mini--rewrite-page-v7'
+    assert client.post('/api/analyze', json=source).json()['document'] == original['document']
