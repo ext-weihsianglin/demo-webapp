@@ -1,0 +1,124 @@
+{
+  "id": "c8439bf1e8c141ef9228bc5370dfa015",
+  "status": "stopped",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-4.1-mini",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 10,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 1,
+    "enable_live_calls": true
+  },
+  "budget": {
+    "attempts": 50,
+    "reserved": 0,
+    "completed": 50,
+    "technical_failures": 8,
+    "stop_reason": "circuit_breaker",
+    "limit": 100
+  },
+  "proposals": 5,
+  "recommendation": null,
+  "stop_reason": "circuit_breaker",
+  "usage": {
+    "rewrite": {
+      "calls": 50,
+      "input_tokens": 1443448,
+      "output_tokens": 207191,
+      "cached_requests": 0
+    },
+    "fidelity": {
+      "calls": 47,
+      "input_tokens": 608411,
+      "output_tokens": 85227,
+      "cached_requests": 0
+    },
+    "reflection": {
+      "calls": 5,
+      "input_tokens": 223611,
+      "output_tokens": 402,
+      "cached_requests": 0
+    },
+    "embedding": {
+      "calls": 10,
+      "input_tokens": 84772,
+      "output_tokens": 0,
+      "cached_requests": 2185
+    }
+  },
+  "finished_at": "2026-10-02T05:16:30.011564+00:00",
+  "reflection_prompt_hash": "f4732a1b425fc5a37931e143b1a63e209812745cc7836171e4f7d82ea53fee37",
+  "fidelity_profile": {
+    "model": "gpt-4.1-mini",
+    "prompt_hash": "05f954abe0751717cd4377463bcac837eab8bfddfaf9ac7d49af7cb694ecace5",
+    "uncertain_policy": "reject_whole_proposal"
+  },
+  "dataset_manifest_hash": "59e416d1942b57ddd9ac4a4cde561bb1d44d48790e9de4734da209a65c29774b",
+  "candidates": [
+    {
+      "id": "gpt-4.1-mini--rewrite-page-v7",
+      "status": "evaluated",
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "editorial_strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks.",
+      "parents": [],
+      "selection_mean": 0.40847754975222894,
+      "failure_rate": 0.7666666666666667,
+      "selection_pages": 30,
+      "frontier": true
+    },
+    {
+      "id": "gpt-4.1-mini--499fed7a9fc506fd079f2427",
+      "status": "rejected",
+      "prompt_hash": "cb3efd0733fce0b1d802d4e1cf691226d339af85cfc9c77fad503db3cd0ecf48",
+      "editorial_strategy": "Focus on clear, concise phrasing that directly addresses all key queries by explicitly linking features and benefits described in the source. Avoid unsupported expansions; enhance usability by grouping related information logically and emphasizing measurable outcomes relevant to diverse user needs.",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--5f561a4c4c8dab3a7a218b37",
+      "status": "rejected",
+      "prompt_hash": "f19c8e6d5ac23a8acce2e1e86bf869930a25e2058b5bfe6f37609c4d912b43c3",
+      "editorial_strategy": "Focus edits on clearly summarizing each tool\u2019s key features, performance metrics, and suitability for various user needs, emphasizing AI enhancements and batch processing capabilities where supported by the source.",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--da0abf0d1f53d0f73eaf4b73",
+      "status": "rejected",
+      "prompt_hash": "257f89596ca9016cdaaa87db5c5b738e152b0d6b4449c5387d7ad3120066cfde",
+      "editorial_strategy": "Edit source content to enhance clarity, consistency, and precision in labels and descriptions without adding unsupported information; focus on clear presentation of provided data to directly answer diverse target queries.",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--2a5b724bd1fe9529b8171974",
+      "status": "rejected",
+      "prompt_hash": "342bacf35a03e33aaba10a21bb464d7759359cbc33a73f4031c495c732846539",
+      "editorial_strategy": "Integrate clear, concise clarifications and relevant discount types or comparison pointers supported by the source to directly address target queries, avoiding unsupported additions or specifics. Emphasize existing content's key discount categories and comparison guidance for user benefit.",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--a2efcf32048726ca3c41201a",
+      "status": "rejected",
+      "prompt_hash": "1ed4236cbb22398ab8e874dd1158ecd5bf89f56f67b41b0c8f7916100195a85b",
+      "editorial_strategy": "Systematically integrate all source-supported answers to target queries into a unified, concise page narrative, emphasizing clarity, directness, and easy citation while preserving source fidelity and avoiding unsupported content.",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    }
+  ],
+  "conclusion": "Circuit breaker stopped after three consecutive judge infrastructure failures. No full challenger or promotion; no held-out evaluation performed. Gate-slot diagnostics and fixes are separate from this immutable trial."
+}

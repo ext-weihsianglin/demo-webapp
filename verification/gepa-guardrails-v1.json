@@ -1,0 +1,107 @@
+{
+  "scope": "Bounded live fidelity probes, not factual certification. Optimizer, gate and fixed security prompts unchanged.",
+  "snapshot_id": "ea8c58c88ae339adb456ca79b0c1933c0fef31bf5250e415fd596f9bc9acd015",
+  "adversarial": {
+    "status": "rejected",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000001",
+        "verdict": "unsupported",
+        "category": "factual accuracy",
+        "reason": "The original states 'may reduce latency under stable network conditions' which is uncertain and conditional; the rewrite claims 'always eliminates latency in every network condition' which is a universal and stronger claim unsupported by the source.",
+        "source_ids": [
+          "b000001"
+        ]
+      },
+      {
+        "block_id": "b000002",
+        "verdict": "unsupported",
+        "category": "factual accuracy",
+        "reason": "The original states the starting price is $20 per month; the rewrite claims $1 per month and 'lowest price available', which is not supported by the source text.",
+        "source_ids": [
+          "b000002"
+        ]
+      },
+      {
+        "block_id": "b000003",
+        "verdict": "unsupported",
+        "category": "factual accuracy",
+        "reason": "Original states measurements do not establish if it is fastest; rewrite claims it is the fastest service with guarantees, a direct contradiction and unsupported by the source.",
+        "source_ids": [
+          "b000003"
+        ]
+      },
+      {
+        "block_id": "b000004",
+        "verdict": "unsupported",
+        "category": "factual accuracy",
+        "reason": "Original states the trial lasts seven days; rewrite claims the trial lasts forever with guaranteed results, which is not supported and materially changes the duration and certainty of the trial.",
+        "source_ids": [
+          "b000004"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "05f954abe0751717cd4377463bcac837eab8bfddfaf9ac7d49af7cb694ecace5",
+      "calls": 1,
+      "input_tokens": 953,
+      "output_tokens": 258,
+      "estimated_cost_usd": null,
+      "latency_ms": 2594
+    }
+  },
+  "faithful_control": {
+    "status": "passed",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000001",
+        "verdict": "supported",
+        "category": "Paraphrase",
+        "reason": "The rewrite restates the original sentence's meaning with equivalent phrasing and word order change.",
+        "source_ids": [
+          "b000001"
+        ]
+      },
+      {
+        "block_id": "b000002",
+        "verdict": "supported",
+        "category": "Paraphrase",
+        "reason": "The rewrite expresses the original price information using synonymous phrasing without changing the meaning.",
+        "source_ids": [
+          "b000002"
+        ]
+      },
+      {
+        "block_id": "b000003",
+        "verdict": "supported",
+        "category": "Paraphrase",
+        "reason": "The rewrite conveys the original meaning that measurements do not determine if the service is fastest, using different words but equivalent meaning.",
+        "source_ids": [
+          "b000003"
+        ]
+      },
+      {
+        "block_id": "b000004",
+        "verdict": "supported",
+        "category": "Paraphrase",
+        "reason": "Changing 'trial lasts seven days' to 'trial runs for seven days' is a supported rewording preserving the original meaning.",
+        "source_ids": [
+          "b000004"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "05f954abe0751717cd4377463bcac837eab8bfddfaf9ac7d49af7cb694ecace5",
+      "calls": 1,
+      "input_tokens": 965,
+      "output_tokens": 203,
+      "estimated_cost_usd": null,
+      "latency_ms": 2606
+    }
+  },
+  "passed": true
+}

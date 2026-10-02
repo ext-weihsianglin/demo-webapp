@@ -1,0 +1,79 @@
+{
+  "run_id": "06880b29841e4dd69c589b7095e00663",
+  "diagnosis": "No accepted rewrites; original-score fallback makes scalar P1 feedback identical and strict reflection admission rejects both candidates. This trial cannot establish proposed-rewrite P1 sensitivity.",
+  "attempts": 38,
+  "applied": 0,
+  "outcomes": [
+    {
+      "candidate_id": "gpt-4.1-mini--procedure--88b7cf540ba702bf9c7fb838",
+      "counts": [
+        {
+          "role": "reflection",
+          "rewrite_status": "succeeded",
+          "fidelity_status": "rejected",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "candidate_id": "gpt-4.1-mini--procedure--ca145ee1343189d5c8b1acb5",
+      "counts": [
+        {
+          "role": "reflection",
+          "rewrite_status": "succeeded",
+          "fidelity_status": "rejected",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "candidate_id": "gpt-4.1-mini--rewrite-page-v7",
+      "counts": [
+        {
+          "role": "selection",
+          "rewrite_status": "succeeded",
+          "fidelity_status": "rejected",
+          "count": 29
+        },
+        {
+          "role": "selection",
+          "rewrite_status": "unsupported_output",
+          "fidelity_status": null,
+          "count": 1
+        },
+        {
+          "role": "reflection",
+          "rewrite_status": "succeeded",
+          "fidelity_status": "rejected",
+          "count": 3
+        },
+        {
+          "role": "reflection",
+          "rewrite_status": "api_error",
+          "fidelity_status": null,
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "procedure_findings": [
+    {
+      "candidate_id": "gpt-4.1-mini--procedure--ca145ee1343189d5c8b1acb5",
+      "characters": 6000,
+      "tail": "ies clearly. If a single sentence fully answers multiple queries and is in an editable block, prefer editing that one sentence rather than multiple. F",
+      "selection_pages": 0
+    },
+    {
+      "candidate_id": "gpt-4.1-mini--procedure--88b7cf540ba702bf9c7fb838",
+      "characters": 6000,
+      "tail": "es unavailable, proceed but document that limitation in review_flags. Any single unsupported addition will cause rejection; prefer omission over risky",
+      "selection_pages": 0
+    }
+  ],
+  "limits": [
+    "Judge false-positive rate not established by this audit",
+    "No new provider calls, promotion or held-out evaluation",
+    "Both procedures end mid-sentence at exactly 6000 characters; no evidence of server-side truncation",
+    "One procedure asks for numbered lists despite the fixed single-line plain-text contract; generated procedures are length/schema checked, not semantically validated"
+  ]
+}

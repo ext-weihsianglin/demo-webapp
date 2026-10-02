@@ -1,0 +1,19 @@
+{
+  "optimization_run": "14fb1db59c26428daa7f47866d7d2250",
+  "model": "gpt-4.1-mini",
+  "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+  "selected_label": "Experimental afc79039 \u00b7 selected default",
+  "example_id": "cd2fd8303acaa265580a5b47384b715abd4cc9e290b754dc9e7b75e0a0c54e87",
+  "query_count": 9,
+  "actions": [
+    "Promote recommended prompt",
+    "Actual backend restart",
+    "Load held-out example",
+    "Analyze content",
+    "Open draft tools",
+    "Generate OpenAI draft"
+  ],
+  "observed_result": "fidelity_rejected: Source-relative fidelity check did not pass; no draft applied.",
+  "controls_reenabled": true,
+  "comparison_scope": "One extra browser UI attempt, outside the eight predeclared paired measurements; no P1 superiority claim."
+}

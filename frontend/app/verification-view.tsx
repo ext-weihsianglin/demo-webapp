@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { readApiResponse } from './api-client';
 import type { ParsedBlock } from './extraction-view';
 
 export type BlockCheck = {status:string; locator_resolved:boolean; review_hints:string[]};
@@ -25,8 +26,7 @@ export function SourceEvidence({blockId, source, check}:{blockId:string;source:o
     setBusy(true);setError('');
     try{
       const response=await fetch('/api/evidence',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...source,block_id:blockId})});
-      const result=await response.json();
-      if(!response.ok)throw new Error(typeof result.detail==='string'?result.detail:'Source comparison is unavailable.');
+      const result=await readApiResponse(response);
       setData(result);
     }catch(error){setError(error instanceof Error?error.message:'Source comparison is unavailable.');}
     finally{setBusy(false);}

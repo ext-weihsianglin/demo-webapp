@@ -1,0 +1,29 @@
+{
+  "previous_run": "2ac71e74c52d4d3ba643de45fa2b3e3f",
+  "new_run": "da27d5e95eab43d08ac4b1e0430afe6a",
+  "changed_manifest_fields": [
+    "run_id",
+    "edit_boundary_version",
+    "created_at"
+  ],
+  "old_boundary": "body-content-v3",
+  "new_boundary": "body-content-v4",
+  "old_run_promotion_compatible": false,
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-4.1",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 10,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 2,
+    "enable_live_calls": true
+  },
+  "held_out_calls": 0
+}

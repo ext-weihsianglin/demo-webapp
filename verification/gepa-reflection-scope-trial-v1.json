@@ -1,0 +1,20 @@
+{
+  "previous_run": "5958785abc174789bc7a079d715a1d9b",
+  "run_id": "a445fda1b1dd40a28c12bd342b8c53df",
+  "unchanged_manifest_fields": {
+    "config": true,
+    "page_roles": true,
+    "baseline": true,
+    "rewrite_settings": true,
+    "edit_boundary_version": true,
+    "fidelity": true,
+    "semantic_rewrite_failures": true,
+    "gepa_version": true,
+    "cache_scope": true,
+    "merge_enabled": true
+  },
+  "reflection_prompt_hash_before": "c9bb6a7bd8d886781f80c186405ab1ee2c6c2f00c9a976d40396b6a6173e1c87",
+  "reflection_prompt_hash_after": "223a5eff9b60f65a7a7fbd5e1442875f2b8cc0e232e91acde19445fdf0519b01",
+  "initial_status": "preflighting",
+  "purpose": "Learn operational page-wide edit scope from reflection-only traces; same source/prompt/P1/gate and100attempt cap."
+}

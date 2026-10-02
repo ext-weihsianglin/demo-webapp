@@ -1,0 +1,432 @@
+{
+  "diagnostic_only": true,
+  "deployed": false,
+  "model": "gpt-5",
+  "reasoning_effort": "low",
+  "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+  "output_budget": {
+    "minimum": 8192,
+    "maximum": 16000,
+    "per_edit": 128
+  },
+  "rewrite_calls": 0,
+  "heldout_calls": 0,
+  "cases": [
+    {
+      "case": "precision",
+      "kind": "saved_edit",
+      "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+      "change": {
+        "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+        "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+        "block_id": "b000031",
+        "before": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+        "after": "Sugerimos usar imagens de referência, como cenas de filmes, documentários ou fotos de alta resolução compatíveis com sua TV. Utilize fontes como pen drive, videogame ou Blu-ray player. Também é possível baixar imagens de teste, inclusive da THX, pela internet e transferi-las para um pen drive para calibrar com precisão.",
+        "reason": "Improved clarity on using reference images and sources for calibration.",
+        "evidence": [
+          {
+            "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+            "block_id": "b000031",
+            "quote": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000031"
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000031",
+            "verdict": "unsupported",
+            "category": "Added claim and lost qualifiers",
+            "reason": "The rewrite adds an unsupported benefit (“para calibrar com precisão”) not present in the source and removes material qualifiers by changing “foto tirada por uma boa câmera com resolução igual ou superior à da sua tela” to the vaguer “fotos de alta resolução compatíveis com sua TV,” weakening the original resolution requirement and omitting the camera/family photo example. It also drops the “ajuste básico” scope qualifier.",
+            "source_ids": [
+              "b000031"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "schema_version": "fidelity-slots-v3",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1375,
+          "output_tokens": 770,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+              "calls": 1,
+              "input_tokens": 1375,
+              "output_tokens": 770,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v3",
+              "schema_hash": "f366d0d0b7183eaf05edd86d96dd400f7e4375e1b8f63fbae30831b7699477ae",
+              "output_limit": 8192,
+              "latency_ms": 10189
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 10189
+        }
+      }
+    },
+    {
+      "case": "precision",
+      "kind": "faithful_control",
+      "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+      "change": {
+        "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+        "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+        "block_id": "b000031",
+        "before": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+        "after": "Para um ajuste básico, sugerimos usar algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+        "reason": "Improved clarity on using reference images and sources for calibration.",
+        "evidence": [
+          {
+            "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+            "block_id": "b000031",
+            "quote": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000031"
+      },
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000031",
+            "verdict": "supported",
+            "category": "wording/clarification",
+            "reason": "The edit only adds the verb 'usar', clarifying the suggestion to use reference images without changing the original meaning or introducing new claims.",
+            "source_ids": [
+              "b000031"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "schema_version": "fidelity-slots-v3",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1393,
+          "output_tokens": 317,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+              "calls": 1,
+              "input_tokens": 1393,
+              "output_tokens": 317,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v3",
+              "schema_hash": "f366d0d0b7183eaf05edd86d96dd400f7e4375e1b8f63fbae30831b7699477ae",
+              "output_limit": 8192,
+              "latency_ms": 4113
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 4113
+        }
+      }
+    },
+    {
+      "case": "commercial_scope",
+      "kind": "saved_edit",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "change": {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "chunk_id": "84c94dafeae436ee2c57a8f979f8576e437ec5455a02a325d3d4fcf1c5e612c9",
+        "block_id": "b000210",
+        "before": "The free tier provides roughly 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+        "after": "Its free plan allows about 20–30 short, 5–10 second watermarked clips monthly. The Standard plan removes watermarks and supports HD exports with faster queue access. The Unlimited tier permits unrestricted content generation, ideal for regular short-form or social posts.",
+        "reason": "Specified Hailuo plan details regarding clip limits, watermark policies, and usage suitability.",
+        "evidence": [
+          {
+            "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+            "block_id": "b000210",
+            "quote": "The free tier provides roughly 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000210"
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000210",
+            "verdict": "unsupported",
+            "category": "Unsupported additions and altered qualifiers",
+            "reason": "The rewrite adds a monthly limit to free clips (not in source), changes “fast queue access” to comparative “faster,” strengthens “suitable” to “ideal,” and replaces “daily social media posts” with “regular,” altering scope and tone beyond the source.",
+            "source_ids": [
+              "b000210"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "schema_version": "fidelity-slots-v3",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1210,
+          "output_tokens": 782,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+              "calls": 1,
+              "input_tokens": 1210,
+              "output_tokens": 782,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v3",
+              "schema_hash": "0a8022c0bbd8184c55b5728ced7ca27ff0c408744ef353e28666a777ea4cbf54",
+              "output_limit": 8192,
+              "latency_ms": 16527
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 16527
+        }
+      }
+    },
+    {
+      "case": "commercial_scope",
+      "kind": "faithful_control",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "change": {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "chunk_id": "84c94dafeae436ee2c57a8f979f8576e437ec5455a02a325d3d4fcf1c5e612c9",
+        "block_id": "b000210",
+        "before": "The free tier provides roughly 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+        "after": "The free tier provides approximately 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+        "reason": "Specified Hailuo plan details regarding clip limits, watermark policies, and usage suitability.",
+        "evidence": [
+          {
+            "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+            "block_id": "b000210",
+            "quote": "The free tier provides roughly 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000210"
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000210",
+            "verdict": "unsupported",
+            "category": "Unnecessary language change",
+            "reason": "Replaces “roughly” with “approximately” without altering meaning; this is a stylistic wording change, which should be rejected per guidelines.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "schema_version": "fidelity-slots-v3",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1213,
+          "output_tokens": 366,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+              "calls": 1,
+              "input_tokens": 1213,
+              "output_tokens": 366,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v3",
+              "schema_hash": "0a8022c0bbd8184c55b5728ced7ca27ff0c408744ef353e28666a777ea4cbf54",
+              "output_limit": 8192,
+              "latency_ms": 8419
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 8419
+        }
+      }
+    },
+    {
+      "case": "attribution",
+      "kind": "saved_edit",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "change": {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "chunk_id": "d3e6b045d634da83189e18c1f9def82feb1386be6561ceab03004c3f17d5c5f3",
+        "block_id": "b000116",
+        "before": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies.",
+        "after": "The Google Ultra plan offers approximately 10 minutes of premium 1080p footage monthly, representing Google's current highest usage limits for Veo 3, while third-party plans provide affordable alternatives with similar model access but fewer rendering features, suitable for prosumers and agencies.",
+        "reason": "Specified plan limits and alternatives making high-quality cinematic video accessible to various users.",
+        "evidence": [
+          {
+            "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+            "block_id": "b000116",
+            "quote": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000116"
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000116",
+            "verdict": "unsupported",
+            "category": "Removed qualifier and altered scope",
+            "reason": "The rewrite removes the attribution “Google claims,” turning a qualified statement into a definitive one; drops “slightly” from “slightly fewer rendering options,” changing degree; and broadens “creative agencies” to “agencies,” altering the audience scope.",
+            "source_ids": [
+              "b000116"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "schema_version": "fidelity-slots-v3",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1181,
+          "output_tokens": 1002,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+              "calls": 1,
+              "input_tokens": 1181,
+              "output_tokens": 1002,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v3",
+              "schema_hash": "a3a22ef47ce4c3de0b989dd961e7f951c2c858a418a3c4102a19a4a2e49c4fe3",
+              "output_limit": 8192,
+              "latency_ms": 13841
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 13841
+        }
+      }
+    },
+    {
+      "case": "attribution",
+      "kind": "faithful_control",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "change": {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "chunk_id": "d3e6b045d634da83189e18c1f9def82feb1386be6561ceab03004c3f17d5c5f3",
+        "block_id": "b000116",
+        "before": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies.",
+        "after": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google states are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies.",
+        "reason": "Specified plan limits and alternatives making high-quality cinematic video accessible to various users.",
+        "evidence": [
+          {
+            "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+            "block_id": "b000116",
+            "quote": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000116"
+      },
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000116",
+            "verdict": "unsupported",
+            "category": "language change",
+            "reason": "Replaces “claims” with “states,” altering the source’s wording without support. The source explicitly uses “claims,” and language changes are not allowed.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "schema_version": "fidelity-slots-v3",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1191,
+          "output_tokens": 366,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+              "calls": 1,
+              "input_tokens": 1191,
+              "output_tokens": 366,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v3",
+              "schema_hash": "a3a22ef47ce4c3de0b989dd961e7f951c2c858a418a3c4102a19a4a2e49c4fe3",
+              "output_limit": 8192,
+              "latency_ms": 6423
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 6423
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "id": "062a765eb15343ba8d96ba282f12abdb",
+  "status": "stopped",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-4.1-mini",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 10,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 0,
+    "enable_live_calls": true
+  },
+  "budget": {
+    "attempts": 96,
+    "reserved": 0,
+    "completed": 96,
+    "technical_failures": 15,
+    "stop_reason": "attempt_budget",
+    "limit": 100
+  },
+  "proposals": 9,
+  "recommendation": null,
+  "stop_reason": "attempt_budget",
+  "usage": {
+    "rewrite": {
+      "calls": 96,
+      "input_tokens": 2690291,
+      "output_tokens": 335052,
+      "cached_requests": 0
+    },
+    "fidelity": {
+      "calls": 77,
+      "input_tokens": 738347,
+      "output_tokens": 109879,
+      "cached_requests": 0
+    },
+    "reflection": {
+      "calls": 9,
+      "input_tokens": 254679,
+      "output_tokens": 1098,
+      "cached_requests": 0
+    },
+    "embedding": {
+      "calls": 13,
+      "input_tokens": 113796,
+      "output_tokens": 0,
+      "cached_requests": 2771
+    }
+  },
+  "finished_at": "2026-10-02T04:44:09.967006+00:00",
+  "reflection_prompt_hash": "0d1e1b77a81a1f59998eae804dbe01f76d0d79c67847cfccb474282f282fb0f2",
+  "dataset_manifest_hash": "59e416d1942b57ddd9ac4a4cde561bb1d44d48790e9de4734da209a65c29774b",
+  "candidates": [
+    {
+      "id": "gpt-4.1-mini--rewrite-page-v7",
+      "status": "evaluated",
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "editorial_strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks.",
+      "parents": [],
+      "selection_mean": 0.4092637718459866,
+      "failure_rate": 0.8333333333333334,
+      "selection_pages": 30,
+      "frontier": true
+    },
+    {
+      "id": "gpt-4.1-mini--1a1743ef7338a55097bf0265",
+      "status": "rejected",
+      "prompt_hash": "2cc62380555adc9d47dcc5acfbc27f9e43dafe925543e2afa6067d0a8b358fd9",
+      "editorial_strategy": "Review all retained page content holistically to present a unified, structured revision that enhances clarity and citation ease by closely adhering to source content without adding unsupported details. Prioritize explicit, source-backed information relevant to all target queries, improving directness and user guidance while preserving original language and intent. Avoid introducing external context or speculative elaborations. Verify all modifications strictly against source text to prevent misat",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--e1fc8f0200599011ff58371f",
+      "status": "rejected",
+      "prompt_hash": "855b9376e5eff6486355cfca1efa97aeffa5aad3d70ce96b1c5738e9825b073f",
+      "editorial_strategy": "Conduct a comprehensive synthesis of all relevant content on B2B marketing automation platforms to present clear, concise, and well-structured responses that directly address each target query. Emphasize supported details on platform capabilities, integration, scalability, automation features, AI-driven CRM tools, compliance, and project management aspects. Ensure all statements are directly grounded in cited source content, avoiding introduction of unsupported claims or promotional exaggerations",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--9f4e0667214f119978288b4b",
+      "status": "rejected",
+      "prompt_hash": "8e5022b746c7e60d10d5b6ca051521be633f1d40cf54a9354ab6550a7424cd0d",
+      "editorial_strategy": "Maintain strict adherence to source content, ensuring no introduction of unsupported claims or expanded interpretations. Focus on consolidating related information clearly and directly, emphasizing the explicit details provided by the source. Preserve original terminology and avoid embellishments or generalizations not grounded in source text. Structure edits to improve clarity and citation ease while retaining all factual fidelity and respecting editorial independence statements. Prioritize unfl",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--0bc2427da5652559cfd444fb",
+      "status": "rejected",
+      "prompt_hash": "80103502afbcbbb3ec936dc30dc28a21acc91a9de97b590cee73fe9881adf627",
+      "editorial_strategy": "As a source-grounded webpage editor, produce one comprehensive rewrite for the entire retained page that clearly and directly answers all target queries without extrapolating beyond source evidence. Ensure all claims strictly reflect source content without attribution to specific brands or unverified software capabilities. Focus on improving clarity, citation ease, and direct relevance to user queries such as invoice and payment management, task scheduling, residential new construction software,\u00a0",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--885bc0d8059b6913d10c2554",
+      "status": "evaluated",
+      "prompt_hash": "76ca1e2102bab9b09e3942c629203fa0ddc0534b2b14be3ce5db613a8f1e8f64",
+      "editorial_strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that clarifies and directly answers all target_queries with explicit references to relevant source blocks. Prioritize clear, concise, and well-cited content that supports key queries, especially emphasizing affordable cat food options including both wet and dry types, sensitive stomach considerations, and nutritional value. Correctly identify unsupported queries to avoid fabric",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "selection_mean": 0.407538662101025,
+      "failure_rate": 0.8333333333333334,
+      "selection_pages": 30,
+      "frontier": true
+    },
+    {
+      "id": "gpt-4.1-mini--54f0320c3f24aa992b277c44",
+      "status": "rejected",
+      "prompt_hash": "32a47b327cfba1f8a0cf1024ba1470546473973d011a54514bc73dbae99c9dfb",
+      "editorial_strategy": "Carefully synthesize the entire page content to directly and comprehensively answer all target queries. Prioritize presenting clear, concise, and well-cited information grounded strictly in source content without adding unsupported claims. Focus on highlighting key features such as help desk platforms supporting live chat and email; modern ticketing systems with AI capabilities including analytics, automation, and workload reduction; seamless integrations; user-friendly design; team collaboration",
+      "parents": [
+        "gpt-4.1-mini--885bc0d8059b6913d10c2554"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--3c08e39a53f6676a5163abed",
+      "status": "rejected",
+      "prompt_hash": "bcf9d689c23605535cb36101861a56a962115e698ca061c095be3fb881371074",
+      "editorial_strategy": "Conduct a holistic review of the entire source page, crafting a unified, well-structured editorial proposal that directly addresses all enumerated target queries with precise citations to relevant source blocks. Prioritize content relevance and factual accuracy by only including information fully supported by explicit textual evidence within the retained page. Identify and flag queries unsupported by the source to avoid fabrication or conjecture. Focus on clear, concise language, structured to un",
+      "parents": [
+        "gpt-4.1-mini--885bc0d8059b6913d10c2554"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--c510f76b4d8233a296af4858",
+      "status": "rejected",
+      "prompt_hash": "a687d9f37a5ec1520f83a168e905efebb801ad0242a6500a4046f1848922e027",
+      "editorial_strategy": "Thoroughly analyze the entire retained page to produce a unified, well-structured editorial proposal that directly and clearly answers all target queries using only supported, verifiable information found within the source content. Present concise, authoritative statements and explanatory enhancements that improve clarity, citation ease, and relevance to each query, with an emphasis on preserving factual accuracy, security standards, schema integrity, language fluency, and faithful representation",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--efd8c030dcc29f4e5dc74980",
+      "status": "partial",
+      "prompt_hash": "4ffda8e42559d225eb08e9be90d7ff61f107d458147cc46b881ac792ead09b3c",
+      "editorial_strategy": "As a source-grounded webpage editor, thoroughly analyze the entire retained page to produce a single, cohesive rewrite proposal that enhances clarity, directness, and ease of citation specifically tailored to address all target queries comprehensively. Keep all modifications strictly supported by the source content without introducing additional claims, interpretations, or industry context beyond the text. Maintain strict fidelity to original wording and meaning, refining phrasing for precision,:",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    }
+  ],
+  "conclusion": "No full-selection improvement; baseline remains selected. Attempt reservation stopped at 96/100 because the next uncached 30-page selection batch would exceed the cap. No held-out evaluation performed."
+}

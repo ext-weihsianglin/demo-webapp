@@ -1,0 +1,707 @@
+{
+  "fixture_sha256": "8a6498addcd2f5f24fdecd8cf878000910492c1ae9982eaf54d1b91751fb4b7d",
+  "scope": "12 frozen saved reflection edits; assistant source assessments, not independent human gold labels. Complete original chunk supplied for each single-edit diagnostic. No held-out pages.",
+  "model": "gpt-5",
+  "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+  "results": [
+    {
+      "id": "fuel-interval",
+      "group": "faithful",
+      "expected": "supported",
+      "saved_verdict": "supported",
+      "observed": "supported",
+      "matches_assessment": true,
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000069",
+            "verdict": "supported",
+            "category": "Faithful paraphrase with minor stylistic/formatting changes",
+            "reason": "The rewrite preserves the original meaning, mileage range, conditions, and qualified causal phrasing (“can help”). It only removes the bullet label and slightly rephrases wording without adding or omitting material facts.",
+            "source_ids": [
+              "b000069"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1263,
+          "output_tokens": 413,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1263,
+              "output_tokens": 413,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "4c4a3cd41570d8c3d0bdd6809f17271f87c1924a8321256f323adc2639155b60",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3438,
+              "latency_ms": 6916
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 6944
+        }
+      }
+    },
+    {
+      "id": "fuel-user-reports",
+      "group": "faithful",
+      "expected": "supported",
+      "saved_verdict": "supported",
+      "observed": "unsupported",
+      "matches_assessment": false,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000056",
+            "verdict": "unsupported",
+            "category": "Lost qualifier/scope",
+            "reason": "The rewrite omits the original qualifier that the additives are specifically designed for direct injection systems, broadening the claim to general additive use and changing the scope of the statement.",
+            "source_ids": [
+              "b000056"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1545,
+          "output_tokens": 1003,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1545,
+              "output_tokens": 1003,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "a84f631888b6997c63ef248023734a4fae80c920f3290e67517ceb39d8d42f38",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3720,
+              "latency_ms": 16498
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 16527
+        }
+      }
+    },
+    {
+      "id": "nec-description",
+      "group": "faithful",
+      "expected": "supported",
+      "saved_verdict": "supported",
+      "observed": "unsupported",
+      "matches_assessment": false,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000025",
+            "verdict": "unsupported",
+            "category": "Material omission",
+            "reason": "The rewrite removes the source’s claim that alliances with AWS and Red Hat \"highlight its ability to integrate and optimise best-of-breed solutions\" and instead folds the alliances into what NEC \"combines,\" altering the stated relationship and omitting a material fact.",
+            "source_ids": [
+              "b000025"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1347,
+          "output_tokens": 1246,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1347,
+              "output_tokens": 1246,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "0fc3d73e3b6929358a06caf84576e63501fbf17f41c6133a4917ca4b2c844fec",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3521,
+              "latency_ms": 18226
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 18230
+        }
+      }
+    },
+    {
+      "id": "fuel-introduction",
+      "group": "faithful",
+      "expected": "supported",
+      "saved_verdict": "supported",
+      "observed": "supported",
+      "matches_assessment": true,
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000013",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "The rewrite preserves the original meaning: DI engines provide efficiency/performance but face cleanliness/performance challenges; additives help combat carbon buildup that can reduce performance, increase emissions, and cause knocking; understanding/using appropriate additives is important. The slight addition about using additives is supported elsewhere in the same chunk, which discusses scenarios for use.",
+            "source_ids": [
+              "b000013",
+              "b000017"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 2677,
+          "output_tokens": 1407,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 2677,
+              "output_tokens": 1407,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "252572c924af43ee8d479bd0c12681a8dccce36ff92aea832474c20f16b05cf9",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 4862,
+              "latency_ms": 29605
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 29633
+        }
+      }
+    },
+    {
+      "id": "turbo-inference",
+      "group": "unsupported",
+      "expected": "unsupported",
+      "saved_verdict": "unsupported",
+      "observed": "unsupported",
+      "matches_assessment": true,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000058",
+            "verdict": "unsupported",
+            "category": "Unsupported generalization",
+            "reason": "The rewrite adds a broader claim that the benefits illustrate restoration of performance in turbocharged engines, which is not stated in the source and generalizes beyond the specific Ford EcoBoost example.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1309,
+          "output_tokens": 584,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1309,
+              "output_tokens": 584,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "2154d99522768b66968f977fb6d2d28f1e8a30e872a7edd91082a2009b08e591",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3484,
+              "latency_ms": 15899
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 15911
+        }
+      }
+    },
+    {
+      "id": "api-attribution",
+      "group": "unsupported",
+      "expected": "unsupported",
+      "saved_verdict": "unsupported",
+      "observed": "unsupported",
+      "matches_assessment": true,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000082",
+            "verdict": "unsupported",
+            "category": "Attribution change and material omission",
+            "reason": "The rewrite replaces the specific attribution to an API report with vague 'industry reporting cited in this article,' which is not supported by the source text, and it omits the claim that studies show fuel additives can significantly improve fuel efficiency—a material fact from the original.",
+            "source_ids": [
+              "b000082"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1068,
+          "output_tokens": 852,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1068,
+              "output_tokens": 852,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "aba5322a048c455d3c6eb3bcd1127e3e32f272aa9176e5b8c7bbb72376abaf68",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3239,
+              "latency_ms": 13409
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 13419
+        }
+      }
+    },
+    {
+      "id": "sae-attribution",
+      "group": "unsupported",
+      "expected": "unsupported",
+      "saved_verdict": "unsupported",
+      "observed": "unsupported",
+      "matches_assessment": true,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000086",
+            "verdict": "unsupported",
+            "category": "Scope expansion and added unsupported claims",
+            "reason": "The rewrite removes the direct-injection engine context and the performance/longevity qualifier, and adds new generalized claims that detergents play an “important role in maintenance” and keep “critical components” cleaner—broadening beyond intake valves. These changes are not supported by the source text.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1036,
+          "output_tokens": 1036,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1036,
+              "output_tokens": 1036,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "73f989d5964e51f23c0c6ef62dd953c996b05f3b2720c46a100af62e4ede1be6",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3207,
+              "latency_ms": 15249
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 15259
+        }
+      }
+    },
+    {
+      "id": "pricing-average",
+      "group": "unsupported",
+      "expected": "unsupported",
+      "saved_verdict": "unsupported",
+      "observed": "unsupported",
+      "matches_assessment": true,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000147",
+            "verdict": "unsupported",
+            "category": "Pricing claim unsupported/altered",
+            "reason": "The rewrite adds multiple claims to a heading. While features like real-time budget visibility, AI-driven capabilities, and a conversational interface are supported elsewhere in the chunk, the phrase “Pricing averages around US$ 2,000/month” is not. The source states a marketed single flat-rate plan “around US$ 2,000 per month,” not an average price, making the pricing claim a meaning change that isn’t supported.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1498,
+          "output_tokens": 1128,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1498,
+              "output_tokens": 1128,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "12ca3acf7e51b1a13d526f52b6130ae2b27f70d0853192bd0cc7eb5c2dbd68b1",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3675,
+              "latency_ms": 16745
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 16754
+        }
+      }
+    },
+    {
+      "id": "5g-intensity",
+      "group": "borderline",
+      "expected": "unsupported",
+      "saved_verdict": "unsupported",
+      "observed": "unsupported",
+      "matches_assessment": true,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000011",
+            "verdict": "unsupported",
+            "category": "Unsupported strengthening/superlatives",
+            "reason": "The rewrite escalates claims: “transforms” becomes “revolutionizes” and “driving growth” becomes “foster significant growth,” adding unstated strength. These changes are not supported by the source text.",
+            "source_ids": [
+              "b000011"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1412,
+          "output_tokens": 628,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1412,
+              "output_tokens": 628,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "768a2e5ea43c83f2971c9f8098301170d3242ad030cfbc38dccc34baec8d8d65",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3594,
+              "latency_ms": 10889
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 10897
+        }
+      }
+    },
+    {
+      "id": "older-systems",
+      "group": "borderline",
+      "expected": "unsupported",
+      "saved_verdict": "unsupported",
+      "observed": "unsupported",
+      "matches_assessment": true,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000014",
+            "verdict": "unsupported",
+            "category": "Lost qualifier and unsupported substitution",
+            "reason": "The rewrite removes the “first and foremost/paramount” qualifier about cleaning ability and replaces the specific comparison to “port fuel injection systems” with the broader, unsupported term “older systems,” changing emphasis and introducing an unsubstantiated generalization.",
+            "source_ids": [
+              "b000014"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 2338,
+          "output_tokens": 939,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 2338,
+              "output_tokens": 939,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "05e272571ca5eae236bccf41f0088f9528c34647249ba5257ec511979d48e977",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 4523,
+              "latency_ms": 14130
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 14142
+        }
+      }
+    },
+    {
+      "id": "fuel-professional-interval",
+      "group": "borderline",
+      "expected": "supported",
+      "saved_verdict": "supported",
+      "observed": "unsupported",
+      "matches_assessment": false,
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000069",
+            "verdict": "unsupported",
+            "category": "unsupported_change",
+            "reason": "The rewrite adds unsupported elements (frequent short trips; framing as part of routine maintenance; avoiding reacting to symptoms) and omits a material benefit (maintain engine performance). It also changes wording about fuel quality. These changes are not grounded in the source block.",
+            "source_ids": [
+              "b000069"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1285,
+          "output_tokens": 1122,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1285,
+              "output_tokens": 1122,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "4c4a3cd41570d8c3d0bdd6809f17271f87c1924a8321256f323adc2639155b60",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3460,
+              "latency_ms": 13551
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 13554
+        }
+      }
+    },
+    {
+      "id": "cisco-paraphrase",
+      "group": "borderline",
+      "expected": "supported",
+      "saved_verdict": "supported",
+      "observed": null,
+      "matches_assessment": false,
+      "result": {
+        "status": "unavailable",
+        "reason": "judge_provider_error",
+        "findings": [],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "estimated_cost_usd": null,
+          "usage_complete": false,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "unavailable",
+              "reason": "judge_provider_error",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "estimated_cost_usd": null,
+              "usage_complete": false,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "cee66869f918cb99f581f72f57a878f4b8317518b415b036be25964a26beef16",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3504,
+              "latency_ms": 60204
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 0,
+          "latency_ms": 60207
+        }
+      }
+    }
+  ],
+  "p2_calls": 0,
+  "embedding_calls": 0,
+  "heldout_calls": 0,
+  "complete": true,
+  "matches_assessment": 8,
+  "calls": 12
+}

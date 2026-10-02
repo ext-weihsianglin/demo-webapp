@@ -1,0 +1,21 @@
+{
+  "run_id": "c8439bf1e8c141ef9228bc5370dfa015",
+  "page_id": "a7655dcfe8bd65f0c537b114121b2217c5bdfef135a40194bea423caf3a25f06",
+  "original_failure": "invalid_judge_output",
+  "probe_status": "unavailable",
+  "probe_reason": "invalid_judge_output",
+  "response_status": "completed",
+  "expected_edits": 36,
+  "returned_edits": 35,
+  "coverage_exact": false,
+  "empty_references": [],
+  "telemetry": {
+    "model": "gpt-4.1-mini",
+    "prompt_hash": "05f954abe0751717cd4377463bcac837eab8bfddfaf9ac7d49af7cb694ecace5",
+    "calls": 1,
+    "input_tokens": 21587,
+    "output_tokens": 2293,
+    "estimated_cost_usd": null,
+    "latency_ms": 15706
+  }
+}

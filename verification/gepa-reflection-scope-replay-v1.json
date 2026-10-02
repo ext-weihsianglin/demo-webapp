@@ -1,0 +1,170 @@
+{
+  "run_id": "5958785abc174789bc7a079d715a1d9b",
+  "scope": "Only saved reflection-role evaluations, no new provider calls or selection/test feedback.",
+  "records": [
+    {
+      "page_id": "ad32f79969d9943d19d75faa7b462d7eded7d2cada7ef2127de5d3446e1f11b4",
+      "status": "retained_original",
+      "proposed_edit_count": 6,
+      "proposed_edits_by_type": {
+        "heading": 2,
+        "paragraph": 4
+      },
+      "candidate_id": "gpt-4.1-mini--3b2d9a89429de83ae95addd0",
+      "strategy": "Select one to three closely related body paragraphs. Clarify or expand concise summaries by explicitly stating multi-dimensional features, technology categories, or types called out in-source, using only specifics already present. Reorder sentences or data points within these paragraphs for logical progression or emphasis as needed, but do not introduce explanations or claims not directly provided by the source. Leave unrelated paragraphs unchanged and avoid broad generalizations."
+    },
+    {
+      "page_id": "0efcb5d3452ca9bd144a112e3bcf7be510785ca5d1aa8cd93d891f747f128d55",
+      "status": "retained_original",
+      "proposed_edit_count": 86,
+      "proposed_edits_by_type": {
+        "paragraph": 41,
+        "heading": 45
+      },
+      "candidate_id": "gpt-4.1-mini--3b2d9a89429de83ae95addd0",
+      "strategy": "Select one to three closely related body paragraphs. Clarify or expand concise summaries by explicitly stating multi-dimensional features, technology categories, or types called out in-source, using only specifics already present. Reorder sentences or data points within these paragraphs for logical progression or emphasis as needed, but do not introduce explanations or claims not directly provided by the source. Leave unrelated paragraphs unchanged and avoid broad generalizations."
+    },
+    {
+      "page_id": "3a04c1cc6a35f744dd20d7f9afa3dd6077616f1d99e344f0aec067ebc165f602",
+      "status": "applied",
+      "proposed_edit_count": 23,
+      "proposed_edits_by_type": {
+        "paragraph": 14,
+        "heading": 9
+      },
+      "candidate_id": "gpt-4.1-mini--3b2d9a89429de83ae95addd0",
+      "strategy": "Select one to three closely related body paragraphs. Clarify or expand concise summaries by explicitly stating multi-dimensional features, technology categories, or types called out in-source, using only specifics already present. Reorder sentences or data points within these paragraphs for logical progression or emphasis as needed, but do not introduce explanations or claims not directly provided by the source. Leave unrelated paragraphs unchanged and avoid broad generalizations."
+    },
+    {
+      "page_id": "3ef40708a72e520dd2a15b36125724d41f8246e039bab54906e47b3074fa30ab",
+      "status": "retained_original",
+      "proposed_edit_count": 8,
+      "proposed_edits_by_type": {
+        "paragraph": 8
+      },
+      "candidate_id": "gpt-4.1-mini--5ec902afae91fc718514e26b",
+      "strategy": "For up to three relevant paragraphs, clarify wording by explicitly stating only the distinguishing features or categories named in the source, without adding extra context or use cases. Reorder or combine sentences for flow and leave all unrelated content unchanged."
+    },
+    {
+      "page_id": "7cc88514bea752b5753201262234d405fd62f15bc0888aa6375f13d86756bfcc",
+      "status": "retained_original",
+      "proposed_edit_count": 14,
+      "proposed_edits_by_type": {
+        "paragraph": 14
+      },
+      "candidate_id": "gpt-4.1-mini--059b8792d8920f7c3984492a",
+      "strategy": "For up to three relevant paragraphs, clarify or reorder factual statements to improve specificity, streamline comparisons, and strengthen the connection to likely user queries, without introducing unsupported claims or explanations. Leave all unrelated content unchanged."
+    },
+    {
+      "page_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+      "status": "retained_original",
+      "proposed_edit_count": 20,
+      "proposed_edits_by_type": {
+        "paragraph": 19,
+        "heading": 1
+      },
+      "candidate_id": "gpt-4.1-mini--rewrite-page-v7",
+      "strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks."
+    },
+    {
+      "page_id": "ad32f79969d9943d19d75faa7b462d7eded7d2cada7ef2127de5d3446e1f11b4",
+      "status": "applied",
+      "proposed_edit_count": 15,
+      "proposed_edits_by_type": {
+        "paragraph": 3,
+        "heading": 12
+      },
+      "candidate_id": "gpt-4.1-mini--5ec902afae91fc718514e26b",
+      "strategy": "For up to three relevant paragraphs, clarify wording by explicitly stating only the distinguishing features or categories named in the source, without adding extra context or use cases. Reorder or combine sentences for flow and leave all unrelated content unchanged."
+    },
+    {
+      "page_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+      "status": "applied",
+      "proposed_edit_count": 14,
+      "proposed_edits_by_type": {
+        "paragraph": 14
+      },
+      "candidate_id": "gpt-4.1-mini--65df9e555a7912892d685bbb",
+      "strategy": "Edit only already-relevant body paragraphs by reordering existing statements for logical flow and clarifying wording with source-supported facts. Do not add new information or broaden scope. Leave unrelated or minimally informative blocks unchanged."
+    },
+    {
+      "page_id": "83cbe60018409d0bb65ad43e47a914d824d62fc35049841db50285b5d32a3b84",
+      "status": "retained_original",
+      "proposed_edit_count": null,
+      "proposed_edits_by_type": null,
+      "candidate_id": "gpt-4.1-mini--059b8792d8920f7c3984492a",
+      "strategy": "For up to three relevant paragraphs, clarify or reorder factual statements to improve specificity, streamline comparisons, and strengthen the connection to likely user queries, without introducing unsupported claims or explanations. Leave all unrelated content unchanged."
+    },
+    {
+      "page_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+      "status": "applied",
+      "proposed_edit_count": 6,
+      "proposed_edits_by_type": {
+        "paragraph": 6
+      },
+      "candidate_id": "gpt-4.1-mini--65df9e555a7912892d685bbb",
+      "strategy": "Edit only already-relevant body paragraphs by reordering existing statements for logical flow and clarifying wording with source-supported facts. Do not add new information or broaden scope. Leave unrelated or minimally informative blocks unchanged."
+    },
+    {
+      "page_id": "7cc88514bea752b5753201262234d405fd62f15bc0888aa6375f13d86756bfcc",
+      "status": "retained_original",
+      "proposed_edit_count": 13,
+      "proposed_edits_by_type": {
+        "paragraph": 13
+      },
+      "candidate_id": "gpt-4.1-mini--rewrite-page-v7",
+      "strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks."
+    },
+    {
+      "page_id": "83cbe60018409d0bb65ad43e47a914d824d62fc35049841db50285b5d32a3b84",
+      "status": "retained_original",
+      "proposed_edit_count": null,
+      "proposed_edits_by_type": null,
+      "candidate_id": "gpt-4.1-mini--rewrite-page-v7",
+      "strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks."
+    },
+    {
+      "page_id": "3a04c1cc6a35f744dd20d7f9afa3dd6077616f1d99e344f0aec067ebc165f602",
+      "status": "applied",
+      "proposed_edit_count": 16,
+      "proposed_edits_by_type": {
+        "paragraph": 14,
+        "heading": 2
+      },
+      "candidate_id": "gpt-4.1-mini--rewrite-page-v7",
+      "strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks."
+    },
+    {
+      "page_id": "0efcb5d3452ca9bd144a112e3bcf7be510785ca5d1aa8cd93d891f747f128d55",
+      "status": "retained_original",
+      "proposed_edit_count": 47,
+      "proposed_edits_by_type": {
+        "paragraph": 34,
+        "heading": 13
+      },
+      "candidate_id": "gpt-4.1-mini--rewrite-page-v7",
+      "strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks."
+    },
+    {
+      "page_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+      "status": "applied",
+      "proposed_edit_count": 43,
+      "proposed_edits_by_type": {
+        "paragraph": 43
+      },
+      "candidate_id": "gpt-4.1-mini--rewrite-page-v7",
+      "strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks."
+    },
+    {
+      "page_id": "3ef40708a72e520dd2a15b36125724d41f8246e039bab54906e47b3074fa30ab",
+      "status": "retained_original",
+      "proposed_edit_count": 9,
+      "proposed_edits_by_type": {
+        "paragraph": 8,
+        "heading": 1
+      },
+      "candidate_id": "gpt-4.1-mini--3b2d9a89429de83ae95addd0",
+      "strategy": "Select one to three closely related body paragraphs. Clarify or expand concise summaries by explicitly stating multi-dimensional features, technology categories, or types called out in-source, using only specifics already present. Reorder sentences or data points within these paragraphs for logical progression or emphasis as needed, but do not introduce explanations or claims not directly provided by the source. Leave unrelated paragraphs unchanged and avoid broad generalizations."
+    }
+  ]
+}

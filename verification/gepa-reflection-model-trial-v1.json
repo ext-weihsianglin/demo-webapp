@@ -1,0 +1,24 @@
+{
+  "previous_run": "71b7bcc18908404786683dee6d500ca1",
+  "run_id": "05ff4eaaf1d64107a2b0f542238e5bbe",
+  "unchanged_manifest_fields": {
+    "page_roles": true,
+    "baseline": true,
+    "rewrite_settings": true,
+    "edit_boundary_version": true,
+    "fidelity": true,
+    "semantic_rewrite_failures": true,
+    "reflection_prompt_hash": true,
+    "gepa_version": true,
+    "cache_scope": true,
+    "merge_enabled": true
+  },
+  "config_changes": {
+    "reflection_model": {
+      "before": "gpt-4.1-mini",
+      "after": "gpt-4.1"
+    }
+  },
+  "initial_status": "preflighting",
+  "purpose": "Test stronger reflection on validation-only data for a reusable strategy, retaining gpt-4.1-mini P2 and the 100-attempt cap."
+}

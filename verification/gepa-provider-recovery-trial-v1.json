@@ -1,0 +1,19 @@
+{
+  "previous_run": "a445fda1b1dd40a28c12bd342b8c53df",
+  "run_id": "c12b14479e214768a8a46e581c5c142b",
+  "unchanged_manifest_fields": {
+    "config": true,
+    "page_roles": true,
+    "baseline": true,
+    "rewrite_settings": true,
+    "edit_boundary_version": true,
+    "fidelity": true,
+    "semantic_rewrite_failures": true,
+    "reflection_prompt_hash": true,
+    "gepa_version": true,
+    "cache_scope": true,
+    "merge_enabled": true
+  },
+  "initial_status": "preflighting",
+  "reason": "Previous run terminal after connection failures; authenticated read-only catalog check now succeeds. New run, no in-run retry/resume."
+}

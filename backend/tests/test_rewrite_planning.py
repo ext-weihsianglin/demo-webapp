@@ -31,7 +31,7 @@ def test_pack_whole_chunks_and_keep_every_query_and_block_text_once():
     for batch,data,count,estimate in requests:
         payload=json.loads(data)
         assert count+settings.output_tokens<=settings.context_tokens
-        assert count==len(encoding.encode(PROMPT+data+json.dumps(response_schema(document,batch))))+256
+        assert count==len(encoding.encode(PROMPT+data+json.dumps(response_schema(document,batch))))+2048
         assert payload['target_queries']==QUERIES
         assert payload['scope']=='whole_page'
         assert 'jsonld' not in payload['source_metadata'] and 'visibility' not in payload['source_metadata']

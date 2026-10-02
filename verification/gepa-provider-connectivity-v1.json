@@ -1,0 +1,6 @@
+{
+  "status": "reachable_authenticated",
+  "model_catalog_access": true,
+  "gpt-4.1-mini_available": true,
+  "kind": "Read-only provider connectivity check, no generation/embedding calls."
+}

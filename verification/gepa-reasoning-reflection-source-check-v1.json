@@ -1,0 +1,90 @@
+{
+  "run_id": "db4545d1d3bf468c94e0d92341ce6c63",
+  "candidate_id": "gpt-4.1-mini--dd6770387811951918ca88f4",
+  "page_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+  "host": "www.hometheater.com.br",
+  "role": "selection",
+  "status": "applied",
+  "delta": 0.0067240679225921696,
+  "change": {
+    "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+    "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+    "block_id": "b000031",
+    "before": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+    "after": "Sugerimos usar imagens de referência, como cenas de filmes, documentários ou fotos de alta resolução compatíveis com sua TV. Utilize fontes como pen drive, videogame ou Blu-ray player. Também é possível baixar imagens de teste, inclusive da THX, pela internet e transferi-las para um pen drive para calibrar com precisão.",
+    "reason": "Improved clarity on using reference images and sources for calibration.",
+    "evidence": [
+      {
+        "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+        "block_id": "b000031",
+        "quote": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive."
+      }
+    ],
+    "review_flags": [],
+    "heading_level": null,
+    "source_id": "b000031"
+  },
+  "allowed_original_chunk": [
+    {
+      "block_id": "b000023",
+      "type": "heading",
+      "text": "Imagem ideal: ajuste contraste e nível de preto de sua TV"
+    },
+    {
+      "block_id": "b000024",
+      "type": "paragraph",
+      "text": "15/05/2020"
+    },
+    {
+      "block_id": "b000025",
+      "type": "paragraph",
+      "text": ""
+    },
+    {
+      "block_id": "b000026",
+      "type": "paragraph",
+      "text": "Por Alex dos Santos"
+    },
+    {
+      "block_id": "b000027",
+      "type": "paragraph",
+      "text": "Diferente de TVs OLED ou LED-LCDs com pontos quânticos e backlight FALD, modelos LED-LCDs convencionais (e acessíveis) podem apresentar níveis de preto mais próximos de um cinza escuro, conforme vemos em nossos testes. Para muitas pessoas o baixo nível de preto nem é um problema, mas para quem é exigente percebe que isso também compromete a fidelidade de cores."
+    },
+    {
+      "block_id": "b000028",
+      "type": "paragraph",
+      "text": "As tonalidades escuras ficam menos intensas, fazendo com que a imagem inteira pareça um pouco “lavada”. Felizmente esse problema inerente aos displays LCDs, sobretudo os de linhas mais populares, pode ser corrigido ao menos parcialmente com ajustes simples. Basta entrar no menu, diminuir o brilho e aumentar o contraste."
+    },
+    {
+      "block_id": "b000029",
+      "type": "paragraph",
+      "text": ""
+    },
+    {
+      "block_id": "b000030",
+      "type": "paragraph",
+      "text": "Para obter bons níveis de tons escuros, o brilho geral da imagem deverá ser menor. Quando o ambiente é escuro ou durante uma sessão noturna, o ajuste de brilho mais baixo não é um problema. Porém, o mesmo não podemos dizer com o uso da TV de dia, ou numa sala onde não há controle de luz externa, mesmo fechando janela e cortina."
+    },
+    {
+      "block_id": "b000031",
+      "type": "paragraph",
+      "text": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive."
+    }
+  ],
+  "saved_finding": {
+    "block_id": "b000031",
+    "verdict": "supported",
+    "category": "clarification",
+    "reason": "The edit rephrases for clarity but accurately reflects the use of reference images, their sources, and that they can be used to calibrate the TV; no new claims are added.",
+    "source_ids": [
+      "b000031"
+    ]
+  },
+  "assessment": {
+    "reviewer": "assistant_source_audit",
+    "human_verified": false,
+    "finding": "The source describes a basic adjustment and test-image downloads. The replacement adds precise calibration (calibrar com precisão), an unstated quality assurance absent from the entire allowed chunk. The fixed LLM gate approved it as clarification.",
+    "candidate_safe_for_promotion": false,
+    "limitation": "This is a direct source comparison, not a complete audit of every accepted edit."
+  }
+}

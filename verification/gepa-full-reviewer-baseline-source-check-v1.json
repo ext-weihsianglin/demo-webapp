@@ -1,0 +1,67 @@
+{
+  "run_id": "2ac71e74c52d4d3ba643de45fa2b3e3f",
+  "candidate_id": "gpt-4.1-mini--rewrite-page-v7",
+  "role": "selection",
+  "hostname": "www.hometheater.com.br",
+  "block_id": "b000031",
+  "change": {
+    "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+    "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+    "block_id": "b000031",
+    "before": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+    "after": "Para realizar ajustes básicos, utilize imagens de referência - pode ser uma cena de filme, documentário ou uma foto de alta resolução. Use fontes como pen drive, videogame ou player de Blu-ray para melhor qualidade. Também é possível baixar imagens de testes, incluindo as da THX, de forma gratuita pela internet e transferi-las para testes práticos.",
+    "reason": "Orientação prática para ajuste baseado em imagens de referência, tornando a recomendação concreta e aplicável.",
+    "evidence": [
+      {
+        "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+        "block_id": "b000031",
+        "quote": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive."
+      }
+    ],
+    "review_flags": [],
+    "heading_level": null,
+    "source_id": "b000031"
+  },
+  "original_chunk": {
+    "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+    "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+    "method": "conservative_dom",
+    "order": 1,
+    "block_ids": [
+      "b000023",
+      "b000024",
+      "b000025",
+      "b000026",
+      "b000027",
+      "b000028",
+      "b000029",
+      "b000030",
+      "b000031"
+    ],
+    "block_schema_versions": [
+      "dom-blocks-v3"
+    ],
+    "heading_path": [
+      {
+        "block_id": "b000023",
+        "level": 1,
+        "text": "Imagem ideal: ajuste contraste e nível de preto de sua TV"
+      }
+    ],
+    "text": "Imagem ideal: ajuste contraste e nível de preto de sua TV\n\n15/05/2020\n\nPor Alex dos Santos\n\nDiferente de TVs OLED ou LED-LCDs com pontos quânticos e backlight FALD, modelos LED-LCDs convencionais (e acessíveis) podem apresentar níveis de preto mais próximos de um cinza escuro, conforme vemos em nossos testes. Para muitas pessoas o baixo nível de preto nem é um problema, mas para quem é exigente percebe que isso também compromete a fidelidade de cores.\n\nAs tonalidades escuras ficam menos intensas, fazendo com que a imagem inteira pareça um pouco “lavada”. Felizmente esse problema inerente aos displays LCDs, sobretudo os de linhas mais populares, pode ser corrigido ao menos parcialmente com ajustes simples. Basta entrar no menu, diminuir o brilho e aumentar o contraste.\n\nPara obter bons níveis de tons escuros, o brilho geral da imagem deverá ser menor. Quando o ambiente é escuro ou durante uma sessão noturna, o ajuste de brilho mais baixo não é um problema. Porém, o mesmo não podemos dizer com o uso da TV de dia, ou numa sala onde não há controle de luz externa, mesmo fechando janela e cortina.\n\nPara um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+    "markdown": "# Imagem ideal: ajuste contraste e nível de preto de sua TV\n\n**15/05/2020**\n\n![](<https://www.hometheater.com.br/portal/wp-content/uploads/2020/05/contraste_nivel_preto1.jpg>)\n\n[Por Alex dos Santos](<https://www.hometheater.com.br/portal/2020/05/15/como-ajustar-contraste-e-nivel-de-preto-de-sua-tv>)\n\nDiferente de TVs **[OLED](<https://www.hometheater.com.br/portal/2019/11/21/lg-oferece-maior-tv-oled-do-mercado-e-demonstra-displays-por-dentro/>)** ou LED-LCDs com pontos quânticos e **[backlight FALD](<https://www.hometheater.com.br/portal/2019/08/19/testando-samsung-qled-q80-55-uma-das-melhores-tvs-do-brasil/>)**, modelos LED-LCDs convencionais (e acessíveis) podem apresentar níveis de preto mais próximos de um cinza escuro, conforme vemos em nossos testes. Para muitas pessoas o baixo nível de preto nem é um problema, mas para quem é exigente percebe que isso também compromete a fidelidade de cores.\n\nAs tonalidades escuras ficam menos intensas, fazendo com que a imagem inteira pareça um pouco “lavada”. Felizmente esse problema inerente aos displays LCDs, sobretudo os de linhas mais populares, pode ser corrigido ao menos parcialmente com ajustes simples. Basta entrar no menu, diminuir o brilho e aumentar o contraste.\n\n![](<https://www.hometheater.com.br/portal/wp-content/uploads/2020/05/cinza_preto.jpg>)\n\nPara obter bons níveis de tons escuros, o brilho geral da imagem deverá ser menor. Quando o ambiente é escuro ou durante uma sessão noturna, o ajuste de brilho mais baixo não é um problema. Porém, o mesmo não podemos dizer com o uso da TV de dia, ou numa sala onde não há controle de luz externa, mesmo fechando janela e cortina.\n\nPara um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+    "characters": 2045,
+    "oversized": false
+  },
+  "gate_finding": {
+    "block_id": "b000031",
+    "verdict": "supported",
+    "category": "faithful/copy-edit",
+    "reason": "The rewrite streamlines and clarifies the process of using reference images and sources for adjustment, matching the meaning of the original and staying within supported claims.",
+    "source_ids": [
+      "b000031"
+    ]
+  },
+  "source_comparison": "The rewrite says de forma gratuita (free of charge); the allowed original chunk says images can be downloaded, without establishing their price. It also adds para melhor qualidade (for better quality) to signal sources, where the source simply lists devices. These are unsupported additions despite the full reviewer passing them. No external truth claim or human validation.",
+  "disposition": "Baseline metrics preserved. No promotion. Audit recommended candidate accepted edits before deciding whether it qualifies. No held-out calls."
+}

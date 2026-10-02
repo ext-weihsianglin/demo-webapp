@@ -1,0 +1,353 @@
+{
+  "diagnostic_only": true,
+  "source_controls": "verification/gepa-fidelity-v4-live-controls-v1.json",
+  "rewrite_provider_calls": 0,
+  "judge_calls": 0,
+  "heldout_calls": 0,
+  "cases": [
+    {
+      "case": "six_faithful_controls",
+      "page_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+      "hostname": "www.hometheater.com.br",
+      "role": "selection",
+      "edit_count": 6,
+      "original_mean": 0.39031814223823996,
+      "control_mean": 0.38955682494458027,
+      "mean_delta": -0.0007613172936596913,
+      "per_query": [
+        {
+          "query": "Melhores pr\u00e1ticas para gerenciar o brilho da TV que voc\u00ea deve adotar imediatamente.",
+          "delta": -0.0009114240453145239
+        },
+        {
+          "query": "Qual TV controlada por voz se destaca na funcionalidade HDMI 2.1?",
+          "delta": -0.0007237227919321132
+        },
+        {
+          "query": "melhor manejo de reflexo de TV pelo dinheiro",
+          "delta": -0.0008683877240632243
+        },
+        {
+          "query": "Principais marcas para TVs 4K acess\u00edveis?",
+          "delta": -0.0008001805315931976
+        },
+        {
+          "query": "melhor smart TV para ambientes claros",
+          "delta": -0.0007402602748603493
+        },
+        {
+          "query": "Principais televis\u00f5es com sistemas de \u00e1udio integrados.",
+          "delta": -0.0007817852354283783
+        },
+        {
+          "query": "Identifique a televis\u00e3o 8K de maior valor dispon\u00edvel no momento.",
+          "delta": -0.000575089757259617
+        },
+        {
+          "query": "Quais s\u00e3o as principais marcas de soundbars de TV com qualidade de som excepcional?",
+          "delta": -0.0007171458344777393
+        },
+        {
+          "query": "Qual modelo de TV OLED tem o melhor custo-benef\u00edcio?",
+          "delta": -0.0007973230997717073
+        },
+        {
+          "query": "Identifique a melhor soundbar para uso em TV para comprar imediatamente.",
+          "delta": -0.0006978536418963954
+        }
+      ],
+      "changed_features": [
+        {
+          "name": "page_similarity",
+          "max_abs_delta": 0.0012282729148864746,
+          "mean_delta": -0.0008657544851303101
+        },
+        {
+          "name": "section_max",
+          "max_abs_delta": 0.0016762614250183105,
+          "mean_delta": -0.00016762614250183107
+        },
+        {
+          "name": "section_top3_mean",
+          "max_abs_delta": 0.0012359619140625,
+          "mean_delta": -0.00012359619140625
+        },
+        {
+          "name": "section_median",
+          "max_abs_delta": 0.0019068121910095215,
+          "mean_delta": 0.00010807514190673828
+        },
+        {
+          "name": "section_q25",
+          "max_abs_delta": 0.005376577377319336,
+          "mean_delta": -0.000520661473274231
+        },
+        {
+          "name": "section_q75",
+          "max_abs_delta": 0.0009976327419281006,
+          "mean_delta": -0.00011601746082305908
+        },
+        {
+          "name": "log_word_count",
+          "max_abs_delta": 0.005141399500418586,
+          "mean_delta": 0.005141399500418586
+        },
+        {
+          "name": "headings_per_1000_words",
+          "max_abs_delta": 0.06625533148370444,
+          "mean_delta": -0.06625533148370444
+        },
+        {
+          "name": "list_items_per_1000_words",
+          "max_abs_delta": 0.09275746407718799,
+          "mean_delta": -0.09275746407718799
+        },
+        {
+          "name": "retained_text_fraction",
+          "max_abs_delta": 0.005056890012642201,
+          "mean_delta": 0.005056890012642201
+        },
+        {
+          "name": "unique_word_fraction",
+          "max_abs_delta": 0.001333388546109593,
+          "mean_delta": 0.001333388546109593
+        },
+        {
+          "name": "numeric_word_fraction",
+          "max_abs_delta": 0.00013251066296740902,
+          "mean_delta": -0.00013251066296740902
+        },
+        {
+          "name": "links_per_1000_words",
+          "max_abs_delta": 0.25177025963807864,
+          "mean_delta": -0.25177025963807864
+        },
+        {
+          "name": "heading_word_fraction",
+          "max_abs_delta": 0.00029814899167667636,
+          "mean_delta": -0.00029814899167667636
+        },
+        {
+          "name": "paragraph_word_fraction",
+          "max_abs_delta": 0.0002981489916766833,
+          "mean_delta": 0.0002981489916766833
+        }
+      ],
+      "unchanged_feature_count": 40,
+      "embedding_before": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_requests": 30,
+        "missing_requests": 0
+      },
+      "embedding_after": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 1,
+        "input_tokens": 3258,
+        "cached_requests": 25,
+        "missing_requests": 5
+      }
+    },
+    {
+      "case": "commercial_scope_faithful_control",
+      "page_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "hostname": "www.imagine.art",
+      "role": "selection",
+      "edit_count": 1,
+      "original_mean": 0.4049419101627917,
+      "control_mean": 0.4049868306654175,
+      "mean_delta": 4.492050262583369e-05,
+      "per_query": [
+        {
+          "query": "Which is the best AI video generator for marketing campaigns?",
+          "delta": 0.00015599565584178965
+        },
+        {
+          "query": "best applied AI tools for business collaboration",
+          "delta": 3.2686728460629144e-05
+        },
+        {
+          "query": "meilleur logiciel pour d\u00e9couper les arri\u00e8re-plans",
+          "delta": 1.734350234447457e-05
+        },
+        {
+          "query": "Where can I find the best free AI art generator?",
+          "delta": 3.599602402432067e-05
+        },
+        {
+          "query": "Can you show me how to generate AI art?",
+          "delta": 8.865138687197405e-06
+        },
+        {
+          "query": "How can I generate free AI art in bulk?",
+          "delta": 9.32552043630408e-05
+        },
+        {
+          "query": "Comparison of the top AI music generators",
+          "delta": 3.45899210568712e-05
+        },
+        {
+          "query": "AI platforms with top photo avatar features",
+          "delta": 3.294711364021374e-05
+        },
+        {
+          "query": "How do I generate realistic images with artificial intelligence?",
+          "delta": 3.074264118052561e-06
+        },
+        {
+          "query": "best AI engine for EDM dance video clips",
+          "delta": 3.4451473721164305e-05
+        }
+      ],
+      "changed_features": [
+        {
+          "name": "page_similarity",
+          "max_abs_delta": 0.00019171833992004395,
+          "mean_delta": 9.468048810958862e-05
+        },
+        {
+          "name": "section_median",
+          "max_abs_delta": 0.0011288225650787354,
+          "mean_delta": 0.00011288225650787353
+        },
+        {
+          "name": "section_q25",
+          "max_abs_delta": 0.0014392733573913574,
+          "mean_delta": 0.0002934783697128296
+        },
+        {
+          "name": "section_q75",
+          "max_abs_delta": 0.0017090439796447754,
+          "mean_delta": 0.00017090439796447755
+        },
+        {
+          "name": "unique_word_fraction",
+          "max_abs_delta": 0.00040683482506104207,
+          "mean_delta": -0.00040683482506104207
+        }
+      ],
+      "unchanged_feature_count": 50,
+      "embedding_before": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_requests": 37,
+        "missing_requests": 0
+      },
+      "embedding_after": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 1,
+        "input_tokens": 1695,
+        "cached_requests": 35,
+        "missing_requests": 2
+      }
+    },
+    {
+      "case": "attribution_faithful_control",
+      "page_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "hostname": "www.imagine.art",
+      "role": "selection",
+      "edit_count": 1,
+      "original_mean": 0.4049419101627917,
+      "control_mean": 0.40495546352215267,
+      "mean_delta": 1.3553359360984896e-05,
+      "per_query": [
+        {
+          "query": "Which is the best AI video generator for marketing campaigns?",
+          "delta": 1.2813116709087247e-05
+        },
+        {
+          "query": "best applied AI tools for business collaboration",
+          "delta": -2.055369387266026e-05
+        },
+        {
+          "query": "meilleur logiciel pour d\u00e9couper les arri\u00e8re-plans",
+          "delta": 9.311777532300392e-06
+        },
+        {
+          "query": "Where can I find the best free AI art generator?",
+          "delta": 2.8840050623424318e-05
+        },
+        {
+          "query": "Can you show me how to generate AI art?",
+          "delta": 3.0125762406685297e-05
+        },
+        {
+          "query": "How can I generate free AI art in bulk?",
+          "delta": 1.4002713929484045e-05
+        },
+        {
+          "query": "Comparison of the top AI music generators",
+          "delta": 2.0327659924657127e-05
+        },
+        {
+          "query": "AI platforms with top photo avatar features",
+          "delta": 1.527488223596052e-05
+        },
+        {
+          "query": "How do I generate realistic images with artificial intelligence?",
+          "delta": 6.972100647761881e-06
+        },
+        {
+          "query": "best AI engine for EDM dance video clips",
+          "delta": 1.841922347267655e-05
+        }
+      ],
+      "changed_features": [
+        {
+          "name": "page_similarity",
+          "max_abs_delta": 0.00028455257415771484,
+          "mean_delta": 0.000174635648727417
+        },
+        {
+          "name": "section_median",
+          "max_abs_delta": 0.0004801452159881592,
+          "mean_delta": -4.8014521598815915e-05
+        },
+        {
+          "name": "section_q75",
+          "max_abs_delta": 0.00020620226860046387,
+          "mean_delta": 1.1146068572998047e-05
+        }
+      ],
+      "unchanged_feature_count": 52,
+      "embedding_before": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_requests": 37,
+        "missing_requests": 0
+      },
+      "embedding_after": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 1,
+        "input_tokens": 1731,
+        "cached_requests": 35,
+        "missing_requests": 2
+      }
+    }
+  ],
+  "limits": [
+    "These small faithful paraphrases are sensitivity controls, not an achievable-score ceiling or GEPA superiority proof.",
+    "Judge acceptance of saved controls is bounded evidence, not factual certification."
+  ]
+}

@@ -1,0 +1,1222 @@
+{
+  "scope": "Three authored faithful controls grounded in the same saved reflection source; one unchanged Cisco edit retries the unavailable case. Expected verdict supported; no P2 or held-out calls.",
+  "cases": [
+    {
+      "id": "fuel-user-reports",
+      "group": "faithful",
+      "expected": "supported",
+      "assessment": "The same chunk explicitly contains mpg, smoothness, throttle-response and preventative-maintenance anecdotes; the rewrite retains user-reported attribution.",
+      "provenance": {
+        "run_id": "b918675d60c2495b878cafc067e18094",
+        "role": "reflection",
+        "evaluation_path": "backend/data/gepa/runs/b918675d60c2495b878cafc067e18094/evaluation-gpt-5-mini--rewrite-page-v7-d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a.json",
+        "evaluation_sha256": "e36615c6fe6d13fe27315bdc338c916e420087694abe9e737609bb927220778f",
+        "candidate_id": "gpt-5-mini--rewrite-page-v7",
+        "block_id": "b000056"
+      },
+      "document": {
+        "snapshot_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+        "chunks": [
+          {
+            "chunk_id": "a6c67583325d36338183326bc26477e0c200a7c492160ecd4ec57927c98e10cb",
+            "snapshot_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+            "method": "conservative_dom",
+            "order": 4,
+            "block_ids": [
+              "b000055",
+              "b000056",
+              "b000057",
+              "b000058",
+              "b000059",
+              "b000060"
+            ],
+            "block_schema_versions": [
+              "dom-blocks-v3"
+            ],
+            "heading_path": [
+              {
+                "block_id": "b000011",
+                "level": 1,
+                "text": "Best Fuel Additive for Direct Injection Engines Facts"
+              },
+              {
+                "block_id": "b000053",
+                "level": 2,
+                "text": "Real-World Experiences with Fuel Additives for Direct Injection Engines"
+              },
+              {
+                "block_id": "b000055",
+                "level": 3,
+                "text": "Real-Life Examples and User Reviews"
+              }
+            ],
+            "text": "Real-Life Examples and User Reviews\n\nMany users have reported significant improvements in engine performance after using fuel additives specifically designed for direct injection systems. Here are a few notable examples:\n\n1. Improved Fuel Economy: A user with a 2018 Volkswagen GTI noticed a marked improvement in fuel economy after using a popular fuel additive. They reported an increase of about 3-5 miles per gallon, which can make a noticeable difference, especially for daily commuters. The user attributed this improvement to the additive’s cleaning properties, which helped remove carbon deposits from the injectors.\n\n2. Restored Engine Performance: An owner of a Ford EcoBoost engine experienced rough idling and reduced power. After using a fuel additive, they reported smoother operation and a noticeable increase in throttle response. This case highlights how additives can help restore engine performance by cleaning critical components.\n\nWhat is the Best 5.3 LS Engine? Facts and Insights\n\n3. Preventative Maintenance: A driver of a Subaru WRX, known for its direct injection system, began using a fuel additive as part of their regular maintenance routine. They found that the additive not only kept the engine clean but also helped maintain optimal fuel system performance. This user emphasized the importance of using a quality additive to prevent issues before they arise.",
+            "markdown": "### Real-Life Examples and User Reviews\n\nMany users have reported significant improvements in engine performance after using fuel additives specifically designed for direct injection systems. Here are a few notable examples:\n\n1. Improved Fuel Economy: A user with a 2018 Volkswagen GTI noticed a marked improvement in fuel economy after using a popular fuel additive. They reported an increase of about 3-5 miles per gallon, which can make a noticeable difference, especially for daily commuters. The user attributed this improvement to the additive’s cleaning properties, which helped remove carbon deposits from the injectors.\n\n2. Restored Engine Performance: An owner of a Ford EcoBoost engine experienced rough idling and reduced power. After using a fuel additive, they reported smoother operation and a noticeable increase in throttle response. This case highlights how additives can help restore engine performance by cleaning critical components.\n\n  What is the Best 5.3 LS Engine? Facts and Insights\n\n3. Preventative Maintenance: A driver of a Subaru WRX, known for its direct injection system, began using a fuel additive as part of their regular maintenance routine. They found that the additive not only kept the engine clean but also helped maintain optimal fuel system performance. This user emphasized the importance of using a quality additive to prevent issues before they arise.",
+            "characters": 1396,
+            "oversized": false
+          }
+        ],
+        "blocks": [
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000055",
+            "order": 55,
+            "parent_id": null,
+            "type": "heading",
+            "text": "Real-Life Examples and User Reviews",
+            "heading_level": 3,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/h3[1]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "span",
+                "tag": "span",
+                "attributes": {
+                  "id": "Real-Life_Examples_and_User_Reviews"
+                },
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/h3[1]/span[1]"
+                },
+                "mapping_status": "exact",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Real-Life Examples and User Reviews",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/h3[1]/span[1]",
+                      "child_index": 0
+                    },
+                    "mapping_status": "exact"
+                  }
+                ]
+              }
+            ],
+            "inline_markdown": "Real-Life Examples and User Reviews"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000056",
+            "order": 56,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Many users have reported significant improvements in engine performance after using fuel additives specifically designed for direct injection systems. Here are a few notable examples:",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[16]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "Many users have reported significant improvements in engine performance after using fuel additives specifically designed for direct injection systems. Here are a few notable examples:",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[16]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "Many users have reported significant improvements in engine performance after using fuel additives specifically designed for direct injection systems. Here are a few notable examples:"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000057",
+            "order": 57,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "1. Improved Fuel Economy: A user with a 2018 Volkswagen GTI noticed a marked improvement in fuel economy after using a popular fuel additive. They reported an increase of about 3-5 miles per gallon, which can make a noticeable difference, especially for daily commuters. The user attributed this improvement to the additive’s cleaning properties, which helped remove carbon deposits from the injectors.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[17]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "1. Improved Fuel Economy: A user with a 2018 Volkswagen GTI noticed a marked improvement in fuel economy after using a popular fuel additive. They reported an increase of about 3-5 miles per gallon, which can make a noticeable difference, especially for daily commuters. The user attributed this improvement to the additive’s cleaning properties, which helped remove carbon deposits from the injectors.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[17]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "1. Improved Fuel Economy: A user with a 2018 Volkswagen GTI noticed a marked improvement in fuel economy after using a popular fuel additive. They reported an increase of about 3-5 miles per gallon, which can make a noticeable difference, especially for daily commuters. The user attributed this improvement to the additive’s cleaning properties, which helped remove carbon deposits from the injectors."
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000058",
+            "order": 58,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "2. Restored Engine Performance: An owner of a Ford EcoBoost engine experienced rough idling and reduced power. After using a fuel additive, they reported smoother operation and a noticeable increase in throttle response. This case highlights how additives can help restore engine performance by cleaning critical components.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[18]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "2. Restored Engine Performance: An owner of a Ford EcoBoost engine experienced rough idling and reduced power. After using a fuel additive, they reported smoother operation and a noticeable increase in throttle response. This case highlights how additives can help restore engine performance by cleaning critical components.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[18]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "2. Restored Engine Performance: An owner of a Ford EcoBoost engine experienced rough idling and reduced power. After using a fuel additive, they reported smoother operation and a noticeable increase in throttle response. This case highlights how additives can help restore engine performance by cleaning critical components."
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000059",
+            "order": 59,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "What is the Best 5.3 LS Engine? Facts and Insights",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/div[6]/a[1]/div[1]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "span",
+                "tag": "span",
+                "attributes": {
+                  "class": [
+                    "ctaText"
+                  ]
+                },
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/div[6]/a[1]/div[1]/span[1]"
+                },
+                "mapping_status": "exact",
+                "children": []
+              },
+              {
+                "type": "text",
+                "text": "  ",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/div[6]/a[1]/div[1]",
+                  "child_index": 1
+                },
+                "mapping_status": "exact"
+              },
+              {
+                "type": "span",
+                "tag": "span",
+                "attributes": {
+                  "class": [
+                    "postTitle"
+                  ]
+                },
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/div[6]/a[1]/div[1]/span[2]"
+                },
+                "mapping_status": "exact",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "What is the Best 5.3 LS Engine? Facts and Insights",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/div[6]/a[1]/div[1]/span[2]",
+                      "child_index": 0
+                    },
+                    "mapping_status": "exact"
+                  }
+                ]
+              }
+            ],
+            "inline_markdown": "  What is the Best 5.3 LS Engine? Facts and Insights"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000060",
+            "order": 60,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "3. Preventative Maintenance: A driver of a Subaru WRX, known for its direct injection system, began using a fuel additive as part of their regular maintenance routine. They found that the additive not only kept the engine clean but also helped maintain optimal fuel system performance. This user emphasized the importance of using a quality additive to prevent issues before they arise.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[19]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "3. Preventative Maintenance: A driver of a Subaru WRX, known for its direct injection system, began using a fuel additive as part of their regular maintenance routine. They found that the additive not only kept the engine clean but also helped maintain optimal fuel system performance. This user emphasized the importance of using a quality additive to prevent issues before they arise.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[19]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "3. Preventative Maintenance: A driver of a Subaru WRX, known for its direct injection system, began using a fuel additive as part of their regular maintenance routine. They found that the additive not only kept the engine clean but also helped maintain optimal fuel system performance. This user emphasized the importance of using a quality additive to prevent issues before they arise."
+          }
+        ]
+      },
+      "change": {
+        "snapshot_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+        "chunk_id": "a6c67583325d36338183326bc26477e0c200a7c492160ecd4ec57927c98e10cb",
+        "block_id": "b000056",
+        "before": "Many users have reported significant improvements in engine performance after using fuel additives specifically designed for direct injection systems. Here are a few notable examples:",
+        "after": "Many users report significant engine-performance improvements after using fuel additives specifically designed for direct injection systems; the following examples describe their experiences.",
+        "reason": "Condense and clarify the specific user-reported benefits so they are easier to cite when answering queries about fuel economy improvements and real-user feedback.",
+        "evidence": [
+          {
+            "snapshot_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+            "block_id": "b000056",
+            "quote": "Many users have reported significant improvements in engine performance after using fuel additives specifically designed for direct injection systems. Here are a few notable examples:"
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000056"
+      },
+      "saved_finding": {
+        "block_id": "b000056",
+        "verdict": "supported",
+        "category": "Faithful summary",
+        "reason": "Summarizes user-reported outcomes (mpg gains, smoother idling, throttle response, preventative use) that are explicitly given in the examples.",
+        "source_ids": [
+          "b000057",
+          "b000058",
+          "b000060"
+        ]
+      },
+      "control_kind": "faithful paraphrase preserving omitted facts"
+    },
+    {
+      "id": "nec-description",
+      "group": "faithful",
+      "expected": "supported",
+      "assessment": "Preserves Open RAN support, platform-agnostic design, experience, alliances and integrator positioning; open multi-vendor focus must be checked against the full original chunk.",
+      "provenance": {
+        "run_id": "b918675d60c2495b878cafc067e18094",
+        "role": "reflection",
+        "evaluation_path": "backend/data/gepa/runs/b918675d60c2495b878cafc067e18094/evaluation-gpt-5-mini--procedure--1256b55af14051b12ab936a0-a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450.json",
+        "evaluation_sha256": "06050eb42750f541d5d4971372cf5b7faf387d93d1106020c2e109120ba7296b",
+        "candidate_id": "gpt-5-mini--procedure--1256b55af14051b12ab936a0",
+        "block_id": "b000025"
+      },
+      "document": {
+        "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+        "chunks": [
+          {
+            "chunk_id": "7cbef15248ad7fb403d9c6ce5be90fd16ab6239b293fb6e8fc429e94600153c8",
+            "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+            "method": "conservative_dom",
+            "order": 3,
+            "block_ids": [
+              "b000021",
+              "b000022",
+              "b000023",
+              "b000024",
+              "b000025"
+            ],
+            "block_schema_versions": [
+              "dom-blocks-v3"
+            ],
+            "heading_path": [
+              {
+                "block_id": "b000003",
+                "level": 1,
+                "text": "Top 10: 5G Core Vendors"
+              },
+              {
+                "block_id": "b000021",
+                "level": 2,
+                "text": "9. NEC"
+              }
+            ],
+            "text": "9. NEC\n\nFounded: 1899 Annual Revenue: US$22.5bn Chief Executive Officer: Takayuki Morita ​​​​​​​Number of Employees: 104,190\n\nYoutube Placeholder\n\nNEC has carved out a distinctive role in the 5G Core ecosystem, focusing on open, multi-vendor networks rather than market share dominance. Its cloud-native 4G/5G Converged Core, built on open-source technology, enables flexible deployment across private and public clouds while helping operators avoid vendor lock-in.\n\nA founding supporter of Open RAN, NEC combines platform-agnostic design with more than 120 years of systems integration expertise. Strategic alliances with AWS and Red Hat highlight its ability to integrate and optimise best-of-breed solutions, positioning NEC as a trusted 5G integrator.",
+            "markdown": "## 9. NEC\n\n**Founded: 1899\\\nAnnual Revenue: US$22.5bn\\\nChief Executive Officer: Takayuki Morita\\\n​​​​​​​Number of Employees: 104,190**\n\n![Youtube Placeholder](<https://i.ytimg.com/vi/levHP73hrUs/hqdefault.jpg>)\n\nNEC has carved out a distinctive role in the 5G Core ecosystem, focusing on open, multi-vendor networks rather than market share dominance. Its cloud-native 4G/5G Converged Core, built on open-source technology, enables flexible deployment across private and public clouds while helping operators avoid vendor lock-in.\n\nA founding supporter of Open RAN, NEC combines platform-agnostic design with more than 120 years of systems integration expertise. Strategic alliances with AWS and Red Hat highlight its ability to integrate and optimise best-of-breed solutions, positioning NEC as a trusted 5G integrator.",
+            "characters": 820,
+            "oversized": false
+          }
+        ],
+        "blocks": [
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000021",
+            "order": 21,
+            "parent_id": null,
+            "type": "heading",
+            "text": "9. NEC",
+            "heading_level": 2,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/h2[1]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "9. NEC",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/h2[1]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "9. NEC"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000022",
+            "order": 22,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Founded: 1899 Annual Revenue: US$22.5bn Chief Executive Officer: Takayuki Morita ​​​​​​​Number of Employees: 104,190",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "strong",
+                "tag": "strong",
+                "attributes": {},
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]/strong[1]"
+                },
+                "mapping_status": "exact",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Founded: 1899",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]/strong[1]",
+                      "child_index": 0
+                    },
+                    "mapping_status": "exact"
+                  },
+                  {
+                    "type": "hard_break",
+                    "tag": "br",
+                    "attributes": {},
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]/strong[1]/br[1]"
+                    },
+                    "mapping_status": "exact",
+                    "children": []
+                  },
+                  {
+                    "type": "text",
+                    "text": "Annual Revenue: US$22.5bn",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]/strong[1]",
+                      "child_index": 2
+                    },
+                    "mapping_status": "exact"
+                  },
+                  {
+                    "type": "hard_break",
+                    "tag": "br",
+                    "attributes": {},
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]/strong[1]/br[2]"
+                    },
+                    "mapping_status": "exact",
+                    "children": []
+                  },
+                  {
+                    "type": "text",
+                    "text": "Chief Executive Officer: Takayuki Morita",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]/strong[1]",
+                      "child_index": 4
+                    },
+                    "mapping_status": "exact"
+                  },
+                  {
+                    "type": "hard_break",
+                    "tag": "br",
+                    "attributes": {},
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]/strong[1]/br[3]"
+                    },
+                    "mapping_status": "exact",
+                    "children": []
+                  },
+                  {
+                    "type": "text",
+                    "text": "​​​​​​​Number of Employees: 104,190",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/p[3]/strong[1]",
+                      "child_index": 6
+                    },
+                    "mapping_status": "exact"
+                  }
+                ]
+              }
+            ],
+            "inline_markdown": "**Founded: 1899\\\nAnnual Revenue: US$22.5bn\\\nChief Executive Officer: Takayuki Morita\\\n​​​​​​​Number of Employees: 104,190**"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000023",
+            "order": 23,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Youtube Placeholder",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[4]/div[1]/div[1]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "link",
+                "tag": "a",
+                "attributes": {
+                  "class": [
+                    "YoutubeEmbedPlaceholder_Wrapper__1V0Ea"
+                  ],
+                  "rel": [
+                    "noreferrer",
+                    "noopener"
+                  ],
+                  "target": "_blank"
+                },
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[4]/div[1]/div[1]/a[1]"
+                },
+                "mapping_status": "exact",
+                "children": [
+                  {
+                    "type": "inline_image",
+                    "tag": "img",
+                    "attributes": {
+                      "alt": "Youtube Placeholder",
+                      "class": [
+                        "YoutubeEmbedPlaceholder_Placeholder__2uFJ0"
+                      ],
+                      "loading": "lazy",
+                      "src": "https://i.ytimg.com/vi/levHP73hrUs/hqdefault.jpg"
+                    },
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[4]/div[1]/div[1]/a[1]/img[1]"
+                    },
+                    "mapping_status": "exact",
+                    "text": "Youtube Placeholder",
+                    "target": "https://i.ytimg.com/vi/levHP73hrUs/hqdefault.jpg",
+                    "resolved_target": "https://i.ytimg.com/vi/levHP73hrUs/hqdefault.jpg",
+                    "html": "<img alt=\"Youtube Placeholder\" class=\"YoutubeEmbedPlaceholder_Placeholder__2uFJ0\" loading=\"lazy\" src=\"https://i.ytimg.com/vi/levHP73hrUs/hqdefault.jpg\"/>",
+                    "children": []
+                  }
+                ]
+              }
+            ],
+            "inline_markdown": "![Youtube Placeholder](<https://i.ytimg.com/vi/levHP73hrUs/hqdefault.jpg>)"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000024",
+            "order": 24,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "NEC has carved out a distinctive role in the 5G Core ecosystem, focusing on open, multi-vendor networks rather than market share dominance. Its cloud-native 4G/5G Converged Core, built on open-source technology, enables flexible deployment across private and public clouds while helping operators avoid vendor lock-in.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[5]/div[1]/p[1]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "NEC has carved out a distinctive role in the 5G Core ecosystem, focusing on open, multi-vendor networks rather than market share dominance. Its cloud-native 4G/5G Converged Core, built on open-source technology, enables flexible deployment across private and public clouds while helping operators avoid vendor lock-in. ",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[5]/div[1]/p[1]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "NEC has carved out a distinctive role in the 5G Core ecosystem, focusing on open, multi-vendor networks rather than market share dominance. Its cloud-native 4G/5G Converged Core, built on open-source technology, enables flexible deployment across private and public clouds while helping operators avoid vendor lock-in. "
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000025",
+            "order": 25,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "A founding supporter of Open RAN, NEC combines platform-agnostic design with more than 120 years of systems integration expertise. Strategic alliances with AWS and Red Hat highlight its ability to integrate and optimise best-of-breed solutions, positioning NEC as a trusted 5G integrator.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[5]/div[1]/p[2]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "A founding supporter of Open RAN, NEC combines platform-agnostic design with more than 120 years of systems integration expertise. Strategic alliances with AWS and Red Hat highlight its ability to integrate and optimise best-of-breed solutions, positioning NEC as a trusted 5G integrator.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[5]/div[1]/p[2]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "A founding supporter of Open RAN, NEC combines platform-agnostic design with more than 120 years of systems integration expertise. Strategic alliances with AWS and Red Hat highlight its ability to integrate and optimise best-of-breed solutions, positioning NEC as a trusted 5G integrator."
+          }
+        ]
+      },
+      "change": {
+        "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+        "chunk_id": "7cbef15248ad7fb403d9c6ce5be90fd16ab6239b293fb6e8fc429e94600153c8",
+        "block_id": "b000025",
+        "before": "A founding supporter of Open RAN, NEC combines platform-agnostic design with more than 120 years of systems integration expertise. Strategic alliances with AWS and Red Hat highlight its ability to integrate and optimise best-of-breed solutions, positioning NEC as a trusted 5G integrator.",
+        "after": "As a founding supporter of Open RAN, NEC combines platform-agnostic design with more than 120 years of systems integration expertise. Its strategic alliances with AWS and Red Hat highlight its ability to integrate and optimise best-of-breed solutions, positioning it as a trusted 5G integrator.",
+        "reason": "Merge and tighten NEC statements from the same chunk to produce a direct vendor-strength sentence that preserves the Open RAN, alliances and multi-vendor focus stated in-chunk.",
+        "evidence": [
+          {
+            "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+            "block_id": "b000025",
+            "quote": "A founding supporter of Open RAN, NEC combines platform-agnostic design with more than 120 years of systems integration expertise. Strategic alliances with AWS and Red Hat highlight its ability to integrate and optimise best-of-breed solutions, positioning NEC as a trusted 5G integrator."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000025"
+      },
+      "saved_finding": {
+        "block_id": "b000025",
+        "verdict": "supported",
+        "category": "Supported consolidation",
+        "reason": "Merges NEC’s Open RAN stance and alliances with its focus on open, multi-vendor networks as stated across adjacent blocks.",
+        "source_ids": [
+          "b000025",
+          "b000024"
+        ]
+      },
+      "control_kind": "faithful paraphrase preserving omitted facts"
+    },
+    {
+      "id": "fuel-professional-interval",
+      "group": "borderline",
+      "expected": "supported",
+      "assessment": "Recurring interval and prevention are in the original block; short-trip context is supported by b000071 in the same chunk. Professional recommendation remains qualified as many/common.",
+      "provenance": {
+        "run_id": "b918675d60c2495b878cafc067e18094",
+        "role": "reflection",
+        "evaluation_path": "backend/data/gepa/runs/b918675d60c2495b878cafc067e18094/evaluation-gpt-5-mini--rewrite-page-v7-d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a.json",
+        "evaluation_sha256": "e36615c6fe6d13fe27315bdc338c916e420087694abe9e737609bb927220778f",
+        "candidate_id": "gpt-5-mini--rewrite-page-v7",
+        "block_id": "b000069"
+      },
+      "document": {
+        "snapshot_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+        "chunks": [
+          {
+            "chunk_id": "503d78caa73515b131b342aa55f73fcadbc34c577727f3c2b523d694b389ff33",
+            "snapshot_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+            "method": "conservative_dom",
+            "order": 6,
+            "block_ids": [
+              "b000066",
+              "b000067",
+              "b000068",
+              "b000069",
+              "b000070",
+              "b000071"
+            ],
+            "block_schema_versions": [
+              "dom-blocks-v3"
+            ],
+            "heading_path": [
+              {
+                "block_id": "b000011",
+                "level": 1,
+                "text": "Best Fuel Additive for Direct Injection Engines Facts"
+              },
+              {
+                "block_id": "b000053",
+                "level": 2,
+                "text": "Real-World Experiences with Fuel Additives for Direct Injection Engines"
+              },
+              {
+                "block_id": "b000066",
+                "level": 3,
+                "text": "Expert Recommendations"
+              }
+            ],
+            "text": "Expert Recommendations\n\nExperienced mechanics and automotive professionals often stress the importance of choosing the right additive based on your specific vehicle and driving conditions. Here are some key points they typically recommend:\n\n– Read the Label: Always check the product label for compatibility with your vehicle’s fuel system. Not all additives are created equal, and some may contain harsh chemicals that could damage sensitive components.\n\n– Frequency of Use: Many professionals suggest using fuel additives every 3,000 to 5,000 miles, especially if you drive in stop-and-go traffic or live in an area with poor fuel quality. Regular use can help prevent carbon buildup and maintain engine performance.\n\n– User Feedback: Mechanics often encourage car owners to look for products with positive user reviews and proven track records. Word-of-mouth recommendations from other car enthusiasts can be invaluable in choosing the right additive.\n\n– Consider Your Driving Habits: If you frequently drive short distances or have a vehicle that sits for extended periods, using a fuel additive can help mitigate the effects of fuel degradation and carbon buildup.",
+            "markdown": "### Expert Recommendations\n\nExperienced mechanics and automotive professionals often stress the importance of choosing the right additive based on your specific vehicle and driving conditions. Here are some key points they typically recommend:\n\n– Read the Label: Always check the product label for compatibility with your vehicle’s fuel system. Not all additives are created equal, and some may contain harsh chemicals that could damage sensitive components.\n\n– Frequency of Use: Many professionals suggest using fuel additives every 3,000 to 5,000 miles, especially if you drive in stop-and-go traffic or live in an area with poor fuel quality. Regular use can help prevent carbon buildup and maintain engine performance.\n\n– User Feedback: Mechanics often encourage car owners to look for products with positive user reviews and proven track records. Word-of-mouth recommendations from other car enthusiasts can be invaluable in choosing the right additive.\n\n– Consider Your Driving Habits: If you frequently drive short distances or have a vehicle that sits for extended periods, using a fuel additive can help mitigate the effects of fuel degradation and carbon buildup.",
+            "characters": 1173,
+            "oversized": false
+          }
+        ],
+        "blocks": [
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000066",
+            "order": 66,
+            "parent_id": null,
+            "type": "heading",
+            "text": "Expert Recommendations",
+            "heading_level": 3,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/h3[3]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "span",
+                "tag": "span",
+                "attributes": {
+                  "id": "Expert_Recommendations"
+                },
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/h3[3]/span[1]"
+                },
+                "mapping_status": "exact",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Expert Recommendations",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/h3[3]/span[1]",
+                      "child_index": 0
+                    },
+                    "mapping_status": "exact"
+                  }
+                ]
+              }
+            ],
+            "inline_markdown": "Expert Recommendations"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000067",
+            "order": 67,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Experienced mechanics and automotive professionals often stress the importance of choosing the right additive based on your specific vehicle and driving conditions. Here are some key points they typically recommend:",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[24]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "Experienced mechanics and automotive professionals often stress the importance of choosing the right additive based on your specific vehicle and driving conditions. Here are some key points they typically recommend:",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[24]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "Experienced mechanics and automotive professionals often stress the importance of choosing the right additive based on your specific vehicle and driving conditions. Here are some key points they typically recommend:"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000068",
+            "order": 68,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "– Read the Label: Always check the product label for compatibility with your vehicle’s fuel system. Not all additives are created equal, and some may contain harsh chemicals that could damage sensitive components.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[25]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "– Read the Label: Always check the product label for compatibility with your vehicle’s fuel system. Not all additives are created equal, and some may contain harsh chemicals that could damage sensitive components.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[25]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "– Read the Label: Always check the product label for compatibility with your vehicle’s fuel system. Not all additives are created equal, and some may contain harsh chemicals that could damage sensitive components."
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000069",
+            "order": 69,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "– Frequency of Use: Many professionals suggest using fuel additives every 3,000 to 5,000 miles, especially if you drive in stop-and-go traffic or live in an area with poor fuel quality. Regular use can help prevent carbon buildup and maintain engine performance.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[26]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "– Frequency of Use: Many professionals suggest using fuel additives every 3,000 to 5,000 miles, especially if you drive in stop-and-go traffic or live in an area with poor fuel quality. Regular use can help prevent carbon buildup and maintain engine performance.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[26]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "– Frequency of Use: Many professionals suggest using fuel additives every 3,000 to 5,000 miles, especially if you drive in stop-and-go traffic or live in an area with poor fuel quality. Regular use can help prevent carbon buildup and maintain engine performance."
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000070",
+            "order": 70,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "– User Feedback: Mechanics often encourage car owners to look for products with positive user reviews and proven track records. Word-of-mouth recommendations from other car enthusiasts can be invaluable in choosing the right additive.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[27]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "– User Feedback: Mechanics often encourage car owners to look for products with positive user reviews and proven track records. Word-of-mouth recommendations from other car enthusiasts can be invaluable in choosing the right additive.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[27]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "– User Feedback: Mechanics often encourage car owners to look for products with positive user reviews and proven track records. Word-of-mouth recommendations from other car enthusiasts can be invaluable in choosing the right additive."
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000071",
+            "order": 71,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "– Consider Your Driving Habits: If you frequently drive short distances or have a vehicle that sits for extended periods, using a fuel additive can help mitigate the effects of fuel degradation and carbon buildup.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[28]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "– Consider Your Driving Habits: If you frequently drive short distances or have a vehicle that sits for extended periods, using a fuel additive can help mitigate the effects of fuel degradation and carbon buildup.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[1]/main[1]/article[1]/div[1]/div[1]/p[28]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "– Consider Your Driving Habits: If you frequently drive short distances or have a vehicle that sits for extended periods, using a fuel additive can help mitigate the effects of fuel degradation and carbon buildup."
+          }
+        ]
+      },
+      "change": {
+        "snapshot_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+        "chunk_id": "503d78caa73515b131b342aa55f73fcadbc34c577727f3c2b523d694b389ff33",
+        "block_id": "b000069",
+        "before": "– Frequency of Use: Many professionals suggest using fuel additives every 3,000 to 5,000 miles, especially if you drive in stop-and-go traffic or live in an area with poor fuel quality. Regular use can help prevent carbon buildup and maintain engine performance.",
+        "after": "Many professionals suggest using fuel additives every 3,000 to 5,000 miles, particularly for stop-and-go driving or in areas with poor fuel quality. Regular use can help maintain engine performance and prevent carbon buildup.",
+        "reason": "Make the frequency recommendation explicit and citation-ready for questions about how often to use cleaning additives.",
+        "evidence": [
+          {
+            "snapshot_id": "d77a8054bfdc28af328ac5b95c08922592e95d774064d94a4b5dc53d17758c6a",
+            "block_id": "b000069",
+            "quote": "– Frequency of Use: Many professionals suggest using fuel additives every 3,000 to 5,000 miles, especially if you drive in stop-and-go traffic or live in an area with poor fuel quality. Regular use can help prevent carbon buildup and maintain engine performance."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000069"
+      },
+      "saved_finding": {
+        "block_id": "b000069",
+        "verdict": "supported",
+        "category": "Faithful paraphrase",
+        "reason": "Keeps the 3,000–5,000 mile guidance and appropriately incorporates short-trip/stop-and-go/poor-fuel contexts supported within the same chunk.",
+        "source_ids": [
+          "b000069",
+          "b000071"
+        ]
+      },
+      "control_kind": "faithful paraphrase preserving omitted facts"
+    },
+    {
+      "id": "cisco-paraphrase",
+      "group": "borderline",
+      "expected": "supported",
+      "assessment": "Retains Acacia, networking/security, transport and trusted IP-fabric function; nearby same-chunk text supplies leadership. Verify that removing promotional unique-value framing is not a material factual omission.",
+      "provenance": {
+        "run_id": "b918675d60c2495b878cafc067e18094",
+        "role": "reflection",
+        "evaluation_path": "backend/data/gepa/runs/b918675d60c2495b878cafc067e18094/evaluation-gpt-5-mini--procedure--1256b55af14051b12ab936a0-a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450.json",
+        "evaluation_sha256": "06050eb42750f541d5d4971372cf5b7faf387d93d1106020c2e109120ba7296b",
+        "candidate_id": "gpt-5-mini--procedure--1256b55af14051b12ab936a0",
+        "block_id": "b000055"
+      },
+      "document": {
+        "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+        "chunks": [
+          {
+            "chunk_id": "0f6969ef6a735ffddd2705d50209e048871265bd8a73255caa987d3c131423dc",
+            "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+            "method": "conservative_dom",
+            "order": 9,
+            "block_ids": [
+              "b000051",
+              "b000052",
+              "b000053",
+              "b000054",
+              "b000055"
+            ],
+            "block_schema_versions": [
+              "dom-blocks-v3"
+            ],
+            "heading_path": [
+              {
+                "block_id": "b000003",
+                "level": 1,
+                "text": "Top 10: 5G Core Vendors"
+              },
+              {
+                "block_id": "b000051",
+                "level": 2,
+                "text": "3. Cisco Systems"
+              }
+            ],
+            "text": "3. Cisco Systems\n\nFounded: 1984 Annual Revenue: US$56.6bn Chief Executive Officer: Chuck Robbins ​​​​​​​Number of Employees: 86,200\n\nPhoto: Cisco Systems\n\nCisco Systems brings decades of leadership in IP networking and security to play a pivotal role in the 5G Core ecosystem. While not a traditional MCN market share leader, Cisco extends its strengths in routing, cloud networking and automation into a secure, cloud-native 5G Core platform.\n\nStrategic moves, including the acquisition of Acacia Communications, enhance its transport and interconnectivity capabilities. Its unique value lies in providing the trusted, high-performance IP fabric that supports all 5G Cores, ensuring resilience, programmability and security across diverse, disaggregated architectures.",
+            "markdown": "## 3. Cisco Systems\n\n**Founded: 1984\\\nAnnual Revenue: US$56.6bn\\\nChief Executive Officer: Chuck Robbins\\\n​​​​​​​Number of Employees: 86,200**\n\nPhoto: Cisco Systems\n\nCisco Systems brings decades of leadership in IP networking and security to play a pivotal role in the 5G Core ecosystem. While not a traditional MCN market share leader, [Cisco extends its strengths](<https://telcomagazine.com/news/peel-ports-cisco-logicalis-deliver-10x-faster-p5g>) in routing, cloud networking and automation into a secure, cloud-native 5G Core platform.\n\nStrategic moves, including the acquisition of Acacia Communications, enhance its transport and interconnectivity capabilities. Its unique value lies in providing the trusted, high-performance IP fabric that supports all 5G Cores, ensuring resilience, programmability and security across diverse, disaggregated architectures.",
+            "characters": 865,
+            "oversized": false
+          }
+        ],
+        "blocks": [
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000051",
+            "order": 51,
+            "parent_id": null,
+            "type": "heading",
+            "text": "3. Cisco Systems",
+            "heading_level": 2,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/h2[1]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "3. Cisco Systems",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/h2[1]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "3. Cisco Systems"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000052",
+            "order": 52,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Founded: 1984 Annual Revenue: US$56.6bn Chief Executive Officer: Chuck Robbins ​​​​​​​Number of Employees: 86,200",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "strong",
+                "tag": "strong",
+                "attributes": {},
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]/strong[1]"
+                },
+                "mapping_status": "exact",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Founded: 1984",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]/strong[1]",
+                      "child_index": 0
+                    },
+                    "mapping_status": "exact"
+                  },
+                  {
+                    "type": "hard_break",
+                    "tag": "br",
+                    "attributes": {},
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]/strong[1]/br[1]"
+                    },
+                    "mapping_status": "exact",
+                    "children": []
+                  },
+                  {
+                    "type": "text",
+                    "text": "Annual Revenue: US$56.6bn",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]/strong[1]",
+                      "child_index": 2
+                    },
+                    "mapping_status": "exact"
+                  },
+                  {
+                    "type": "hard_break",
+                    "tag": "br",
+                    "attributes": {},
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]/strong[1]/br[2]"
+                    },
+                    "mapping_status": "exact",
+                    "children": []
+                  },
+                  {
+                    "type": "text",
+                    "text": "Chief Executive Officer: Chuck Robbins",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]/strong[1]",
+                      "child_index": 4
+                    },
+                    "mapping_status": "exact"
+                  },
+                  {
+                    "type": "hard_break",
+                    "tag": "br",
+                    "attributes": {},
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]/strong[1]/br[3]"
+                    },
+                    "mapping_status": "exact",
+                    "children": []
+                  },
+                  {
+                    "type": "text",
+                    "text": "​​​​​​​Number of Employees: 86,200",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[15]/div[1]/p[3]/strong[1]",
+                      "child_index": 6
+                    },
+                    "mapping_status": "exact"
+                  }
+                ]
+              }
+            ],
+            "inline_markdown": "**Founded: 1984\\\nAnnual Revenue: US$56.6bn\\\nChief Executive Officer: Chuck Robbins\\\n​​​​​​​Number of Employees: 86,200**"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000053",
+            "order": 53,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Photo: Cisco Systems",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[16]/figure[1]/figcaption[1]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "Photo: Cisco Systems",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[16]/figure[1]/figcaption[1]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "Photo: Cisco Systems"
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000054",
+            "order": 54,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Cisco Systems brings decades of leadership in IP networking and security to play a pivotal role in the 5G Core ecosystem. While not a traditional MCN market share leader, Cisco extends its strengths in routing, cloud networking and automation into a secure, cloud-native 5G Core platform.",
+            "heading_level": null,
+            "links": [
+              {
+                "text": "Cisco extends its strengths",
+                "target": "https://telcomagazine.com/news/peel-ports-cisco-logicalis-deliver-10x-faster-p5g",
+                "resolved_target": "https://telcomagazine.com/news/peel-ports-cisco-logicalis-deliver-10x-faster-p5g"
+              }
+            ],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[17]/div[1]/p[1]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "Cisco Systems brings decades of leadership in IP networking and security to play a pivotal role in the 5G Core ecosystem. While not a traditional MCN market share leader, ",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[17]/div[1]/p[1]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              },
+              {
+                "type": "link",
+                "tag": "a",
+                "attributes": {
+                  "data-cke-saved-href": "https://telcomagazine.com/news/peel-ports-cisco-logicalis-deliver-10x-faster-p5g",
+                  "href": "https://telcomagazine.com/news/peel-ports-cisco-logicalis-deliver-10x-faster-p5g",
+                  "rel": [
+                    "noopener",
+                    "noreferrer"
+                  ],
+                  "target": "_blank"
+                },
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[17]/div[1]/p[1]/a[1]"
+                },
+                "mapping_status": "exact",
+                "target": "https://telcomagazine.com/news/peel-ports-cisco-logicalis-deliver-10x-faster-p5g",
+                "resolved_target": "https://telcomagazine.com/news/peel-ports-cisco-logicalis-deliver-10x-faster-p5g",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Cisco extends its strengths",
+                    "source_locator": {
+                      "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[17]/div[1]/p[1]/a[1]",
+                      "child_index": 0
+                    },
+                    "mapping_status": "exact"
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " in routing, cloud networking and automation into a secure, cloud-native 5G Core platform. ",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[17]/div[1]/p[1]",
+                  "child_index": 2
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "Cisco Systems brings decades of leadership in IP networking and security to play a pivotal role in the 5G Core ecosystem. While not a traditional MCN market share leader, [Cisco extends its strengths](<https://telcomagazine.com/news/peel-ports-cisco-logicalis-deliver-10x-faster-p5g>) in routing, cloud networking and automation into a secure, cloud-native 5G Core platform. "
+          },
+          {
+            "schema_version": "dom-blocks-v3",
+            "block_id": "b000055",
+            "order": 55,
+            "parent_id": null,
+            "type": "paragraph",
+            "text": "Strategic moves, including the acquisition of Acacia Communications, enhance its transport and interconnectivity capabilities. Its unique value lies in providing the trusted, high-performance IP fabric that supports all 5G Cores, ensuring resilience, programmability and security across diverse, disaggregated architectures.",
+            "heading_level": null,
+            "links": [],
+            "table": null,
+            "source_locator": {
+              "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[17]/div[1]/p[2]"
+            },
+            "mapping_status": "exact",
+            "inline_nodes": [
+              {
+                "type": "text",
+                "text": "Strategic moves, including the acquisition of Acacia Communications, enhance its transport and interconnectivity capabilities. Its unique value lies in providing the trusted, high-performance IP fabric that supports all 5G Cores, ensuring resilience, programmability and security across diverse, disaggregated architectures.",
+                "source_locator": {
+                  "dom_path": "/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[17]/div[1]/p[2]",
+                  "child_index": 0
+                },
+                "mapping_status": "exact"
+              }
+            ],
+            "inline_markdown": "Strategic moves, including the acquisition of Acacia Communications, enhance its transport and interconnectivity capabilities. Its unique value lies in providing the trusted, high-performance IP fabric that supports all 5G Cores, ensuring resilience, programmability and security across diverse, disaggregated architectures."
+          }
+        ]
+      },
+      "change": {
+        "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+        "chunk_id": "0f6969ef6a735ffddd2705d50209e048871265bd8a73255caa987d3c131423dc",
+        "block_id": "b000055",
+        "before": "Strategic moves, including the acquisition of Acacia Communications, enhance its transport and interconnectivity capabilities. Its unique value lies in providing the trusted, high-performance IP fabric that supports all 5G Cores, ensuring resilience, programmability and security across diverse, disaggregated architectures.",
+        "after": "Cisco Systems brings decades of leadership in IP networking and security to the 5G Core ecosystem, enhancing transport and interconnectivity (including the acquisition of Acacia Communications) and providing a trusted, high-performance IP fabric that supports resilience, programmability and security across disaggregated architectures.",
+        "reason": "Merge Cisco’s networking/security role and transport capability claims from the same chunk into a single, citation-backed paragraph that preserves security and acquisition details.",
+        "evidence": [
+          {
+            "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+            "block_id": "b000054",
+            "quote": "Cisco Systems brings decades of leadership in IP networking and security to play a pivotal role in the 5G Core ecosystem. While not a traditional MCN market share leader, Cisco extends its strengths in routing, cloud networking and automation into a secure, cloud-native 5G Core platform."
+          },
+          {
+            "snapshot_id": "a70ab0d9e803dbe5f5d91dcf334f7cd8bcae1cc7f96932b28c9418fe700a2450",
+            "block_id": "b000055",
+            "quote": "Strategic moves, including the acquisition of Acacia Communications, enhance its transport and interconnectivity capabilities. Its unique value lies in providing the trusted, high-performance IP fabric that supports all 5G Cores, ensuring resilience, programmability and security across diverse, disaggregated architectures."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000055"
+      },
+      "saved_finding": {
+        "block_id": "b000055",
+        "verdict": "supported",
+        "category": "Supported consolidation",
+        "reason": "Combines Cisco’s IP networking/security leadership, Acacia acquisition, and role providing the IP fabric as stated in the source.",
+        "source_ids": [
+          "b000054",
+          "b000055"
+        ]
+      },
+      "control_kind": "explicit retry of prior unavailable diagnostic"
+    }
+  ]
+}

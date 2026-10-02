@@ -1,0 +1,116 @@
+{
+  "id": "14fb1db59c26428daa7f47866d7d2250",
+  "status": "stopped",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-4.1-mini",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 10,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 1,
+    "enable_live_calls": true
+  },
+  "budget": {
+    "attempts": 100,
+    "reserved": 0,
+    "completed": 100,
+    "technical_failures": 10,
+    "stop_reason": "attempt_budget",
+    "limit": 100
+  },
+  "proposals": 3,
+  "recommendation": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+  "stop_reason": "attempt_budget",
+  "usage": {
+    "rewrite": {
+      "calls": 100,
+      "input_tokens": 2918153,
+      "output_tokens": 366798,
+      "cached_requests": 0
+    },
+    "fidelity": {
+      "calls": 87,
+      "input_tokens": 936555,
+      "output_tokens": 132662,
+      "cached_requests": 0
+    },
+    "reflection": {
+      "calls": 3,
+      "input_tokens": 108480,
+      "output_tokens": 231,
+      "cached_requests": 0
+    },
+    "embedding": {
+      "calls": 25,
+      "input_tokens": 226421,
+      "output_tokens": 0,
+      "cached_requests": 2251
+    }
+  },
+  "finished_at": "2026-10-02T05:56:30.129203+00:00",
+  "reflection_prompt_hash": "3a49548a45aee39b61443c96accf37fd091b8db5660398d2086c8dc4f8d42b86",
+  "fidelity_profile": {
+    "model": "gpt-4.1-mini",
+    "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+    "schema_version": "fidelity-slots-v1",
+    "output_budget": {
+      "minimum": 4096,
+      "maximum": 16000,
+      "per_edit": 128
+    },
+    "uncertain_policy": "reject_whole_proposal"
+  },
+  "dataset_manifest_hash": "59e416d1942b57ddd9ac4a4cde561bb1d44d48790e9de4734da209a65c29774b",
+  "candidates": [
+    {
+      "id": "gpt-4.1-mini--rewrite-page-v7",
+      "status": "evaluated",
+      "editorial_strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks.",
+      "parents": [],
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "selection_mean": 0.40775854455872795,
+      "failure_rate": 0.8,
+      "selection_pages": 30
+    },
+    {
+      "id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+      "status": "evaluated",
+      "editorial_strategy": "Focus on consolidating the entire page into a single clear, source-supported proposal that addresses all queries directly and succinctly, improving clarity and citation ease without adding unsupported information.",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+      "selection_mean": 0.4108943902036323,
+      "failure_rate": 0.7,
+      "selection_pages": 30
+    },
+    {
+      "id": "gpt-4.1-mini--e787b31f6e2d9ef9ee668c5d",
+      "status": "evaluated",
+      "editorial_strategy": "Concisely summarize key product comparisons and features directly supported by source content, emphasizing tested performance and core functionalities relevant to primary queries, while avoiding unsupported claims or extraneous detail.",
+      "parents": [
+        "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8"
+      ],
+      "prompt_hash": "cb3520893490b7bf0716481b26d0b09aaff580b46cce9218ac607d5418cdf599",
+      "selection_mean": 0.40763198957375724,
+      "failure_rate": 0.8333333333333334,
+      "selection_pages": 30
+    },
+    {
+      "id": "gpt-4.1-mini--13842d16bdd1ca7fef3f1016",
+      "status": "partial",
+      "editorial_strategy": "Focus edits on clearly presenting program definitions, target audiences, key benefits, progression guarantees, and entry requirements as stated in the source. Avoid introducing new claims or rearranging labels contrary to source structure.",
+      "parents": [
+        "gpt-4.1-mini--e787b31f6e2d9ef9ee668c5d"
+      ],
+      "prompt_hash": "1daf16d539eba109aa5835c254132fa3cda35d7e6ae011fa93194722aae7fed5"
+    }
+  ]
+}

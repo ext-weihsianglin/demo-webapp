@@ -1,15 +1,29 @@
 """Upstream retention extraction, mock grading and OpenAI baseline rewriting."""
 from app.rewriting import rewrite, model_options
+from app.prompt_registry import PromptRegistry
+from app.fidelity import check_fidelity
+from app.gepa.routes import router as gepa_router
+from app.gepa import routes as gepa_routes
+from contextlib import asynccontextmanager
 from urllib.parse import urlparse
 from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, field_validator, model_validator
 from app.examples import catalog, load_example
-from app.scoring import score_document, compare_scores
+from app.scoring import score_document, compare_scores, public_scores
 from app.extraction import UPSTREAM, extract_document, section_view
 from app.verification import SourceInspector, verify_document
 
-app = FastAPI(title="Content Studio", version="0.1.0")
+@asynccontextmanager
+async def lifespan(app):
+    try:
+        yield
+    finally:
+        gepa_routes.manager.shutdown()
+
+
+app = FastAPI(title="Content Studio", version="0.1.0", lifespan=lifespan)
+app.include_router(gepa_router)
 
 class Source(BaseModel):
     example_id: str | None = None
@@ -79,6 +93,7 @@ class EvidenceRequest(Source):
     block_id: str = Field(min_length=1, max_length=64)
 
 class DraftRequest(Source):
+    prompt_id: str | None = Field(default=None, min_length=1, max_length=200)
     model: str | None = Field(default=None, min_length=1, max_length=200)
 
     @field_validator('model')
@@ -117,8 +132,7 @@ def source_origin(source):
     item = load_example(source.example_id)
     return {"kind": "example", "snapshot_id": item["snapshot_id"], "split": item["split"], "manifest_hash": item["manifest_hash"], "payload_hash": item["payload_hash"], 'p1_split_hash': item['p1_split_hash']}
 
-@app.post('/api/analyze')
-def analyze(source: Source):
+def _analyze(source: Source, *, explain=False):
     parsed, chunks = extract_document(source.content, source.format, source.href, source.hostname)
     sections = [section_view(block) for block in parsed['blocks']]
     facts = [{"source_id": block['block_id'], "text": block['text'], "status": "Source statement · unverified"}
@@ -134,7 +148,7 @@ def analyze(source: Source):
             raise HTTPException(503, "Example identity does not match the parsed snapshot.")
         parsed['raw_payload_reference'] = origin
     return {"mode": "source-analysis", "target_queries": source.queries,
-            "p1": score_document(parsed, source.content, source.format, source.queries), "snapshot_id": parsed['snapshot_id'], "source_origin": origin,
+            "p1": score_document(parsed, source.content, source.format, source.queries, explain=explain), "snapshot_id": parsed['snapshot_id'], "source_origin": origin,
             "extraction": {"engine": "content-optimization-system", "upstream_revision": UPSTREAM['revision'], "package_version": UPSTREAM['package_version'], **parsed['selection']},
             "document": parsed, "chunks": chunks,
             "verification": verify_document(source.content, source.format, parsed, chunks, facts),
@@ -150,6 +164,11 @@ def analyze(source: Source):
                       "Factoids are source statements, not independently verified facts.",
                       "P1 estimates the sampled within-host top class among already-cited pages, not citation likelihood or uplift. Editorial grades remain mocked."]}
 
+
+@app.post('/api/analyze')
+def analyze(source: Source):
+    return _analyze(source)
+
 @app.post('/api/evidence')
 def evidence(source: EvidenceRequest):
     parsed, _ = extract_document(source.content, source.format, source.href, source.hostname)
@@ -161,13 +180,28 @@ def evidence(source: EvidenceRequest):
 
 @app.post('/api/draft')
 def draft(source: DraftRequest):
-    analysis = analyze(source)
-    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=analysis['p1'])
+    selected_model = source.model or model_options()['default_model']
+    try:
+        prompt = PromptRegistry().resolve(source.prompt_id, selected_model)
+    except (ValueError, OSError, KeyError):
+        raise HTTPException(400, 'Prompt is missing, changed or incompatible with the selected model.') from None
+    analysis = _analyze(source, explain=True)
+    p1_feedback = public_scores(analysis['p1'])
+    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=p1_feedback, prompt=prompt['effective_prompt'], prompt_id=prompt['id'], optimization_context=prompt.get('optimization_context'))
+    result['telemetry'].update(prompt_id=prompt['id'], prompt_hash=prompt['prompt_hash'], contract_version=prompt['contract_version'])
     result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
     if result['status'] != 'succeeded':
         code = 422 if result['status'] in ('source_insufficient', 'context_limit', 'abstained') else 503 if result['status'] == 'missing_credentials' else 502
         raise HTTPException(code, detail=result)
-    after = score_document(result['document'], source.content, source.format, source.queries)
-    result.update(target_queries=source.queries, p1_before=analysis['p1'], p1_after=after,
-                  p1_comparison=compare_scores(analysis['p1'], after))
+    gate = check_fidelity(analysis['document'], result['changes'])
+    result['fidelity'] = gate
+    if gate['status'] != 'passed':
+        raise HTTPException(422 if gate['status']=='rejected' else 502, detail={
+            'status':'fidelity_rejected' if gate['status']=='rejected' else 'fidelity_unavailable',
+            'summary':'Source-relative fidelity check did not pass; no draft applied.',
+            'fidelity':gate, 'telemetry':result['telemetry'], 'rejected_changes':result['changes']})
+    after = score_document(result['document'], source.content, source.format, source.queries, explain=True)
+    comparison = compare_scores(analysis['p1'], after)
+    result.update(target_queries=source.queries, p1_before=public_scores(analysis['p1']),
+                  p1_after=public_scores(after), p1_comparison=comparison)
     return result

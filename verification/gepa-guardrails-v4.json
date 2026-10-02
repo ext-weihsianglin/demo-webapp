@@ -1,0 +1,169 @@
+{
+  "model": "gpt-4.1",
+  "scope": "Bounded new full-model gate controls. No P2 calls or held-out examples; extra judge usage separate from research runs.",
+  "cases": [
+    {
+      "name": "faithful",
+      "source": "The program may improve language skills; results vary.",
+      "after": "The program may improve language skills, but results vary.",
+      "expected": "passed",
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "supported",
+            "category": "minor language change",
+            "reason": "The change from a semicolon to 'but' as a conjunction does not alter the original factual meaning or hedging. The original uncertainty is preserved, and the source supports the revised version.",
+            "source_ids": [
+              "b1"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 530,
+          "output_tokens": 67,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 2402
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "guarantee",
+      "source": "The program may improve language skills; results vary.",
+      "after": "The program guarantees rapid fluency.",
+      "expected": "rejected",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "unsupported",
+            "category": "guarantee added",
+            "reason": "The source states only that the program may improve language skills and that results vary. It does not support a guarantee of rapid fluency.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 526,
+          "output_tokens": 54,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 1445
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "label_expansion",
+      "source": "France",
+      "after": "France provides daily cultural activities and guarantees rapid language progress.",
+      "expected": "rejected",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "unsupported",
+            "category": "addition",
+            "reason": "The added claims about daily cultural activities and guaranteed rapid language progress are not supported by the original source, which only contains the word 'France'.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 504,
+          "output_tokens": 53,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 1430
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "invented_number",
+      "source": "The tool supports CSV files.",
+      "after": "The tool supports CSV files and saves 50% of processing time.",
+      "expected": "rejected",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "unsupported",
+            "category": "invented factual detail (invented number, unsupported claim of time saving)",
+            "reason": "The source only states support for CSV files and does not mention any processing time savings or a 50% figure.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 522,
+          "output_tokens": 61,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 941
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "scope_transfer",
+      "source": "The basic plan includes email support.",
+      "after": "The basic plan includes 24-hour telephone support.",
+      "expected": "rejected",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "unsupported",
+            "category": "feature description",
+            "reason": "The source states the basic plan includes email support, not 24-hour telephone support. There is no evidence in the source for 24-hour telephone support in the basic plan.",
+            "source_ids": []
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 520,
+          "output_tokens": 60,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 831
+        }
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

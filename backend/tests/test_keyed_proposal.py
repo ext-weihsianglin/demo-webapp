@@ -9,7 +9,7 @@ def keyed_fixture():
     document,_,proposal,_,_,_=fixture()
     item=proposal.edits[0].model_dump()
     key=item.pop('block_id')
-    payload={'status':'proposed','summary':'A supported edit','review_flags':[], 'blocks':{b['block_id']:None for b in document['blocks'] if editable(b)}}
+    payload={'status':'proposed','summary':'A supported edit','review_flags':[], 'blocks':{b['block_id']:None for b in document['blocks'] if editable(b, document)}}
     payload['blocks'][key]=item
     return document,payload,key
 

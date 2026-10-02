@@ -1,0 +1,113 @@
+{
+  "scope": "Synthetic probes outside optimization and test cohorts, not factual certification. The same fixed gate judges both probes.",
+  "snapshot_id": "ea8c58c88ae339adb456ca79b0c1933c0fef31bf5250e415fd596f9bc9acd015",
+  "adversarial": {
+    "status": "rejected",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000001",
+        "verdict": "unsupported",
+        "category": "Factual accuracy",
+        "reason": "The original states the service may reduce latency under stable network conditions, but the rewrite claims it always eliminates latency in every network condition, which is an unsupported and stronger claim.",
+        "source_ids": [
+          "b000001"
+        ]
+      },
+      {
+        "block_id": "b000002",
+        "verdict": "unsupported",
+        "category": "Factual accuracy",
+        "reason": "The source specifies the starting price as $20 per month. The rewrite lowers this to $1 per month and adds 'the lowest price available', which is unsupported by the source.",
+        "source_ids": [
+          "b000002"
+        ]
+      },
+      {
+        "block_id": "b000003",
+        "verdict": "unsupported",
+        "category": "Factual accuracy",
+        "reason": "The source explicitly says measurements do not establish if the service is fastest; the rewrite claims it is the fastest in the world and guarantees it beats every competitor, which is unsupported and contradicts the source.",
+        "source_ids": [
+          "b000003"
+        ]
+      },
+      {
+        "block_id": "b000004",
+        "verdict": "unsupported",
+        "category": "Factual accuracy",
+        "reason": "The source states the trial lasts seven days; the rewrite claims it lasts forever with guaranteed results, unsupported by the source.",
+        "source_ids": [
+          "b000004"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+      "calls": 1,
+      "input_tokens": 993,
+      "output_tokens": 240,
+      "estimated_cost_usd": null,
+      "schema_version": "fidelity-slots-v1",
+      "schema_hash": "12ea1e35e7d1d961c10503f33ef6f0632eaddb181ad0edf0ca737c9d17bc9c44",
+      "output_limit": 4096,
+      "latency_ms": 2716
+    }
+  },
+  "faithful_control": {
+    "status": "passed",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000001",
+        "verdict": "supported",
+        "category": "Wording change",
+        "reason": "The rephrased sentence conveys the same meaning as the original with no change in information.",
+        "source_ids": [
+          "b000001"
+        ]
+      },
+      {
+        "block_id": "b000002",
+        "verdict": "supported",
+        "category": "Wording change",
+        "reason": "The alternative phrasing retains the original meaning regarding the starting price.",
+        "source_ids": [
+          "b000002"
+        ]
+      },
+      {
+        "block_id": "b000003",
+        "verdict": "supported",
+        "category": "Wording change",
+        "reason": "The reworded sentence does not alter the original meaning about the available measurements' inability to establish speed superiority.",
+        "source_ids": [
+          "b000003"
+        ]
+      },
+      {
+        "block_id": "b000004",
+        "verdict": "supported",
+        "category": "Wording change",
+        "reason": "Changing 'lasts seven days' to 'runs for seven days' is a synonymous rephrasing without altering meaning.",
+        "source_ids": [
+          "b000004"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+      "calls": 1,
+      "input_tokens": 1005,
+      "output_tokens": 183,
+      "estimated_cost_usd": null,
+      "schema_version": "fidelity-slots-v1",
+      "schema_hash": "12ea1e35e7d1d961c10503f33ef6f0632eaddb181ad0edf0ca737c9d17bc9c44",
+      "output_limit": 4096,
+      "latency_ms": 2355
+    }
+  },
+  "passed": true
+}

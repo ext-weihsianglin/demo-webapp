@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-10-02T04:05:55.924173+00:00",
+  "optimization_run": "d6a254c540dd47db9abcdd3fc4134dfc",
+  "model": "gpt-4.1-mini",
+  "baseline_prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+  "selection_rule": "Previously inspected blog.blazingcdn.com and lowest snapshot SHA among other test hosts with 20k\u2013100k source characters and at least three editable paragraphs. Chosen before any GEPA mutation exists.",
+  "repetitions": 2,
+  "comparison": "Identical full host queries; within-page P1 mean; failures and abstentions retain measured original P1; no example swapping or prompt edits based on test results.",
+  "quality_limit": "Two exposed P1-test hosts are a bounded dogfood check, not general superiority or an untouched final evaluation.",
+  "examples": [
+    {
+      "hostname": "blog.blazingcdn.com",
+      "snapshot_id": "cd2fd8303acaa265580a5b47384b715abd4cc9e290b754dc9e7b75e0a0c54e87",
+      "characters": 59456
+    },
+    {
+      "hostname": "erp.compare",
+      "snapshot_id": "0245a9f5adabce1d3d2b21eac2bcaa20bdc1a6b581417a957e7760e9713d95a5",
+      "characters": 49829
+    }
+  ]
+}

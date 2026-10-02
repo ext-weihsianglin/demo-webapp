@@ -1,0 +1,176 @@
+{
+  "purpose": "New chunk-scoped gate adversarial/control diagnostics, no P2 calls or held-out pages. Usage outside research-run totals.",
+  "cases": [
+    {
+      "name": "faithful",
+      "expected": "passed",
+      "source": "The program may improve language skills; results vary.",
+      "after": "The program may improve language skills, but results vary.",
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "supported",
+            "category": "Conjunction change",
+            "reason": "The change from a semicolon to a comma plus 'but' preserves the meaning that the program may improve language skills and that results vary, matching the original sentence's meaning.",
+            "source_ids": [
+              "b1"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1-mini",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 533,
+          "output_tokens": 64,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 1388
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "guarantee",
+      "expected": "rejected",
+      "source": "The program may improve language skills; results vary.",
+      "after": "The program guarantees rapid fluency.",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "unsupported",
+            "category": "Guarantee",
+            "reason": "The source indicates that the program 'may improve language skills' and that 'results vary', which does not support a claim that the program guarantees rapid fluency. The word 'guarantees' is a strong assured outcome not stated or implied in the source.",
+            "source_ids": [
+              "b1"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1-mini",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 529,
+          "output_tokens": 80,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 1827
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "label_expansion",
+      "expected": "rejected",
+      "source": "France",
+      "after": "France provides daily cultural activities and guarantees rapid language progress.",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "unsupported",
+            "category": "Factual Accuracy",
+            "reason": "The source text only mentions 'France' without providing any information about daily cultural activities or guaranteed rapid language progress. These new claims are not supported by the given source.",
+            "source_ids": [
+              "b1"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1-mini",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 507,
+          "output_tokens": 62,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 1388
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "invented_number",
+      "expected": "rejected",
+      "source": "The tool supports CSV files.",
+      "after": "The tool supports CSV files and saves 50% of processing time.",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "unsupported",
+            "category": "Added information",
+            "reason": "The source only states that the tool supports CSV files and does not mention any claim about saving 50% of processing time.",
+            "source_ids": [
+              "b1"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1-mini",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 525,
+          "output_tokens": 53,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 992
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "scope_transfer",
+      "expected": "rejected",
+      "source": "The basic plan includes email support.",
+      "after": "The basic plan includes 24-hour telephone support.",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b1",
+            "verdict": "unsupported",
+            "category": "Support Availability",
+            "reason": "The source states the basic plan includes email support, not 24-hour telephone support, which is a different support modality and time availability.",
+            "source_ids": [
+              "b1"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-4.1-mini",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 523,
+          "output_tokens": 55,
+          "estimated_cost_usd": null,
+          "schema_version": "fidelity-slots-v2",
+          "schema_hash": "3895d57a6e468cf280d908611a1a6ad084d4d663d698bf0cc606debb87ad6412",
+          "output_limit": 4096,
+          "latency_ms": 945
+        }
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

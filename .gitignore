@@ -8,3 +8,6 @@ __pycache__/
 
 *.tsbuildinfo
 backend/data/
+
+prompt-registry/p2/*/candidates/
+prompt-registry/p2/*/selected.json

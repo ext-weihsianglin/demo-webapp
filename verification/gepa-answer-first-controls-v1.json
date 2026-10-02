@@ -1,0 +1,60 @@
+{
+  "dataset_id": "validation-90-v2",
+  "diagnostic_only": true,
+  "policy": "fixed answer-first controls; no revision after scores; no held-out pages",
+  "cases": [
+    {
+      "hostname": "grow.google",
+      "page_id": "0efcb5d3452ca9bd144a112e3bcf7be510785ca5d1aa8cd93d891f747f128d55",
+      "edits": [
+        {
+          "block_id": "b000007",
+          "before": "Flexible online training programs, designed to put you on the fast track to jobs in high-paying fields, now including practical AI training. No experience necessary.",
+          "after": "No experience is necessary for these flexible online training programs. Designed to put learners on the fast track to jobs in high-paying fields, the programs now include practical AI training."
+        },
+        {
+          "block_id": "b000231",
+          "before": "The Google Career Certificate program is an online training program that offers professional certificates in high-paying technology fields. The program is designed by Google and taught by experts in the areas of IT, user experience design, project management, and more, and combines skills training with hands-on practice. In addition, job seekers receive support and practical tips for resumes, interviews, and job searches, helping them to land jobs in the technology sector.",
+          "after": "Google Career Certificates are professional certificates offered through an online training program in high-paying technology fields. Designed by Google and taught by experts in IT, user experience design, project management and other areas, the program combines skills training with hands-on practice. Job seekers also receive support and practical tips for resumes, interviews and job searches, helping them to land jobs in the technology sector."
+        }
+      ]
+    },
+    {
+      "hostname": "www.lindy.ai",
+      "page_id": "92e678faacd11130d26a0f4600a9f42a8bb3fb3f36b2787417bae88e6c19e79a",
+      "edits": [
+        {
+          "block_id": "b000106",
+          "before": "AI app builders generate layouts, logic, and data connections for you based on natural language input, while no-code tools require you to drag, configure, and build those parts yourself.",
+          "after": "The difference between AI app builders and no-code tools is how layouts, logic and data connections are created. AI app builders generate these parts from natural language input; no-code tools require you to drag, configure and build them yourself."
+        },
+        {
+          "block_id": "b000478",
+          "before": "Glide is best for lightweight internal tools powered by spreadsheets. Builder.ai is aimed at larger businesses that want custom apps built by a managed dev team.",
+          "after": "For lightweight internal tools powered by spreadsheets, Glide is best. Builder.ai is aimed at larger businesses seeking custom apps built by a managed development team."
+        }
+      ]
+    },
+    {
+      "hostname": "tech.co",
+      "page_id": "2bb4591118effbfb8d09d04596192a33660aa27645c7f3f31a4c99e469a5affe",
+      "edits": [
+        {
+          "block_id": "b000019",
+          "before": "Any business that grows beyond a couple of customers a month can stand to benefit from an invoice software. Invoice software allows a business to create and track invoices and estimates, which can then be tracked and paid through easily accessible payment portals.",
+          "after": "Invoice software lets businesses create and track invoices and estimates, with easily accessible payment portals for tracking and payment. A business that grows beyond a couple of customers a month can stand to benefit from this software."
+        },
+        {
+          "block_id": "b000120",
+          "before": "Zoho Invoice technically offers four plans, but one of them is a free plan that only allows for five clients, so won\u2019t last very long in any growing business. But if you\u2019re a small business looking to test out the software, or only send a few invoices a month, it might be perfect for you.",
+          "after": "Zoho Invoice offers four plans, including a free plan limited to five clients. That limit means the free plan will not last long for a growing business, but it might be perfect for a small business testing the software or sending only a few invoices a month."
+        },
+        {
+          "block_id": "b000147",
+          "before": "FreshBooks is an accounting platform for small businesses. With great help and support options, and an intuitive interface that won't deter first-time users, it's a great solution for sole traders or companies with very few staff, who can't afford to invest too much time becoming acquainted with a new platform. It has four pricing plans, ranging from $21 per month to $65 per month, with one plan that has no public pricing.",
+          "after": "FreshBooks is a small-business accounting platform with great help and support options and an intuitive interface that will not deter first-time users. It is a great solution for sole traders or companies with very few staff who cannot invest much time in learning a new platform. There are four pricing plans: publicly listed prices range from $21 to $65 per month, and one plan has no public pricing."
+        }
+      ]
+    }
+  ]
+}

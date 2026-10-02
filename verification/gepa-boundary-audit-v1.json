@@ -1,0 +1,134 @@
+{
+  "run_id": "14fb1db59c26428daa7f47866d7d2250",
+  "candidate_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+  "edit_boundary_version": "body-content-v2",
+  "scope": "Replay immutable validation records only; no provider calls, no test feedback, no rescoring or replacement of historical metrics. An old applied proposal containing any newly protected edit fails the corrected whole-proposal boundary. Core blocks match saved upstream parsed records exactly.",
+  "applied_selection_pages": 8,
+  "affected_selection_pages": 5,
+  "rows": [
+    {
+      "hostname": "daloopa.com",
+      "snapshot_id": "f31249627fba0f62e898ed8b2ce8081197042ab2ec8dc4b3ebd9df1c962d02d5",
+      "historical_status": "applied",
+      "historical_gate": "passed",
+      "changes": 13,
+      "newly_protected_changes": 1,
+      "examples": [
+        {
+          "block_id": "b000002",
+          "original_text": "An AI Financial Copilot, made by analysts for analysts. Designed to fit seamlessly into your workflow and deliver best-in-class data customized to your preferences.",
+          "replacement_text": "Daloopa provides an AI Financial Copilot designed specifically for financial analysts that integrates seamlessly into existing workflows, delivering best-in-class financial data customized to users' preferences and supporting real-time financial modeling with live data directly in Excel.",
+          "dom_path": "/html[1]/body[1]/div[2]/header[1]/div[1]/div[1]/div[2]"
+        }
+      ]
+    },
+    {
+      "hostname": "www.denver.org",
+      "snapshot_id": "960122f559822336b386e6ee297d63aa11b34a162fc9c066e28e1b08021f97ed",
+      "historical_status": "applied",
+      "historical_gate": "passed",
+      "changes": 64,
+      "newly_protected_changes": 26,
+      "examples": [
+        {
+          "block_id": "b000004",
+          "original_text": "51\u00b0",
+          "replacement_text": "Denver enjoys a pleasant climate with temperatures around 51\u00b0F currently, sunny this Thursday, and a comfortable forecast into the weekend, ideal for both brewery explorations and outdoor activities.",
+          "dom_path": "/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/header[1]/div[1]/div[2]/div[1]/div[1]"
+        },
+        {
+          "block_id": "b000005",
+          "original_text": "Current Conditions",
+          "replacement_text": "Current weather conditions in Denver are sunny with a mild temperature, which complements visits to outdoor venues, including breweries, galleries, and parks.",
+          "dom_path": "/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/header[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
+        }
+      ]
+    },
+    {
+      "hostname": "www.logiwa.com",
+      "snapshot_id": "ec8854587344c1a3f4fd3637ee3e081cd671fdaba8522e999e9892357def23a6",
+      "historical_status": "applied",
+      "historical_gate": "passed",
+      "changes": 1,
+      "newly_protected_changes": 0,
+      "examples": []
+    },
+    {
+      "hostname": "www.looppanel.com",
+      "snapshot_id": "b191b108c8b69a880125d0e5f15c7e74ec3a288e1ace5b424fb22f2acad3b26b",
+      "historical_status": "applied",
+      "historical_gate": "passed",
+      "changes": 11,
+      "newly_protected_changes": 1,
+      "examples": [
+        {
+          "block_id": "b000056",
+          "original_text": "Do you want to know what's next in UX?",
+          "replacement_text": "Stay informed about the latest trends and innovations in UX design to ensure your projects benefit from cutting-edge practices and ideas.",
+          "dom_path": "/html[1]/body[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/form[1]"
+        }
+      ]
+    },
+    {
+      "hostname": "www.nacel.org",
+      "snapshot_id": "38733e7b50c1b81b6b9f54effebd988c36fb0d2a177430c1aa18cb0a0727621c",
+      "historical_status": "applied",
+      "historical_gate": "passed",
+      "changes": 57,
+      "newly_protected_changes": 17,
+      "examples": [
+        {
+          "block_id": "b000004",
+          "original_text": "Choose a language: Dutch English French German Italian Japanese Portuguese Spanish",
+          "replacement_text": "Available Languages for Homestay Immersion: Dutch, English, French, German, Italian, Japanese, Portuguese, and Spanish. Choose your language and immerse yourself fully to experience both language and culture first-hand.",
+          "dom_path": "/html[1]/body[1]/main[1]/section[1]/div[1]/div[1]/div[1]/div[1]"
+        },
+        {
+          "block_id": "b000005",
+          "original_text": "See all languages",
+          "replacement_text": "Expand your choices by exploring all languages offered through our comprehensive homestay immersion programs, tailored to your interests and learning goals.",
+          "dom_path": "/html[1]/body[1]/main[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]"
+        }
+      ]
+    },
+    {
+      "hostname": "www.papermark.io",
+      "snapshot_id": "6450cdc58d2d599253705720a7eebc6d94cb936ee71125392ac0c340330646de",
+      "historical_status": "applied",
+      "historical_gate": "passed",
+      "changes": 27,
+      "newly_protected_changes": 1,
+      "examples": [
+        {
+          "block_id": "b000068",
+          "original_text": "Share deck via trackable link",
+          "replacement_text": "Sharing your pitch deck via a trackable link facilitates real-time insights into investor engagement, including notifications when investors view your deck, detailed time tracking on each page, capturing their emails, and controlling access with screenshot protection and watermarking. Secure data room features allow sending multiple documents safely.",
+          "dom_path": "/html[1]/body[1]/div[1]/div[3]/div[1]/div[1]/div[1]/a[1]/button[1]/p[1]"
+        }
+      ]
+    },
+    {
+      "hostname": "www.thebrokebackpacker.com",
+      "snapshot_id": "c190e864667a4bc9b1ba752b210cd0a31e57beeef589df6e3305418e74058eb7",
+      "historical_status": "applied",
+      "historical_gate": "passed",
+      "changes": 29,
+      "newly_protected_changes": 0,
+      "examples": []
+    },
+    {
+      "hostname": "www.topanalyticstools.com",
+      "snapshot_id": "d0a847e5faa952b5106b028429afb0e0eced07145bb1440d992f612de8d98470",
+      "historical_status": "applied",
+      "historical_gate": "passed",
+      "changes": 56,
+      "newly_protected_changes": 0,
+      "examples": []
+    }
+  ],
+  "default_restoration": {
+    "previous_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+    "selected_id": "gpt-4.1-mini--rewrite-page-v7",
+    "reason": "Validation audit invalidates qualification under corrected body-content-v2 boundary; retain old candidate as historical experiment."
+  }
+}

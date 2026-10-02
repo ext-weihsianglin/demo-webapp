@@ -1,0 +1,38 @@
+{
+  "run_id": "2ac71e74c52d4d3ba643de45fa2b3e3f",
+  "boundary": "body-content-v4",
+  "snapshot_id": "7cc88514bea752b5753201262234d405fd62f15bc0888aa6375f13d86756bfcc",
+  "core_upstream_document_unchanged": true,
+  "footer_checks": [
+    {
+      "block_id": "b000558",
+      "text": "Stay current with our latest updates, guides, and subscriber-only offer.",
+      "before_editable": true,
+      "after_editable": false,
+      "roles": [
+        "contentinfo"
+      ]
+    },
+    {
+      "block_id": "b000578",
+      "text": "Copyright © 2025 Digiarty Software, Inc. All rights reserved.",
+      "before_editable": true,
+      "after_editable": false,
+      "roles": [
+        "contentinfo"
+      ]
+    },
+    {
+      "block_id": "b000582",
+      "text": "Any third-party product names and trademarks used on this website, including but not limited to Apple, are property of their respective owners.",
+      "before_editable": true,
+      "after_editable": false,
+      "roles": [
+        "contentinfo"
+      ]
+    }
+  ],
+  "article_body_still_editable": true,
+  "provider_calls": 0,
+  "reason": "Accepted reflection candidate changed retained MainFoot subscription/copyright/trademark text. Agent stopped the run via Stop endpoint; user_stop is the endpoint reason, not a separate user instruction."
+}

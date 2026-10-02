@@ -1,0 +1,498 @@
+{
+  "run_id": "da27d5e95eab43d08ac4b1e0430afe6a",
+  "candidate_id": "gpt-4.1-mini--4288bb3d1e63fc0c3a0413f4",
+  "model": "gpt-4.1",
+  "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+  "batch_size": 8,
+  "edit_count": 41,
+  "result": {
+    "status": "rejected",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000006",
+        "verdict": "supported",
+        "category": "acceptable rewording",
+        "reason": "The revision does not introduce any new claims and maintains the meaning and scope of the original sentence.",
+        "source_ids": [
+          "b000006"
+        ]
+      },
+      {
+        "block_id": "b000030",
+        "verdict": "supported",
+        "category": "acceptable rewording",
+        "reason": "The updated sentence condenses and clarifies the original meaning, focusing on time/cost savings and core evaluation factors without inventing or omitting claims.",
+        "source_ids": [
+          "b000030"
+        ]
+      },
+      {
+        "block_id": "b000031",
+        "verdict": "supported",
+        "category": "acceptable rewording",
+        "reason": "The rewritten passage summarizes the concepts in the original, preserves qualifiers, and does not introduce unsupported content.",
+        "source_ids": [
+          "b000031"
+        ]
+      },
+      {
+        "block_id": "b000032",
+        "verdict": "supported",
+        "category": "acceptable rewording",
+        "reason": "The edit rephrases the original for clarity and detail but retains all factual claims and scope on pricing, features, and video production.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000048",
+        "verdict": "supported",
+        "category": "acceptable rewording",
+        "reason": "The revised text faithfully presents the original claims about plan features and value without exaggeration or omission.",
+        "source_ids": [
+          "b000048"
+        ]
+      },
+      {
+        "block_id": "b000049",
+        "verdict": "supported",
+        "category": "acceptable rewording",
+        "reason": "The change clarifies 'how far your subscription credits will go' by rewording the original content without adding or omitting claims.",
+        "source_ids": [
+          "b000049"
+        ]
+      },
+      {
+        "block_id": "b000067",
+        "verdict": "supported",
+        "category": "acceptable rewording",
+        "reason": "The edit restates the original meaning, focusing on balancing cost/quality via model selection, with no change to underlying factual content.",
+        "source_ids": [
+          "b000067"
+        ]
+      },
+      {
+        "block_id": "b000068",
+        "verdict": "supported",
+        "category": "acceptable rewording",
+        "reason": "The edit is a faithful rewording, preserving original qualifiers and numbers regarding output for mid-tier plans.",
+        "source_ids": [
+          "b000068"
+        ]
+      },
+      {
+        "block_id": "b000069",
+        "verdict": "supported",
+        "category": "faithful rewording",
+        "reason": "The after version rearranges and rewords the original but maintains the factual meaning that ImagineArt is a single platform for video and image creation with one subscription covering both formats.",
+        "source_ids": [
+          "b000069"
+        ]
+      },
+      {
+        "block_id": "b000071",
+        "verdict": "supported",
+        "category": "faithful rewording",
+        "reason": "The rewrite preserves the idea that OpenAI pioneered generative AI and Sora is focused on narrative creativity for visual prototyping, as stated in the source.",
+        "source_ids": [
+          "b000071"
+        ]
+      },
+      {
+        "block_id": "b000072",
+        "verdict": "supported",
+        "category": "faithful rewording",
+        "reason": "The edited text maintains the original meaning that Sora is not the most advanced in visual realism but is popular for visual concept exploration.",
+        "source_ids": [
+          "b000072"
+        ]
+      },
+      {
+        "block_id": "b000079",
+        "verdict": "supported",
+        "category": "faithful rewording",
+        "reason": "The after text faithfully summarizes the specific benefits of the Plus and Pro plans as described in the source, including the focus on clip length and inclusion of image generation.",
+        "source_ids": [
+          "b000079"
+        ]
+      },
+      {
+        "block_id": "b000081",
+        "verdict": "supported",
+        "category": "faithful rewording",
+        "reason": "The revision condenses while preserving all material attributes (avatar-led, accurate lip-sync, branding, maturity) and focus area of Synthesia.",
+        "source_ids": [
+          "b000081"
+        ]
+      },
+      {
+        "block_id": "b000082",
+        "verdict": "supported",
+        "category": "faithful rewording",
+        "reason": "The edit sustains all content: intuitive interface for various user types, enterprise workflow, and limited flexibility due to structured format.",
+        "source_ids": [
+          "b000082"
+        ]
+      },
+      {
+        "block_id": "b000093",
+        "verdict": "supported",
+        "category": "faithful rewording",
+        "reason": "The after conveys all points from the source\u2014minutes of content, plan features, and suitability for the described use cases.",
+        "source_ids": [
+          "b000093"
+        ]
+      },
+      {
+        "block_id": "b000095",
+        "verdict": "supported",
+        "category": "faithful rewording",
+        "reason": "The rewording maintains all described strengths and popular features, as well as user sentiment and model options, matching the source content.",
+        "source_ids": [
+          "b000095"
+        ]
+      },
+      {
+        "block_id": "b000107",
+        "verdict": "supported",
+        "category": "wording clarity",
+        "reason": "The revision maintains original factual content, clarifies plan purpose, and preserves qualifiers without inventing or omitting information.",
+        "source_ids": [
+          "b000107"
+        ]
+      },
+      {
+        "block_id": "b000109",
+        "verdict": "supported",
+        "category": "wording clarity",
+        "reason": "The changes rephrase the original for clarity, retain all substantive facts, and avoid unsupported inventions or omissions.",
+        "source_ids": [
+          "b000109"
+        ]
+      },
+      {
+        "block_id": "b000116",
+        "verdict": "supported",
+        "category": "wording clarity",
+        "reason": "The revision clarifies content without adding or omitting material facts, maintaining original intent and information.",
+        "source_ids": [
+          "b000116"
+        ]
+      },
+      {
+        "block_id": "b000119",
+        "verdict": "supported",
+        "category": "wording clarity",
+        "reason": "The edited version condenses without factual loss, preserves nuances, and does not introduce unsupported claims.",
+        "source_ids": [
+          "b000119"
+        ]
+      },
+      {
+        "block_id": "b000132",
+        "verdict": "supported",
+        "category": "wording clarity",
+        "reason": "The rewrite simplifies language while including all facts about plan features. No factual information is omitted or changed in scope.",
+        "source_ids": [
+          "b000132"
+        ]
+      },
+      {
+        "block_id": "b000134",
+        "verdict": "supported",
+        "category": "wording clarity",
+        "reason": "The rewording maintains all factual content, attributes, and considerations without adding or omitting details.",
+        "source_ids": [
+          "b000134"
+        ]
+      },
+      {
+        "block_id": "b000145",
+        "verdict": "supported",
+        "category": "wording clarity",
+        "reason": "The changes only clarify expression; they do not alter or omit underlying features or qualifiers.",
+        "source_ids": [
+          "b000145"
+        ]
+      },
+      {
+        "block_id": "b000147",
+        "verdict": "supported",
+        "category": "wording clarity",
+        "reason": "The edit retains all key claims and details while changing language for conciseness. No facts are omitted or invented.",
+        "source_ids": [
+          "b000147"
+        ]
+      },
+      {
+        "block_id": "b000158",
+        "verdict": "supported",
+        "category": "paraphrase/clarification",
+        "reason": "The rewritten text accurately preserves the meaning of the original: unlimited video creation for the Creator and Team plans, Team plan benefits, and Enterprise tier focus. No material changes or unsupported claims were introduced.",
+        "source_ids": [
+          "b000158"
+        ]
+      },
+      {
+        "block_id": "b000160",
+        "verdict": "supported",
+        "category": "paraphrase/clarification",
+        "reason": "The changes only clarify wording and organization without altering or expanding the claims. All details about Runway's features, user groups, and rendering characteristics are faithfully retained.",
+        "source_ids": [
+          "b000160"
+        ]
+      },
+      {
+        "block_id": "b000173",
+        "verdict": "supported",
+        "category": "paraphrase/clarification",
+        "reason": "The rewrite maintains all details about plan limits, high-resolution output, and unrestricted usage for commercial creators. No fact or claim is changed in meaning or scope.",
+        "source_ids": [
+          "b000173"
+        ]
+      },
+      {
+        "block_id": "b000175",
+        "verdict": "supported",
+        "category": "paraphrase/clarification",
+        "reason": "The proposed text summarizes all salient points: ByteDance backing, cinematic storytelling, dynamic transitions, realistic camera movement, and praise for motion/naturalism. There\u2019s no lost or invented content.",
+        "source_ids": [
+          "b000175"
+        ]
+      },
+      {
+        "block_id": "b000182",
+        "verdict": "supported",
+        "category": "paraphrase/clarification",
+        "reason": "The rewrite retains all facts: $20/month gets ~25 HD clips, higher tiers get more (50\u2013200), plus rollover and faster queues, for creators seeking narrative/AI-assisted evolution. The scope and detail are unchanged.",
+        "source_ids": [
+          "b000182"
+        ]
+      },
+      {
+        "block_id": "b000184",
+        "verdict": "supported",
+        "category": "paraphrase/clarification",
+        "reason": "The new wording closely parallels the original: Dream Machine, 10-sec cinematic videos, smooth/realistic visuals, physics awareness, strong camera paths, praised prompt-following. No scope or claim is changed.",
+        "source_ids": [
+          "b000184"
+        ]
+      },
+      {
+        "block_id": "b000197",
+        "verdict": "supported",
+        "category": "paraphrase/clarification",
+        "reason": "All key information is present: Lite offers ~20 monthly 1080p clips, Plus removes watermark and ups priority, Unlimited enables continuous rendering for heavier use. The reformulation clarifies without distorting scope.",
+        "source_ids": [
+          "b000197"
+        ]
+      },
+      {
+        "block_id": "b000199",
+        "verdict": "supported",
+        "category": "paraphrase/clarification",
+        "reason": "The proposed revision restates all original points succinctly: cinematic visual storytelling, MiniMax, prompt-based control, viral/fast rendering. No facts are lost, added, or altered.",
+        "source_ids": [
+          "b000199"
+        ]
+      },
+      {
+        "block_id": "b000210",
+        "verdict": "unsupported",
+        "category": "inaccurate quantification",
+        "reason": "The source states the free tier provides roughly 20\u201330 short (5\u201310 sec) watermarked clips, but does not specify this is a monthly allowance, making the added word 'monthly' unsupported.",
+        "source_ids": [
+          "b000210"
+        ]
+      },
+      {
+        "block_id": "b000212",
+        "verdict": "supported",
+        "category": "paraphrase",
+        "reason": "All major details about Kling's strengths and tier-specific model access/realism are preserved, with wording condensed and simplified, in line with the original source.",
+        "source_ids": [
+          "b000212"
+        ]
+      },
+      {
+        "block_id": "b000223",
+        "verdict": "supported",
+        "category": "paraphrase",
+        "reason": "The rewrite is a faithful condensation of the benefit and feature lists in the source, maintaining explicit numerical ranges and feature assignments per plan.",
+        "source_ids": [
+          "b000223"
+        ]
+      },
+      {
+        "block_id": "b000225",
+        "verdict": "supported",
+        "category": "paraphrase",
+        "reason": "The factual claims about PixVerse's versatility, rendering speed, and daily usability are preserved with condensed wording that accurately reflects the source.",
+        "source_ids": [
+          "b000225"
+        ]
+      },
+      {
+        "block_id": "b000226",
+        "verdict": "supported",
+        "category": "paraphrase",
+        "reason": "The description retains all significant functional details, only omitting subjective language ('the best thing...intuitive'). The rewriting remains faithful.",
+        "source_ids": [
+          "b000226"
+        ]
+      },
+      {
+        "block_id": "b000239",
+        "verdict": "supported",
+        "category": "paraphrase",
+        "reason": "The rewrite faithfully preserves all plan distinctions and intended user groups from the source statement.",
+        "source_ids": [
+          "b000239"
+        ]
+      },
+      {
+        "block_id": "b000241",
+        "verdict": "supported",
+        "category": "paraphrase",
+        "reason": "The edit retains all user impressions, platform attributes, and use cases with reworded but accurate content.",
+        "source_ids": [
+          "b000241"
+        ]
+      },
+      {
+        "block_id": "b000254",
+        "verdict": "supported",
+        "category": "paraphrase",
+        "reason": "The reinterpretation of Pictory's plan features matches the structure and specifics in the source material.",
+        "source_ids": [
+          "b000254"
+        ]
+      },
+      {
+        "block_id": "b000261",
+        "verdict": "supported",
+        "category": "paraphrase",
+        "reason": "The revised sentence maintains the same meaning as the original, stating that Sameer Sohail uses writing and strategy for content marketing to help GenAI and SaaS companies grow; it simply rephrases 'helping them grow with strong writing and strategy' to 'focusing on writing and strategy to drive growth,' which is a faithful paraphrase of the source.",
+        "source_ids": [
+          "b000261"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1",
+      "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+      "schema_version": "fidelity-slots-v3",
+      "batch_size": 8,
+      "calls": 6,
+      "input_tokens": 25110,
+      "output_tokens": 2421,
+      "estimated_cost_usd": null,
+      "usage_complete": true,
+      "batches": [
+        {
+          "offset": 0,
+          "status": "passed",
+          "reason": "source_relative_check",
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 4503,
+          "output_tokens": 475,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "schema_version": "fidelity-slots-v3",
+          "schema_hash": "b5c617541871e1dc2dcdbc86f41f11273242947b06e6f02ebbd6e15a1a4e69fc",
+          "output_limit": 4096,
+          "latency_ms": 4460
+        },
+        {
+          "offset": 8,
+          "status": "passed",
+          "reason": "source_relative_check",
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 5065,
+          "output_tokens": 448,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "schema_version": "fidelity-slots-v3",
+          "schema_hash": "6cc04d66c9989565c392d6c03b59f4ef4c274c10eae90fc2484bce670b42eb21",
+          "output_limit": 4096,
+          "latency_ms": 5883
+        },
+        {
+          "offset": 16,
+          "status": "passed",
+          "reason": "source_relative_check",
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 5028,
+          "output_tokens": 370,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "schema_version": "fidelity-slots-v3",
+          "schema_hash": "0341aaa28fd51a89b78d1dbb6819216c67fb64d68effecd11d227d4e5703f07b",
+          "output_limit": 4096,
+          "latency_ms": 3560
+        },
+        {
+          "offset": 24,
+          "status": "passed",
+          "reason": "source_relative_check",
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 4957,
+          "output_tokens": 537,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "schema_version": "fidelity-slots-v3",
+          "schema_hash": "5c80feb7270589d604543b5f43f2786becc2171e775cd017d5ec19e143499a1f",
+          "output_limit": 4096,
+          "latency_ms": 7462
+        },
+        {
+          "offset": 32,
+          "status": "rejected",
+          "reason": "source_relative_check",
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 4776,
+          "output_tokens": 488,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "schema_version": "fidelity-slots-v3",
+          "schema_hash": "75265b1b4e3c7386e487455d8ceb7026b6e69974d4e7c680361033b36a32dbce",
+          "output_limit": 4096,
+          "latency_ms": 6771
+        },
+        {
+          "offset": 40,
+          "status": "passed",
+          "reason": "source_relative_check",
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 781,
+          "output_tokens": 103,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "schema_version": "fidelity-slots-v3",
+          "schema_hash": "cb812077472fac4db40e707eff70ff2a38d4679beeb3c3973ac719397b0f69a3",
+          "output_limit": 4096,
+          "latency_ms": 2097
+        }
+      ],
+      "requested_edits": 41,
+      "reviewed_edits": 41,
+      "latency_ms": 30234
+    }
+  },
+  "held_out_calls": 0,
+  "p2_calls": 0,
+  "scope": "Saved whole-page selection changes reviewed in bounded batches; original frozen run metrics unchanged; diagnostic usage separate."
+}

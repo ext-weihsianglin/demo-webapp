@@ -1,0 +1,94 @@
+{
+  "run_id": "da27d5e95eab43d08ac4b1e0430afe6a",
+  "candidate_id": "gpt-4.1-mini--4288bb3d1e63fc0c3a0413f4",
+  "change": {
+    "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+    "chunk_id": "84c94dafeae436ee2c57a8f979f8576e437ec5455a02a325d3d4fcf1c5e612c9",
+    "block_id": "b000210",
+    "before": "The free tier provides roughly 20\u201330 short (5\u201310 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+    "after": "Its free plan allows about 20\u201330 short, 5\u201310 second watermarked clips monthly. The Standard plan removes watermarks and supports HD exports with faster queue access. The Unlimited tier permits unrestricted content generation, ideal for regular short-form or social posts.",
+    "reason": "Specified Hailuo plan details regarding clip limits, watermark policies, and usage suitability.",
+    "evidence": [
+      {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "block_id": "b000210",
+        "quote": "The free tier provides roughly 20\u201330 short (5\u201310 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts."
+      }
+    ],
+    "review_flags": [],
+    "heading_level": null,
+    "source_id": "b000210"
+  },
+  "original_chunk": {
+    "chunk_id": "84c94dafeae436ee2c57a8f979f8576e437ec5455a02a325d3d4fcf1c5e612c9",
+    "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+    "method": "conservative_dom",
+    "order": 13,
+    "block_ids": [
+      "b000198",
+      "b000199",
+      "b000200",
+      "b000201",
+      "b000202",
+      "b000203",
+      "b000204",
+      "b000205",
+      "b000206",
+      "b000207",
+      "b000208",
+      "b000209",
+      "b000210"
+    ],
+    "block_schema_versions": [
+      "dom-blocks-v3"
+    ],
+    "heading_path": [
+      {
+        "block_id": "b000005",
+        "level": 1,
+        "text": "How Much AI Video Generators Cost \u2014 Top 15 Tools' Pricing Compared"
+      },
+      {
+        "block_id": "b000198",
+        "level": 2,
+        "text": "Hailuo"
+      }
+    ],
+    "text": "Hailuo\n\nHailuo is a rising AI video tool by the Chinese company MiniMax, focused on visual storytelling with cinematic flair. It allows for prompt-based control over things like character animation and camera angles. Users frequently highlight its viral content potential and the sheer speed at which it renders high-quality footage.\n\nPricing\n\nFree \u2013 1,000 credits, watermarked\n\nStandard \u2013 $9.99/month\n\nUnlimited \u2013 $94.99/month\n\nAPI \u2013 $0.20/text\u2011to\u2011video, $0.30/image\u2011referenced\n\nThe free tier provides roughly 20\u201330 short (5\u201310 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+    "markdown": "## Hailuo\n\nHailuo is a rising AI video tool by the Chinese company MiniMax, focused on visual storytelling with cinematic flair. It allows for prompt-based control over things like character animation and camera angles. Users frequently highlight its viral content potential and the sheer speed at which it renders high-quality footage.\n\n**Pricing**\n\n- Free \u2013 1,000 credits, watermarked\n- Standard \u2013 $9.99/month\n- Unlimited \u2013 $94.99/month\n- API \u2013 $0.20/text\u2011to\u2011video, $0.30/image\u2011referenced\n\nThe free tier provides roughly 20\u201330 short (5\u201310 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+    "characters": 788,
+    "oversized": false
+  },
+  "source_assessment": "Monthly pricing is given for paid tiers only. The source gives a free allocation of 1000 credits and roughly 20\u201330 clips without stating a monthly reset; the rewrite adds a monthly free entitlement. No credit limits becomes unrestricted generation, broadening the scope of the limit.",
+  "model": "gpt-4.1",
+  "prompt_hash": "b172408a20a3170c64469902a045a558a221dbef8e6b3b03618a4784dff842f3",
+  "result": {
+    "status": "rejected",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000210",
+        "verdict": "unsupported",
+        "category": "unsubstantiated details and altered factual scope",
+        "reason": "The change introduces that the free plan's clips are per month, but the source only states 'roughly 20\u201330 short (5\u201310 sec) watermarked clips' with no monthly timeframe. The source says Unlimited allows content generation 'without credit limits', not 'unrestricted content generation'\u2014which in context refers to credit, not absolute usage or other potential limits. The rest is a fair paraphrase, but these details are not supported.",
+        "source_ids": [
+          "b000210"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1",
+      "prompt_hash": "b172408a20a3170c64469902a045a558a221dbef8e6b3b03618a4784dff842f3",
+      "calls": 1,
+      "input_tokens": 1338,
+      "output_tokens": 127,
+      "estimated_cost_usd": null,
+      "schema_version": "fidelity-slots-v2",
+      "schema_hash": "0a8022c0bbd8184c55b5728ced7ca27ff0c408744ef353e28666a777ea4cbf54",
+      "output_limit": 4096,
+      "latency_ms": 2304
+    }
+  },
+  "held_out_calls": 0,
+  "p2_calls": 0
+}

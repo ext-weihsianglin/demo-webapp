@@ -1,0 +1,91 @@
+{
+  "created_at": "2026-10-02T04:41:37.415633+00:00",
+  "check": "Fresh-process registry catalog equals live API catalog; each entry resolves and validates exact composed prompt/hash.",
+  "optimization_run": "062a765eb15343ba8d96ba282f12abdb",
+  "model": "gpt-4.1-mini",
+  "selected_id": "gpt-4.1-mini--rewrite-page-v7",
+  "prompts": [
+    {
+      "id": "gpt-4.1-mini--rewrite-page-v7",
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "baseline_id": "gpt-4.1-mini--rewrite-page-v7",
+      "run_id": null,
+      "contract_version": "rewrite-page-v7",
+      "kind": "baseline",
+      "selected": true
+    },
+    {
+      "id": "gpt-4.1-mini--0bc2427da5652559cfd444fb",
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "80103502afbcbbb3ec936dc30dc28a21acc91a9de97b590cee73fe9881adf627",
+      "baseline_id": "gpt-4.1-mini--rewrite-page-v7",
+      "run_id": "062a765eb15343ba8d96ba282f12abdb",
+      "contract_version": "rewrite-page-v7",
+      "kind": "experimental",
+      "selected": false
+    },
+    {
+      "id": "gpt-4.1-mini--1a1743ef7338a55097bf0265",
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "2cc62380555adc9d47dcc5acfbc27f9e43dafe925543e2afa6067d0a8b358fd9",
+      "baseline_id": "gpt-4.1-mini--rewrite-page-v7",
+      "run_id": "062a765eb15343ba8d96ba282f12abdb",
+      "contract_version": "rewrite-page-v7",
+      "kind": "experimental",
+      "selected": false
+    },
+    {
+      "id": "gpt-4.1-mini--3c08e39a53f6676a5163abed",
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "bcf9d689c23605535cb36101861a56a962115e698ca061c095be3fb881371074",
+      "baseline_id": "gpt-4.1-mini--rewrite-page-v7",
+      "run_id": "062a765eb15343ba8d96ba282f12abdb",
+      "contract_version": "rewrite-page-v7",
+      "kind": "experimental",
+      "selected": false
+    },
+    {
+      "id": "gpt-4.1-mini--54f0320c3f24aa992b277c44",
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "32a47b327cfba1f8a0cf1024ba1470546473973d011a54514bc73dbae99c9dfb",
+      "baseline_id": "gpt-4.1-mini--rewrite-page-v7",
+      "run_id": "062a765eb15343ba8d96ba282f12abdb",
+      "contract_version": "rewrite-page-v7",
+      "kind": "experimental",
+      "selected": false
+    },
+    {
+      "id": "gpt-4.1-mini--885bc0d8059b6913d10c2554",
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "76ca1e2102bab9b09e3942c629203fa0ddc0534b2b14be3ce5db613a8f1e8f64",
+      "baseline_id": "gpt-4.1-mini--rewrite-page-v7",
+      "run_id": "062a765eb15343ba8d96ba282f12abdb",
+      "contract_version": "rewrite-page-v7",
+      "kind": "experimental",
+      "selected": false
+    },
+    {
+      "id": "gpt-4.1-mini--9f4e0667214f119978288b4b",
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "8e5022b746c7e60d10d5b6ca051521be633f1d40cf54a9354ab6550a7424cd0d",
+      "baseline_id": "gpt-4.1-mini--rewrite-page-v7",
+      "run_id": "062a765eb15343ba8d96ba282f12abdb",
+      "contract_version": "rewrite-page-v7",
+      "kind": "experimental",
+      "selected": false
+    },
+    {
+      "id": "gpt-4.1-mini--e1fc8f0200599011ff58371f",
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "855b9376e5eff6486355cfca1efa97aeffa5aad3d70ce96b1c5738e9825b073f",
+      "baseline_id": "gpt-4.1-mini--rewrite-page-v7",
+      "run_id": "062a765eb15343ba8d96ba282f12abdb",
+      "contract_version": "rewrite-page-v7",
+      "kind": "experimental",
+      "selected": false
+    }
+  ],
+  "passed": true,
+  "limits": "Candidate persistence only. No candidate has qualified for promotion; actual selected-winner backend restart remains pending."
+}

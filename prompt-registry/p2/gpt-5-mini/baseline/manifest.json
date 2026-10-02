@@ -1,0 +1,6 @@
+{
+  "model": "gpt-5-mini",
+  "id": "gpt-5-mini--rewrite-page-v7",
+  "source": "backend/app/prompts/rewrite-page-v7.txt",
+  "measured_by_registration": false
+}

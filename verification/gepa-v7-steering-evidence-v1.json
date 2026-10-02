@@ -1,0 +1,268 @@
+{
+  "diagnostic_only": true,
+  "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+  "source_reports": {
+    "/Users/ext-weihsiang.lin/Documents/profound/content-optimization-system/.worktrees/deck-prototype-trad-ml-scorers/trad_ml_scorer/interpretation/fixed_prompt/report.html": "26c3739cb1d364513b10fadf84fd1a673474afd3057a13d09a7c4c2f652cb374",
+    "/Users/ext-weihsiang.lin/Documents/profound/content-optimization-system/.worktrees/deck-prototype-trad-ml-scorers/trad_ml_scorer/v6/report.html": "cf29e0f566a882065f7f5434d74a877034d8bba0a9c48f51f15914d13c3411cd",
+    "/Users/ext-weihsiang.lin/Documents/profound/content-optimization-system/.worktrees/deck-prototype-trad-ml-scorers/trad_ml_scorer/v7/report.html": "aa153df4d0f09f344695f89eb1084d5dfa34ba1a87896aa5f697e41c4b57b183"
+  },
+  "reflection_prompt_hash": "da2bdfe523e757ea22f353a2af6a51668cde5146108fad8599b5811b36718aef",
+  "provider_calls": 0,
+  "heldout_calls": 0,
+  "standardized_coefficients": [
+    {
+      "feature": "path_similarity",
+      "coefficient": 0.1286665297868692
+    },
+    {
+      "feature": "title_similarity",
+      "coefficient": 0.10357725446569971
+    },
+    {
+      "feature": "prompt_comparison",
+      "coefficient": 0.0977272900101463
+    },
+    {
+      "feature": "prompt_question",
+      "coefficient": -0.09762357340052981
+    },
+    {
+      "feature": "path_homepage",
+      "coefficient": 0.08600278907250342
+    },
+    {
+      "feature": "missingindicator_path_similarity",
+      "coefficient": 0.08600278907250342
+    },
+    {
+      "feature": "path_commerce",
+      "coefficient": 0.08369200501517607
+    },
+    {
+      "feature": "sparse_body",
+      "coefficient": 0.07380527654319834
+    },
+    {
+      "feature": "prompt_how_to",
+      "coefficient": -0.0721103553035404
+    },
+    {
+      "feature": "log_heading_count",
+      "coefficient": 0.06863245291617774
+    },
+    {
+      "feature": "has_article_schema",
+      "coefficient": -0.0584388801045771
+    },
+    {
+      "feature": "path_editorial",
+      "coefficient": -0.051942420279230926
+    },
+    {
+      "feature": "path_depth",
+      "coefficient": -0.050399978996656124
+    },
+    {
+      "feature": "log_list_items",
+      "coefficient": 0.04865057858889051
+    },
+    {
+      "feature": "headings_per_1000_words",
+      "coefficient": 0.04832471062121614
+    },
+    {
+      "feature": "format_html",
+      "coefficient": 0.04814638987939409
+    },
+    {
+      "feature": "h1_similarity",
+      "coefficient": 0.047676147169927255
+    },
+    {
+      "feature": "page_similarity",
+      "coefficient": 0.0432870344207169
+    },
+    {
+      "feature": "log_link_count",
+      "coefficient": 0.03931086471710794
+    },
+    {
+      "feature": "missingindicator_h1_similarity",
+      "coefficient": 0.036816956078635034
+    },
+    {
+      "feature": "has_jsonld",
+      "coefficient": -0.03668480187638636
+    },
+    {
+      "feature": "unique_word_fraction",
+      "coefficient": -0.03648076877178347
+    },
+    {
+      "feature": "has_table",
+      "coefficient": 0.033560282426748446
+    },
+    {
+      "feature": "outline_similarity",
+      "coefficient": 0.033114775023438334
+    },
+    {
+      "feature": "section_q75",
+      "coefficient": 0.03045428570094016
+    },
+    {
+      "feature": "section_max",
+      "coefficient": 0.028602741248472004
+    },
+    {
+      "feature": "missingindicator_outline_similarity",
+      "coefficient": 0.028361267763278613
+    },
+    {
+      "feature": "path_support_docs",
+      "coefficient": -0.027130608864472553
+    },
+    {
+      "feature": "log_word_count",
+      "coefficient": 0.026804474022893206
+    },
+    {
+      "feature": "list_items_per_1000_words",
+      "coefficient": -0.02598958403938983
+    },
+    {
+      "feature": "log_prompt_words",
+      "coefficient": -0.025637956155028854
+    },
+    {
+      "feature": "retained_text_fraction",
+      "coefficient": -0.025070962637954376
+    },
+    {
+      "feature": "section_median",
+      "coefficient": 0.024982035854320774
+    },
+    {
+      "feature": "log_h1_count",
+      "coefficient": -0.024347246184418428
+    },
+    {
+      "feature": "table_word_fraction",
+      "coefficient": 0.024128055638746294
+    },
+    {
+      "feature": "log_table_count",
+      "coefficient": 0.022972068650551934
+    },
+    {
+      "feature": "has_list",
+      "coefficient": -0.022422185815046087
+    },
+    {
+      "feature": "section_top3_mean",
+      "coefficient": 0.021490049393285852
+    },
+    {
+      "feature": "log_title_words",
+      "coefficient": -0.019883918204553687
+    },
+    {
+      "feature": "log_source_script_count",
+      "coefficient": -0.019086242532938877
+    },
+    {
+      "feature": "paragraph_word_fraction",
+      "coefficient": -0.018845003765836584
+    },
+    {
+      "feature": "heading_word_fraction",
+      "coefficient": 0.01637299580958572
+    },
+    {
+      "feature": "paragraph_log_p90_words",
+      "coefficient": 0.015257472062428312
+    },
+    {
+      "feature": "log_code_count",
+      "coefficient": -0.014074894503637789
+    },
+    {
+      "feature": "paragraph_log_median_words",
+      "coefficient": 0.012319087461525878
+    },
+    {
+      "feature": "section_q25",
+      "coefficient": -0.012130385216207655
+    },
+    {
+      "feature": "log_paragraph_count",
+      "coefficient": 0.011302162513115197
+    },
+    {
+      "feature": "code_word_fraction",
+      "coefficient": -0.0103552149573772
+    },
+    {
+      "feature": "numeric_word_fraction",
+      "coefficient": 0.010077138465015331
+    },
+    {
+      "feature": "needs_review",
+      "coefficient": 0.008922193732713335
+    },
+    {
+      "feature": "question_heading_fraction",
+      "coefficient": -0.00877408999274306
+    },
+    {
+      "feature": "short_paragraph_fraction",
+      "coefficient": -0.0071352567990837805
+    },
+    {
+      "feature": "log_ordered_steps",
+      "coefficient": -0.006969514670853607
+    },
+    {
+      "feature": "missingindicator_headings_per_1000_words",
+      "coefficient": 0.006386466375181637
+    },
+    {
+      "feature": "missingindicator_list_items_per_1000_words",
+      "coefficient": 0.006386466375181637
+    },
+    {
+      "feature": "missingindicator_retained_text_fraction",
+      "coefficient": 0.006386466375181637
+    },
+    {
+      "feature": "empty_title",
+      "coefficient": 0.004448115447139502
+    },
+    {
+      "feature": "missingindicator_title_similarity",
+      "coefficient": 0.004448115447139502
+    },
+    {
+      "feature": "links_per_1000_words",
+      "coefficient": -0.004321623357175019
+    },
+    {
+      "feature": "possible_error_response",
+      "coefficient": -0.00019623592422005943
+    },
+    {
+      "feature": "duplicate_heading_fraction",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "list_item_word_fraction",
+      "coefficient": 0.0
+    }
+  ],
+  "limits": [
+    "Coefficient magnitude is a fitted standardized slope, not conditional editing importance or causal uplift.",
+    "Older reports describe v5 retained by v6; lexical interaction features are absent from served v7.",
+    "Metadata, URLs, source inventory and block counts remain immutable.",
+    "Prompt change applies only after current run terminates and an idle backend reload; historical manifests are preserved."
+  ]
+}

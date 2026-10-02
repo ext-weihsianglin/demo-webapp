@@ -1,0 +1,59 @@
+{
+  "run_id": "c536094bf77a41cdbbfb9243ff4dca90",
+  "prior_run_id": "db4545d1d3bf468c94e0d92341ce6c63",
+  "manifest_changes": {
+    "run_id": {
+      "before": "db4545d1d3bf468c94e0d92341ce6c63",
+      "after": "c536094bf77a41cdbbfb9243ff4dca90"
+    },
+    "created_at": {
+      "before": "2026-10-02T10:50:33.489457+00:00",
+      "after": "2026-10-02T11:44:13.263305+00:00"
+    },
+    "fidelity": {
+      "before": {
+        "model": "gpt-4.1",
+        "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+        "schema_version": "fidelity-slots-v3",
+        "output_budget": {
+          "minimum": 4096,
+          "maximum": 16000,
+          "per_edit": 128
+        },
+        "batch_size": 8,
+        "uncertain_policy": "reject_whole_proposal"
+      },
+      "after": {
+        "model": "gpt-5",
+        "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+        "schema_version": "fidelity-slots-v4",
+        "output_budget": {
+          "minimum": 8192,
+          "maximum": 16000,
+          "per_edit": 128
+        },
+        "batch_size": 8,
+        "reasoning_effort": "low",
+        "schema_limits": {
+          "enum_values": 1000,
+          "schema_characters": 120000,
+          "large_enum_characters": 15000
+        },
+        "uncertain_policy": "reject_whole_proposal"
+      }
+    }
+  },
+  "status_at_recording": "running",
+  "budget_at_recording": {
+    "attempts": 10,
+    "reserved": 20,
+    "completed": 0,
+    "technical_failures": 0,
+    "stop_reason": null,
+    "limit": 100
+  },
+  "heldout_calls": 0,
+  "limits": [
+    "Running trial: no final candidate quality result at recording."
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "id": "3a27d781574445ef97048804f4ff47d4",
+  "status": "stopped",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-4.1-mini",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 10,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 2,
+    "enable_live_calls": true
+  },
+  "budget": {
+    "attempts": 92,
+    "reserved": 0,
+    "completed": 92,
+    "technical_failures": 3,
+    "stop_reason": "attempt_budget",
+    "limit": 100
+  },
+  "candidates": [
+    {
+      "id": "gpt-4.1-mini--rewrite-page-v7",
+      "model": "gpt-4.1-mini",
+      "run_id": null,
+      "parents": [],
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "editorial_strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks.",
+      "status": "evaluated",
+      "selection_mean": 0.40937584542740885,
+      "selection_pages": 30,
+      "failure_rate": 0.7333333333333333
+    },
+    {
+      "id": "gpt-4.1-mini--8916cbcd258d25a25d428d41",
+      "model": "gpt-4.1-mini",
+      "run_id": "3a27d781574445ef97048804f4ff47d4",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "e492df739935dac24adaa4be5f6568895273134db86e35f4aad36fb13d6cfe93",
+      "editorial_strategy": "Provide concise, source-supported summaries that directly answer all target queries by synthesizing vendor profiles, technology roles, market impact, and innovation highlights while avoiding unsupported generalizations or extrapolations.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--92f63bce4fffba53b71d7e2b",
+      "model": "gpt-4.1-mini",
+      "run_id": "3a27d781574445ef97048804f4ff47d4",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "2fc1b7e3e35008f08b5eeca1bd3255f771cb53183c787cea16c580b6b8047509",
+      "editorial_strategy": "Enhance clarity and directness by consolidating relevant product features and performance data, explicitly linking them to diverse user queries around AI video editing, batch processing, format support, and device compatibility for better citation.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--c317c6bcd229e8223fe3f63f",
+      "model": "gpt-4.1-mini",
+      "run_id": "3a27d781574445ef97048804f4ff47d4",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "316528bd2d7e430056af8daf053d25c7f2a1015fee689868bbd4ea6e1933ffe7",
+      "editorial_strategy": "Optimize the page by clarifying key concepts, consolidating technical details into cohesive summaries, and emphasizing practical applications and vendor examples to aid comprehension and support accurate citation.",
+      "status": "evaluated",
+      "selection_mean": 0.40818406189108164,
+      "selection_pages": 30,
+      "failure_rate": 0.8666666666666667
+    },
+    {
+      "id": "gpt-4.1-mini--8c045d984dc0aeff44763000",
+      "model": "gpt-4.1-mini",
+      "run_id": "3a27d781574445ef97048804f4ff47d4",
+      "parents": [
+        "gpt-4.1-mini--c317c6bcd229e8223fe3f63f"
+      ],
+      "prompt_hash": "3035e8bead140778b7b2712448851cc14f08c7ed301b18d9294e37a82c6ad794",
+      "editorial_strategy": "Summarize and clarify core concepts and vendor features succinctly, focusing on practical decision criteria and matching tools to user needs to support accurate, source-backed citations and enhance usability across varied queries.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--4f072be8d014ffbb94f10bf3",
+      "model": "gpt-4.1-mini",
+      "run_id": "3a27d781574445ef97048804f4ff47d4",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "6863dd0ae3273ce033e3b5f4e3550cf05da34d66c64b0ac72a06b267d4881b50",
+      "editorial_strategy": "Focus on enhancing clarity and directness in responses to all target queries with supported, concise explanations and structured summaries, improving citation ease without introducing unsupported content or diluting core details.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--2c42c48ad4e6b58c83420af9",
+      "model": "gpt-4.1-mini",
+      "run_id": "3a27d781574445ef97048804f4ff47d4",
+      "parents": [
+        "gpt-4.1-mini--c317c6bcd229e8223fe3f63f"
+      ],
+      "prompt_hash": "1d7c77e14cf4718d6b801c78c58dcfef8e2edb9dab17e1939292c6afc5e23f14",
+      "editorial_strategy": "Maintain original phrasing unless fully supported by source; prefer focused paraphrasing that preserves factual accuracy and omits unsourced claims or expansions beyond given content.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--93395f5626caa930008e85b2",
+      "model": "gpt-4.1-mini",
+      "run_id": "3a27d781574445ef97048804f4ff47d4",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "c8dffc6ce7e342a3dd2504aad784e6cd247331a27ad67ead92e20612848c7bd2",
+      "editorial_strategy": "Focus edits on clarifying scheme features, eligibility, bank participation, and benefits using concise, factual sentences directly grounded in the source. Avoid adding unsupported promotional or interpretive language and preserve original terminology and tone.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--a7f416e2053be619eb78683e",
+      "model": "gpt-4.1-mini",
+      "run_id": "3a27d781574445ef97048804f4ff47d4",
+      "parents": [
+        "gpt-4.1-mini--c317c6bcd229e8223fe3f63f"
+      ],
+      "prompt_hash": "8489c9998afd1520dbd17f805f8c286a0a78bc071350b010ced94608f57ea96e",
+      "editorial_strategy": "Enhance clarity by succinctly defining key product features and use cases, emphasize integration capabilities and user benefits supported by user feedback, and maintain factual accuracy without adding unsupported claims or overgeneralizations.",
+      "status": "partial"
+    }
+  ],
+  "recommendation": null,
+  "stop_reason": "attempt_budget",
+  "proposals": 8,
+  "finished_at": "2026-10-02T06:58:16.272606+00:00",
+  "usage": {
+    "rewrite": {
+      "calls": 92,
+      "input_tokens": 2850487,
+      "output_tokens": 348160,
+      "cached_requests": 0
+    },
+    "fidelity": {
+      "calls": 83,
+      "input_tokens": 934692,
+      "output_tokens": 140757,
+      "cached_requests": 0
+    },
+    "reflection": {
+      "calls": 8,
+      "input_tokens": 348775,
+      "output_tokens": 663,
+      "cached_requests": 0
+    },
+    "embedding": {
+      "calls": 20,
+      "input_tokens": 210442,
+      "output_tokens": 0,
+      "cached_requests": 2866
+    }
+  },
+  "interpretation": "Body-content-v2 validation-only trial. Full challenger below baseline; no recommendation. Whole 30-page selection batch could not fit eight remaining attempts. All saved page/query traces remain in local run export. No held-out calls or feedback."
+}

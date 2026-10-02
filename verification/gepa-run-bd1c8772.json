@@ -1,0 +1,131 @@
+{
+  "id": "bd1c877280164b8c9367eabb4093dd30",
+  "status": "stopped",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-4.1-mini",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 10,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 2,
+    "enable_live_calls": true
+  },
+  "budget": {
+    "attempts": 80,
+    "reserved": 0,
+    "completed": 80,
+    "technical_failures": 4,
+    "stop_reason": "attempt_budget",
+    "limit": 100
+  },
+  "candidates": [
+    {
+      "id": "gpt-4.1-mini--rewrite-page-v7",
+      "model": "gpt-4.1-mini",
+      "run_id": null,
+      "parents": [],
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "editorial_strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks.",
+      "status": "evaluated",
+      "selection_mean": 0.40829541069711517,
+      "selection_pages": 30,
+      "failure_rate": 0.7666666666666667
+    },
+    {
+      "id": "gpt-4.1-mini--f3a0cde4bbc615d83a6f1b60",
+      "model": "gpt-4.1-mini",
+      "run_id": "bd1c877280164b8c9367eabb4093dd30",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "82e217d9827db64d08cdbae5936fd799b4e2b66df4ea421a0591e9976e4ae6bf",
+      "editorial_strategy": "Select one to three core paragraphs relevant to key queries, restructure for flow, clarify technical terms using only sourced facts, and omit unsupported claims to enhance clarity and directness while preserving original scope and attributions.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--f414965b2798ed961787bbde",
+      "model": "gpt-4.1-mini",
+      "run_id": "bd1c877280164b8c9367eabb4093dd30",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "c0cfc71ac138727c70a688fdf513c06babe5d9158ef6ca8a36cc9be52067e08f",
+      "editorial_strategy": "Focus edits on key product descriptions and feature comparisons by condensing technical details into clear, jargon-free summaries that emphasize measurable performance, usability, and supported formats. Retain original factual claims and quantitative metrics without adding speculative or unsupported benefits.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--0f1af82910a42b5fe41ef19e",
+      "model": "gpt-4.1-mini",
+      "run_id": "bd1c877280164b8c9367eabb4093dd30",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "653e2f9589eb5f01f029a47db2aa04baac3966a7d72268f70b87076f3ac1b238",
+      "editorial_strategy": "Select pivotal paragraphs that define core subject dimensions; clarify and reorder statements within these, preserving original data and attributing sources. Avoid broad synthesis, fabricated claims, or unsupported details; maintain unrelated sections untouched.",
+      "status": "evaluated",
+      "selection_mean": 0.4088102140245711,
+      "selection_pages": 30,
+      "failure_rate": 0.7666666666666667
+    },
+    {
+      "id": "gpt-4.1-mini--de91df31156f8224ccc6f4d1",
+      "model": "gpt-4.1-mini",
+      "run_id": "bd1c877280164b8c9367eabb4093dd30",
+      "parents": [
+        "gpt-4.1-mini--0f1af82910a42b5fe41ef19e"
+      ],
+      "prompt_hash": "49ed8cce18d133665193d59b83c4fe4be1738ccb7e30f32ed3b69c3c8f08a304",
+      "editorial_strategy": "Identify key paragraphs central to the page's main topics; enhance clarity and logical flow within these sections by reordering and refining existing statements while strictly preserving original facts, attributions, and terminology. Avoid adding unsupported information or synthesizing beyond the source scope; leave unrelated content untouched.",
+      "status": "rejected"
+    },
+    {
+      "id": "gpt-4.1-mini--bae52c701a6c010112beabb5",
+      "model": "gpt-4.1-mini",
+      "run_id": "bd1c877280164b8c9367eabb4093dd30",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "prompt_hash": "8db8b9957fe83b30618c056c65efc0596f1386728fc12ba64c23910037b16db0",
+      "editorial_strategy": "Select one to three highly relevant paragraphs central to the page's focus and improve clarity by reordering sentence elements and refining wording strictly within the scope of existing facts. Preserve original factual scope and do not add unsupported content or broad generalizations. Leave unrelated sections unchanged.",
+      "status": "partial"
+    }
+  ],
+  "recommendation": "gpt-4.1-mini--0f1af82910a42b5fe41ef19e",
+  "stop_reason": "attempt_budget",
+  "proposals": 5,
+  "finished_at": "2026-10-02T07:18:54.807297+00:00",
+  "usage": {
+    "rewrite": {
+      "calls": 80,
+      "input_tokens": 2322597,
+      "output_tokens": 263189,
+      "cached_requests": 0
+    },
+    "fidelity": {
+      "calls": 74,
+      "input_tokens": 697266,
+      "output_tokens": 98867,
+      "cached_requests": 0
+    },
+    "reflection": {
+      "calls": 5,
+      "input_tokens": 190163,
+      "output_tokens": 437,
+      "cached_requests": 0
+    },
+    "embedding": {
+      "calls": 26,
+      "input_tokens": 275985,
+      "output_tokens": 0,
+      "cached_requests": 2580
+    }
+  },
+  "interpretation": "Numerical recommendation under body-content-v2 is superseded by validation navigation-boundary audit. All prior metrics/prompts retained; no held-out evaluation performed for this candidate. Natural terminal attempt_budget preceded operator Stop request."
+}
