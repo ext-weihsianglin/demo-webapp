@@ -1,0 +1,25 @@
+{
+  "run_id": "c8439bf1e8c141ef9228bc5370dfa015",
+  "page_id": "a50391ca6bcf61418f4c70d606776e3c15231289033a631e6788989614268282",
+  "original_failure": "incomplete_or_refused_judge",
+  "probe_status": "rejected",
+  "probe_reason": "source_relative_check",
+  "response_status": "completed",
+  "expected_edits": 143,
+  "returned_edits": 143,
+  "coverage_exact": true,
+  "unsupported_findings": 42,
+  "probe_timeout_seconds": 120,
+  "telemetry": {
+    "model": "gpt-4.1-mini",
+    "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+    "calls": 1,
+    "input_tokens": 28721,
+    "output_tokens": 7062,
+    "estimated_cost_usd": null,
+    "schema_version": "fidelity-slots-v1",
+    "schema_hash": "ccf89f774f59641df442cc175e0f6d364d172ace7f1ac116490ef2c910fc9625",
+    "output_limit": 16000,
+    "latency_ms": 50467
+  }
+}

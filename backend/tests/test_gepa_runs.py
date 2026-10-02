@@ -44,9 +44,9 @@ class ResearchClient(StubClient):
                 response.output_text=response.output_text.replace('prioritize a comfortable fit','choose a comfortable fit')
             return response
         if name=='fidelity':
-            body={'edits':[{'block_id':c['source_id'],'verdict':self.verdict,'category':'fidelity',
+            body={'edits':{c['source_id']:{'verdict':self.verdict,'category':'fidelity',
                 'reason':'Meaning matches source.' if self.verdict=='supported' else 'Unsupported certainty.',
-                'source_ids':[c['source_id']]} for c in data['changes']]}
+                'source_ids':[c['source_id']] if self.verdict=='supported' else []} for c in data['changes']}}
         else:
             self.reflection_examples.extend(data['examples']['editorial_strategy'])
             body={'editorial_strategy':'Clarify supported answers while preserving every factual qualifier.', 'summary':'Clarify answer wording.'}

@@ -21,6 +21,9 @@ products, brands, industries, query topics or source-specific facts in the strat
 Learn an editing method from their outcomes. P1 gains count only after the fixed
 fidelity gate passes; use rejected edits to learn what to leave unchanged and
 prefer focused useful improvements over broad unsupported expansion.
+One unsupported edit rejects the entire proposal and erases its potential gain.
+When broad proposals fail, consider a one-paragraph editing policy that leaves
+unrelated blocks unchanged rather than trying to improve every block.
 Never weaken fixed security, schema, evidence, preservation,
 language or fidelity constraints. Do not encourage fabricated claims, repetition,
 keyword stuffing, unsupported clickbait or answering queries unsupported by source.

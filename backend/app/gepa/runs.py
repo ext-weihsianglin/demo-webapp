@@ -10,7 +10,7 @@ from gepa import optimize
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.prompt_registry import PromptRegistry
 from app.rewriting import model_options, Settings
-from app.fidelity import PROMPT as GATE_PROMPT, MODEL as GATE_MODEL
+from app.fidelity import PROMPT as GATE_PROMPT, MODEL as GATE_MODEL, SCHEMA_VERSION, OUTPUT_BUDGET
 from app.prompt_registry import digest
 from app.gepa.datasets import load_dataset, root
 from app.gepa.storage import RunStore, safe_id
@@ -84,7 +84,8 @@ class RunManager:
             manifest={'run_id':identity,'config':config.model_dump(),'dataset':{k:v for k,v in data.items() if k!='pages'},
                 'page_roles':[{k:p[k] for k in ('snapshot_id','role','query_set_hash')} for p in data['pages']],
                 'baseline':baseline,'rewrite_settings':settings.__dict__,
-                'fidelity':{'model':GATE_MODEL,'prompt_hash':digest(GATE_PROMPT),'uncertain_policy':'reject_whole_proposal'},
+                'fidelity':{'model':GATE_MODEL,'prompt_hash':digest(GATE_PROMPT),'schema_version':SCHEMA_VERSION,
+                            'output_budget':OUTPUT_BUDGET,'uncertain_policy':'reject_whole_proposal'},
                 'reflection_prompt_hash':digest(REFLECTION_PROMPT),'gepa_version':importlib.metadata.version('gepa'),
                 'cache_scope':'per_run','merge_enabled':False,'created_at':datetime.now(timezone.utc).isoformat()}
             store.write('manifest',manifest)
