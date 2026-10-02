@@ -11,12 +11,12 @@ from app.scoring import MODEL_SHA256
 def prepare(source: Path, output: Path):
     payload = source.read_bytes()
     if hashlib.sha256(payload).hexdigest() != MODEL_SHA256:
-        raise ValueError('Only the pinned P1 v7 semantic_context model is supported; source hash mismatch')
+        raise ValueError('Only the pinned P1 v7.1 semantic_context model is supported; source hash mismatch')
     if output.exists():
         raise ValueError('Output exists; use a fresh path to preserve the installed artifact')
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_bytes(payload)
-    print(f'Installed pinned P1 v7 model: {MODEL_SHA256}')
+    print(f'Installed pinned P1 v7.1 model: {MODEL_SHA256}')
 
 
 if __name__ == '__main__':

@@ -233,8 +233,8 @@ wheels = [
 
 [[package]]
 name = "content-optimization-exploration"
-version = "0.2.0"
-source = { path = "packages/content_optimization_exploration-0.2.0-py3-none-any.whl" }
+version = "0.3.0"
+source = { path = "packages/content_optimization_exploration-0.3.0-py3-none-any.whl" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "duckdb" },
@@ -254,7 +254,7 @@ dependencies = [
     { name = "umap-learn" },
 ]
 wheels = [
-    { filename = "content_optimization_exploration-0.2.0-py3-none-any.whl", hash = "sha256:3772ed84077cf314b8c7f75533fa277292b511f20b460ec31a15d7f2ce216026" },
+    { filename = "content_optimization_exploration-0.3.0-py3-none-any.whl", hash = "sha256:86321b4fa75fcff266630133f0fdf0c7e9566f137ad4948e1f06745fc0433b02" },
 ]
 
 [package.metadata]
@@ -1491,7 +1491,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "content-optimization-exploration", path = "packages/content_optimization_exploration-0.2.0-py3-none-any.whl" },
+    { name = "content-optimization-exploration", path = "packages/content_optimization_exploration-0.3.0-py3-none-any.whl" },
     { name = "fastapi", specifier = ">=0.115,<1" },
     { name = "gepa", specifier = "==0.1.4" },
     { name = "lingua-language-detector", specifier = ">=2,<3" },

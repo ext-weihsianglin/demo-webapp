@@ -7,9 +7,9 @@ import subprocess
 import tempfile
 import zipfile
 
-REVISION = '864e6634a54ad80ac1657129e994b18c3a1f7eff'
+REVISION = '6a9606d3febaf62f76c8448c44f91a120107e5a6'
 REPOSITORY = 'https://github.com/ext-weihsianglin/content-optimization-system'
-VERSION = '0.2.0'
+VERSION = '0.3.0'
 
 
 def build(uv, output):
@@ -28,30 +28,41 @@ packages = ["preprocessing", "trad_ml_scorer", "representations", "scripts"]
 exclude = ["**/*.html", "**/*.svg", "**/*.png", "trad_ml_scorer/v*", "trad_ml_scorer/interpretation"]
 ''')
         manifest.write_text(text)
-        parser = root / 'trad_ml_scorer/retention_features.py'
-        text = parser.read_text().replace('def parse_snapshot(payload, href, hostname="", source=None):',
-            'def parse_snapshot(payload, href, hostname="", source=None, *, source_format=None):')
-        text = text.replace('format_name = classify_payload(payload)',
-            'format_name = source_format if source_format is not None else classify_payload(payload)')
-        parser.write_text(text)
         api = root / 'preprocessing/api.py'
-        api.write_text(f'''"""Tuple facade over the exact upstream corpus parser."""
-from trad_ml_scorer.retention_features import parse_snapshot as _parse
+        api.write_text(f'''"""Tuple facade over the exact upstream corpus parser modules."""
+from preprocessing.adapters.local import extract_conservative, extract_markdown_text
+from preprocessing.downstream import document
+from preprocessing.quality import classify_payload, source_inventory
+from preprocessing.schema import Snapshot, snapshot_identity
+from scripts.analyze_content import words
 
 PARSER_REVISION = "{REVISION}"
 
 def parse_snapshot(payload, href, hostname="", *, source_format=None, source=None):
-    doc = _parse(payload, href, hostname, source, source_format=source_format)
+    payload_hash, identity = snapshot_identity(payload, href)
+    format_name = source_format if source_format is not None else classify_payload(payload)
+    snapshot = Snapshot(identity, payload_hash, href, hostname, payload, format_name)
+    inventory = source_inventory(payload, href, format_name)
+    candidate = extract_conservative(snapshot) if format_name == "html" else extract_markdown_text(snapshot)
+    source = {{**(source or {{}}), "payload_hash": payload_hash, "href": href,
+              "hostname": hostname, "format": format_name}}
+    for key in ("source_file", "source_file_hash", "source_row"):
+        source.setdefault(key, None)
+    doc, chunks = document(snapshot, source, [candidate.to_dict()], inventory)
+    doc["scorer_source_word_count"] = len(words(inventory["body_text"]))
+    doc["raw_payload_path"] = None
+    doc["raw_payload_reference"] = {{key: source[key] for key in
+                                    ("source_file", "source_file_hash", "source_row", "payload_hash")}}
+    doc["chunks"] = chunks
     doc["candidate_diagnostics"] = dict(doc.get("representation", {{}}))
-    return doc, doc["chunks"]
+    return doc, chunks
 ''')
         subprocess.run(['git', 'add', '-N', 'preprocessing/api.py'], cwd=root, check=True)
-        patch = subprocess.check_output(['git', 'diff', '--', 'pyproject.toml',
-            'preprocessing/api.py', 'trad_ml_scorer/retention_features.py'], cwd=root)
+        patch = subprocess.check_output(['git', 'diff', '--', 'pyproject.toml', 'preprocessing/api.py'], cwd=root)
         output.mkdir(parents=True, exist_ok=True)
         subprocess.run([uv, 'build', '--wheel', '--out-dir', str(output.resolve())], cwd=root, check=True)
         wheel = output / f'content_optimization_exploration-{VERSION}-py3-none-any.whl'
-        (output / 'content-optimization-library-v2.patch').write_bytes(patch)
+        (output / 'content-optimization-library-v3.patch').write_bytes(patch)
         fingerprints = {}
         installed = set(zipfile.ZipFile(wheel).namelist())
         for folder in ('preprocessing', 'trad_ml_scorer', 'representations', 'scripts'):
@@ -61,10 +72,10 @@ def parse_snapshot(payload, href, hostname="", *, source_format=None, source=Non
                     fingerprints[name] = hashlib.sha256(path.read_bytes()).hexdigest()
         identity = {'repository': REPOSITORY, 'base_revision': REVISION, 'version': VERSION,
             'wheel': wheel.name, 'wheel_sha256': hashlib.sha256(wheel.read_bytes()).hexdigest(),
-            'packaging_patch': 'content-optimization-library-v2.patch',
-            'status': 'Pinned merged upstream modules plus tuple facade and explicit format override',
+            'packaging_patch': 'content-optimization-library-v3.patch',
+            'status': 'Pinned merged upstream v7.1 modules plus tuple facade and explicit format override',
             'module_sha256': fingerprints}
-        (output / 'provenance-v2.json').write_text(json.dumps(identity, indent=2) + '\n')
+        (output / 'provenance-v3.json').write_text(json.dumps(identity, indent=2) + '\n')
 
 
 if __name__ == '__main__':
