@@ -25,7 +25,7 @@ def freeze(corpus, split_root, raw_root, output, seed=0):
     def eligible(row):
         doc = read_document(corpus/row['document_path'])
         try:
-            if doc['source']['format']!='html' or not any(editable(b) and b['type']=='paragraph' for b in doc['blocks']):
+            if doc['source']['format']!='html' or not any(editable(b, doc) and b['type']=='paragraph' for b in doc['blocks']):
                 raise ValueError('No editable HTML prose')
             plan_requests(doc,doc['chunks'],[row['prompt']],'Preserve original',False,Settings(),encoding)
             return True

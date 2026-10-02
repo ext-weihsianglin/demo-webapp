@@ -13,8 +13,10 @@ import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
 from app.language_guard import confident_language, compare_language
+from app.source_context import protected_roles
 
 PROMPT_VERSION = 'rewrite-page-v7'
+EDIT_BOUNDARY_VERSION = 'body-content-v2'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 SUPPORTED_REWRITE_MODELS = ('gpt-4.1-mini', 'gpt-4.1', 'gpt-4.1-nano', 'gpt-5', 'gpt-5-mini', 'gpt-5-nano')
@@ -134,10 +136,27 @@ class RewriteFailure(Exception):
         super().__init__(message)
 
 
-def editable(block):
+def _protected_html_context(node):
+    # Use parser-owned provenance; never fetch or execute the original HTML.
+    path = (node.get('source_locator') or {}).get('dom_path', '')
+    tags = [part.split('[', 1)[0].lower() for part in path.split('/') if part]
+    controls = {'nav', 'footer', 'form', 'button', 'input', 'select', 'textarea', 'option', 'summary'}
+    if any(tag in controls for tag in tags) or node.get('tag') in controls:
+        return True
+    # An article's own header is editorial content; a site header is page chrome.
+    if 'header' in tags and not any(tag in ('main', 'article') for tag in tags[:tags.index('header')]):
+        return True
+    if protected_roles((node.get('attributes') or {}).get('role')):
+        return True
+    return any(_protected_html_context(child) for child in node.get('inline_nodes', node.get('children', [])))
+
+
+def editable(block, document):
     # Preserve containers, code, links, table HTML and inline formatting byte-for-byte.
     return (block['type'] in ('paragraph', 'heading') and not block.get('parent_id')
-            and not block.get('links') and block.get('inline_markdown', block['text']) == block['text'])
+            and not block.get('links') and block.get('inline_markdown', block['text']) == block['text']
+            and not document.get('source_role_context', {}).get(block['block_id'])
+            and not _protected_html_context(block))
 
 
 def validate_edits(proposal, document, chunk, allow_structure):
@@ -151,7 +170,7 @@ def validate_edits(proposal, document, chunk, allow_structure):
                 or edit.block_id not in chunk['block_ids'] or b is None or edit.block_id in seen):
             raise RewriteFailure('invalid_output', f'Invalid source reference for block {edit.block_id}: snapshot_match={edit.snapshot_id == document["snapshot_id"]}, chunk_match={edit.chunk_id == chunk["chunk_id"]}, member={edit.block_id in chunk["block_ids"]}, duplicate={edit.block_id in seen}.')
         seen.add(edit.block_id)
-        if not editable(b):
+        if not editable(b, document):
             raise RewriteFailure('invalid_output', f'Block {edit.block_id} is protected and cannot be edited.')
         if edit.before != b['text']:
             raise RewriteFailure('invalid_output', f'Block {edit.block_id}: before text does not exactly match the original source.')
@@ -194,7 +213,7 @@ def response_schema(document, batch, allow_structure=False):
     # Evidence enums occur once per chunk, not once per editable block.
     constrain_evidence = sum(len(c['block_ids']) for c in batch) <= 900
     for index, chunk in enumerate(batch):
-        targets = [i for i in chunk['block_ids'] if editable(blocks[i])]
+        targets = [i for i in chunk['block_ids'] if editable(blocks[i], document)]
         if not targets:
             continue
         definition = deepcopy(base)
@@ -234,7 +253,7 @@ def parse_provider_proposal(raw, document):
             result[key] = value
         return result
     payload = json.loads(raw, object_pairs_hook=unique_object)
-    expected = {b['block_id'] for b in document['blocks'] if editable(b)}
+    expected = {b['block_id'] for b in document['blocks'] if editable(b, document)}
     if not isinstance(payload, dict) or set(payload) != {'status', 'summary', 'review_flags', 'blocks'}:
         raise RewriteFailure('invalid_output', 'Invalid keyed proposal envelope.')
     values = payload['blocks']
@@ -279,9 +298,9 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
             block = blocks[identity]
             item = {k: block.get(k) for k in ('block_id', 'order', 'parent_id', 'type', 'text', 'heading_level')}
             item['chunk_id'] = chunk_for[identity]
-            if editable(block):
+            if editable(block, document):
                 item['source_language_hint'] = confident_language(block['text'])
-            payload['editable_blocks' if editable(block) else 'read_only_context'].append(item)
+            payload['editable_blocks' if editable(block, document) else 'read_only_context'].append(item)
         data = json.dumps(payload, ensure_ascii=False)
         count = len(encoding.encode((PROMPT if prompt is None else prompt) + data + json.dumps(response_schema(document, batch, allow_structure)))) + 256
         # Estimate space if each editable block receives one ordinary edit.
@@ -290,7 +309,7 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
         for chunk in batch:
             for identity in chunk['block_ids']:
                 b = blocks[identity]
-                if editable(b):
+                if editable(b, document):
                     template = {'snapshot_id': document['snapshot_id'], 'chunk_id': chunk['chunk_id'],
                                 'block_id': identity, 'before': b['text'], 'after': b['text'],
                                 'reason': 'Source-supported rephrasing across the target query set.',
@@ -310,7 +329,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
     queries = list(dict.fromkeys([query] if isinstance(query, str) else query))
     start = time.monotonic()
     accumulated_flags = []
-    telemetry = {'prompt_version': prompt_id or PROMPT_VERSION, 'model': None, 'status': 'started', 'calls': 0,
+    telemetry = {'edit_boundary_version': EDIT_BOUNDARY_VERSION, 'prompt_version': prompt_id or PROMPT_VERSION, 'model': None, 'status': 'started', 'calls': 0,
                  'input_tokens': 0, 'output_tokens': 0, 'estimated_cost_usd': None, 'usage_complete': True}
     def finish(status, message, **extra):
         telemetry.update(status=status, latency_ms=round((time.monotonic()-start)*1000))
@@ -325,7 +344,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
         telemetry['model'] = settings.model
         reasoning = {'reasoning': {'effort': 'low'}} if settings.model in ('gpt-5-mini', 'gpt-5-nano') else {}
         telemetry['reasoning_effort'] = 'low' if reasoning else None
-        if document['selection']['status'] == 'source_insufficient' or not chunks or not any(editable(b) and b['type']=='paragraph' for b in document['blocks']):
+        if document['selection']['status'] == 'source_insufficient' or not chunks or not any(editable(b, document) and b['type']=='paragraph' for b in document['blocks']):
             raise RewriteFailure('source_insufficient', 'Insufficient editable source prose; choose a fuller source snapshot.')
         try:
             encoding = tiktoken.encoding_for_model(settings.model)
@@ -345,7 +364,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
             client = OpenAI(timeout=settings.timeout, max_retries=0)
         edits, summaries = [], []
         for batch, data, _, _ in requests:
-            if not any(editable(blocks[i]) for chunk in batch for i in chunk['block_ids']):
+            if not any(editable(blocks[i], document) for chunk in batch for i in chunk['block_ids']):
                 telemetry['skipped_protected_batches'] = telemetry.get('skipped_protected_batches', 0) + 1
                 continue
             schema = response_schema(document, batch, allow_structure)

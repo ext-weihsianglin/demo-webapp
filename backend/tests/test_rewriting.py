@@ -52,8 +52,8 @@ def test_source_preservation_and_body_edits():
     editable_ids={b['block_id'] for b in data['editable_blocks']}
     protected_ids={b['block_id'] for b in data['read_only_context']}
     assert editable_ids and protected_ids and editable_ids.isdisjoint(protected_ids)
-    assert editable_ids=={b['block_id'] for b in p['blocks'] if editable(b)}
-    assert protected_ids=={b['block_id'] for b in p['blocks'] if not editable(b)}
+    assert editable_ids=={b['block_id'] for b in p['blocks'] if editable(b, p)}
+    assert protected_ids=={b['block_id'] for b in p['blocks'] if not editable(b, p)}
     transmitted=sorted(data['editable_blocks']+data['read_only_context'],key=lambda b:b['order'])
     assert [(b['block_id'],b['text']) for b in transmitted]==[(b['block_id'],b['text']) for b in p['blocks']]
     assert set(client.requests[0]['text']['format']['schema']['properties']['blocks']['properties'])==editable_ids
@@ -118,3 +118,63 @@ def test_endpoint_failures_are_visible(monkeypatch):
     response=TestClient(app).post('/api/draft',json={'query':'Road shoes?', 'href':'https://example.com/shoes','hostname':'example.com','content':SOURCE})
     assert response.status_code==503 and response.json()['detail']['status']=='missing_credentials'
     assert 'markdown' not in response.json()['detail']
+
+
+def test_page_chrome_and_controls_are_read_only_but_article_header_is_editable():
+    source = '<header><div><button>51°</button></div><p>Current Conditions</p></header><nav><p>Browse destinations</p></nav><main><article><header><h1>City guide</h1></header><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p><div><button>Subscribe</button></div></article></main><footer><p>All rights reserved</p></footer>'
+    document, chunks = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    def body_edit(proposal, response, data):
+        block = next(b for b in data['editable_blocks'] if b['text'].startswith('For everyday'))
+        proposal['edits'][0].update(block_id=block['block_id'], evidence=[{'block_id':block['block_id']}])
+    client = StubClient(body_edit)
+    outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=client)
+    assert outcome['status'] == 'succeeded'
+    payload = json.loads(client.requests[0]['input'][0]['content'])
+    protected = {'51°', 'Current Conditions', 'Subscribe'}
+    # The upstream parser omits these nav/footer nodes before the rewrite boundary.
+    assert not {'Browse destinations', 'All rights reserved'} & {b['text'] for b in payload['editable_blocks']}
+    assert protected <= {b['text'] for b in payload['read_only_context']}
+    assert not protected & {b['text'] for b in payload['editable_blocks']}
+    assert 'City guide' in {b['text'] for b in payload['editable_blocks']}
+    assert all(b in outcome['document']['blocks'] for b in document['blocks'] if b['text'] in protected)
+
+
+def test_provider_cannot_rewrite_a_read_only_control_even_with_known_evidence():
+    source = '<main><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p><div><button>Subscribe</button></div></main>'
+    document, chunks = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    def control_edit(proposal, response, data):
+        control = next(b for b in data['read_only_context'] if b['text'] == 'Subscribe')
+        proposal['edits'][0].update(block_id=control['block_id'], evidence=[{'block_id':control['block_id']}])
+    outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=StubClient(control_edit))
+    assert outcome['status'] == 'invalid_output'
+    assert 'document' not in outcome and 'markdown' not in outcome
+    assert outcome['telemetry']['edit_boundary_version'] == 'body-content-v2'
+
+
+@pytest.mark.parametrize('control', ['<p role="button">Subscribe now</p>', '<div role="button"><p>Subscribe now</p></div>'])
+def test_aria_control_and_ancestor_roles_remain_read_only(control):
+    source = '<main>' + control + '<p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main>'
+    document, chunks = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    def body_edit(proposal, response, data):
+        block = next(b for b in data['editable_blocks'] if b['text'].startswith('For everyday'))
+        proposal['edits'][0].update(block_id=block['block_id'], evidence=[{'block_id':block['block_id']}])
+    client = StubClient(body_edit)
+    outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=client)
+    assert outcome['status'] == 'succeeded'
+    payload = json.loads(client.requests[0]['input'][0]['content'])
+    assert 'Subscribe now' in {b['text'] for b in payload['read_only_context']}
+    assert 'Subscribe now' not in {b['text'] for b in payload['editable_blocks']}
+
+
+@pytest.mark.parametrize('role', ['button link', 'switch button', 'BUTTON'])
+def test_inline_control_role_tokens_are_read_only(role):
+    source = f'<main><p><span role="{role}">Subscribe now</span></p><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main>'
+    document, chunks = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    def body_edit(proposal, response, data):
+        block = next(b for b in data['editable_blocks'] if b['text'].startswith('For everyday'))
+        proposal['edits'][0].update(block_id=block['block_id'], evidence=[{'block_id':block['block_id']}])
+    client = StubClient(body_edit)
+    outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=client)
+    assert outcome['status'] == 'succeeded'
+    payload = json.loads(client.requests[0]['input'][0]['content'])
+    assert 'Subscribe now' in {b['text'] for b in payload['read_only_context']}

@@ -1,6 +1,7 @@
 """Invoke the pinned upstream Markdownify corpus parser for submitted snapshots."""
 from importlib.metadata import version
 from preprocessing.api import PARSER_REVISION, parse_snapshot
+from app.source_context import html_role_context
 
 UPSTREAM = {"repository": "https://github.com/ext-weihsianglin/content-optimization-system",
             "revision": PARSER_REVISION, "package_version": version("content-optimization-exploration"),
@@ -8,7 +9,12 @@ UPSTREAM = {"repository": "https://github.com/ext-weihsianglin/content-optimizat
 
 
 def extract_document(content, format, href, hostname):
-    return parse_snapshot(content, href, hostname, source_format=format)
+    document, chunks = parse_snapshot(content, href, hostname, source_format=format)
+    if document['source']['format'] == 'html':
+        roles = html_role_context(content, document['blocks'])
+        if roles:
+            document['source_role_context'] = roles
+    return document, chunks
 
 
 def section_view(block):

@@ -51,5 +51,5 @@ def test_schema_binds_each_edit_to_same_chunk_evidence():
         name=declaration['anyOf'][0]['$ref'].split('/')[-1]
         allowed=schema['$defs'][name]['properties']['evidence']['items']['properties']['block_id']['enum']
         chunk=next(c for c in chunks if target in c['block_ids'])
-        assert editable(blocks[target])
+        assert editable(blocks[target], document)
         assert set(allowed)=={i for i in chunk['block_ids'] if blocks[i]['text'].strip()}
