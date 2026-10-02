@@ -162,3 +162,11 @@ The local ignored `validation-90-v2` dataset contains 90 hash-verified validatio
 
 
 A 2026-10-02 backend restart interrupted a user-started run after its 30 baseline selection rewrites. All page outcomes were retained, including six fidelity-approved/rescored proposals. Progress was recovered from saved events. The frontend now handles plain-text proxy failures, and graceful shutdown stops later provider phases. Final verification: 117 backend tests passed, 2 opt-in checks skipped; 3 frontend API-error regression checks passed; production build/typecheck and diff checks passed. See [the handoff](gepa-implementation.md#proxy-error-and-interrupted-run-recovery--2026-10-02).
+
+## Advisory studio validation and prompt inspection — 2026-10-02
+
+The interactive `/api/draft` flow retains readable model responses, including self-reported unsupported/missing-evidence flags, language warnings, schema errors and incomplete output. Mechanically valid edits enter the proposed page; invalid/protected/ambiguous edits remain inspectable without being applied. Raw provider text is escaped in the UI. No-applied-edit responses explicitly show the original page preview and are marked `review_required`. Research acceptance still uses its existing strict orchestration path.
+
+The selected-prompt viewer posts to `/api/prompt-preview`, which reuses the request builder with the displayed P1 feedback without provider or scoring calls. Draft responses record the exact system instructions and user message actually sent; these may differ from a preview if scoring availability changes. Source content remains untrusted data, and prompt registry contracts are unchanged.
+
+QA must check `p1.status == scored`, not just HTTP 200. This machine's v7.1 artifact is `model-v7.1.joblib`; the older `model.joblib` does not match the pinned v7.1 hash. Provider generation was exercised with stubs for this change, not live quality evaluation.

@@ -329,11 +329,12 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
     return [request]
 
 
-def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None, prompt=None, prompt_id=None, optimization_context=None, research_fidelity=False):
+def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None, prompt=None, prompt_id=None, optimization_context=None, research_fidelity=False, review_mode=False):
     effective_prompt = PROMPT if prompt is None else prompt
     queries = list(dict.fromkeys([query] if isinstance(query, str) else query))
     start = time.monotonic()
     accumulated_flags = []
+    prompt_messages = None
     telemetry = {'edit_boundary_version': EDIT_BOUNDARY_VERSION, 'prompt_version': prompt_id or PROMPT_VERSION, 'model': None, 'status': 'started', 'research_fidelity':research_fidelity, 'calls': 0,
                  'input_tokens': 0, 'output_tokens': 0, 'estimated_cost_usd': None, 'usage_complete': True}
     def finish(status, message, **extra):
@@ -343,7 +344,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
         return {'mode': 'openai', 'status': status, 'summary': message, 'telemetry': telemetry,
                 'snapshot_id': document['snapshot_id'], 'review_items': [*document['selection']['quality_flags'], *accumulated_flags,
                 'Human review required: evidence passages are copied by the backend from model-selected block IDs; this does not prove factual entailment.',
-                'Markdown content proposal; source HTML/CSS is not patched.'], **extra}
+                'Markdown content proposal; source HTML/CSS is not patched.'], 'prompt_messages': prompt_messages, **extra}
     try:
         settings = settings or Settings.from_env(model)
         telemetry['model'] = settings.model
@@ -373,6 +374,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                 telemetry['skipped_protected_batches'] = telemetry.get('skipped_protected_batches', 0) + 1
                 continue
             schema = response_schema(document, batch, allow_structure)
+            prompt_messages = {'system': effective_prompt, 'user': data, 'prompt_id': prompt_id or PROMPT_VERSION, 'model': settings.model, 'kind': 'sent'}
             telemetry['calls'] += 1
             response = client.responses.create(model=settings.model, instructions=effective_prompt,
                 input=[{'role': 'user', 'content': data}], store=False, max_output_tokens=settings.output_tokens,
@@ -382,6 +384,13 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                 telemetry['output_tokens'] += response.usage.output_tokens
             else:
                 telemetry['usage_complete'] = False
+            if review_mode and isinstance(response.output_text, str) and response.output_text.strip():
+                from app.draft_review import review_response
+                reviewed = review_response(response.output_text, document, chunks, allow_structure,
+                                           completed=response.status == 'completed')
+                accumulated_flags.extend(reviewed.pop('review_items'))
+                return finish('review_required' if reviewed['validation_warnings'] else 'succeeded',
+                              reviewed.pop('summary'), **reviewed)
             if any(getattr(c, 'type', '') == 'refusal' for o in response.output for c in getattr(o, 'content', [])):
                 raise RewriteFailure('refused', 'The model refused this rewrite.')
             if response.status != 'completed':

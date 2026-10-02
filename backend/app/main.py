@@ -1,5 +1,6 @@
 """Upstream retention extraction, mock grading and OpenAI baseline rewriting."""
-from app.rewriting import rewrite, model_options
+from app.rewriting import rewrite, model_options, plan_requests, Settings, RewriteFailure
+import tiktoken
 from app.prompt_registry import PromptRegistry
 from app.fidelity import check_fidelity
 from app.gepa.routes import router as gepa_router
@@ -187,13 +188,13 @@ def draft(source: DraftRequest):
         raise HTTPException(400, 'Prompt is missing, changed or incompatible with the selected model.') from None
     analysis = _analyze(source, explain=True)
     p1_feedback = public_scores(analysis['p1'])
-    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=p1_feedback, prompt=prompt['effective_prompt'], prompt_id=prompt['id'], optimization_context=prompt.get('optimization_context'))
+    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=p1_feedback, prompt=prompt['effective_prompt'], prompt_id=prompt['id'], optimization_context=prompt.get('optimization_context'), review_mode=True)
     result['telemetry'].update(prompt_id=prompt['id'], prompt_hash=prompt['prompt_hash'], contract_version=prompt['contract_version'])
     result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
-    if result['status'] != 'succeeded':
+    if result['status'] not in ('succeeded', 'review_required'):
         code = 422 if result['status'] in ('source_insufficient', 'context_limit', 'abstained') else 503 if result['status'] == 'missing_credentials' else 502
         raise HTTPException(code, detail=result)
-    gate = check_fidelity(analysis['document'], result['changes'])
+    gate = check_fidelity(analysis['document'], result['changes']) if result['changes'] else {'status': 'unavailable', 'reason': 'no_applied_edits', 'findings': []}
     result['fidelity'] = gate
     # The studio presents the assessment for human review, including failed or
     # unavailable judgments. Research acceptance policy remains separate.
@@ -204,3 +205,35 @@ def draft(source: DraftRequest):
     result.update(target_queries=source.queries, p1_before=public_scores(analysis['p1']),
                   p1_after=public_scores(after), p1_comparison=comparison)
     return result
+
+
+class PromptPreviewRequest(DraftRequest):
+    p1_feedback: dict = Field(default_factory=lambda: {'status': 'unavailable'})
+
+
+@app.post('/api/prompt-preview')
+def prompt_preview(source: PromptPreviewRequest):
+    """Render the same request builder without making scoring or provider calls.
+
+    P1 feedback is the currently displayed analysis supplied by the browser.
+    Actual generation recomputes it and records the exact messages sent.
+    """
+    selected_model = source.model or model_options()['default_model']
+    try:
+        prompt = PromptRegistry().resolve(source.prompt_id, selected_model)
+        settings = Settings.from_env(selected_model)
+        document, chunks = extract_document(source.content, source.format, source.href, source.hostname)
+        try:
+            encoding = tiktoken.encoding_for_model(selected_model)
+        except KeyError:
+            encoding = tiktoken.get_encoding('o200k_base')
+        requests = plan_requests(document, chunks, source.queries, source.tone, source.allow_structure,
+            settings, encoding, source.p1_feedback, prompt=prompt['effective_prompt'],
+            optimization_context=prompt.get('optimization_context'))
+        return {'system': prompt['effective_prompt'], 'user': requests[0][1],
+                'prompt_id': prompt['id'], 'prompt_hash': prompt['prompt_hash'],
+                'model': selected_model, 'kind': 'preview'}
+    except RewriteFailure as exc:
+        raise HTTPException(422, detail=exc.message) from None
+    except (ValueError, OSError, KeyError):
+        raise HTTPException(400, 'Prompt or source configuration is unavailable.') from None

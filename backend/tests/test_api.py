@@ -15,7 +15,7 @@ def test_extraction_is_query_independent_and_removes_boilerplate():
 
 def test_draft_retains_claims_and_requires_structure_opt_in(draft_stub):
     a = client.post('/api/draft', json=SOURCE).json()
-    assert a['mode'] == 'openai' and a['status'] == 'succeeded'
+    assert a['mode'] == 'openai' and a['status'] in ('succeeded', 'review_required')
     assert a['changes'][0]['before'] == 'Choose a comfortable fit.'
     assert a['changes'][0]['reason'] and a['changes'][0]['snapshot_id'] == a['snapshot_id']
     assert a['document']['blocks'][0]['text'] == 'Shoes'
