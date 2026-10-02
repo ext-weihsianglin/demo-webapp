@@ -1,5 +1,6 @@
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -102,7 +103,7 @@ def test_feature_parity_with_frozen_upstream_for_html():
 
 
 def test_installed_frozen_model_parity_and_proposed_document_scoring(monkeypatch, tmp_path):
-    path = Path(__file__).resolve().parents[1]/'data/scoring/model.joblib'
+    path = Path(os.getenv('P1_MODEL_PATH', Path(__file__).resolve().parents[1]/'data/scoring/model.joblib'))
     if not path.exists():
         pytest.skip('Install the pinned model to run real P1 parity validation')
     monkeypatch.setenv('P1_MODEL_PATH', str(path))
@@ -128,7 +129,7 @@ def test_installed_frozen_model_parity_and_proposed_document_scoring(monkeypatch
 
 def test_draft_returns_exact_query_level_rewrite_explanation_without_prompt_leakage(
         monkeypatch, draft_stub):
-    path = Path(__file__).resolve().parents[1] / 'data/scoring/model.joblib'
+    path = Path(os.getenv('P1_MODEL_PATH', Path(__file__).resolve().parents[1] / 'data/scoring/model.joblib'))
     if not path.exists():
         pytest.skip('Install the pinned model to run real P1 explanation validation')
     monkeypatch.setenv('P1_MODEL_PATH', str(path))

@@ -54,3 +54,12 @@ backend/.venv/bin/python backend/scripts/calibrate_gepa_fidelity.py --live \
 The same command accepts the four-case control fixture with `--timeout-seconds 120`. It caps fixtures at 12 cases, checks original before text and reflection provenance, and saves each result incrementally. Calls are explicitly enabled; ordinary tests use stubs.
 
 Validation: **175 backend tests passed, two opt-in checks skipped**; diff checks passed. No frontend code changed in this update. The diagnostic provider use comprised one reflection call, 12 initial fidelity calls and four follow-up fidelity calls. One initial fidelity call timed out and remains recorded.
+
+
+### Shared branch reconciliation with P1 v7.1
+
+While publishing this work, the shared PR branch received PR #12 (canonical P1 v7.1 and 0.3.0 library). The procedure/calibration change was rebased onto that merge. Frozen audit inputs and historical v7 scores were preserved; fidelity calibration does not use P1 and was not rerun to change its results.
+
+Installed the verified v7.1 artifact at the fresh ignored path `backend/data/scoring/model-v7.1.joblib`, preserving the old model. Local backend configuration now selects that path. Two installed-model tests now honor `P1_MODEL_PATH`, matching production, so both old artifacts and the new model can coexist. Combined verification: **177 backend tests passed, two opt-in checks skipped; frontend build/typecheck and diff checks passed**. The backend was restarted with the pinned v7.1 artifact successfully loaded.
+
+The old `validation-90-v2` manifest binds v7/0.2.0 and is intentionally incompatible with the merged scorer/parser profile. A fresh compatible dataset must be prepared before the next full GEPA run. Historical experiment scores must not be compared as if measured by v7.1. No new optimization run was launched.
