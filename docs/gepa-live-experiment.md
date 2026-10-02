@@ -84,6 +84,10 @@ Verification: 138 backend tests passed, two opt-in checks skipped. Regressions c
 
 This is conservative source provenance protection, not complete factual verification: semantically unmarked JavaScript controls can escape classification, and a header outside `main`/`article` may contain legitimate editorial text that is now read-only. Fidelity judgments remain fallible. No new superiority claim follows from this correction.
 
+## Next reflection profile
+
+The corrected-boundary trial’s complete challenger scored 0.408184 versus baseline 0.409376 and increased failures from 0.733333 to 0.866667. Its validation-only traces show recurring unsupported content expansion; early strategies also repeated the reflection pages’ topic categories. The next reflection profile therefore gives concrete abstract guidance for selective existing-fact paragraph edits, preserving attribution, numbers and qualifiers, leaving unrelated slots null, and removing example-domain nouns. This changes only mutation guidance for a future frozen run; baseline v7, fixed P2 constraints, fidelity gate, P1 and selection criteria remain unchanged. There is no test feedback in this guidance. The active trial retains its recorded prompt hash. Eleven GEPA integration tests pass and both review axes report no defects; actual next-profile effectiveness is pending live evaluation.
+
 ## Remaining limits
 
 Whole-proposal rejection can retain the original page when only one edit fails fidelity, reducing accepted sample yield. The frozen v7 context-feature training/serving mismatch remains deliberately deferred under upstream issue #15. Model stochasticity and two already exposed P1-test hosts limit dogfood conclusions. The agreed 100-attempt cap may permit fewer than two fully evaluated challengers; incomplete selection vectors cannot be ranked or promoted.
