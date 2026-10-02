@@ -6,6 +6,7 @@ import importlib.metadata
 import os
 import threading
 
+from app.experiment_names import slug, prompt_name, experiment_name
 from gepa import optimize
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.prompt_registry import PromptRegistry, PROCEDURE_CONTRACT
@@ -30,6 +31,7 @@ def fidelity_profile():
 
 class RunConfig(BaseModel):
     model_config=ConfigDict(extra='forbid',allow_inf_nan=False)
+    experiment_name: str | None=Field(default=None,max_length=80)
     dataset_id: str
     model: str='gpt-4.1-mini'
     reflection_model: str='gpt-4.1-mini'
@@ -88,7 +90,8 @@ class RunManager:
         with self.lock:
             if self.active:
                 raise ValueError('A research run is already active')
-            identity=uuid4().hex
+            label=slug(config.experiment_name or config.model+'-fidelity-search')
+            identity=f"{label}-{datetime.now(timezone.utc):%Y%m%d-%H%M%S}-{uuid4().hex[:8]}"
             store=self.store(identity)
             budget=AttemptBudget(config.attempts,config.consecutive_failures,config.failure_rate,config.failure_minimum)
             context={'budget':budget,'config':config,'dataset':data,'baseline':baseline,'store':store,'settings':settings}
@@ -225,6 +228,9 @@ class RunManager:
         if rejected:
             summary['promotion_block_reason']='Candidate rejected by source review: '+rejected['reason']
         summary['promotion_compatible']=summary['promotion_block_reason'] is None
+        summary['display_name']=experiment_name(identity,summary['config'])
+        for candidate in summary['candidates']:
+            candidate['display_name']=prompt_name(candidate)
         return summary
 
     def reject_candidate(self, identity, candidate_id, reason):

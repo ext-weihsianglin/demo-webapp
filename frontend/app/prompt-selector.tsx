@@ -2,7 +2,7 @@
 import { readApiResponse } from './api-client';
 import { useEffect, useState } from 'react';
 
-type Entry = {id:string;kind:string;prompt_hash:string;selected:boolean};
+type Entry = {display_name?:string;id:string;kind:string;prompt_hash:string;selected:boolean};
 export function PromptSelector({model,value,onChange,disabled=false,refreshKey=0}: {model:string;value:string;onChange:(id:string)=>void;disabled?:boolean;refreshKey?:number}) {
   const [entries,setEntries]=useState<Entry[]>([]),[error,setError]=useState('');
   useEffect(()=>{
@@ -18,6 +18,6 @@ export function PromptSelector({model,value,onChange,disabled=false,refreshKey=0
   },[model,onChange,refreshKey]);
   return <><label htmlFor="prompt-selector">Rewrite prompt</label><select id="prompt-selector" value={value} disabled={disabled||!entries.length} onChange={e=>onChange(e.target.value)}>
     {!entries.length&&<option value="">Loading compatible prompts…</option>}
-    {entries.map(p=><option key={p.id} value={p.id}>{p.kind==='baseline'?'Baseline v7':'Experimental '+p.prompt_hash.slice(0,8)}{p.selected?' · selected default':''}</option>)}
+    {entries.map(p=><option key={p.id} value={p.id}>{p.display_name||(p.kind==='baseline'?'Baseline v7':'Experimental '+p.prompt_hash.slice(0,8))}{p.selected?' · selected default':''}</option>)}
   </select>{error&&<p role="alert" className="error">{error}</p>}<small className="source-help">Prompts are specific to {model}. Experimental prompts require review.</small></>;
 }

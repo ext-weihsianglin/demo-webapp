@@ -1,4 +1,5 @@
 """HTTP validation only; coordinator and artifacts own research behavior."""
+from app.experiment_names import prompt_name
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
@@ -84,6 +85,7 @@ def candidate(identity: str,candidate_id: str):
     def read():
         store=manager.store(identity)
         record=store.read('candidate-'+safe_id(candidate_id))
+        record['display_name']=prompt_name(record)
         evaluations=[store.read(p.stem) for p in store.path.glob('evaluation-'+safe_id(candidate_id)+'-*.json')]
         return {'candidate':record,'evaluations':evaluations}
     return invoke(read)

@@ -1,4 +1,5 @@
 """Immutable model-specific editorial prompts and explicit local promotion."""
+from app.experiment_names import prompt_name
 from pathlib import Path
 import hashlib
 import json
@@ -148,7 +149,7 @@ class PromptRegistry:
         selected = self.resolve(None, model)['id']
         return {'model': model, 'selected_id': selected, 'prompts': [
             {k: r[k] for k in ('id', 'model', 'prompt_hash', 'baseline_id', 'run_id', 'contract_version')} |
-            {'kind': 'baseline' if r['id'] == baseline['id'] else 'experimental', 'selected': r['id'] == selected}
+            {'display_name': prompt_name(r), 'kind': 'baseline' if r['id'] == baseline['id'] else 'experimental', 'selected': r['id'] == selected}
             for r in entries]}
 
     def promote(self, identity, model):
