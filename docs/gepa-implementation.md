@@ -103,3 +103,10 @@ While publishing this work, the shared PR branch received PR #12 (canonical P1 v
 Installed the verified v7.1 artifact at the fresh ignored path `backend/data/scoring/model-v7.1.joblib`, preserving the old model. Local backend configuration now selects that path. Two installed-model tests now honor `P1_MODEL_PATH`, matching production, so both old artifacts and the new model can coexist. Combined verification: **177 backend tests passed, two opt-in checks skipped; frontend build/typecheck and diff checks passed**. The backend was restarted with the pinned v7.1 artifact successfully loaded.
 
 The old `validation-90-v2` manifest binds v7/0.2.0 and is intentionally incompatible with the merged scorer/parser profile. A fresh compatible dataset must be prepared before the next full GEPA run. Historical experiment scores must not be compared as if measured by v7.1. No new optimization run was launched.
+
+
+### Soft fidelity penalties for GEPA research — 2026-10-02
+
+User requested penalties instead of the binary factual gate during optimization. Mechanically valid proposals now receive raw proposed P1 minus per-block factual deductions (default unsupported .05, uncertain .02, UI-configurable). Reflection receives exact rationales, evidence/block IDs and reward decomposition. Admission/Pareto/numerical ranking use reward; raw P1 and per-query deltas remain distinct. Ordinary drafting keeps its factual checks, and technical/mechanical failures keep their existing accounting. No proposal is partially applied or automatically promoted. See [the reward contract](gepa-fidelity-penalty.md). Historical binary-gate decisions above remain dated evidence.
+
+Verification: **181 backend tests passed, two opt-in checks skipped; frontend production build/typecheck and diff checks passed**. Stubbed integration checks exercise negative rewards, penalty-based candidate ranking, reflection rationales and unchanged ordinary drafting checks. The local backend was reloaded with v7.1 and the browser shows the new penalty controls. No live optimization/provider call or promotion was made; a compatible frozen v7.1 dataset remains required.

@@ -161,7 +161,7 @@ def editable(block, document):
             and not _protected_html_context(block))
 
 
-def validate_edits(proposal, document, chunk, allow_structure):
+def validate_edits(proposal, document, chunk, allow_structure, *, research_fidelity=False):
     blocks = {b['block_id']: b for b in document['blocks']}
     seen = set()
     if proposal.status == 'abstained' and proposal.edits:
@@ -196,7 +196,7 @@ def validate_edits(proposal, document, chunk, allow_structure):
                 raise RewriteFailure('invalid_output',
                     f'Evidence for edit {edit.block_id} failed: {", ".join(failures)}. No draft applied.', details)
         # Evidence validity is mechanical, not a semantic entailment guarantee.
-        if any(f in edit.review_flags for f in ('unsupported_addition', 'missing_evidence')):
+        if not research_fidelity and any(f in edit.review_flags for f in ('unsupported_addition', 'missing_evidence')):
             raise RewriteFailure('unsupported_output', 'Model flagged unsupported additions or missing evidence; no draft applied.')
 
 
@@ -327,12 +327,12 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
     return [request]
 
 
-def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None, prompt=None, prompt_id=None, optimization_context=None):
+def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None, prompt=None, prompt_id=None, optimization_context=None, research_fidelity=False):
     effective_prompt = PROMPT if prompt is None else prompt
     queries = list(dict.fromkeys([query] if isinstance(query, str) else query))
     start = time.monotonic()
     accumulated_flags = []
-    telemetry = {'edit_boundary_version': EDIT_BOUNDARY_VERSION, 'prompt_version': prompt_id or PROMPT_VERSION, 'model': None, 'status': 'started', 'calls': 0,
+    telemetry = {'edit_boundary_version': EDIT_BOUNDARY_VERSION, 'prompt_version': prompt_id or PROMPT_VERSION, 'model': None, 'status': 'started', 'research_fidelity':research_fidelity, 'calls': 0,
                  'input_tokens': 0, 'output_tokens': 0, 'estimated_cost_usd': None, 'usage_complete': True}
     def finish(status, message, **extra):
         telemetry.update(status=status, latency_ms=round((time.monotonic()-start)*1000))
@@ -394,7 +394,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                 raise RewriteFailure('invalid_output', 'Edit references a chunk outside this request batch.')
             for chunk in batch:
                 chunk_proposal = proposal.model_copy(update={'edits': [edit for edit in proposal.edits if edit.chunk_id == chunk['chunk_id']]})
-                validate_edits(chunk_proposal, document, chunk, allow_structure)
+                validate_edits(chunk_proposal, document, chunk, allow_structure, research_fidelity=research_fidelity)
             changed = [edit for edit in proposal.edits if edit.after.strip() != edit.before.strip()
                        or (edit.heading_level is not None and edit.heading_level != blocks[edit.block_id]['heading_level'])]
             telemetry['ignored_unchanged_edits'] = telemetry.get('ignored_unchanged_edits', 0) + len(proposal.edits) - len(changed)

@@ -16,6 +16,7 @@ from app.prompt_registry import digest
 from app.gepa.datasets import load_dataset, root
 from app.gepa.storage import RunStore, safe_id
 from app.gepa.evaluation import AttemptBudget, PageEvaluator, RunStopped, SEMANTIC_REWRITE_FAILURES
+from app.gepa.reward import policy as reward_policy
 from app.gepa.adapter import Adapter, Callbacks, REFLECTION_PROMPT, reflection_settings, reflection_instructions
 
 TERMINAL={'completed','stopped','failed','interrupted'}
@@ -38,6 +39,8 @@ class RunConfig(BaseModel):
     attempts: int=Field(default=100,ge=30,le=2000)
     concurrency: int=Field(default=10,ge=1,le=20)
     strategy_characters: int=Field(default=6000,ge=1000,le=16000)
+    unsupported_penalty: float=Field(default=.05,ge=0,le=1)
+    uncertain_penalty: float=Field(default=.02,ge=0,le=1)
     length_multiplier: float=Field(default=1.5,ge=1,le=3)
     consecutive_failures: int=Field(default=3,ge=1,le=20)
     failure_rate: float=Field(default=.2,gt=0,le=1)
@@ -95,6 +98,7 @@ class RunManager:
                 'page_roles':[{k:p[k] for k in ('snapshot_id','role','query_set_hash')} for p in data['pages']],
                 'baseline':baseline,'rewrite_settings':settings.__dict__,'edit_boundary_version':EDIT_BOUNDARY_VERSION,
                 'fidelity':fidelity_profile(),
+                'reward_policy':reward_policy(config.unsupported_penalty,config.uncertain_penalty),
                 'semantic_rewrite_failures':sorted(SEMANTIC_REWRITE_FAILURES),
                 'reflection_prompt_hash':digest(REFLECTION_PROMPT),
                 'reflection_instruction_hash':digest(reflection_instructions(self.registry.fixed,config.strategy_characters)),
@@ -121,13 +125,14 @@ class RunManager:
             def record(result):
                 store.write('evaluation-'+result['candidate_id']+'-'+result['page_id'],result)
                 store.event('page_evaluated',page_id=result['page_id'],candidate_id=result['candidate_id'],
-                            role=result['role'],status=result['status'],score=result.get('score'),delta=result.get('delta'),
+                            role=result['role'],status=result['status'],score=result.get('score'),raw_p1=result.get('raw_p1'),penalty=result.get('penalty'),delta=result.get('delta'),
                             budget=budget.snapshot(), usage_by_phase={
                                 'rewrite':result.get('rewrite',{}).get('telemetry',{}),
                                 'fidelity':result.get('fidelity',{}).get('telemetry',{}),
                                 'embedding':{key:sum((result.get(phase) or {}).get(key,0) for phase in ('original_embedding','proposed_embedding'))
                                     for key in ('calls','input_tokens','cached_requests')}})
-            evaluator=PageEvaluator(budget,config.concurrency,client=self.client,scorer=self.scorer,record=record,settings=context['settings'])
+            evaluator=PageEvaluator(budget,config.concurrency,client=self.client,scorer=self.scorer,record=record,settings=context['settings'],
+                penalty_policy=reward_policy(config.unsupported_penalty,config.uncertain_penalty))
             adapter=Adapter(evaluator,self.registry,context['baseline'],store,config)
             context['adapter']=adapter
             summary=store.read('summary')
@@ -156,8 +161,8 @@ class RunManager:
             candidates=adapter.snapshot() if adapter else []
             baseline=adapter.full_scores.get(context['baseline']['id']) if adapter else None
             eligible=[c for c in candidates if c.get('selection_pages')==30 and baseline and
-                      c.get('selection_mean',-1)>baseline['selection_mean'] and c['failure_rate']<=baseline['failure_rate']]
-            recommendation=max(eligible,key=lambda c:c['selection_mean'])['id'] if eligible else None
+                      c.get('selection_reward',float('-inf'))>baseline['selection_reward'] and c['failure_rate']<=baseline['failure_rate']]
+            recommendation=max(eligible,key=lambda c:c['selection_reward'])['id'] if eligible else None
             store.write('summary',{'id':identity,'status':status,'config':config.model_dump(),
                 'budget':budget.snapshot(),'candidates':candidates,'recommendation':recommendation,'stop_reason':reason,
                 'proposals':adapter.proposals if adapter else 0,'finished_at':datetime.now(timezone.utc).isoformat()})
@@ -201,6 +206,7 @@ class RunManager:
         summary['edit_boundary_version']=boundary
         summary['fidelity_policy']=manifest.get('fidelity')
         summary['component_contract']=manifest.get('component_contract')
+        summary['reward_policy']=manifest.get('reward_policy')
         summary['promotion_block_reason']=(
             'This run uses an older or unrecorded edit boundary. Evaluate again before promotion.'
             if boundary != EDIT_BOUNDARY_VERSION else
@@ -209,7 +215,9 @@ class RunManager:
             'This run uses an older or unrecorded strategy component contract. Evaluate again before promotion.'
             if manifest.get('component_contract') != PROCEDURE_CONTRACT or manifest.get('component_profile') != self.registry.procedure_contract else
             'This run uses an older or unrecorded request budget. Evaluate again before promotion.'
-            if manifest.get('request_budget') != REQUEST_BUDGET_PROFILE else None)
+            if manifest.get('request_budget') != REQUEST_BUDGET_PROFILE else
+            'This run uses an older or unrecorded research reward policy. Evaluate again before promotion.'
+            if manifest.get('reward_policy') != reward_policy(summary['config'].get('unsupported_penalty',.05),summary['config'].get('uncertain_penalty',.02)) else None)
         rejections={record['candidate_id']:record for path in store.path.glob('source-review-*.json')
                     for record in [store.read(path.stem)]}
         summary['source_rejections']=rejections

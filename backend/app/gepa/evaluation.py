@@ -7,6 +7,7 @@ from app.extraction import extract_document
 from app.fidelity import check_fidelity
 from app.rewriting import rewrite
 from app.scoring import score_document
+from app.gepa.reward import policy as reward_policy, components as reward_components
 
 
 SEMANTIC_REWRITE_FAILURES = frozenset({'unsupported_output'})
@@ -88,10 +89,11 @@ class GuardedClient:
 
 
 class PageEvaluator:
-    def __init__(self, budget, workers=10, *, client=None, scorer=None, record=None, settings=None):
+    def __init__(self, budget, workers=10, *, client=None, scorer=None, record=None, settings=None, penalty_policy=None):
         self.budget, self.workers = budget, workers
         self.client = client
         self.settings = settings
+        self.penalty_policy = penalty_policy or reward_policy()
         self.scorer = scorer
         self.record = record or (lambda result: None)
         self.cache, self.originals = {}, {}
@@ -148,7 +150,7 @@ class PageEvaluator:
             result['original'] = before
             outcome = rewrite(document,chunks,page['queries'],'Preserve original',False,
                 model=prompt['model'], prompt=prompt['effective_prompt'],prompt_id=prompt['id'],
-                p1_feedback=before,optimization_context=prompt.get('optimization_context'),settings=self.settings,client=GuardedClient(self._client(),self.budget,token))
+                research_fidelity=True,p1_feedback=before,optimization_context=prompt.get('optimization_context'),settings=self.settings,client=GuardedClient(self._client(),self.budget,token))
             result.update(rewrite=outcome, original_document=document)
             after = before
             failure = outcome['status'] not in ('succeeded','abstained')
@@ -158,15 +160,21 @@ class PageEvaluator:
                 gate = check_fidelity(document,outcome['changes'],client=GuardedClient(self._client(),self.budget),
                     on_progress=lambda partial: result.update(fidelity=partial))
                 result['fidelity'] = gate
-                failure = gate['status'] != 'passed'
+                failure = gate['status'] == 'unavailable'
                 technical = gate['status'] == 'unavailable'
                 if not failure:
                     self.budget.check()
                     after = self._score(outcome['document'],page,result,'proposed_embedding')
                     if after['status'] != 'scored':
                         raise ValueError('Proposed P1 unavailable')
-            result.update(status='retained_original' if failure or outcome['status']=='abstained' else 'applied',
-                          failed=failure, technical_failure=technical, after=after, score=after['mean_score'],
+            measured=not failure and outcome['status']=='succeeded'
+            reward=reward_components(after['mean_score'],result.get('fidelity',{}).get('findings',[]) if measured else [],
+                                     outcome.get('changes',[]) if measured else [],self.penalty_policy)
+            status=('retained_original' if not measured else
+                    'evaluated_with_penalty' if reward['factual_violations'] else 'applied')
+            result.update(status=status,failed=failure,technical_failure=technical,after=after,
+                          score=reward['reward'],raw_p1=reward['raw_p1'],penalty=reward['fidelity_penalty'],
+                          reward_components=reward,fidelity_violation=bool(reward['factual_violations']),
                           delta=after['mean_score']-before['mean_score'])
             return result
         except RunStopped:
