@@ -1,0 +1,24 @@
+{
+  "run_id": "b918675d60c2495b878cafc067e18094",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-5-mini",
+    "reflection_model": "gpt-5-mini",
+    "prompt_id": "gpt-5-mini--rewrite-page-v7",
+    "candidates": 2,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "strategy_characters": 6000,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 2,
+    "enable_live_calls": true
+  },
+  "purpose": "User-authorized stronger P2 comparison plus trusted procedure length guidance",
+  "fidelity_rejections_stop_run": false,
+  "heldout_calls": 0,
+  "promoted": false
+}

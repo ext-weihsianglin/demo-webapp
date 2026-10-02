@@ -284,6 +284,8 @@ def test_reflection_uses_complete_relevant_source_text_once_and_schema_length_bo
     assert feedback['proposed_edits_by_type'] is None
     adapter.propose_new_texts({'editorial_strategy':registry.editorial},dataset,['editorial_strategy'])
     assert client.schema['properties']['editorial_strategy']['maxLength'] == 6000
+    assert 'at most 6000 characters' in client.request['instructions']
+    assert 'Finish every sentence and step' in client.request['instructions']
     assert registry.fixed in client.request['instructions']
     assert unedited_text not in client.request['instructions']
     assert json.loads(client.request['input'][0]['content'])['examples']['editorial_strategy'][0]['Inputs']['queries'] == result['queries']
@@ -402,3 +404,12 @@ def test_historical_recommendation_cannot_promote_with_changed_fidelity_policy(t
         with pytest.raises(ValueError,match='fidelity'):
             manager.promote('old-gate',candidate['id'])
         assert registry.resolve(None,'gpt-4.1-mini')['id']==registry.baseline('gpt-4.1-mini')['id']
+
+
+def test_reflection_system_length_matches_configurable_schema_bound():
+    from app.gepa.adapter import reflection_instructions
+    instructions = reflection_instructions('fixed contract', 1000)
+    assert 'at most 1000 characters' in instructions
+    assert 'roughly 700 characters or less' in instructions
+    assert 'at most 6000 characters' not in instructions
+    assert instructions.endswith('fixed contract')

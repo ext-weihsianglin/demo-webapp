@@ -97,7 +97,7 @@ class RunManager:
                 'fidelity':fidelity_profile(),
                 'semantic_rewrite_failures':sorted(SEMANTIC_REWRITE_FAILURES),
                 'reflection_prompt_hash':digest(REFLECTION_PROMPT),
-                'reflection_instruction_hash':digest(reflection_instructions(self.registry.fixed)),
+                'reflection_instruction_hash':digest(reflection_instructions(self.registry.fixed,config.strategy_characters)),
                 'component_contract':PROCEDURE_CONTRACT,
                 'component_profile':self.registry.procedure_contract,
                 'request_budget':REQUEST_BUDGET_PROFILE,

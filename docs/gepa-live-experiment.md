@@ -242,3 +242,14 @@ Reflection receives the trusted fixed P2 contract separately from complete untru
 Rewriting, reflection and fidelity preflight the complete input, schema, output reserve and a 2,048-token overhead allowance against the conservative 128,000-token budget. Oversized inputs fail before provider dispatch without truncation. Stub tests exercise each boundary. Grounded few-shot selection/provenance remains unfinished and disabled; this is the procedure/context slice of issue #9, not its completion.
 
 Validation: 166 backend tests passed, 2 opt-in live checks skipped; frontend production build/typecheck and diff checks passed. A fresh live monitoring run `06880b29841e4dd69c589b7095e00663` uses gpt-4.1-mini P2, gpt-5-mini reflection, two proposed candidates, two reflection pages, concurrency 10 and a hard 100-attempt cap. It retains the frozen 60/30 validation roles and GPT-5 fidelity v4 policy. The preceding run `6082eccf` was stopped and archived at 81 attempts before this idle backend restart. No prompt promotion or held-out calls were made for the new trial. Live quality remains unproven.
+
+
+### GPT-5-mini comparison and explicit procedure limit — 2026-10-02
+
+The user requested a stronger P2 model after the two-proposal procedure trial produced zero accepted edits across 38 attempts. Run `06880b29` is archived with its plateau audit; both candidates tied their parents on reflection pages and were rejected before full selection evaluation. No P1 uplift claim follows from scores that retained original pages.
+
+The GEPA tab now defaults to GPT-5-mini for rewriting and reflection. Fresh run `b918675d60c2495b878cafc067e18094` uses its model-specific baseline v7, the same frozen roles/seed, two proposals, 100 maximum attempts, concurrency 10 and the unchanged fidelity policy. Trusted reflection instructions explicitly state the configurable character maximum (6,000 for this run), suggest a 70% target to leave room, require complete sentences/steps and distinguish procedure steps from the fixed single-line plain-text rewrite contract. The manifest hashes these actual configured instructions. This guidance does not establish that future procedures will always be complete.
+
+Fidelity rejection discards the complete page proposal and retains the original score, but does not trigger the technical circuit breaker or halt search. A tied candidate is rejected; the next proposal may proceed until the configured proposal/attempt limit, operator stop or technical circuit breaker. These semantics remain unchanged; no unsafe partial edits are applied.
+
+Validation: 19 targeted GEPA coordinator/API tests passed, including the configured limit in actual reflection instructions and a custom-limit regression; frontend production build/typecheck and diff checks passed. No live held-out evaluation or promotion was made.

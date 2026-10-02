@@ -59,8 +59,18 @@ traces are null, not zero. Return a complete procedure and brief change summary 
 the required mutation schema, without hidden reasoning.'''
 
 
-def reflection_instructions(fixed_contract):
-    return REFLECTION_PROMPT + '\n\nTRUSTED IMMUTABLE TARGET P2 CONTRACT (reference for mutation):\n' + fixed_contract
+def reflection_instructions(fixed_contract, character_limit=6000):
+    length_instruction = (
+        f'\n\nPROCEDURE LENGTH: The editorial_strategy must be at most {character_limit} characters '
+        '(including spaces and newlines). This is a hard maximum, not a target to fill. '
+        f'Aim for roughly {int(character_limit * .7)} characters or less so the complete procedure fits. '
+        'Finish every sentence and step. Compress or remove redundant steps before returning; '
+        'never end mid-sentence or leave an unfinished section. '
+        'Numbered steps describe the procedure only; rewritten page blocks must still follow '
+        'the fixed single-line plain-text output contract. Do not invent output fields, '
+        'lists, Markdown structures or capabilities absent from that contract.'
+    )
+    return REFLECTION_PROMPT + length_instruction + '\n\nTRUSTED IMMUTABLE TARGET P2 CONTRACT (reference for mutation):\n' + fixed_contract
 
 
 
@@ -139,7 +149,7 @@ class Adapter:
             raise RunStopped('proposal_limit')
         parent=self.prompt(candidate)
         character_limit=self.config.strategy_characters
-        instructions=reflection_instructions(self.registry.fixed)
+        instructions=reflection_instructions(self.registry.fixed,character_limit)
         payload=json.dumps({'strategy':candidate['editorial_strategy'],'examples':reflective_dataset,
             'character_limit':character_limit},ensure_ascii=False)
         schema={'type':'object','properties':{'editorial_strategy':{'type':'string','minLength':1,'maxLength':character_limit,
