@@ -45,8 +45,8 @@ prompt-registry/
   p2/
     gpt-4.1-mini/
       baseline/                     # committed reference/metadata for baseline v7
-      candidates/<candidate-id>/    # ignored generated prompt + metadata
-      selected.json                 # ignored local default pointer
+      candidates/<candidate-id>/    # versioned prompt + metadata
+      selected.json                 # versioned default pointer
     gpt-5-mini/
       baseline/                     # explicitly registered model-specific baseline
       candidates/<candidate-id>/
