@@ -27,7 +27,13 @@ The UI now displays a remotely started run's frozen settings, updates saved-run 
 
 ## Live optimization status
 
-Retry `37f8e094ccee4fbf8a0502a87a2a39b3` uses the same frozen experiment after the cache corrections. Its result, persistence checks and paired held-out comparison will be added when terminal. No optimized superiority is claimed while these checks remain pending.
+Retry `37f8e094ccee4fbf8a0502a87a2a39b3` stopped at the ten-proposal ceiling after 42 rewrite attempts, with no admissible mutation. Its baseline selection mean was 0.407489 and failure fraction 0.866667. Reflection exceeded the mutable-text limit, and duplicate raw DOM/source fields overflowed some reflection requests. Context-preflight failures incorrectly consumed the proposal counter.
+
+Reflection now presents original source text once, with changes and evidence referenced by ID, and excludes raw DOM diagnostics. When edits exist it includes their complete source chunks; otherwise it includes the entire page. The response schema enforces the mutable-text character bound, and preflight failures are logged without counting a provider proposal. No source text is truncated and fixed rewriter/gate instructions remain unchanged.
+
+Third run `062a765eb15343ba8d96ba282f12abdb` uses those corrections with the same frozen configuration. Its baseline selection mean is 0.409264 and failure fraction 0.833333. Mutations are now being registered and evaluated. Its terminal result, actual selected-prompt restart check and paired held-out comparison will be added when complete. No optimized superiority is claimed while these checks remain pending.
+
+All UI API consumers now handle non-JSON proxy failures, including evidence inspection and example loading. The proxy error regression, frontend build and typecheck pass. A plain-text HTTP 500 is presented as an availability error; it does not become a draft or a fabricated score.
 
 ## Remaining limits
 

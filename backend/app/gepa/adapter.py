@@ -19,7 +19,8 @@ editorial guidance. Never weaken fixed security, schema, evidence, preservation,
 language or fidelity constraints. Do not encourage fabricated claims, repetition,
 keyword stuffing, unsupported clickbait or answering queries unsupported by source.
 Return a complete new strategy within the supplied character limit and a brief
-change summary, not hidden reasoning. The fixed harness remains authoritative.'''
+change summary, not hidden reasoning. Use terse editorial prose; do not restate
+the fixed harness rules. The fixed harness remains authoritative.'''
 
 
 class Adapter:
@@ -65,8 +66,17 @@ class Adapter:
         for result in eval_batch.trajectories or []:
             if result['role']!='reflection':
                 raise ValueError('Selection/test data cannot enter reflection')
-            records.append({'Inputs':{'page_id':result['page_id'],'source':result['original_document']['blocks'],'queries':result['queries']},
-                'Generated Outputs':result.get('rewrite',{}).get('changes',[]),
+            changes=result.get('rewrite',{}).get('changes',[])
+            document=result['original_document']
+            changed_chunks={change['chunk_id'] for change in changes}
+            source_ids={block_id for chunk in document['chunks'] if chunk['chunk_id'] in changed_chunks for block_id in chunk['block_ids']}
+            source=[{key:block[key] for key in ('block_id','type','text','parent_id','heading_level') if key in block}
+                    for block in document['blocks'] if not changes or block['block_id'] in source_ids]
+            outputs=[{key:change[key] for key in ('source_id','chunk_id','after','reason','review_flags') if key in change} |
+                     {'evidence_ids':[evidence['block_id'] for evidence in change['evidence']]} for change in changes]
+            records.append({'Inputs':{'page_id':result['page_id'],'source':source,'queries':result['queries'],
+                                     'source_scope':'changed_chunks' if changes else 'whole_page'},
+                'Generated Outputs':outputs,
                 'Feedback':{'status':result['status'],'original':result['original'],'after':result['after'],
                             'delta':result['delta'],'fidelity':result.get('fidelity'),
                             'validation':result.get('rewrite',{}).get('summary')}})
@@ -77,14 +87,17 @@ class Adapter:
         if self.proposals>=self.config.candidates:
             self.evaluator.budget.stop('proposal_limit')
             raise RunStopped('proposal_limit')
-        self.proposals+=1
         parent=self.prompt(candidate)
+        character_limit=int(len(self.registry.editorial)*self.config.length_multiplier)
         payload=json.dumps({'strategy':candidate['editorial_strategy'],'examples':reflective_dataset,
-            'character_limit':int(len(self.registry.editorial)*self.config.length_multiplier)},ensure_ascii=False)
-        if len(tiktoken.get_encoding('o200k_base').encode(payload+REFLECTION_PROMPT))+4096>128000:
-            raise ValueError('Reflection context exceeds budget; no examples truncated')
-        schema={'type':'object','properties':{'editorial_strategy':{'type':'string'},'summary':{'type':'string'}},
+            'character_limit':character_limit},ensure_ascii=False)
+        schema={'type':'object','properties':{'editorial_strategy':{'type':'string','minLength':1,'maxLength':character_limit},'summary':{'type':'string'}},
                 'required':['editorial_strategy','summary'],'additionalProperties':False}
+        input_tokens=len(tiktoken.get_encoding('o200k_base').encode(payload+REFLECTION_PROMPT+json.dumps(schema)))
+        if input_tokens+4096>128000:
+            self.store.event('reflection_skipped',reason='context_limit',input_tokens=input_tokens)
+            raise ValueError('Reflection context exceeds budget; no examples truncated')
+        self.proposals+=1
         started=time.monotonic()
         try:
             response=GuardedClient(self.evaluator._client(),self.evaluator.budget).responses.create(

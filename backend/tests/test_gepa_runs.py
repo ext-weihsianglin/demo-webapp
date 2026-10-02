@@ -189,3 +189,31 @@ def test_server_shutdown_stops_next_phase_and_saved_progress_is_recoverable(tmp_
     recovered = fresh.status(run['id'])
     assert recovered['status'] == 'interrupted' and recovered['budget']['attempts'] == 1
     assert recovered['budget']['reserved'] == 0 and recovered['candidates']
+
+
+def test_reflection_uses_complete_relevant_source_text_once_and_schema_length_bound(tmp_path, monkeypatch):
+    from app.gepa.adapter import Adapter
+    from app.gepa.evaluation import PageEvaluator, AttemptBudget
+    from app.gepa.storage import RunStore
+    from gepa.core.adapter import EvaluationBatch
+    class Capture(ResearchClient):
+        def create(self, **request):
+            self.schema = request['text']['format']['schema']
+            return super().create(**request)
+    registry = PromptRegistry(tmp_path/'registry')
+    client = Capture()
+    adapter = Adapter(PageEvaluator(AttemptBudget(100), client=client), registry,
+        registry.baseline('gpt-4.1-mini'), RunStore('reflection-fixture',tmp_path/'runs'), RunConfig(dataset_id='fixture'))
+    source_text = 'Retain this factual qualifier exactly: may help under stable conditions.'
+    result = {'role':'reflection','page_id':'page-id','queries':['What may help?'],
+        'original_document':{'blocks':[{'block_id':'b1','type':'paragraph','text':source_text,'raw_html':'x'*500000}],
+                            'chunks':[{'chunk_id':'c1','block_ids':['b1']}]},
+        'rewrite':{'changes':[{'source_id':'b1','chunk_id':'c1','before':source_text,'after':'This may help under stable conditions.',
+                              'evidence':[{'block_id':'b1','quote':source_text}]}],'summary':'Validated.'},
+        'original':{'mean_score':.2},'after':{'mean_score':.3},'delta':.1,'status':'applied'}
+    dataset = adapter.make_reflective_dataset({},EvaluationBatch(outputs=[result],scores=[.3],trajectories=[result]),['editorial_strategy'])
+    serialized = json.dumps(dataset)
+    assert serialized.count(source_text) == 1 and 'raw_html' not in serialized
+    assert dataset['editorial_strategy'][0]['Inputs']['source_scope'] == 'changed_chunks'
+    adapter.propose_new_texts({'editorial_strategy':registry.editorial},dataset,['editorial_strategy'])
+    assert client.schema['properties']['editorial_strategy']['maxLength'] == int(len(registry.editorial)*1.5)
