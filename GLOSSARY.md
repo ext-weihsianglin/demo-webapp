@@ -8,6 +8,24 @@ Content Studio creates source-grounded rewrite proposals and supports research i
 A frozen classifier's estimate of the sampled within-host top class among already-cited pages for a target query. It is a reward proxy, not a citation probability or a measure of factual correctness.
 _Avoid_: Citation uplift, quality score
 
+**Rewrite explanation**:
+A query-specific account of how a completed rewrite proposal changed P1 measurements and the resulting P1 score.
+_Avoid_: Optimization recommendation
+
+**Raw P1 feature value**:
+A human-readable measurement supplied to P1 for one page and target query, before the model's fitted preprocessing.
+
+**Standardized P1 feature value**:
+A raw P1 feature value after the frozen model's fitted imputation and scaling. This is the value multiplied by a standardized model weight.
+
+**Standardized model weight**:
+The frozen logistic-regression coefficient applied to a standardized P1 feature value.
+_Avoid_: Rewrite importance, causal effect
+
+**Rewrite effect**:
+A P1 feature's exact additive contribution to the change in log odds between the original page and a rewrite proposal for one target query.
+_Avoid_: Citation uplift, probability-point contribution
+
 **P2 rewriter**:
 The system that proposes edits to a source snapshot for its target queries while preserving source evidence and protected content.
 

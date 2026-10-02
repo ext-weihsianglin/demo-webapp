@@ -10,7 +10,7 @@ from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, field_validator, model_validator
 from app.examples import catalog, load_example
-from app.scoring import score_document, compare_scores
+from app.scoring import score_document, compare_scores, public_scores
 from app.extraction import UPSTREAM, extract_document, section_view
 from app.verification import SourceInspector, verify_document
 
@@ -132,8 +132,7 @@ def source_origin(source):
     item = load_example(source.example_id)
     return {"kind": "example", "snapshot_id": item["snapshot_id"], "split": item["split"], "manifest_hash": item["manifest_hash"], "payload_hash": item["payload_hash"], 'p1_split_hash': item['p1_split_hash']}
 
-@app.post('/api/analyze')
-def analyze(source: Source):
+def _analyze(source: Source, *, explain=False):
     parsed, chunks = extract_document(source.content, source.format, source.href, source.hostname)
     sections = [section_view(block) for block in parsed['blocks']]
     facts = [{"source_id": block['block_id'], "text": block['text'], "status": "Source statement · unverified"}
@@ -149,7 +148,7 @@ def analyze(source: Source):
             raise HTTPException(503, "Example identity does not match the parsed snapshot.")
         parsed['raw_payload_reference'] = origin
     return {"mode": "source-analysis", "target_queries": source.queries,
-            "p1": score_document(parsed, source.content, source.format, source.queries), "snapshot_id": parsed['snapshot_id'], "source_origin": origin,
+            "p1": score_document(parsed, source.content, source.format, source.queries, explain=explain), "snapshot_id": parsed['snapshot_id'], "source_origin": origin,
             "extraction": {"engine": "content-optimization-system", "upstream_revision": UPSTREAM['revision'], "package_version": UPSTREAM['package_version'], **parsed['selection']},
             "document": parsed, "chunks": chunks,
             "verification": verify_document(source.content, source.format, parsed, chunks, facts),
@@ -164,6 +163,11 @@ def analyze(source: Source):
             "notes": ["Extraction uses the pinned upstream retention-first parser.",
                       "Factoids are source statements, not independently verified facts.",
                       "P1 estimates the sampled within-host top class among already-cited pages, not citation likelihood or uplift. Editorial grades remain mocked."]}
+
+
+@app.post('/api/analyze')
+def analyze(source: Source):
+    return _analyze(source)
 
 @app.post('/api/evidence')
 def evidence(source: EvidenceRequest):
@@ -181,8 +185,9 @@ def draft(source: DraftRequest):
         prompt = PromptRegistry().resolve(source.prompt_id, selected_model)
     except (ValueError, OSError, KeyError):
         raise HTTPException(400, 'Prompt is missing, changed or incompatible with the selected model.') from None
-    analysis = analyze(source)
-    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=analysis['p1'], prompt=prompt['effective_prompt'], prompt_id=prompt['id'], optimization_context=prompt.get('optimization_context'))
+    analysis = _analyze(source, explain=True)
+    p1_feedback = public_scores(analysis['p1'])
+    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=p1_feedback, prompt=prompt['effective_prompt'], prompt_id=prompt['id'], optimization_context=prompt.get('optimization_context'))
     result['telemetry'].update(prompt_id=prompt['id'], prompt_hash=prompt['prompt_hash'], contract_version=prompt['contract_version'])
     result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
     if result['status'] != 'succeeded':
@@ -195,7 +200,8 @@ def draft(source: DraftRequest):
             'status':'fidelity_rejected' if gate['status']=='rejected' else 'fidelity_unavailable',
             'summary':'Source-relative fidelity check did not pass; no draft applied.',
             'fidelity':gate, 'telemetry':result['telemetry'], 'rejected_changes':result['changes']})
-    after = score_document(result['document'], source.content, source.format, source.queries)
-    result.update(target_queries=source.queries, p1_before=analysis['p1'], p1_after=after,
-                  p1_comparison=compare_scores(analysis['p1'], after))
+    after = score_document(result['document'], source.content, source.format, source.queries, explain=True)
+    comparison = compare_scores(analysis['p1'], after)
+    result.update(target_queries=source.queries, p1_before=public_scores(analysis['p1']),
+                  p1_after=public_scores(after), p1_comparison=comparison)
     return result

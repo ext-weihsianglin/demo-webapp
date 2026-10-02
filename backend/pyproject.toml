@@ -5,14 +5,14 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115,<1",
     "uvicorn[standard]>=0.30,<1",
-    "content-optimization-exploration==0.2.0",
+    "content-optimization-exploration==0.3.0",
     "openai>=2,<3",
     "tiktoken>=0.12,<1",
     "lingua-language-detector>=2,<3",
     "gepa==0.1.4",
 ]
 [tool.uv.sources]
-content-optimization-exploration = { path = "packages/content_optimization_exploration-0.2.0-py3-none-any.whl" }
+content-optimization-exploration = { path = "packages/content_optimization_exploration-0.3.0-py3-none-any.whl" }
 [dependency-groups]
 dev = [
     "pytest>=8",
