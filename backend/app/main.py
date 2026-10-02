@@ -98,7 +98,10 @@ def health():
 
 @app.get('/api/rewrite-models')
 def rewrite_models():
-    return model_options()
+    try:
+        return model_options()
+    except ValueError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
 
 @app.get('/api/examples')
 def examples():

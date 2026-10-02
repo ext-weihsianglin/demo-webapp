@@ -13,7 +13,7 @@ def model_config(monkeypatch):
     monkeypatch.setenv('OPENAI_REWRITE_MODEL','gpt-4.1-mini')
     monkeypatch.delenv('OPENAI_REWRITE_MODELS', raising=False)
 
-@pytest.mark.parametrize('selected', ['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-sol','gpt-6.1-sol','gpt-6-luna','gpt-6-astra',None])
+@pytest.mark.parametrize('selected', ['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5','gpt-5-mini',None])
 def test_dropdown_model_routes_to_client_and_telemetry(selected, monkeypatch):
     from app import main
     stub=StubClient()
@@ -26,10 +26,10 @@ def test_dropdown_model_routes_to_client_and_telemetry(selected, monkeypatch):
 
 
 def test_server_allowlist_and_configured_default(monkeypatch):
-    monkeypatch.setenv('OPENAI_REWRITE_MODEL','gpt-4.1-mini-2025-04-14')
+    monkeypatch.setenv('OPENAI_REWRITE_MODEL','gpt-5-mini')
     monkeypatch.setenv('OPENAI_REWRITE_MODELS','gpt-4.1, gpt-4.1,gpt-4.1-mini')
     options=client.get('/api/rewrite-models').json()
-    assert options=={'default_model':'gpt-4.1-mini-2025-04-14','models':['gpt-4.1-mini-2025-04-14','gpt-4.1','gpt-4.1-mini']}
+    assert options=={'default_model':'gpt-5-mini','models':['gpt-5-mini','gpt-4.1','gpt-4.1-mini']}
     assert Settings.from_env().model==options['default_model']
 
 @pytest.mark.parametrize('model',['arbitrary-model','', ' gpt-4.1-mini', 'gpt-4.1-nano'])
@@ -50,10 +50,10 @@ def test_default_price_estimate_does_not_apply_to_other_models(monkeypatch):
     assert alternate.input_price is alternate.output_price is None
 
 
-def test_default_catalog_includes_gpt_56_and_newer_families():
+def test_default_catalog_only_contains_tested_families():
     options=client.get('/api/rewrite-models').json()
     assert options['default_model']=='gpt-4.1-mini'
-    assert options['models']==['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-sol','gpt-6.1-sol','gpt-6-luna','gpt-6-astra']
+    assert options['models']==['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5','gpt-5-mini']
 
 
 def test_unavailable_model_reports_access_failure_without_provider_body(monkeypatch):
@@ -68,8 +68,22 @@ def test_unavailable_model_reports_access_failure_without_provider_body(monkeypa
             raise PermissionDeniedError('sensitive provider detail',response=response,
                 body={'code':'model_not_found','type':'invalid_request_error'})
     monkeypatch.setattr(main,'rewrite',lambda *args,**kwargs:rewrite(*args,client=Unavailable(),**kwargs))
-    response=client.post('/api/draft',json={**PAYLOAD,'model':'gpt-5.6-sol'})
+    response=client.post('/api/draft',json={**PAYLOAD,'model':'gpt-5'})
     assert response.status_code==502
     assert response.json()['detail']['status']=='model_unavailable'
-    assert 'cannot access gpt-5.6-sol' in response.json()['detail']['summary']
+    assert 'cannot access gpt-5' in response.json()['detail']['summary']
     assert 'sensitive provider detail' not in response.text
+
+
+@pytest.mark.parametrize('model',['gpt-5-nano','gpt-5.6-sol','gpt-6-sol','gemini-pro','gpt-5-custom'])
+def test_environment_cannot_expand_supported_catalog(model,monkeypatch):
+    monkeypatch.setenv('OPENAI_REWRITE_MODELS',f'gpt-4.1,{model}')
+    assert model not in client.get('/api/rewrite-models').json()['models']
+    assert client.post('/api/draft',json={**PAYLOAD,'model':model}).status_code==422
+
+
+def test_unsupported_configured_default_reports_configuration_error(monkeypatch):
+    monkeypatch.setenv('OPENAI_REWRITE_MODEL','gpt-6-sol')
+    response=client.get('/api/rewrite-models')
+    assert response.status_code==503
+    assert 'supported P2 model catalog' in response.json()['detail']

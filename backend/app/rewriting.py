@@ -17,11 +17,16 @@ from app.language_guard import confident_language, compare_language
 PROMPT_VERSION = 'rewrite-page-v6'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
+SUPPORTED_REWRITE_MODELS = ('gpt-4.1-mini', 'gpt-4.1', 'gpt-4.1-nano', 'gpt-5', 'gpt-5-mini')
+
+
 def model_options():
-    """Server-owned allowlist; the configured default remains available to older clients."""
+    """Configuration can narrow the tested model catalog, never expand it."""
     default = os.getenv('OPENAI_REWRITE_MODEL', 'gpt-4.1-mini')
-    configured = os.getenv('OPENAI_REWRITE_MODELS', 'gpt-4.1-mini,gpt-4.1,gpt-4.1-nano,gpt-5.6-sol,gpt-5.6-terra,gpt-5.6-luna,gpt-6-sol,gpt-6.1-sol,gpt-6-luna,gpt-6-astra')
-    models = list(dict.fromkeys([default, *(m.strip() for m in configured.split(',') if m.strip())]))
+    if default not in SUPPORTED_REWRITE_MODELS:
+        raise ValueError('OPENAI_REWRITE_MODEL must be in the supported P2 model catalog')
+    configured = os.getenv('OPENAI_REWRITE_MODELS', ','.join(SUPPORTED_REWRITE_MODELS))
+    models = list(dict.fromkeys([default, *(m.strip() for m in configured.split(',') if m.strip() in SUPPORTED_REWRITE_MODELS)]))
     return {'default_model': default, 'models': models}
 
 

@@ -9,7 +9,7 @@ The following files/contracts are implemented in [PR #2](https://github.com/ext-
 - `app/extraction.py` calls the pinned upstream retention parser. Keep extraction independent of the target query and citation labels. Do not duplicate the upstream parser or replace the wheel with an unpublished Git dependency.
 - `app/examples.py` serves explicitly prepared, hash-verified extraction-held-out snapshots. Saved payloads are read-only; their target queries are editable. Version-2 bundles retain all ten host records and default to the distinct usable prompt set; never silently pick the first prompt. `scripts/prepare_examples.py` prepares the ignored local bundle. Missing bundles must not prevent custom snapshots.
 - `app/rewriting.py` owns token budgeting, OpenAI requests, edit validation and rendering. `app/main.py` owns request validation and HTTP errors. Keep the fixed baseline prompt separate from untrusted source inputs.
-- `GET /api/rewrite-models` is the server-owned model catalog. `OPENAI_REWRITE_MODEL` is the default; `OPENAI_REWRITE_MODELS` is the allowlist. Clients may choose only listed IDs, and omitted selections retain the default. Model inclusion does not prove account access. Preserve `model_unavailable` errors; never fall back silently. Global configured price estimates apply only to the default model.
+- `GET /api/rewrite-models` is the server-owned model catalog. `OPENAI_REWRITE_MODEL` is the default; `OPENAI_REWRITE_MODELS` narrows the supported catalog; it cannot add untested IDs. An unsupported default is a configuration error. Clients may choose only listed IDs, and omitted selections retain the default. Model inclusion does not prove account access. Preserve `model_unavailable` errors; never fall back silently. Global configured price estimates apply only to the default model.
 - Editable blocks currently comprise plain top-level paragraphs/headings. Preserve linked/formatted blocks, tables, nested lists, code and source metadata. Structural permission only permits level changes to existing headings. Do not broaden this contract without matching validation, rendering, tests and documentation.
 - Validate snapshot/chunk/block references, exact `before` text and evidence quotes. Exact quote validation is not semantic entailment. Carry extraction warnings/review flags, abstain when source is insufficient, and require a body edit for successful generation.
 - Budget the full input/schema/instructions and output reserve in model tokens. Extraction chunks use a soft character target. Oversized groups must fail visibly rather than be silently truncated. Incomplete/refused/invalid output cannot become a partial successful draft.
@@ -19,7 +19,7 @@ The following files/contracts are implemented in [PR #2](https://github.com/ext-
 Ordinary scaffold tests exercise the deterministic mock. PR #2 adds stubbed OpenAI clients and explicit live/evaluation commands below; these commands require that implementation to be present. Run `uv run pytest -q` from this directory. Credentials in `.env` must be loaded explicitly for CLI checks, for example:
 
 ```sh
-RUN_OPENAI_LIVE=1 RUN_OPENAI_LIVE_MODELS=gpt-5.6-sol,gpt-6.1-sol \
+RUN_OPENAI_LIVE=1 RUN_OPENAI_LIVE_MODELS=gpt-4.1,gpt-5 \
   uv run --env-file .env pytest -q tests/test_live_rewriting.py
 uv run --env-file .env python scripts/evaluate_rewriting.py --live --output evaluation/new-report.json
 ```
