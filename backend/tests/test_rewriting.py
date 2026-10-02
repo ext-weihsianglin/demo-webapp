@@ -18,7 +18,7 @@ class StubClient:
         b = next((b for b in data['blocks'] if b['editable'] and b['type']=='paragraph'), None)
         proposal = {'status':'proposed' if b else 'abstained','summary':'Reframed the source answer.','review_flags':[], 'edits':[]}
         if b:
-            proposal['edits']=[{'snapshot_id':data['snapshot_id'],'chunk_id':data['chunk']['chunk_id'],'block_id':b['block_id'],
+            proposal['edits']=[{'snapshot_id':data['snapshot_id'],'chunk_id':next(chunk['chunk_id'] for chunk in data['chunks'] if b['block_id'] in chunk['block_ids']),'block_id':b['block_id'],
              'before':b['text'],'after':'For road runs, prioritize a comfortable fit; there is no single best shoe for every runner.',
              'reason':'Lead with the source-supported answer to the query.', 'review_flags':[], 'heading_level':None,
              'evidence':[{'snapshot_id':data['snapshot_id'],'block_id':b['block_id'],'quote':b['text']}]}]

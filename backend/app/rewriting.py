@@ -13,7 +13,7 @@ import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
 
-PROMPT_VERSION = 'rewrite-multiquery-v1'
+PROMPT_VERSION = 'rewrite-page-v3'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 def model_options():
@@ -52,17 +52,15 @@ class Proposal(StrictModel):
 @dataclass(frozen=True)
 class Settings:
     model: str = 'gpt-4.1-mini'
-    context_tokens: int = 16000
-    output_tokens: int = 4000
-    timeout: float = 45
-    retries: int = 1
-    max_calls: int = 12
+    context_tokens: int = 128000
+    output_tokens: int = 16000
+    timeout: float = 120
     input_price: float | None = None
     output_price: float | None = None
 
     def __post_init__(self):
         if not (1000 <= self.context_tokens <= 128000 and 256 <= self.output_tokens < self.context_tokens
-                and 1 <= self.timeout <= 120 and 0 <= self.retries <= 2 and 1 <= self.max_calls <= 20):
+                and 1 <= self.timeout <= 120):
             raise ValueError('Invalid rewrite limits')
         if any(p is not None and p < 0 for p in (self.input_price, self.output_price)):
             raise ValueError('Invalid rewrite prices')
@@ -78,11 +76,9 @@ class Settings:
         # Global price configuration applies only to the configured default model.
         default_pricing = model == options['default_model']
         return cls(model=model,
-                   context_tokens=int(os.getenv('REWRITE_CONTEXT_TOKENS', '16000')),
-                   output_tokens=int(os.getenv('REWRITE_OUTPUT_TOKENS', '4000')),
-                   timeout=float(os.getenv('REWRITE_TIMEOUT_SECONDS', '45')),
-                   retries=int(os.getenv('REWRITE_MAX_RETRIES', '1')),
-                   max_calls=int(os.getenv('REWRITE_MAX_CALLS', '12')),
+                   context_tokens=int(os.getenv('REWRITE_CONTEXT_TOKENS', '128000')),
+                   output_tokens=int(os.getenv('REWRITE_OUTPUT_TOKENS', '16000')),
+                   timeout=float(os.getenv('REWRITE_TIMEOUT_SECONDS', '120')),
                    input_price=price('REWRITE_INPUT_USD_PER_MILLION') if default_pricing else None,
                    output_price=price('REWRITE_OUTPUT_USD_PER_MILLION') if default_pricing else None)
 
@@ -107,10 +103,12 @@ def validate_edits(proposal, document, chunk, allow_structure):
         b = blocks.get(edit.block_id)
         if (edit.snapshot_id != document['snapshot_id'] or edit.chunk_id != chunk['chunk_id']
                 or edit.block_id not in chunk['block_ids'] or b is None or edit.block_id in seen):
-            raise RewriteFailure('invalid_output', 'Invalid or duplicate source reference.')
+            raise RewriteFailure('invalid_output', f'Invalid source reference for block {edit.block_id}: snapshot_match={edit.snapshot_id == document["snapshot_id"]}, chunk_match={edit.chunk_id == chunk["chunk_id"]}, member={edit.block_id in chunk["block_ids"]}, duplicate={edit.block_id in seen}.')
         seen.add(edit.block_id)
-        if not editable(b) or edit.before != b['text'] or edit.after.strip() == edit.before.strip():
-            raise RewriteFailure('invalid_output', 'Edit does not match an editable source block.')
+        if not editable(b):
+            raise RewriteFailure('invalid_output', f'Block {edit.block_id} is protected and cannot be edited.')
+        if edit.before != b['text']:
+            raise RewriteFailure('invalid_output', f'Block {edit.block_id}: before text does not exactly match the original source.')
         if not edit.after.strip() or not edit.reason.strip() or '\n' in edit.after:
             raise RewriteFailure('invalid_output', 'Prose edits must retain one nonempty block and a reason.')
         if edit.heading_level is not None and (b['type'] != 'heading' or not allow_structure):
@@ -123,6 +121,66 @@ def validate_edits(proposal, document, chunk, allow_structure):
         # Evidence validity is mechanical, not a semantic entailment guarantee.
         if any(f in edit.review_flags for f in ('unsupported_addition', 'missing_evidence')):
             raise RewriteFailure('unsupported_output', 'Model flagged unsupported additions or missing evidence; no draft applied.')
+
+
+
+
+def response_schema(document, batch, allow_structure=False):
+    """Keep the provider schema bounded; validate source identities/text locally."""
+    schema = Proposal.model_json_schema()
+    allowed = [b['block_id'] for b in document['blocks'] if editable(b)]
+    # Bound schema growth for very large custom pages; server checks always apply.
+    if allowed and len(allowed) <= 900 and sum(map(len, allowed)) <= 10000:
+        schema['$defs']['Edit']['properties']['block_id']['enum'] = allowed
+    for name in ('Edit', 'Evidence'):
+        schema['$defs'][name]['properties']['snapshot_id']['enum'] = [document['snapshot_id']]
+    if not allow_structure:
+        schema['$defs']['Edit']['properties']['heading_level'] = {'type': 'null'}
+    return schema
+
+
+def plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback=None):
+    """Build exactly one whole-page request, preserving all text and queries.
+
+    Source locators, HTML serialization, JSON-LD and visibility diagnostics are
+    retained in the document but are not editable rewrite evidence. Send each
+    block's text once; never send duplicate chunk text/Markdown or raw DOM paths.
+    """
+    blocks = {b['block_id']: b for b in document['blocks']}
+    metadata = {k: document['source_metadata'].get(k) for k in ('title', 'language', 'description', 'canonical')}
+
+    def serialize(batch):
+        ids = [i for chunk in batch for i in chunk['block_ids']]
+        chunk_for = {i: chunk['chunk_id'] for chunk in batch for i in chunk['block_ids']}
+        payload = {'task': 'Rewrite this entire page in one coordinated proposal for all target queries.', 'scope': 'whole_page', 'target_queries': queries, 'p1_feedback': p1_feedback or {'status': 'unavailable'},
+                   'optimization_objective': 'Increase the equal-weight mean P1 score across every distinct target query; avoid per-query regressions. Preserve source evidence even if scores cannot improve.',
+                   'editorial_tone': tone, 'allow_structure': allow_structure,
+                   'snapshot_id': document['snapshot_id'], 'extraction': document['selection'],
+                   'source_metadata': metadata, 'heading_outline': document.get('outline', []),
+                   'chunks': [{k: chunk[k] for k in ('chunk_id', 'order', 'block_ids', 'heading_path')} for chunk in batch],
+                   'blocks': [{**{k: blocks[i].get(k) for k in ('block_id', 'order', 'parent_id', 'type', 'text', 'heading_level')},
+                               'editable': editable(blocks[i]), 'chunk_id': chunk_for[i]} for i in ids]}
+        data = json.dumps(payload, ensure_ascii=False)
+        count = len(encoding.encode(PROMPT + data + json.dumps(response_schema(document, batch, allow_structure)))) + 256
+        # Estimate space if each editable block receives one ordinary edit.
+        # Output remains strictly capped, and incomplete output never applies.
+        output_estimate = 256
+        for chunk in batch:
+            for identity in chunk['block_ids']:
+                b = blocks[identity]
+                if editable(b):
+                    template = {'snapshot_id': document['snapshot_id'], 'chunk_id': chunk['chunk_id'],
+                                'block_id': identity, 'before': b['text'], 'after': b['text'],
+                                'reason': 'Source-supported rephrasing across the target query set.',
+                                'evidence': [{'snapshot_id': document['snapshot_id'], 'block_id': identity, 'quote': b['text']}],
+                                'review_flags': [], 'heading_level': None}
+                    output_estimate += len(encoding.encode(json.dumps(template, ensure_ascii=False))) + 64
+        return batch, data, count, output_estimate
+
+    request = serialize(chunks)
+    if request[2] + settings.output_tokens > settings.context_tokens:
+        raise RewriteFailure('context_limit', f'Whole page needs {request[2]} input tokens + {settings.output_tokens} output reserve; budget is {settings.context_tokens}. No source or queries were truncated and no call was made.')
+    return [request]
 
 
 def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None):
@@ -151,30 +209,21 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
             # Explicit conservative fallback for unknown model aliases.
             encoding = tiktoken.get_encoding('o200k_base')
             telemetry['tokenizer'] = 'o200k_base (fallback; verify model compatibility)'
-        schema = Proposal.model_json_schema()
         blocks = {b['block_id']: b for b in document['blocks']}
-        requests = []
-        for chunk in chunks:
-            payload = {'target_queries': queries, 'p1_feedback': p1_feedback or {'status': 'unavailable'},
-                       'optimization_objective': 'Increase the equal-weight mean P1 score across every distinct target query; avoid per-query regressions. Preserve source evidence even if scores cannot improve.',
-                       'editorial_tone': tone, 'allow_structure': allow_structure,
-                       'snapshot_id': document['snapshot_id'], 'extraction': document['selection'],
-                       'source_metadata': document['source_metadata'], 'heading_outline': document.get('outline', []),
-                       'chunk': chunk, 'blocks': [{**blocks[i], 'editable': editable(blocks[i])} for i in chunk['block_ids']]}
-            data = json.dumps(payload, ensure_ascii=False)
-            count = len(encoding.encode(PROMPT + data + json.dumps(schema))) + 256
-            if count + settings.output_tokens > settings.context_tokens:
-                raise RewriteFailure('context_limit', f'Chunk {chunk["chunk_id"]} needs {count} input tokens plus output reserve. Oversized tables/code/list groups are retained intact; increase the verified model budget or choose a smaller snapshot.')
-            requests.append((chunk, data, count))
-        if len(requests) > settings.max_calls:
-            raise RewriteFailure('context_limit', f'Source needs {len(requests)} calls; configured maximum is {settings.max_calls}. No source was truncated.')
-        telemetry['budgeted_input_tokens'] = sum(r[2] for r in requests)
+        requests = plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback)
+        telemetry.update(budgeted_input_tokens=sum(r[2] for r in requests),
+                         planned_calls=len(requests), original_chunks=len(chunks),
+                         context_tokens=settings.context_tokens, output_reserve_tokens=settings.output_tokens)
         if client is None:
             if not os.environ.get('OPENAI_API_KEY'):
                 raise RewriteFailure('missing_credentials', 'Set OPENAI_API_KEY on the backend to generate a real draft.')
-            client = OpenAI(timeout=settings.timeout, max_retries=settings.retries)
+            client = OpenAI(timeout=settings.timeout, max_retries=0)
         edits, summaries = [], []
-        for chunk, data, _ in requests:
+        for batch, data, _, _ in requests:
+            if not any(editable(blocks[i]) for chunk in batch for i in chunk['block_ids']):
+                telemetry['skipped_protected_batches'] = telemetry.get('skipped_protected_batches', 0) + 1
+                continue
+            schema = response_schema(document, batch, allow_structure)
             telemetry['calls'] += 1
             response = client.responses.create(model=settings.model, instructions=PROMPT,
                 input=[{'role': 'user', 'content': data}], store=False, max_output_tokens=settings.output_tokens,
@@ -191,8 +240,16 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
             proposal = Proposal.model_validate_json(response.output_text)
             accumulated_flags.extend(proposal.review_flags)
             accumulated_flags.extend(f for e in proposal.edits for f in e.review_flags)
-            validate_edits(proposal, document, chunk, allow_structure)
-            edits.extend(proposal.edits)
+            batch_ids = {chunk['chunk_id'] for chunk in batch}
+            if any(edit.chunk_id not in batch_ids for edit in proposal.edits):
+                raise RewriteFailure('invalid_output', 'Edit references a chunk outside this request batch.')
+            for chunk in batch:
+                chunk_proposal = proposal.model_copy(update={'edits': [edit for edit in proposal.edits if edit.chunk_id == chunk['chunk_id']]})
+                validate_edits(chunk_proposal, document, chunk, allow_structure)
+            changed = [edit for edit in proposal.edits if edit.after.strip() != edit.before.strip()
+                       or (edit.heading_level is not None and edit.heading_level != blocks[edit.block_id]['heading_level'])]
+            telemetry['ignored_unchanged_edits'] = telemetry.get('ignored_unchanged_edits', 0) + len(proposal.edits) - len(changed)
+            edits.extend(changed)
             summaries.append(proposal.summary)
         if len({e.block_id for e in edits}) != len(edits):
             raise RewriteFailure('invalid_output', 'Duplicate edits across chunks.')
@@ -218,6 +275,13 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
         return finish('invalid_output', 'Invalid model output or server rewrite configuration; no draft applied.')
     except APIError as exc:
         telemetry['usage_complete'] = False
+        known_codes = {'invalid_json_schema', 'rate_limit_exceeded', 'insufficient_quota', 'context_length_exceeded', 'invalid_request_error', 'model_not_found'}
+        code = getattr(exc, 'code', None)
+        telemetry['provider_error'] = {'type': type(exc).__name__, 'http_status': getattr(exc, 'status_code', None),
+                                       'code': code if code in known_codes else None}
+        # Only safe diagnostic categories are logged; never raw provider bodies or source text.
+        import logging
+        logging.getLogger('uvicorn.error').warning('Rewrite provider failure: %s', json.dumps(telemetry['provider_error']))
         if getattr(exc, 'code', None) == 'model_not_found':
             return finish('model_unavailable', f'The server credentials cannot access {settings.model}. Choose another model or configure credentials with model access; no draft applied.')
         return finish('api_error', 'OpenAI request failed or timed out. Check server configuration and retry; no draft applied.')

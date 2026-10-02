@@ -1,0 +1,25 @@
+{
+  "snapshot_id": "a2dc73dc37ac68980b5aa72560892b6dc0430656af7512cd484a71b74b19f805",
+  "hostname": "asanify.com",
+  "model": "gpt-4.1",
+  "prompt_version": "rewrite-multiquery-v2",
+  "query_count": 10,
+  "original_chunks": 33,
+  "original_blocks": 481,
+  "planned_batches": 7,
+  "context_tokens": 16000,
+  "output_reserve_tokens": 4000,
+  "batch_input_tokens": [
+    11514,
+    11805,
+    7995,
+    8793,
+    8930,
+    11221,
+    5963
+  ],
+  "all_chunks_retained": true,
+  "all_block_text_retained": true,
+  "all_queries_in_each_batch": true,
+  "p1_model_sha256": "f78ca1f8e51f147a5b52a16cafed6819d165f18eff8bf6e0f5ed61cf5c918b92"
+}
