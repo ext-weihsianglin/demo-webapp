@@ -1,0 +1,230 @@
+{
+  "results": [
+    {
+      "id": "nec-description",
+      "control_kind": "faithful paraphrase preserving omitted facts",
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000025",
+            "verdict": "supported",
+            "category": "Minor stylistic rephrasing (pronoun and connective)",
+            "reason": "The edit only introduces stylistic changes—adding a leading connective (“As”), using a possessive pronoun (“Its”), and replacing the repeated subject with a pronoun (“it”)—without altering meaning, scope, claims, or qualifiers from the source text.",
+            "source_ids": [
+              "b000025"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1226,
+          "output_tokens": 369,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1226,
+              "output_tokens": 369,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "0fc3d73e3b6929358a06caf84576e63501fbf17f41c6133a4917ca4b2c844fec",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3400,
+              "latency_ms": 6437
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 6437
+        }
+      }
+    },
+    {
+      "id": "fuel-user-reports",
+      "control_kind": "faithful paraphrase preserving omitted facts",
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000056",
+            "verdict": "supported",
+            "category": "faithful paraphrase",
+            "reason": "The rewrite is a stylistic paraphrase that preserves the original meaning and scope, maintaining the claim about many users reporting significant improvements and introducing examples without adding new facts or guarantees.",
+            "source_ids": [
+              "b000056"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1232,
+          "output_tokens": 322,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1232,
+              "output_tokens": 322,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "a84f631888b6997c63ef248023734a4fae80c920f3290e67517ceb39d8d42f38",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3407,
+              "latency_ms": 7467
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 7467
+        }
+      }
+    },
+    {
+      "id": "fuel-professional-interval",
+      "control_kind": "faithful paraphrase preserving omitted facts",
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000069",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "The rewrite preserves the original meaning, frequency range, conditions (stop-and-go driving, poor fuel quality), and outcome (maintain performance, prevent carbon buildup) with only stylistic reordering and wording changes.",
+            "source_ids": [
+              "b000069"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1259,
+          "output_tokens": 396,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1259,
+              "output_tokens": 396,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "4c4a3cd41570d8c3d0bdd6809f17271f87c1924a8321256f323adc2639155b60",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3434,
+              "latency_ms": 4774
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 4774
+        }
+      }
+    },
+    {
+      "id": "cisco-paraphrase",
+      "control_kind": "explicit retry of prior unavailable diagnostic",
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000055",
+            "verdict": "unsupported",
+            "category": "Material omission",
+            "reason": "The rewrite omits the source’s material claims that the IP fabric “supports all 5G Cores” and that this is Cisco’s “unique value,” and it softens/changes phrasing (from “ensuring” to “supports” and drops “diverse”). While added context about leadership is supported elsewhere, these omissions change the factual scope of the original block.",
+            "source_ids": [
+              "b000055",
+              "b000054"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1330,
+          "output_tokens": 1353,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1330,
+              "output_tokens": 1353,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "context_tokens": 128000,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "cee66869f918cb99f581f72f57a878f4b8317518b415b036be25964a26beef16",
+              "output_limit": 8192,
+              "budgeted_input_tokens": 3504,
+              "latency_ms": 15613
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 15613
+        }
+      }
+    }
+  ],
+  "timeout_seconds": 120,
+  "sdk_retries": 0,
+  "expected": "supported",
+  "heldout_calls": 0,
+  "complete": true
+}

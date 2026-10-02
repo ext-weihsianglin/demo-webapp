@@ -70,7 +70,12 @@ def reflection_traces(identity: str):
     def read():
         store=manager.store(identity)
         store.read('manifest')
-        return {'traces':[store.read(path.stem) for path in sorted(store.path.glob('reflection-input-*.json'))]}
+        traces=[]
+        for path in sorted(store.path.glob('reflection-input-*.json')):
+            output=path.with_name(path.name.replace('reflection-input-','reflection-output-'))
+            traces.append({**store.read(path.stem),'artifact':path.stem,
+                'response':store.read(output.stem) if output.exists() else None})
+        return {'traces':traces}
     return invoke(read)
 
 

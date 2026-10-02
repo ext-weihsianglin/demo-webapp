@@ -253,3 +253,12 @@ The GEPA tab now defaults to GPT-5-mini for rewriting and reflection. Fresh run 
 Fidelity rejection discards the complete page proposal and retains the original score, but does not trigger the technical circuit breaker or halt search. A tied candidate is rejected; the next proposal may proceed until the configured proposal/attempt limit, operator stop or technical circuit breaker. These semantics remain unchanged; no unsafe partial edits are applied.
 
 Validation: 19 targeted GEPA coordinator/API tests passed, including the configured limit in actual reflection instructions and a custom-limit regression; frontend production build/typecheck and diff checks passed. No live held-out evaluation or promotion was made.
+
+
+### Procedure repair and fidelity calibration — 2026-10-02
+
+The user requested procedure validation and a source audit before further optimization. New procedures are checked for length, unfinished endings and known fixed-output conflicts; one explicitly logged, fully budgeted repair is allowed before registration. Raw returned text and validation errors are inspectable beside reflection requests. A failed repair preserves the parent. The versioned component profile freezes these rules for promotion compatibility. A live diagnostic produced a complete 5,226-character procedure; raw and registered text matched exactly.
+
+The 12 saved-edit fidelity replay produced 11 verdicts and one timeout. Three disputes with the initial assistant assessments involved omitted details; three newly authored controls preserving those details all passed. An explicit retry of the unavailable case was rejected for omissions. The judge showed variability and one flawed rationale, but this audit did not establish a reason to weaken its policy. The original prompt/policy remains in service. These are assistant source assessments, not independent human labels or a measured false-positive rate. See [the complete audit and reproducible fixtures](gepa-fidelity-calibration.md).
+
+Checks: 175 backend tests passed with two opt-in checks skipped; 27 targeted coordinator/API/procedure tests passed again after refining a validator false-positive edge case; diff checks passed. The backend was reloaded only after all runs were terminal. No full GEPA run, held-out comparison, P1 rescoring or promotion was started.

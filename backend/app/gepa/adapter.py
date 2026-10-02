@@ -12,6 +12,7 @@ from app.request_budget import input_tokens as budget_input_tokens, CONTEXT_TOKE
 from app.fidelity import MODEL as GATE_MODEL
 from app.prompt_registry import digest
 from app.gepa.evaluation import GuardedClient, RunStopped
+from app.gepa.procedure_validation import validate_procedure, PROFILE as PROCEDURE_VALIDATION
 import tiktoken
 
 REFLECTION_PROMPT='''Evolve a generalizable query-driven rewriting procedure for the target P2 system.
@@ -63,7 +64,7 @@ def reflection_instructions(fixed_contract, character_limit=6000):
     length_instruction = (
         f'\n\nPROCEDURE LENGTH: The editorial_strategy must be at most {character_limit} characters '
         '(including spaces and newlines). This is a hard maximum, not a target to fill. '
-        f'Aim for roughly {int(character_limit * .7)} characters or less so the complete procedure fits. '
+        f'Aim for roughly {min(PROCEDURE_VALIDATION['target_characters'], int(character_limit * .65))} characters or less so the complete procedure fits. '
         'Finish every sentence and step. Compress or remove redundant steps before returning; '
         'never end mid-sentence or leave an unfinished section. '
         'Numbered steps describe the procedure only; rewritten page blocks must still follow '
@@ -147,6 +148,7 @@ class Adapter:
         if self.proposals>=self.config.candidates:
             self.evaluator.budget.stop('proposal_limit')
             raise RunStopped('proposal_limit')
+        self.last_proposal=None
         parent=self.prompt(candidate)
         character_limit=self.config.strategy_characters
         instructions=reflection_instructions(self.registry.fixed,character_limit)
@@ -156,45 +158,73 @@ class Adapter:
                 'description':f'A complete reusable query-analysis and rewriting procedure, at most {character_limit} characters. Multiple steps and paragraphs are allowed.'},'summary':{'type':'string'}},
                 'required':['editorial_strategy','summary'],'additionalProperties':False}
         schema['properties']['summary']['maxLength']=2000
-        input_tokens=budget_input_tokens(instructions,payload,schema,tiktoken.get_encoding('o200k_base'))
         settings=reflection_settings(self.config.reflection_model)
-        if input_tokens+settings['max_output_tokens']>CONTEXT_TOKENS:
-            self.store.event('reflection_skipped',reason='context_limit',input_tokens=input_tokens)
-            raise ValueError('Reflection context exceeds budget; no examples truncated')
-        self.proposals+=1
-        trace_name='reflection-input-'+str(self.proposals)
-        self.store.write(trace_name,{'parent_candidate_id':parent['id'],
-            'reflection_model':self.config.reflection_model,'instruction_hash':digest(instructions),
-            'instructions':instructions,'input':json.loads(payload),'schema':schema})
-        started=time.monotonic()
-        try:
-            response=GuardedClient(self.evaluator._client(),self.evaluator.budget).responses.create(
-                model=self.config.reflection_model,instructions=instructions,input=[{'role':'user','content':payload}],
-                store=False,max_output_tokens=settings['max_output_tokens'],
-                **({'reasoning':{'effort':settings['reasoning_effort']}} if settings['reasoning_effort'] else {}),
-                text={'format':{'type':'json_schema','name':'prompt_mutation','strict':True,'schema':schema}})
-        except APIError as error:
-            self.store.event('reflection',proposal=self.proposals,usage={'calls':1,'model':self.config.reflection_model,**settings},status='provider_error')
-            raise ValueError('reflection_rate_limited' if getattr(error,'status_code',None)==429 else 'reflection_provider_error') from None
-        usage={'calls':1,'model':self.config.reflection_model,**settings,'input_tokens':response.usage.input_tokens if response.usage else 0,
-               'output_tokens':response.usage.output_tokens if response.usage else 0,'estimated_cost_usd':None,
-               'latency_ms':round((time.monotonic()-started)*1000)}
-        self.store.event('reflection',proposal=self.proposals,usage=usage)
-        if response.status!='completed' or any(getattr(c,'type','')=='refusal' for o in response.output for c in getattr(o,'content',[])):
-            raise ValueError('Reflection incomplete/refused')
-        try:
-            body=json.loads(response.output_text)
-            if set(body)!= {'editorial_strategy','summary'} or not isinstance(body['summary'],str):
-                raise ValueError('Invalid reflection envelope')
-            record=self.registry.create(self.config.model,body['editorial_strategy'],self.store.path.name,[parent['id']],self.config.length_multiplier,
-                character_limit=self.config.strategy_characters,optimization_context={
-                    'rationale':body['summary'],'reflection_model':self.config.reflection_model,
-                    'reflection_instruction_hash':digest(instructions),
-                    'reflection_trace':{'run_id':self.store.path.name,'artifact':trace_name}})
-        except (ValueError,TypeError,KeyError):
-            self.store.event('proposal_rejected',proposal=self.proposals,reason='invalid_or_oversized_mutable_component',
-                             output=response.output_text)
-            return dict(candidate)
+        proposal=self.proposals+1
+        trace_name='reflection-input-'+str(proposal)
+        for attempt in range(PROCEDURE_VALIDATION['max_repairs']+1):
+            input_tokens=budget_input_tokens(instructions,payload,schema,tiktoken.get_encoding('o200k_base'))
+            if input_tokens+settings['max_output_tokens']>CONTEXT_TOKENS:
+                self.store.event('reflection_skipped',reason='context_limit',input_tokens=input_tokens,attempt=attempt)
+                if attempt:
+                    self.store.event('proposal_rejected',proposal=proposal,reason='repair_context_limit')
+                    return dict(candidate)
+                raise ValueError('Reflection context exceeds budget; no examples truncated')
+            if attempt==0:
+                self.proposals+=1
+            request_name=trace_name if attempt==0 else trace_name+'-repair-1'
+            self.store.write(request_name,{'parent_candidate_id':parent['id'],
+                'reflection_model':self.config.reflection_model,'instruction_hash':digest(instructions),
+                'instructions':instructions,'input':json.loads(payload),'schema':schema,'attempt':attempt,
+                'budgeted_input_tokens':input_tokens,'output_reserve':settings['max_output_tokens']})
+            started=time.monotonic()
+            try:
+                response=GuardedClient(self.evaluator._client(),self.evaluator.budget).responses.create(
+                    model=self.config.reflection_model,instructions=instructions,input=[{'role':'user','content':payload}],
+                    store=False,max_output_tokens=settings['max_output_tokens'],
+                    **({'reasoning':{'effort':settings['reasoning_effort']}} if settings['reasoning_effort'] else {}),
+                    text={'format':{'type':'json_schema','name':'prompt_mutation','strict':True,'schema':schema}})
+            except APIError as error:
+                self.store.event('reflection',proposal=proposal,attempt=attempt,usage={'calls':1,'model':self.config.reflection_model,**settings},status='provider_error')
+                raise ValueError('reflection_rate_limited' if getattr(error,'status_code',None)==429 else 'reflection_provider_error') from None
+            usage={'calls':1,'model':self.config.reflection_model,**settings,'input_tokens':response.usage.input_tokens if response.usage else 0,
+                   'output_tokens':response.usage.output_tokens if response.usage else 0,'estimated_cost_usd':None,
+                   'latency_ms':round((time.monotonic()-started)*1000)}
+            refused=any(getattr(c,'type','')=='refusal' for o in response.output for c in getattr(o,'content',[]))
+            self.store.event('reflection',proposal=proposal,attempt=attempt,usage=usage)
+            # Save verbatim returned text before parsing/registration; never save hidden reasoning.
+            output_name=request_name.replace('reflection-input-','reflection-output-')
+            raw={'status':response.status,'refused':refused,'output_text':response.output_text,'usage':usage,
+                 'response_model':getattr(response,'model',None),
+                 'incomplete_reason':getattr(getattr(response,'incomplete_details',None),'reason',None)}
+            self.store.write(output_name,raw)
+            if refused:
+                self.store.event('proposal_rejected',proposal=proposal,reason='reflection_refused')
+                return dict(candidate)
+            try:
+                body=json.loads(response.output_text)
+                errors=validate_procedure(body,character_limit)
+            except (ValueError,TypeError):
+                body=None
+                errors=['Return a complete valid JSON mutation envelope.']
+            if response.status!='completed':
+                errors.append('The provider response was incomplete; return a shorter complete procedure.')
+            self.store.write(output_name,{**raw,'validation_errors':errors})
+            if not errors:
+                break
+            self.store.event('procedure_validation',proposal=proposal,attempt=attempt,errors=errors)
+            if attempt==PROCEDURE_VALIDATION['max_repairs']:
+                self.store.event('proposal_rejected',proposal=proposal,reason='procedure_validation_failed')
+                return dict(candidate)
+            # One explicit repair, not an SDK retry. Keep full original feedback and budget it again.
+            repair=json.loads(payload)
+            repair['repair']={'invalid_response':response.output_text,'validation_errors':errors,
+                'task':'Replace the invalid procedure with a shorter complete contract-compliant procedure. Return the same JSON envelope.'}
+            payload=json.dumps(repair,ensure_ascii=False)
+        record=self.registry.create(self.config.model,body['editorial_strategy'],self.store.path.name,[parent['id']],self.config.length_multiplier,
+            character_limit=self.config.strategy_characters,optimization_context={
+                'rationale':body['summary'],'reflection_model':self.config.reflection_model,
+                'reflection_instruction_hash':digest(instructions),
+                'reflection_trace':{'run_id':self.store.path.name,'artifact':trace_name}})
         self.entries[body['editorial_strategy']]=record
         diff=''.join(difflib.unified_diff(candidate['editorial_strategy'].splitlines(True),body['editorial_strategy'].splitlines(True),fromfile=parent['id'],tofile=record['id']))
         with self.lock:

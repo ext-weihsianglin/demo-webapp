@@ -410,6 +410,6 @@ def test_reflection_system_length_matches_configurable_schema_bound():
     from app.gepa.adapter import reflection_instructions
     instructions = reflection_instructions('fixed contract', 1000)
     assert 'at most 1000 characters' in instructions
-    assert 'roughly 700 characters or less' in instructions
+    assert 'roughly 650 characters or less' in instructions
     assert 'at most 6000 characters' not in instructions
     assert instructions.endswith('fixed contract')

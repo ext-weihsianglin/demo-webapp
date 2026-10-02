@@ -1,4 +1,5 @@
 import time
+import json
 from fastapi.testclient import TestClient
 from app.main import app
 from app.gepa import routes
@@ -35,9 +36,10 @@ def test_http_research_requires_explicit_live_flag_and_exports_promotable_result
     assert traces.status_code==200
     trace=traces.json()['traces'][0]
     assert trace['input']['examples']['editorial_strategy'][0]['Inputs']['source_scope']=='whole_page'
+    assert trace['response']['validation_errors']==[]
+    assert json.loads(trace['response']['output_text'])['editorial_strategy'].startswith('Clarify')
     assert manager.registry.fixed in trace['instructions']
     assert trace['input']['examples']['editorial_strategy'][0]['Inputs']['queries']==['How should I choose road shoes?']
-    import json
     proposals=[json.loads(request['input'][0]['content']) for request in manager.client.requests]
     evolved=[p for p in proposals if p['optimization_context']]
     assert evolved and evolved[0]['optimization_context']['rationale']=='Clarify answer wording.'
