@@ -24,7 +24,7 @@ Many larger coefficients concern fixed query or URL properties. Negative fitted 
 
 `backend/app/gepa/adapter.py` now tells the reflection model which served-v7 signals are plausible editing hypotheses. It encourages policies that clarify up to two existing body headings and one to three related paragraphs, with limits across the entire page. Policies should make existing subjects, relationships and answers explicit, rather than merely swap synonyms. It removes the previous blanket advice to leave all headings unchanged. The model must preserve attribution, qualifications, language, heading levels and block order, and use only original-chunk factual support. It must judge hypotheses by actual mean P1 and every query regression.
 
-Only reflection guidance changes. Baseline v7 bytes, the mutable-component size limit, fixed rewriter instructions, parser/scorer, fidelity profile, test separation and promotion rules remain unchanged. The active c536094b trial keeps its original frozen reflection instructions. The changed prompt is applied only after that run is terminal and the backend is reloaded while idle; the next run's manifest will bind its new reflection hash.
+Only reflection guidance changes. Baseline v7 bytes, the mutable-component size limit, fixed rewriter instructions, parser/scorer, fidelity profile, test separation and promotion rules remain unchanged. The c536094b trial kept its original frozen reflection instructions and was cooperatively stopped at the user’s request. After an idle backend reload, fresh run 6082eccf binds the new reflection hash; all other evaluation fields remain unchanged. See the [startup evidence](../verification/gepa-v7-steering-trial-v1.json).
 
 ## Why the reports do not justify easy large gains
 

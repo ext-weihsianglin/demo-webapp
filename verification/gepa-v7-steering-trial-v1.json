@@ -1,0 +1,34 @@
+{
+  "run_id": "6082eccfc0c442b9865f8966d393ff1c",
+  "prior_run_id": "c536094bf77a41cdbbfb9243ff4dca90",
+  "prior_run_stopped_for_new_guidance": true,
+  "backend_restarted_idle": true,
+  "manifest_changes": {
+    "reflection_prompt_hash": {
+      "before": "223a5eff9b60f65a7a7fbd5e1442875f2b8cc0e232e91acde19445fdf0519b01",
+      "after": "da2bdfe523e757ea22f353a2af6a51668cde5146108fad8599b5811b36718aef"
+    },
+    "run_id": {
+      "before": "c536094bf77a41cdbbfb9243ff4dca90",
+      "after": "6082eccfc0c442b9865f8966d393ff1c"
+    },
+    "created_at": {
+      "before": "2026-10-02T11:44:13.263305+00:00",
+      "after": "2026-10-02T11:58:08.094752+00:00"
+    }
+  },
+  "status_at_recording": "running",
+  "budget_at_recording": {
+    "attempts": 12,
+    "reserved": 18,
+    "completed": 2,
+    "technical_failures": 0,
+    "stop_reason": null,
+    "limit": 100
+  },
+  "browser_adopted_run": true,
+  "heldout_calls": 0,
+  "limits": [
+    "Running trial; this startup check does not establish final prompt quality."
+  ]
+}
