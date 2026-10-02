@@ -1,0 +1,17 @@
+{
+  "run_id": "14fb1db59c26428daa7f47866d7d2250",
+  "selected_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+  "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+  "catalog_equal_before_after": true,
+  "run_status": "stopped",
+  "budget": {
+    "attempts": 100,
+    "reserved": 0,
+    "completed": 100,
+    "technical_failures": 10,
+    "stop_reason": "attempt_budget",
+    "limit": 100
+  },
+  "recommendation": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+  "verification": "Actual backend process stopped and replaced only after all runs were terminal; prompt catalog, selected pointer and saved terminal run checked through Next proxy."
+}

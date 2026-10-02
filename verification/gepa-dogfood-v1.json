@@ -1,0 +1,909 @@
+{
+  "created_at": "2026-10-02T06:00:38.164410+00:00",
+  "protocol": {
+    "created_at": "2026-10-02T04:05:55.924173+00:00",
+    "optimization_run": "d6a254c540dd47db9abcdd3fc4134dfc",
+    "model": "gpt-4.1-mini",
+    "baseline_prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "selection_rule": "Previously inspected blog.blazingcdn.com and lowest snapshot SHA among other test hosts with 20k–100k source characters and at least three editable paragraphs. Chosen before any GEPA mutation exists.",
+    "repetitions": 2,
+    "comparison": "Identical full host queries; within-page P1 mean; failures and abstentions retain measured original P1; no example swapping or prompt edits based on test results.",
+    "quality_limit": "Two exposed P1-test hosts are a bounded dogfood check, not general superiority or an untouched final evaluation.",
+    "examples": [
+      {
+        "hostname": "blog.blazingcdn.com",
+        "snapshot_id": "cd2fd8303acaa265580a5b47384b715abd4cc9e290b754dc9e7b75e0a0c54e87",
+        "characters": 59456
+      },
+      {
+        "hostname": "erp.compare",
+        "snapshot_id": "0245a9f5adabce1d3d2b21eac2bcaa20bdc1a6b581417a957e7760e9713d95a5",
+        "characters": 49829
+      }
+    ]
+  },
+  "candidate_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+  "api": "http://127.0.0.1:3000",
+  "rows": [
+    {
+      "kind": "baseline",
+      "repeat": 0,
+      "hostname": "blog.blazingcdn.com",
+      "snapshot_id": "cd2fd8303acaa265580a5b47384b715abd4cc9e290b754dc9e7b75e0a0c54e87",
+      "http_status": 422,
+      "status": "fidelity_rejected",
+      "fidelity_status": "rejected",
+      "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "latency_seconds": 41.67,
+      "failed": true,
+      "retained_original": true,
+      "mean_p1": 0.49651787177722784,
+      "original_mean_p1": 0.49651787177722784,
+      "query_count": 9,
+      "per_query": [
+        {
+          "query": "best content delivery options for CMS",
+          "original": 0.5141191106585679,
+          "after": 0.5141191106585679,
+          "delta": 0.0
+        },
+        {
+          "query": "What are the top providers for always-on content pipelines?",
+          "original": 0.4088992121903175,
+          "after": 0.4088992121903175,
+          "delta": 0.0
+        },
+        {
+          "query": "What's the top content delivery network for fast streaming?",
+          "original": 0.4687552318267657,
+          "after": 0.4687552318267657,
+          "delta": 0.0
+        },
+        {
+          "query": "best cloud infrastructure for global performance",
+          "original": 0.5794333636948674,
+          "after": 0.5794333636948674,
+          "delta": 0.0
+        },
+        {
+          "query": "Best scalable content delivery network for large audiences",
+          "original": 0.5695578200058466,
+          "after": 0.5695578200058466,
+          "delta": 0.0
+        },
+        {
+          "query": "How do users compare latency and performance across Azure, Cloudflare, and IBM solutions?",
+          "original": 0.5122030185037518,
+          "after": 0.5122030185037518,
+          "delta": 0.0
+        },
+        {
+          "query": "Best content delivery network for product leadership",
+          "original": 0.6438509865475951,
+          "after": 0.6438509865475951,
+          "delta": 0.0
+        },
+        {
+          "query": "top software dev tools",
+          "original": 0.33469204134959,
+          "after": 0.33469204134959,
+          "delta": 0.0
+        },
+        {
+          "query": "CDNを活用してページ遅延を減らす方法",
+          "original": 0.4371500612177493,
+          "after": 0.4371500612177493,
+          "delta": 0.0
+        }
+      ],
+      "rewrite_usage": {
+        "prompt_version": "gpt-4.1-mini--rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 17539,
+        "output_tokens": 3838,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 21560,
+        "planned_calls": 1,
+        "original_chunks": 26,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 13,
+        "language_unverified_edits": 2,
+        "latency_ms": 25132,
+        "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+        "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+        "contract_version": "rewrite-page-v7"
+      },
+      "fidelity_usage": {
+        "model": "gpt-4.1-mini",
+        "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+        "calls": 1,
+        "input_tokens": 10869,
+        "output_tokens": 2015,
+        "estimated_cost_usd": null,
+        "schema_version": "fidelity-slots-v1",
+        "schema_hash": "997c07c265b7aac030320e23b034ba46b78ad5b9de5c7916bff666c840fff94d",
+        "output_limit": 4224,
+        "latency_ms": 16007
+      }
+    },
+    {
+      "kind": "candidate",
+      "repeat": 0,
+      "hostname": "blog.blazingcdn.com",
+      "snapshot_id": "cd2fd8303acaa265580a5b47384b715abd4cc9e290b754dc9e7b75e0a0c54e87",
+      "http_status": 422,
+      "status": "fidelity_rejected",
+      "fidelity_status": "rejected",
+      "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+      "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+      "latency_seconds": 16.406,
+      "failed": true,
+      "retained_original": true,
+      "mean_p1": 0.49651787177722784,
+      "original_mean_p1": 0.49651787177722784,
+      "query_count": 9,
+      "per_query": [
+        {
+          "query": "best content delivery options for CMS",
+          "original": 0.5141191106585679,
+          "after": 0.5141191106585679,
+          "delta": 0.0
+        },
+        {
+          "query": "What are the top providers for always-on content pipelines?",
+          "original": 0.4088992121903175,
+          "after": 0.4088992121903175,
+          "delta": 0.0
+        },
+        {
+          "query": "What's the top content delivery network for fast streaming?",
+          "original": 0.4687552318267657,
+          "after": 0.4687552318267657,
+          "delta": 0.0
+        },
+        {
+          "query": "best cloud infrastructure for global performance",
+          "original": 0.5794333636948674,
+          "after": 0.5794333636948674,
+          "delta": 0.0
+        },
+        {
+          "query": "Best scalable content delivery network for large audiences",
+          "original": 0.5695578200058466,
+          "after": 0.5695578200058466,
+          "delta": 0.0
+        },
+        {
+          "query": "How do users compare latency and performance across Azure, Cloudflare, and IBM solutions?",
+          "original": 0.5122030185037518,
+          "after": 0.5122030185037518,
+          "delta": 0.0
+        },
+        {
+          "query": "Best content delivery network for product leadership",
+          "original": 0.6438509865475951,
+          "after": 0.6438509865475951,
+          "delta": 0.0
+        },
+        {
+          "query": "top software dev tools",
+          "original": 0.33469204134959,
+          "after": 0.33469204134959,
+          "delta": 0.0
+        },
+        {
+          "query": "CDNを活用してページ遅延を減らす方法",
+          "original": 0.4371500612177493,
+          "after": 0.4371500612177493,
+          "delta": 0.0
+        }
+      ],
+      "rewrite_usage": {
+        "prompt_version": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 17514,
+        "output_tokens": 1705,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 21535,
+        "planned_calls": 1,
+        "original_chunks": 26,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 2,
+        "language_unverified_edits": 1,
+        "latency_ms": 10881,
+        "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+        "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+        "contract_version": "rewrite-page-v7"
+      },
+      "fidelity_usage": {
+        "model": "gpt-4.1-mini",
+        "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+        "calls": 1,
+        "input_tokens": 5088,
+        "output_tokens": 796,
+        "estimated_cost_usd": null,
+        "schema_version": "fidelity-slots-v1",
+        "schema_hash": "9d78336eceb141f78d178193d55d627be9e4fdd4aaf0badca1ec1b028fda91e1",
+        "output_limit": 4096,
+        "latency_ms": 5193
+      }
+    },
+    {
+      "kind": "candidate",
+      "repeat": 1,
+      "hostname": "blog.blazingcdn.com",
+      "snapshot_id": "cd2fd8303acaa265580a5b47384b715abd4cc9e290b754dc9e7b75e0a0c54e87",
+      "http_status": 422,
+      "status": "fidelity_rejected",
+      "fidelity_status": "rejected",
+      "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+      "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+      "latency_seconds": 76.452,
+      "failed": true,
+      "retained_original": true,
+      "mean_p1": 0.49651787177722784,
+      "original_mean_p1": 0.49651787177722784,
+      "query_count": 9,
+      "per_query": [
+        {
+          "query": "best content delivery options for CMS",
+          "original": 0.5141191106585679,
+          "after": 0.5141191106585679,
+          "delta": 0.0
+        },
+        {
+          "query": "What are the top providers for always-on content pipelines?",
+          "original": 0.4088992121903175,
+          "after": 0.4088992121903175,
+          "delta": 0.0
+        },
+        {
+          "query": "What's the top content delivery network for fast streaming?",
+          "original": 0.4687552318267657,
+          "after": 0.4687552318267657,
+          "delta": 0.0
+        },
+        {
+          "query": "best cloud infrastructure for global performance",
+          "original": 0.5794333636948674,
+          "after": 0.5794333636948674,
+          "delta": 0.0
+        },
+        {
+          "query": "Best scalable content delivery network for large audiences",
+          "original": 0.5695578200058466,
+          "after": 0.5695578200058466,
+          "delta": 0.0
+        },
+        {
+          "query": "How do users compare latency and performance across Azure, Cloudflare, and IBM solutions?",
+          "original": 0.5122030185037518,
+          "after": 0.5122030185037518,
+          "delta": 0.0
+        },
+        {
+          "query": "Best content delivery network for product leadership",
+          "original": 0.6438509865475951,
+          "after": 0.6438509865475951,
+          "delta": 0.0
+        },
+        {
+          "query": "top software dev tools",
+          "original": 0.33469204134959,
+          "after": 0.33469204134959,
+          "delta": 0.0
+        },
+        {
+          "query": "CDNを活用してページ遅延を減らす方法",
+          "original": 0.4371500612177493,
+          "after": 0.4371500612177493,
+          "delta": 0.0
+        }
+      ],
+      "rewrite_usage": {
+        "prompt_version": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 17514,
+        "output_tokens": 3548,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 21535,
+        "planned_calls": 1,
+        "original_chunks": 26,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 21,
+        "latency_ms": 23168,
+        "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+        "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+        "contract_version": "rewrite-page-v7"
+      },
+      "fidelity_usage": {
+        "model": "gpt-4.1-mini",
+        "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+        "calls": 1,
+        "input_tokens": 10292,
+        "output_tokens": 1431,
+        "estimated_cost_usd": null,
+        "schema_version": "fidelity-slots-v1",
+        "schema_hash": "1e9503d4cd560a3c85e0f343f22d5c2b7647ae3a9619e9c92a8e7fad913d93e8",
+        "output_limit": 4096,
+        "latency_ms": 52948
+      }
+    },
+    {
+      "kind": "baseline",
+      "repeat": 1,
+      "hostname": "blog.blazingcdn.com",
+      "snapshot_id": "cd2fd8303acaa265580a5b47384b715abd4cc9e290b754dc9e7b75e0a0c54e87",
+      "http_status": 502,
+      "status": "unsupported_output",
+      "fidelity_status": null,
+      "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "latency_seconds": 28.28,
+      "failed": true,
+      "retained_original": true,
+      "mean_p1": 0.49651787177722784,
+      "original_mean_p1": 0.49651787177722784,
+      "query_count": 9,
+      "per_query": [
+        {
+          "query": "best content delivery options for CMS",
+          "original": 0.5141191106585679,
+          "after": 0.5141191106585679,
+          "delta": 0.0
+        },
+        {
+          "query": "What are the top providers for always-on content pipelines?",
+          "original": 0.4088992121903175,
+          "after": 0.4088992121903175,
+          "delta": 0.0
+        },
+        {
+          "query": "What's the top content delivery network for fast streaming?",
+          "original": 0.4687552318267657,
+          "after": 0.4687552318267657,
+          "delta": 0.0
+        },
+        {
+          "query": "best cloud infrastructure for global performance",
+          "original": 0.5794333636948674,
+          "after": 0.5794333636948674,
+          "delta": 0.0
+        },
+        {
+          "query": "Best scalable content delivery network for large audiences",
+          "original": 0.5695578200058466,
+          "after": 0.5695578200058466,
+          "delta": 0.0
+        },
+        {
+          "query": "How do users compare latency and performance across Azure, Cloudflare, and IBM solutions?",
+          "original": 0.5122030185037518,
+          "after": 0.5122030185037518,
+          "delta": 0.0
+        },
+        {
+          "query": "Best content delivery network for product leadership",
+          "original": 0.6438509865475951,
+          "after": 0.6438509865475951,
+          "delta": 0.0
+        },
+        {
+          "query": "top software dev tools",
+          "original": 0.33469204134959,
+          "after": 0.33469204134959,
+          "delta": 0.0
+        },
+        {
+          "query": "CDNを活用してページ遅延を減らす方法",
+          "original": 0.4371500612177493,
+          "after": 0.4371500612177493,
+          "delta": 0.0
+        }
+      ],
+      "rewrite_usage": {
+        "prompt_version": "gpt-4.1-mini--rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "unsupported_output",
+        "calls": 1,
+        "input_tokens": 17539,
+        "output_tokens": 3653,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 21560,
+        "planned_calls": 1,
+        "original_chunks": 26,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "latency_ms": 27607,
+        "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+        "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+        "contract_version": "rewrite-page-v7"
+      },
+      "fidelity_usage": null
+    },
+    {
+      "kind": "baseline",
+      "repeat": 0,
+      "hostname": "erp.compare",
+      "snapshot_id": "0245a9f5adabce1d3d2b21eac2bcaa20bdc1a6b581417a957e7760e9713d95a5",
+      "http_status": 422,
+      "status": "fidelity_rejected",
+      "fidelity_status": "rejected",
+      "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "latency_seconds": 12.799,
+      "failed": true,
+      "retained_original": true,
+      "mean_p1": 0.4279916089617653,
+      "original_mean_p1": 0.4279916089617653,
+      "query_count": 9,
+      "per_query": [
+        {
+          "query": "which ERP has the best scalability features?",
+          "original": 0.5210871428764915,
+          "after": 0.5210871428764915,
+          "delta": 0.0
+        },
+        {
+          "query": "Which ERP platforms offer the best financial management modules?",
+          "original": 0.46768074311416347,
+          "after": 0.46768074311416347,
+          "delta": 0.0
+        },
+        {
+          "query": "which cloud business software works best?",
+          "original": 0.42417697641793545,
+          "after": 0.42417697641793545,
+          "delta": 0.0
+        },
+        {
+          "query": "ERP for multi-entity SaaS replacing NetSuite",
+          "original": 0.4397706402643653,
+          "after": 0.4397706402643653,
+          "delta": 0.0
+        },
+        {
+          "query": "Who delivers the best integration with eCommerce and ERP platforms?",
+          "original": 0.41904771831127746,
+          "after": 0.41904771831127746,
+          "delta": 0.0
+        },
+        {
+          "query": "Which ERP systems are considered best-in-class for asset-intensive industries?",
+          "original": 0.44647443616640975,
+          "after": 0.44647443616640975,
+          "delta": 0.0
+        },
+        {
+          "query": "Which business management software provides the best all-in-one solution?",
+          "original": 0.4158441232854095,
+          "after": 0.4158441232854095,
+          "delta": 0.0
+        },
+        {
+          "query": "Which systems support multi-location inventory control?",
+          "original": 0.2770360244959669,
+          "after": 0.2770360244959669,
+          "delta": 0.0
+        },
+        {
+          "query": "What are the top ERP systems for manufacturing industries?",
+          "original": 0.44080667572386834,
+          "after": 0.44080667572386834,
+          "delta": 0.0
+        }
+      ],
+      "rewrite_usage": {
+        "prompt_version": "gpt-4.1-mini--rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 23168,
+        "output_tokens": 1195,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 26338,
+        "planned_calls": 1,
+        "original_chunks": 18,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 1,
+        "language_unverified_edits": 1,
+        "latency_ms": 8997,
+        "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+        "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+        "contract_version": "rewrite-page-v7"
+      },
+      "fidelity_usage": {
+        "model": "gpt-4.1-mini",
+        "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+        "calls": 1,
+        "input_tokens": 3427,
+        "output_tokens": 502,
+        "estimated_cost_usd": null,
+        "schema_version": "fidelity-slots-v1",
+        "schema_hash": "b1b7dc5c7dacf1d857342c7d79b5fc7b2e0d5bb782728eabe7db8ef2a6382d21",
+        "output_limit": 4096,
+        "latency_ms": 3345
+      }
+    },
+    {
+      "kind": "candidate",
+      "repeat": 0,
+      "hostname": "erp.compare",
+      "snapshot_id": "0245a9f5adabce1d3d2b21eac2bcaa20bdc1a6b581417a957e7760e9713d95a5",
+      "http_status": 422,
+      "status": "fidelity_rejected",
+      "fidelity_status": "rejected",
+      "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+      "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+      "latency_seconds": 27.252,
+      "failed": true,
+      "retained_original": true,
+      "mean_p1": 0.4279916089617653,
+      "original_mean_p1": 0.4279916089617653,
+      "query_count": 9,
+      "per_query": [
+        {
+          "query": "which ERP has the best scalability features?",
+          "original": 0.5210871428764915,
+          "after": 0.5210871428764915,
+          "delta": 0.0
+        },
+        {
+          "query": "Which ERP platforms offer the best financial management modules?",
+          "original": 0.46768074311416347,
+          "after": 0.46768074311416347,
+          "delta": 0.0
+        },
+        {
+          "query": "which cloud business software works best?",
+          "original": 0.42417697641793545,
+          "after": 0.42417697641793545,
+          "delta": 0.0
+        },
+        {
+          "query": "ERP for multi-entity SaaS replacing NetSuite",
+          "original": 0.4397706402643653,
+          "after": 0.4397706402643653,
+          "delta": 0.0
+        },
+        {
+          "query": "Who delivers the best integration with eCommerce and ERP platforms?",
+          "original": 0.41904771831127746,
+          "after": 0.41904771831127746,
+          "delta": 0.0
+        },
+        {
+          "query": "Which ERP systems are considered best-in-class for asset-intensive industries?",
+          "original": 0.44647443616640975,
+          "after": 0.44647443616640975,
+          "delta": 0.0
+        },
+        {
+          "query": "Which business management software provides the best all-in-one solution?",
+          "original": 0.4158441232854095,
+          "after": 0.4158441232854095,
+          "delta": 0.0
+        },
+        {
+          "query": "Which systems support multi-location inventory control?",
+          "original": 0.2770360244959669,
+          "after": 0.2770360244959669,
+          "delta": 0.0
+        },
+        {
+          "query": "What are the top ERP systems for manufacturing industries?",
+          "original": 0.44080667572386834,
+          "after": 0.44080667572386834,
+          "delta": 0.0
+        }
+      ],
+      "rewrite_usage": {
+        "prompt_version": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 23143,
+        "output_tokens": 3318,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 26313,
+        "planned_calls": 1,
+        "original_chunks": 18,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 28,
+        "language_unverified_edits": 1,
+        "latency_ms": 20246,
+        "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+        "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+        "contract_version": "rewrite-page-v7"
+      },
+      "fidelity_usage": {
+        "model": "gpt-4.1-mini",
+        "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+        "calls": 1,
+        "input_tokens": 7580,
+        "output_tokens": 977,
+        "estimated_cost_usd": null,
+        "schema_version": "fidelity-slots-v1",
+        "schema_hash": "79cf1ed8cd21fd45f04ee06a5a86a4f125ae535bf512a942c9e58c7488a87e8e",
+        "output_limit": 4096,
+        "latency_ms": 6322
+      }
+    },
+    {
+      "kind": "candidate",
+      "repeat": 1,
+      "hostname": "erp.compare",
+      "snapshot_id": "0245a9f5adabce1d3d2b21eac2bcaa20bdc1a6b581417a957e7760e9713d95a5",
+      "http_status": 422,
+      "status": "fidelity_rejected",
+      "fidelity_status": "rejected",
+      "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+      "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+      "latency_seconds": 21.198,
+      "failed": true,
+      "retained_original": true,
+      "mean_p1": 0.4279916089617653,
+      "original_mean_p1": 0.4279916089617653,
+      "query_count": 9,
+      "per_query": [
+        {
+          "query": "which ERP has the best scalability features?",
+          "original": 0.5210871428764915,
+          "after": 0.5210871428764915,
+          "delta": 0.0
+        },
+        {
+          "query": "Which ERP platforms offer the best financial management modules?",
+          "original": 0.46768074311416347,
+          "after": 0.46768074311416347,
+          "delta": 0.0
+        },
+        {
+          "query": "which cloud business software works best?",
+          "original": 0.42417697641793545,
+          "after": 0.42417697641793545,
+          "delta": 0.0
+        },
+        {
+          "query": "ERP for multi-entity SaaS replacing NetSuite",
+          "original": 0.4397706402643653,
+          "after": 0.4397706402643653,
+          "delta": 0.0
+        },
+        {
+          "query": "Who delivers the best integration with eCommerce and ERP platforms?",
+          "original": 0.41904771831127746,
+          "after": 0.41904771831127746,
+          "delta": 0.0
+        },
+        {
+          "query": "Which ERP systems are considered best-in-class for asset-intensive industries?",
+          "original": 0.44647443616640975,
+          "after": 0.44647443616640975,
+          "delta": 0.0
+        },
+        {
+          "query": "Which business management software provides the best all-in-one solution?",
+          "original": 0.4158441232854095,
+          "after": 0.4158441232854095,
+          "delta": 0.0
+        },
+        {
+          "query": "Which systems support multi-location inventory control?",
+          "original": 0.2770360244959669,
+          "after": 0.2770360244959669,
+          "delta": 0.0
+        },
+        {
+          "query": "What are the top ERP systems for manufacturing industries?",
+          "original": 0.44080667572386834,
+          "after": 0.44080667572386834,
+          "delta": 0.0
+        }
+      ],
+      "rewrite_usage": {
+        "prompt_version": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 23143,
+        "output_tokens": 2198,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 26313,
+        "planned_calls": 1,
+        "original_chunks": 18,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 17,
+        "language_unverified_edits": 2,
+        "latency_ms": 14595,
+        "prompt_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+        "prompt_hash": "afc79039efd8e8404fa01583b722fbb205cd1a40156c968c159e38001fffdd47",
+        "contract_version": "rewrite-page-v7"
+      },
+      "fidelity_usage": {
+        "model": "gpt-4.1-mini",
+        "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+        "calls": 1,
+        "input_tokens": 6504,
+        "output_tokens": 933,
+        "estimated_cost_usd": null,
+        "schema_version": "fidelity-slots-v1",
+        "schema_hash": "ba36f94b252c9751208df1fc8413afbd3ff1c8a11d1ccf881ecbc3a109558955",
+        "output_limit": 4096,
+        "latency_ms": 5973
+      }
+    },
+    {
+      "kind": "baseline",
+      "repeat": 1,
+      "hostname": "erp.compare",
+      "snapshot_id": "0245a9f5adabce1d3d2b21eac2bcaa20bdc1a6b581417a957e7760e9713d95a5",
+      "http_status": 502,
+      "status": "unsupported_output",
+      "fidelity_status": null,
+      "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "latency_seconds": 21.596,
+      "failed": true,
+      "retained_original": true,
+      "mean_p1": 0.4279916089617653,
+      "original_mean_p1": 0.4279916089617653,
+      "query_count": 9,
+      "per_query": [
+        {
+          "query": "which ERP has the best scalability features?",
+          "original": 0.5210871428764915,
+          "after": 0.5210871428764915,
+          "delta": 0.0
+        },
+        {
+          "query": "Which ERP platforms offer the best financial management modules?",
+          "original": 0.46768074311416347,
+          "after": 0.46768074311416347,
+          "delta": 0.0
+        },
+        {
+          "query": "which cloud business software works best?",
+          "original": 0.42417697641793545,
+          "after": 0.42417697641793545,
+          "delta": 0.0
+        },
+        {
+          "query": "ERP for multi-entity SaaS replacing NetSuite",
+          "original": 0.4397706402643653,
+          "after": 0.4397706402643653,
+          "delta": 0.0
+        },
+        {
+          "query": "Who delivers the best integration with eCommerce and ERP platforms?",
+          "original": 0.41904771831127746,
+          "after": 0.41904771831127746,
+          "delta": 0.0
+        },
+        {
+          "query": "Which ERP systems are considered best-in-class for asset-intensive industries?",
+          "original": 0.44647443616640975,
+          "after": 0.44647443616640975,
+          "delta": 0.0
+        },
+        {
+          "query": "Which business management software provides the best all-in-one solution?",
+          "original": 0.4158441232854095,
+          "after": 0.4158441232854095,
+          "delta": 0.0
+        },
+        {
+          "query": "Which systems support multi-location inventory control?",
+          "original": 0.2770360244959669,
+          "after": 0.2770360244959669,
+          "delta": 0.0
+        },
+        {
+          "query": "What are the top ERP systems for manufacturing industries?",
+          "original": 0.44080667572386834,
+          "after": 0.44080667572386834,
+          "delta": 0.0
+        }
+      ],
+      "rewrite_usage": {
+        "prompt_version": "gpt-4.1-mini--rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "unsupported_output",
+        "calls": 1,
+        "input_tokens": 23168,
+        "output_tokens": 3102,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 26338,
+        "planned_calls": 1,
+        "original_chunks": 18,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "latency_ms": 21276,
+        "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+        "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+        "contract_version": "rewrite-page-v7"
+      },
+      "fidelity_usage": null
+    }
+  ],
+  "totals": {
+    "baseline": {
+      "mean_p1": 0.46225474036949654,
+      "failure_rate": 1.0,
+      "accepted": 0,
+      "attempts": 4
+    },
+    "candidate": {
+      "mean_p1": 0.46225474036949654,
+      "failure_rate": 1.0,
+      "accepted": 0,
+      "attempts": 4
+    }
+  },
+  "page_deltas": [
+    {
+      "hostname": "blog.blazingcdn.com",
+      "snapshot_id": "cd2fd8303acaa265580a5b47384b715abd4cc9e290b754dc9e7b75e0a0c54e87",
+      "characters": 59456,
+      "baseline": 0.49651787177722784,
+      "candidate": 0.49651787177722784,
+      "candidate_minus_baseline": 0.0
+    },
+    {
+      "hostname": "erp.compare",
+      "snapshot_id": "0245a9f5adabce1d3d2b21eac2bcaa20bdc1a6b581417a957e7760e9713d95a5",
+      "characters": 49829,
+      "baseline": 0.4279916089617653,
+      "candidate": 0.4279916089617653,
+      "candidate_minus_baseline": 0.0
+    }
+  ],
+  "candidate_minus_baseline": 0.0,
+  "bounded_check_passed": false,
+  "interpretation": "Predeclared two-host, two-repeat dogfood; not general superiority, factual certification or citation uplift."
+}
