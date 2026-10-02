@@ -1,0 +1,729 @@
+{
+  "prompt_version": "rewrite-page-v7",
+  "live": true,
+  "scope": "Exploratory checks of extraction-held-out examples; not a reserved P2 quality benchmark.",
+  "runs": [
+    {
+      "snapshot_id": "0cbc8a5e12709367e63cdd9579bfee14bdabd85e758cf0b1e3ed29a2f61481aa",
+      "hostname": "blog.blazingcdn.com",
+      "payload_hash": "d4db4935d48c97394540d463b0f8b256e5acd3e3b743db69f024b88780faf42a",
+      "query_count": 9,
+      "model": "gpt-4.1-nano",
+      "status": "succeeded",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-4.1-nano",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 20038,
+        "output_tokens": 1760,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 23374,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 16,
+        "language_unverified_edits": 2,
+        "latency_ms": 11391
+      },
+      "change_count": 2,
+      "checks": {
+        "one_call": true,
+        "unique_edits": true,
+        "unchanged_blocks_exact": true,
+        "metadata_exact": true,
+        "structure_exact": true,
+        "original_before_exact": true,
+        "evidence_exact_same_chunk": true,
+        "body_edit": true
+      },
+      "p1_comparison": {
+        "status": "scored",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "best content delivery options for CMS",
+            "score": 0.5760325154816741,
+            "before": 0.5760325154816741,
+            "after": 0.5798743787782759,
+            "delta": 0.003841863296601744
+          },
+          {
+            "query_index": 1,
+            "query": "What are the top providers for always-on content pipelines?",
+            "score": 0.5037273268886783,
+            "before": 0.5037273268886783,
+            "after": 0.5068231588666141,
+            "delta": 0.0030958319779358368
+          },
+          {
+            "query_index": 2,
+            "query": "What's the top content delivery network for fast streaming?",
+            "score": 0.4931585425976171,
+            "before": 0.4931585425976171,
+            "after": 0.49653482727573944,
+            "delta": 0.0033762846781223432
+          },
+          {
+            "query_index": 3,
+            "query": "best cloud infrastructure for global performance",
+            "score": 0.5818165399585059,
+            "before": 0.5818165399585059,
+            "after": 0.5856436923770825,
+            "delta": 0.0038271524185765626
+          },
+          {
+            "query_index": 4,
+            "query": "Best scalable content delivery network for large audiences",
+            "score": 0.6220519456900999,
+            "before": 0.6220519456900999,
+            "after": 0.6237566442583489,
+            "delta": 0.0017046985682489524
+          },
+          {
+            "query_index": 5,
+            "query": "How do users compare latency and performance across Azure, Cloudflare, and IBM solutions?",
+            "score": 0.5202417332972096,
+            "before": 0.5202417332972096,
+            "after": 0.5240079911871207,
+            "delta": 0.00376625788991114
+          },
+          {
+            "query_index": 6,
+            "query": "Best content delivery network for product leadership",
+            "score": 0.6348404341912471,
+            "before": 0.6348404341912471,
+            "after": 0.6384838440686733,
+            "delta": 0.0036434098774261736
+          },
+          {
+            "query_index": 7,
+            "query": "top software dev tools",
+            "score": 0.45882979380942324,
+            "before": 0.45882979380942324,
+            "after": 0.46274314941253875,
+            "delta": 0.003913355603115509
+          },
+          {
+            "query_index": 8,
+            "query": "CDNを活用してページ遅延を減らす方法",
+            "score": 0.4443661708533967,
+            "before": 0.4443661708533967,
+            "after": 0.44825834713389284,
+            "delta": 0.0038921762804961513
+          }
+        ],
+        "mean_before": 0.5372294447519835,
+        "mean_after": 0.540680670373143,
+        "mean_delta": 0.003451225621159515,
+        "regression_count": 0,
+        "improvement_count": 9
+      }
+    },
+    {
+      "snapshot_id": "0cbc8a5e12709367e63cdd9579bfee14bdabd85e758cf0b1e3ed29a2f61481aa",
+      "hostname": "blog.blazingcdn.com",
+      "payload_hash": "d4db4935d48c97394540d463b0f8b256e5acd3e3b743db69f024b88780faf42a",
+      "query_count": 9,
+      "model": "gpt-4.1-mini",
+      "status": "invalid_output",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "invalid_output",
+        "calls": 1,
+        "input_tokens": 20038,
+        "output_tokens": 5490,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 23374,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "latency_ms": 35117
+      },
+      "change_count": 0,
+      "summary": "Prose edits must retain one nonempty block and a reason."
+    },
+    {
+      "snapshot_id": "0cbc8a5e12709367e63cdd9579bfee14bdabd85e758cf0b1e3ed29a2f61481aa",
+      "hostname": "blog.blazingcdn.com",
+      "payload_hash": "d4db4935d48c97394540d463b0f8b256e5acd3e3b743db69f024b88780faf42a",
+      "query_count": 9,
+      "model": "gpt-5-mini",
+      "status": "succeeded",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-5-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 20036,
+        "output_tokens": 6887,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 23374,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 0,
+        "latency_ms": 53911
+      },
+      "change_count": 12,
+      "checks": {
+        "one_call": true,
+        "unique_edits": true,
+        "unchanged_blocks_exact": true,
+        "metadata_exact": true,
+        "structure_exact": true,
+        "original_before_exact": true,
+        "evidence_exact_same_chunk": true,
+        "body_edit": true
+      },
+      "p1_comparison": {
+        "status": "scored",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "best content delivery options for CMS",
+            "score": 0.5760325154816741,
+            "before": 0.5760325154816741,
+            "after": 0.6108810441917174,
+            "delta": 0.03484852871004329
+          },
+          {
+            "query_index": 1,
+            "query": "What are the top providers for always-on content pipelines?",
+            "score": 0.5037273268886783,
+            "before": 0.5037273268886783,
+            "after": 0.5099990315152781,
+            "delta": 0.006271704626599872
+          },
+          {
+            "query_index": 2,
+            "query": "What's the top content delivery network for fast streaming?",
+            "score": 0.4931585425976171,
+            "before": 0.4931585425976171,
+            "after": 0.5152955739059958,
+            "delta": 0.022137031308378685
+          },
+          {
+            "query_index": 3,
+            "query": "best cloud infrastructure for global performance",
+            "score": 0.5818165399585059,
+            "before": 0.5818165399585059,
+            "after": 0.5944519218351779,
+            "delta": 0.012635381876672014
+          },
+          {
+            "query_index": 4,
+            "query": "Best scalable content delivery network for large audiences",
+            "score": 0.6220519456900999,
+            "before": 0.6220519456900999,
+            "after": 0.6285268650242286,
+            "delta": 0.006474919334128693
+          },
+          {
+            "query_index": 5,
+            "query": "How do users compare latency and performance across Azure, Cloudflare, and IBM solutions?",
+            "score": 0.5202417332972096,
+            "before": 0.5202417332972096,
+            "after": 0.5388406740005454,
+            "delta": 0.018598940703335787
+          },
+          {
+            "query_index": 6,
+            "query": "Best content delivery network for product leadership",
+            "score": 0.6348404341912471,
+            "before": 0.6348404341912471,
+            "after": 0.6556814693450393,
+            "delta": 0.02084103515379221
+          },
+          {
+            "query_index": 7,
+            "query": "top software dev tools",
+            "score": 0.45882979380942324,
+            "before": 0.45882979380942324,
+            "after": 0.4656591758464386,
+            "delta": 0.006829382037015386
+          },
+          {
+            "query_index": 8,
+            "query": "CDNを活用してページ遅延を減らす方法",
+            "score": 0.4443661708533967,
+            "before": 0.4443661708533967,
+            "after": 0.4722878862999443,
+            "delta": 0.02792171544654759
+          }
+        ],
+        "mean_before": 0.5372294447519835,
+        "mean_after": 0.5546248491071517,
+        "mean_delta": 0.017395404355168176,
+        "regression_count": 0,
+        "improvement_count": 9
+      }
+    },
+    {
+      "snapshot_id": "a2dc73dc37ac68980b5aa72560892b6dc0430656af7512cd484a71b74b19f805",
+      "hostname": "asanify.com",
+      "payload_hash": "89a0e65b50cb7a3f7d3a6599fc14466529e939629bd1e9b2b562469856dab6ec",
+      "query_count": 10,
+      "model": "gpt-4.1-mini",
+      "status": "succeeded",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 39230,
+        "output_tokens": 2602,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 42352,
+        "planned_calls": 1,
+        "original_chunks": 33,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 12,
+        "language_unverified_edits": 2,
+        "latency_ms": 18048
+      },
+      "change_count": 23,
+      "checks": {
+        "one_call": true,
+        "unique_edits": true,
+        "unchanged_blocks_exact": true,
+        "metadata_exact": true,
+        "structure_exact": true,
+        "original_before_exact": true,
+        "evidence_exact_same_chunk": true,
+        "body_edit": true
+      },
+      "p1_comparison": {
+        "status": "scored",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "Oyster vs other HR software",
+            "score": 0.5041441082793613,
+            "before": 0.5041441082793613,
+            "after": 0.49426849105891874,
+            "delta": -0.009875617220442556
+          },
+          {
+            "query_index": 1,
+            "query": "which company has the best Employer of Record services?",
+            "score": 0.4452424670082394,
+            "before": 0.4452424670082394,
+            "after": 0.4542191293304282,
+            "delta": 0.0089766623221888
+          },
+          {
+            "query_index": 2,
+            "query": "What are the pricing models used by top EOR providers?",
+            "score": 0.38083418253230567,
+            "before": 0.38083418253230567,
+            "after": 0.37922595614463406,
+            "delta": -0.0016082263876716074
+          },
+          {
+            "query_index": 3,
+            "query": "where to find the best hiring solutions",
+            "score": 0.44176023755290833,
+            "before": 0.44176023755290833,
+            "after": 0.4422776135551348,
+            "delta": 0.0005173760022264551
+          },
+          {
+            "query_index": 4,
+            "query": "Which are the best staff augmentation companies?",
+            "score": 0.46036631062626154,
+            "before": 0.46036631062626154,
+            "after": 0.4591713586590696,
+            "delta": -0.0011949519671919373
+          },
+          {
+            "query_index": 5,
+            "query": "How do contract engineers integrate into agile product teams?",
+            "score": 0.3947309403708495,
+            "before": 0.3947309403708495,
+            "after": 0.41081793419340773,
+            "delta": 0.016086993822558238
+          },
+          {
+            "query_index": 6,
+            "query": "Welke HCM-onderneming leidt de markt voor organisaties die personeelsoplossingen aanschaffen?",
+            "score": 0.37953611285238537,
+            "before": 0.37953611285238537,
+            "after": 0.3801979629668063,
+            "delta": 0.0006618501144209366
+          },
+          {
+            "query_index": 7,
+            "query": "Komu duże firmy ufają jako najlepszej marce wdrażającej HCM?",
+            "score": 0.37655746786287086,
+            "before": 0.37655746786287086,
+            "after": 0.3772172816125594,
+            "delta": 0.0006598137496885426
+          },
+          {
+            "query_index": 8,
+            "query": "What is the scope and placement after BTech in Artificial Intelligence?",
+            "score": 0.3826213774427413,
+            "before": 0.3826213774427413,
+            "after": 0.3832852841956317,
+            "delta": 0.0006639067528904086
+          },
+          {
+            "query_index": 9,
+            "query": "¿Cómo elegir un sistema de nómina con soporte legal en España?",
+            "score": 0.3777672695546569,
+            "before": 0.3777672695546569,
+            "after": 0.37842791640955215,
+            "delta": 0.0006606468548952527
+          }
+        ],
+        "mean_before": 0.41435604740825804,
+        "mean_after": 0.4159108928126143,
+        "mean_delta": 0.001554845404356242,
+        "regression_count": 3,
+        "improvement_count": 7
+      }
+    },
+    {
+      "snapshot_id": "a2dc73dc37ac68980b5aa72560892b6dc0430656af7512cd484a71b74b19f805",
+      "hostname": "asanify.com",
+      "payload_hash": "89a0e65b50cb7a3f7d3a6599fc14466529e939629bd1e9b2b562469856dab6ec",
+      "query_count": 10,
+      "model": "gpt-4.1-nano",
+      "status": "succeeded",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-4.1-nano",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 39230,
+        "output_tokens": 2735,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 42352,
+        "planned_calls": 1,
+        "original_chunks": 33,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 3,
+        "language_unverified_edits": 12,
+        "latency_ms": 14282
+      },
+      "change_count": 32,
+      "checks": {
+        "one_call": true,
+        "unique_edits": true,
+        "unchanged_blocks_exact": true,
+        "metadata_exact": true,
+        "structure_exact": true,
+        "original_before_exact": true,
+        "evidence_exact_same_chunk": true,
+        "body_edit": true
+      },
+      "p1_comparison": {
+        "status": "scored",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "Oyster vs other HR software",
+            "score": 0.5041441082793613,
+            "before": 0.5041441082793613,
+            "after": 0.5107088257165664,
+            "delta": 0.006564717437205103
+          },
+          {
+            "query_index": 1,
+            "query": "which company has the best Employer of Record services?",
+            "score": 0.4452424670082394,
+            "before": 0.4452424670082394,
+            "after": 0.4473030981586248,
+            "delta": 0.002060631150385406
+          },
+          {
+            "query_index": 2,
+            "query": "What are the pricing models used by top EOR providers?",
+            "score": 0.38083418253230567,
+            "before": 0.38083418253230567,
+            "after": 0.3801805119282137,
+            "delta": -0.0006536706040919382
+          },
+          {
+            "query_index": 3,
+            "query": "where to find the best hiring solutions",
+            "score": 0.44176023755290833,
+            "before": 0.44176023755290833,
+            "after": 0.45415822775003795,
+            "delta": 0.012397990197129616
+          },
+          {
+            "query_index": 4,
+            "query": "Which are the best staff augmentation companies?",
+            "score": 0.46036631062626154,
+            "before": 0.46036631062626154,
+            "after": 0.4371071038836316,
+            "delta": -0.023259206742629934
+          },
+          {
+            "query_index": 5,
+            "query": "How do contract engineers integrate into agile product teams?",
+            "score": 0.3947309403708495,
+            "before": 0.3947309403708495,
+            "after": 0.4046772138961635,
+            "delta": 0.00994627352531402
+          },
+          {
+            "query_index": 6,
+            "query": "Welke HCM-onderneming leidt de markt voor organisaties die personeelsoplossingen aanschaffen?",
+            "score": 0.37953611285238537,
+            "before": 0.37953611285238537,
+            "after": 0.38090339035636056,
+            "delta": 0.001367277503975195
+          },
+          {
+            "query_index": 7,
+            "query": "Komu duże firmy ufają jako najlepszej marce wdrażającej HCM?",
+            "score": 0.37655746786287086,
+            "before": 0.37655746786287086,
+            "after": 0.3779205507224805,
+            "delta": 0.0013630828596096212
+          },
+          {
+            "query_index": 8,
+            "query": "What is the scope and placement after BTech in Artificial Intelligence?",
+            "score": 0.3826213774427413,
+            "before": 0.3826213774427413,
+            "after": 0.3821919091050578,
+            "delta": -0.0004294683376834807
+          },
+          {
+            "query_index": 9,
+            "query": "¿Cómo elegir un sistema de nómina con soporte legal en España?",
+            "score": 0.3777672695546569,
+            "before": 0.3777672695546569,
+            "after": 0.3842203261554173,
+            "delta": 0.0064530566007603984
+          }
+        ],
+        "mean_before": 0.41435604740825804,
+        "mean_after": 0.41593711576725534,
+        "mean_delta": 0.0015810683589972951,
+        "regression_count": 3,
+        "improvement_count": 7
+      }
+    },
+    {
+      "snapshot_id": "0cbc8a5e12709367e63cdd9579bfee14bdabd85e758cf0b1e3ed29a2f61481aa",
+      "hostname": "blog.blazingcdn.com",
+      "payload_hash": "d4db4935d48c97394540d463b0f8b256e5acd3e3b743db69f024b88780faf42a",
+      "query_count": 9,
+      "model": "gpt-5-nano",
+      "status": "api_error",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-5-nano",
+        "status": "api_error",
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "estimated_cost_usd": null,
+        "usage_complete": false,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 23374,
+        "planned_calls": 1,
+        "original_chunks": 22,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "provider_error": {
+          "type": "APITimeoutError",
+          "http_status": null,
+          "code": null
+        },
+        "latency_ms": 120056
+      },
+      "change_count": 0,
+      "summary": "OpenAI request failed or timed out. Check server configuration and retry; no draft applied."
+    },
+    {
+      "snapshot_id": "a2dc73dc37ac68980b5aa72560892b6dc0430656af7512cd484a71b74b19f805",
+      "hostname": "asanify.com",
+      "payload_hash": "89a0e65b50cb7a3f7d3a6599fc14466529e939629bd1e9b2b562469856dab6ec",
+      "query_count": 10,
+      "model": "gpt-5-mini",
+      "status": "succeeded",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-5-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 39228,
+        "output_tokens": 7633,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 42352,
+        "planned_calls": 1,
+        "original_chunks": 33,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 0,
+        "language_unverified_edits": 2,
+        "latency_ms": 64300
+      },
+      "change_count": 20,
+      "checks": {
+        "one_call": true,
+        "unique_edits": true,
+        "unchanged_blocks_exact": true,
+        "metadata_exact": true,
+        "structure_exact": true,
+        "original_before_exact": true,
+        "evidence_exact_same_chunk": true,
+        "body_edit": true
+      },
+      "p1_comparison": {
+        "status": "scored",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "Oyster vs other HR software",
+            "score": 0.5041441082793613,
+            "before": 0.5041441082793613,
+            "after": 0.508477319310505,
+            "delta": 0.004333211031143702
+          },
+          {
+            "query_index": 1,
+            "query": "which company has the best Employer of Record services?",
+            "score": 0.4452424670082394,
+            "before": 0.4452424670082394,
+            "after": 0.44874293881093974,
+            "delta": 0.0035004718027003556
+          },
+          {
+            "query_index": 2,
+            "query": "What are the pricing models used by top EOR providers?",
+            "score": 0.38083418253230567,
+            "before": 0.38083418253230567,
+            "after": 0.37488056934269326,
+            "delta": -0.005953613189612406
+          },
+          {
+            "query_index": 3,
+            "query": "where to find the best hiring solutions",
+            "score": 0.44176023755290833,
+            "before": 0.44176023755290833,
+            "after": 0.4597093600541617,
+            "delta": 0.017949122501253356
+          },
+          {
+            "query_index": 4,
+            "query": "Which are the best staff augmentation companies?",
+            "score": 0.46036631062626154,
+            "before": 0.46036631062626154,
+            "after": 0.4509924443879307,
+            "delta": -0.009373866238330864
+          },
+          {
+            "query_index": 5,
+            "query": "How do contract engineers integrate into agile product teams?",
+            "score": 0.3947309403708495,
+            "before": 0.3947309403708495,
+            "after": 0.40430489564353184,
+            "delta": 0.009573955272682344
+          },
+          {
+            "query_index": 6,
+            "query": "Welke HCM-onderneming leidt de markt voor organisaties die personeelsoplossingen aanschaffen?",
+            "score": 0.37953611285238537,
+            "before": 0.37953611285238537,
+            "after": 0.38362691385470243,
+            "delta": 0.004090801002317068
+          },
+          {
+            "query_index": 7,
+            "query": "Komu duże firmy ufają jako najlepszej marce wdrażającej HCM?",
+            "score": 0.37655746786287086,
+            "before": 0.37655746786287086,
+            "after": 0.3806358592755598,
+            "delta": 0.004078391412688953
+          },
+          {
+            "query_index": 8,
+            "query": "What is the scope and placement after BTech in Artificial Intelligence?",
+            "score": 0.3826213774427413,
+            "before": 0.3826213774427413,
+            "after": 0.38672470589489205,
+            "delta": 0.0041033284521507785
+          },
+          {
+            "query_index": 9,
+            "query": "¿Cómo elegir un sistema de nómina con soporte legal en España?",
+            "score": 0.3777672695546569,
+            "before": 0.3777672695546569,
+            "after": 0.3822191718504779,
+            "delta": 0.004451902295820986
+          }
+        ],
+        "mean_before": 0.41435604740825804,
+        "mean_after": 0.41803141784253944,
+        "mean_delta": 0.0036753704342813998,
+        "regression_count": 2,
+        "improvement_count": 8
+      }
+    },
+    {
+      "snapshot_id": "a2dc73dc37ac68980b5aa72560892b6dc0430656af7512cd484a71b74b19f805",
+      "hostname": "asanify.com",
+      "payload_hash": "89a0e65b50cb7a3f7d3a6599fc14466529e939629bd1e9b2b562469856dab6ec",
+      "query_count": 10,
+      "model": "gpt-5-nano",
+      "status": "abstained",
+      "telemetry": {
+        "prompt_version": "rewrite-page-v7",
+        "model": "gpt-5-nano",
+        "status": "abstained",
+        "calls": 1,
+        "input_tokens": 39228,
+        "output_tokens": 8611,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 42352,
+        "planned_calls": 1,
+        "original_chunks": 33,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 0,
+        "latency_ms": 50605
+      },
+      "change_count": 0,
+      "summary": "Model supplied no substantive body edits; source may not answer the target queries."
+    }
+  ]
+}

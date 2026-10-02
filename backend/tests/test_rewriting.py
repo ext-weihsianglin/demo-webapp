@@ -24,6 +24,13 @@ class StubClient:
              'evidence':[{'block_id':b['block_id']}]}]
         response=NS(status='completed',output=[],output_text=json.dumps(proposal),usage=NS(input_tokens=100,output_tokens=50))
         if self.mutate: self.mutate(proposal,response,data); response.output_text=json.dumps(proposal) if response.output_text is not None else 'invalid json'
+        if response.output_text != 'invalid json':
+            keys={e['block_id'] for e in proposal['edits']}
+            entries=[(b['block_id'],None) for b in data['editable_blocks'] if b['block_id'] not in keys]
+            entries += [(e['block_id'],{k:v for k,v in e.items() if k!='block_id'}) for e in proposal['edits']]
+            body=', '.join(json.dumps(k)+':'+json.dumps(v) for k,v in entries)
+            envelope=json.dumps({k:v for k,v in proposal.items() if k!='edits'})
+            response.output_text=envelope[:-1]+', "blocks":{'+body+'}}'
         return response
 
 def run(client=None, settings=None, **kwargs):
@@ -49,8 +56,7 @@ def test_source_preservation_and_body_edits():
     assert protected_ids=={b['block_id'] for b in p['blocks'] if not editable(b)}
     transmitted=sorted(data['editable_blocks']+data['read_only_context'],key=lambda b:b['order'])
     assert [(b['block_id'],b['text']) for b in transmitted]==[(b['block_id'],b['text']) for b in p['blocks']]
-    branches=client.requests[0]['text']['format']['schema']['$defs']['ProviderEdit']['anyOf']
-    assert {i for branch in branches for i in branch['properties']['block_id']['enum']}==editable_ids
+    assert set(client.requests[0]['text']['format']['schema']['properties']['blocks']['properties'])==editable_ids
 
 
 @pytest.mark.parametrize('field,value',[('snapshot_id','wrong'),('chunk_id','wrong'),('block_id','unknown'),('before','invented'),('after',''),('after','two\nblocks'),('heading_level',2),('review_flags',['unsupported_addition'])])
@@ -60,7 +66,7 @@ def test_invalid_edits(field,value):
 
 def test_invalid_evidence_duplicate_and_json():
     for mutate in [lambda p,r,d:p['edits'][0]['evidence'][0].update(quote='invented'),
-                   lambda p,r,d:p['edits'].append(p['edits'][0]),lambda p,r,d:setattr(r,'output_text',None)]:
+                   lambda p,r,d:p['edits'].append({**p['edits'][0],'after':'A conflicting replacement.'}),lambda p,r,d:setattr(r,'output_text',None)]:
         assert run(StubClient(mutate))['status']=='invalid_output'
 
 @pytest.mark.parametrize('status',['incomplete','failed'])

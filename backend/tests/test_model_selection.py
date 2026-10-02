@@ -13,7 +13,7 @@ def model_config(monkeypatch):
     monkeypatch.setenv('OPENAI_REWRITE_MODEL','gpt-4.1-mini')
     monkeypatch.delenv('OPENAI_REWRITE_MODELS', raising=False)
 
-@pytest.mark.parametrize('selected', ['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5','gpt-5-mini',None])
+@pytest.mark.parametrize('selected', ['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5','gpt-5-mini','gpt-5-nano',None])
 def test_dropdown_model_routes_to_client_and_telemetry(selected, monkeypatch):
     from app import main
     stub=StubClient()
@@ -23,6 +23,11 @@ def test_dropdown_model_routes_to_client_and_telemetry(selected, monkeypatch):
     expected=selected or 'gpt-4.1-mini'
     assert all(request['model']==expected for request in stub.requests)
     assert response.json()['telemetry']['model']==expected
+    for request in stub.requests:
+        if expected in ('gpt-5-mini','gpt-5-nano'):
+            assert request['reasoning']=={'effort':'low'}
+        else:
+            assert 'reasoning' not in request
 
 
 def test_server_allowlist_and_configured_default(monkeypatch):
@@ -53,7 +58,7 @@ def test_default_price_estimate_does_not_apply_to_other_models(monkeypatch):
 def test_default_catalog_only_contains_tested_families():
     options=client.get('/api/rewrite-models').json()
     assert options['default_model']=='gpt-4.1-mini'
-    assert options['models']==['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5','gpt-5-mini']
+    assert options['models']==['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5','gpt-5-mini','gpt-5-nano']
 
 
 def test_unavailable_model_reports_access_failure_without_provider_body(monkeypatch):
@@ -75,7 +80,7 @@ def test_unavailable_model_reports_access_failure_without_provider_body(monkeypa
     assert 'sensitive provider detail' not in response.text
 
 
-@pytest.mark.parametrize('model',['gpt-5-nano','gpt-5.6-sol','gpt-6-sol','gemini-pro','gpt-5-custom'])
+@pytest.mark.parametrize('model',['gpt-5.6-sol','gpt-6-sol','gemini-pro','gpt-5-custom'])
 def test_environment_cannot_expand_supported_catalog(model,monkeypatch):
     monkeypatch.setenv('OPENAI_REWRITE_MODELS',f'gpt-4.1,{model}')
     assert model not in client.get('/api/rewrite-models').json()['models']

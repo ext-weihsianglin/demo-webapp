@@ -14,10 +14,10 @@ from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
 from app.language_guard import confident_language, compare_language
 
-PROMPT_VERSION = 'rewrite-page-v6'
+PROMPT_VERSION = 'rewrite-page-v7'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
-SUPPORTED_REWRITE_MODELS = ('gpt-4.1-mini', 'gpt-4.1', 'gpt-4.1-nano', 'gpt-5', 'gpt-5-mini')
+SUPPORTED_REWRITE_MODELS = ('gpt-4.1-mini', 'gpt-4.1', 'gpt-4.1-nano', 'gpt-5', 'gpt-5-mini', 'gpt-5-nano')
 
 
 def model_options():
@@ -60,8 +60,8 @@ class EvidenceReference(StrictModel):
 
 class ProviderEdit(StrictModel):
     block_id: str
-    after: str = Field(min_length=1, max_length=20000)
-    reason: str = Field(min_length=1, max_length=2000)
+    after: str = Field(min_length=1, max_length=20000, pattern=r'^[^\r\n]*\S[^\r\n]*$')
+    reason: str = Field(min_length=1, max_length=2000, pattern=r'\S')
     evidence: list[EvidenceReference] = Field(min_length=1)
     review_flags: list[str]
     heading_level: int | None = Field(ge=1, le=6)
@@ -182,36 +182,74 @@ def validate_edits(proposal, document, chunk, allow_structure):
 
 
 def response_schema(document, batch, allow_structure=False):
-    """Keep the provider schema bounded; validate source identities/text locally."""
-    schema = ProviderProposal.model_json_schema()
+    """One required nullable property per editable block; identity is the key."""
     blocks = {b['block_id']: b for b in document['blocks']}
-    allowed = [b['block_id'] for b in document['blocks'] if editable(b)]
-    base = schema['$defs']['ProviderEdit']
+    base = ProviderEdit.model_json_schema()
+    definitions = base.pop('$defs')
+    base['properties'].pop('block_id')
+    base['required'].remove('block_id')
     if not allow_structure:
         base['properties']['heading_level'] = {'type': 'null'}
-    branches = []
-    enum_count = 0
-    enum_characters = 0
-    for chunk in batch:
+    properties = {}
+    # Evidence enums occur once per chunk, not once per editable block.
+    constrain_evidence = sum(len(c['block_ids']) for c in batch) <= 900
+    for index, chunk in enumerate(batch):
         targets = [i for i in chunk['block_ids'] if editable(blocks[i])]
-        evidence_ids = [i for i in chunk['block_ids'] if blocks[i]['text'].strip()]
-        if not targets or not evidence_ids:
+        if not targets:
             continue
-        branch = deepcopy(base)
-        branch['properties']['block_id']['enum'] = targets
-        branch['properties']['evidence']['items'] = {
-            'type': 'object', 'properties': {'block_id': {'type': 'string', 'enum': evidence_ids}},
-            'required': ['block_id'], 'additionalProperties': False}
-        branches.append(branch)
-        enum_count += len(targets) + len(evidence_ids)
-        enum_characters += sum(map(len, targets + evidence_ids))
-    # Bounded nested alternatives bind each edit target to its own chunk evidence.
-    # For unusually large pages, retain strict server validation without oversized schemas.
-    if branches and len(branches) <= 100 and enum_count <= 900 and enum_characters <= 10000:
-        schema['$defs']['ProviderEdit'] = {'anyOf': branches}
-    elif allowed and len(allowed) <= 900 and sum(map(len, allowed)) <= 10000:
-        base['properties']['block_id']['enum'] = allowed
+        definition = deepcopy(base)
+        if constrain_evidence:
+            evidence_ids = [i for i in chunk['block_ids'] if blocks[i]['text'].strip()]
+            definition['properties']['evidence']['items'] = {
+                'type': 'object', 'properties': {'block_id': {'type': 'string', 'enum': evidence_ids}},
+                'required': ['block_id'], 'additionalProperties': False}
+        name = f'ChunkEdit{index}'
+        definitions[name] = definition
+        for identity in targets:
+            properties[identity] = {'anyOf': [{'$ref': f'#/$defs/{name}'}, {'type': 'null'}]}
+    schema = {'type': 'object', 'properties': {
+        'status': {'type': 'string', 'enum': ['proposed', 'abstained']},
+        'summary': {'type': 'string'}, 'review_flags': {'type': 'array', 'items': {'type': 'string'}},
+        'blocks': {'type': 'object', 'properties': properties, 'required': list(properties), 'additionalProperties': False}},
+        'required': ['status', 'summary', 'review_flags', 'blocks'], 'additionalProperties': False, '$defs': definitions}
+    # Fail before the provider when a page cannot fit the strict keyed contract.
+    property_count = len(properties) + 4 + sum(len(d.get('properties', {})) + 1 for d in definitions.values())
+    if property_count > 4500 or len(json.dumps(schema)) > 110000:
+        raise RewriteFailure('context_limit', 'Page exceeds the keyed response schema budget; no source was truncated and no call was made.')
     return schema
+
+
+def parse_provider_proposal(raw, document):
+    """Normalize identical duplicate keys; reject conflicts before JSON can discard them."""
+    duplicates = 0
+    def unique_object(pairs):
+        nonlocal duplicates
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                if json.dumps(result[key], sort_keys=True) != json.dumps(value, sort_keys=True):
+                    raise RewriteFailure('invalid_output', 'Conflicting duplicate JSON key; no draft applied.',
+                                         {'checks_failed': ['conflicting_duplicate_key'], 'key': key})
+                duplicates += 1
+            result[key] = value
+        return result
+    payload = json.loads(raw, object_pairs_hook=unique_object)
+    expected = {b['block_id'] for b in document['blocks'] if editable(b)}
+    if not isinstance(payload, dict) or set(payload) != {'status', 'summary', 'review_flags', 'blocks'}:
+        raise RewriteFailure('invalid_output', 'Invalid keyed proposal envelope.')
+    values = payload['blocks']
+    if not isinstance(values, dict) or set(values) != expected:
+        raise RewriteFailure('invalid_output', 'Proposal must include exactly the editable block IDs, using null for unchanged blocks.',
+                             {'checks_failed': ['editable_key_set_mismatch']})
+    edits = []
+    for identity, value in values.items():
+        if value is None:
+            continue
+        if not isinstance(value, dict) or 'block_id' in value:
+            raise RewriteFailure('invalid_output', 'Edit identity must appear only as its object key.')
+        edits.append({**value, 'block_id': identity})
+    proposal = ProviderProposal.model_validate({**{k: payload[k] for k in ('status', 'summary', 'review_flags')}, 'edits': edits})
+    return proposal, duplicates
 
 
 def plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback=None):
@@ -284,6 +322,8 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
     try:
         settings = settings or Settings.from_env(model)
         telemetry['model'] = settings.model
+        reasoning = {'reasoning': {'effort': 'low'}} if settings.model in ('gpt-5-mini', 'gpt-5-nano') else {}
+        telemetry['reasoning_effort'] = 'low' if reasoning else None
         if document['selection']['status'] == 'source_insufficient' or not chunks or not any(editable(b) and b['type']=='paragraph' for b in document['blocks']):
             raise RewriteFailure('source_insufficient', 'Insufficient editable source prose; choose a fuller source snapshot.')
         try:
@@ -311,7 +351,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
             telemetry['calls'] += 1
             response = client.responses.create(model=settings.model, instructions=PROMPT,
                 input=[{'role': 'user', 'content': data}], store=False, max_output_tokens=settings.output_tokens,
-                text={'format': {'type': 'json_schema', 'name': 'rewrite_proposal', 'strict': True, 'schema': schema}})
+                text={'format': {'type': 'json_schema', 'name': 'rewrite_proposal', 'strict': True, 'schema': schema}}, **reasoning)
             if response.usage:
                 telemetry['input_tokens'] += response.usage.input_tokens
                 telemetry['output_tokens'] += response.usage.output_tokens
@@ -321,7 +361,9 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                 raise RewriteFailure('refused', 'The model refused this rewrite.')
             if response.status != 'completed':
                 raise RewriteFailure('incomplete_output', 'The model did not complete its output; no partial draft applied.')
-            proposal = assemble_proposal(ProviderProposal.model_validate_json(response.output_text), document, chunks)
+            provider_proposal, duplicates = parse_provider_proposal(response.output_text, document)
+            telemetry['normalized_duplicate_keys'] = duplicates
+            proposal = assemble_proposal(provider_proposal, document, chunks)
             accumulated_flags.extend(proposal.review_flags)
             accumulated_flags.extend(f for e in proposal.edits for f in e.review_flags)
             batch_ids = {chunk['chunk_id'] for chunk in batch}

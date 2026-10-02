@@ -109,7 +109,8 @@ def test_protected_edit_rejected_with_bounded_provider_schema():
     result=rewrite(document,chunks,QUERIES,'Preserve original',False,client=stub)
     assert result['status']=='invalid_output' and 'document' not in result
     schema=stub.requests[0]['text']['format']['schema']
-    for branch in schema['$defs']['ProviderEdit']['anyOf']:
-        assert protected['block_id'] not in branch['properties']['block_id']['enum']
-        assert branch['properties']['heading_level']=={'type':'null'}
+    assert protected['block_id'] not in schema['properties']['blocks']['properties']
+    for name, definition in schema['$defs'].items():
+        if name.startswith('ChunkEdit'):
+            assert definition['properties']['heading_level']=={'type':'null'}
     assert set(schema['$defs']['EvidenceReference']['properties'])=={'block_id'}
