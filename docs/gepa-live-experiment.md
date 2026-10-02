@@ -38,6 +38,10 @@ Its first full challenger, `gpt-4.1-mini--885bc0d8059b6913d10c2554`, scores 0.40
 
 All UI API consumers now handle non-JSON proxy failures, including evidence inspection and example loading. The proxy error regression, frontend build and typecheck pass. A plain-text HTTP 500 is presented as an availability error; it does not become a draft or a fabricated score.
 
+[Fourth terminal result](../verification/gepa-run-5f1536b7.json): stopped at 80/100 attempts, five proposals and six technical failures. Its complete general challenger scored 0.409092 versus baseline 0.409105; failures improved from 0.8 to 0.766667. The lower mean still disqualifies promotion. A subsequent admitted candidate could not reserve 30 uncached selection pages with only 20 attempts left. No held-out comparison was performed.
+
+Several fourth-run strategies ended mid-sentence at the 501-character hard bound. Reflection now has an explicit advisory target of 250 characters and asks for one or two complete sentences; the configurable hard bound is unchanged. Fifth run `c8439bf1e8c141ef9228bc5370dfa015` records this new reflection-prompt hash and seed 1 with the same frozen page roles, baseline, models, gate, P1 and 100-attempt cap. Changing the reflection seed explores another optimization batch; it is not independent generalization evidence. The successful optimization, actual winner promotion/restart and predeclared held-out comparison remain pending.
+
 ## Remaining limits
 
 Whole-proposal rejection can retain the original page when only one edit fails fidelity, reducing accepted sample yield. The frozen v7 context-feature training/serving mismatch remains deliberately deferred under upstream issue #15. Model stochasticity and two already exposed P1-test hosts limit dogfood conclusions. The agreed 100-attempt cap may permit fewer than two fully evaluated challengers; incomplete selection vectors cannot be ranked or promoted.

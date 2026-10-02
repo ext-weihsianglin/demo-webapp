@@ -24,9 +24,10 @@ prefer focused useful improvements over broad unsupported expansion.
 Never weaken fixed security, schema, evidence, preservation,
 language or fidelity constraints. Do not encourage fabricated claims, repetition,
 keyword stuffing, unsupported clickbait or answering queries unsupported by source.
-Return a complete new strategy within the supplied character limit and a brief
-change summary, not hidden reasoning. Stay comfortably below the character limit
-and finish every sentence. Use terse editorial prose; do not restate
+Return a complete new strategy and a brief change summary, not hidden reasoning.
+Use one or two short complete sentences. Aim at or below character_target;
+character_limit is only the emergency maximum, not a length to fill.
+Finish every sentence. Use terse editorial prose; do not restate
 the fixed harness rules. The fixed harness remains authoritative.'''
 
 
@@ -96,9 +97,11 @@ class Adapter:
             raise RunStopped('proposal_limit')
         parent=self.prompt(candidate)
         character_limit=int(len(self.registry.editorial)*self.config.length_multiplier)
+        character_target=min(250,character_limit)
         payload=json.dumps({'strategy':candidate['editorial_strategy'],'examples':reflective_dataset,
-            'character_limit':character_limit},ensure_ascii=False)
-        schema={'type':'object','properties':{'editorial_strategy':{'type':'string','minLength':1,'maxLength':character_limit},'summary':{'type':'string'}},
+            'character_limit':character_limit,'character_target':character_target},ensure_ascii=False)
+        schema={'type':'object','properties':{'editorial_strategy':{'type':'string','minLength':1,'maxLength':character_limit,
+                'description':f'A generic editing method in one or two complete sentences. Aim for at most {character_target} characters; finish before the hard maximum.'},'summary':{'type':'string'}},
                 'required':['editorial_strategy','summary'],'additionalProperties':False}
         input_tokens=len(tiktoken.get_encoding('o200k_base').encode(payload+REFLECTION_PROMPT+json.dumps(schema)))
         if input_tokens+4096>128000:

@@ -1,0 +1,123 @@
+{
+  "id": "5f1536b7bf72467386a6da16ce453cc6",
+  "status": "stopped",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-4.1-mini",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 10,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 0,
+    "enable_live_calls": true
+  },
+  "budget": {
+    "attempts": 80,
+    "reserved": 0,
+    "completed": 80,
+    "technical_failures": 6,
+    "stop_reason": "attempt_budget",
+    "limit": 100
+  },
+  "proposals": 5,
+  "recommendation": null,
+  "stop_reason": "attempt_budget",
+  "usage": {
+    "rewrite": {
+      "calls": 80,
+      "input_tokens": 2204033,
+      "output_tokens": 283750,
+      "cached_requests": 0
+    },
+    "fidelity": {
+      "calls": 75,
+      "input_tokens": 729166,
+      "output_tokens": 111613,
+      "cached_requests": 0
+    },
+    "reflection": {
+      "calls": 5,
+      "input_tokens": 141891,
+      "output_tokens": 625,
+      "cached_requests": 0
+    },
+    "embedding": {
+      "calls": 17,
+      "input_tokens": 152644,
+      "output_tokens": 0,
+      "cached_requests": 2323
+    }
+  },
+  "finished_at": "2026-10-02T04:59:37.276538+00:00",
+  "reflection_prompt_hash": "f78e864566231d05dba7d4e3ee995942286cd3d63e966e959a6ae5f5fddaf6d5",
+  "dataset_manifest_hash": "59e416d1942b57ddd9ac4a4cde561bb1d44d48790e9de4734da209a65c29774b",
+  "candidates": [
+    {
+      "id": "gpt-4.1-mini--rewrite-page-v7",
+      "status": "evaluated",
+      "prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "editorial_strategy": "You are a source-grounded webpage editor. Review the entire retained page and return one coordinated structured proposal that makes supported answers to all target_queries clearer, more direct, and easier to cite. This is the only generation call for this page; extraction chunks are provenance boundaries, not separate rewrite tasks.",
+      "parents": [],
+      "selection_mean": 0.4091053931565296,
+      "failure_rate": 0.8,
+      "selection_pages": 30,
+      "frontier": true
+    },
+    {
+      "id": "gpt-4.1-mini--27ecbdaa476f3f243ff3e3e6",
+      "status": "evaluated",
+      "prompt_hash": "6a464382aaa9a7a8d4adcc473027c7dab23034e561ce88df2e89289f1d72abcf",
+      "editorial_strategy": "Review the entire page to provide a single coordinated rewrite that enhances clarity and directness for all target queries. Focus on consolidating relevant information to improve user understanding and citation ease. Ensure all edits maintain strict fidelity to source content without fabrications or unsupported expansions. Emphasize clear explanations of service features, user actions, and service scope as present in the source. Avoid adding details or inferential claims not explicitly supported.",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "selection_mean": 0.4090922325013278,
+      "failure_rate": 0.7666666666666667,
+      "selection_pages": 30,
+      "frontier": true
+    },
+    {
+      "id": "gpt-4.1-mini--378d50960ab9cf169ff71034",
+      "status": "rejected",
+      "prompt_hash": "f7e45fa5d079a819fe705b568189abae9c2b07b304ed4b02d80082b6a2a71561",
+      "editorial_strategy": "Review the entire retained page thoroughly to ensure each content block directly supports and clearly answers the target queries with exact, source-backed information. Remove or avoid adding unsupported details or extrapolations beyond the source. Prioritize clarity, precision, and brevity in presenting key facts to improve direct citation and user comprehension. Organize content to highlight explicit connections to query topics, using language strictly reflecting source statements without over-7",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--7dc481dbee937c1ec4a22153",
+      "status": "rejected",
+      "prompt_hash": "f6c14b8a42c1cf2fa2e3512bb38a1279781203237bdd9436cf9e59e75ee0e157",
+      "editorial_strategy": "Focus rewrites on clearly presenting core product or service features, benefits, and use cases that directly address multiple target queries. Summarize complex data into concise, user-friendly explanations, ensuring fidelity to source material. Highlight comparisons, specifications, and actionable next steps like purchasing or subscription options without speculation or unsupported detail. Organize content to facilitate skimming and easy navigation toward relevant sections, maintaining neutrality",
+      "parents": [
+        "gpt-4.1-mini--27ecbdaa476f3f243ff3e3e6"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--24a0ab640928f46518ca28d4",
+      "status": "rejected",
+      "prompt_hash": "7949a6f020963f70fdc1b605c733424c57dd3d27ddbf1af0fec1d73b73abd3c7",
+      "editorial_strategy": "Focus on clear, concise presentation of verified facts and features directly supported by the source. Avoid adding interpretive claims or brand endorsements not explicitly stated. Emphasize modular clarity to quickly address diverse queries about features, benefits, and practical implementation without overextension. Preserve original terminology and avoid unnecessary elaborations or terminology changes that lack direct evidence. Maintain neutral tone and style compatible across varied domains,, ",
+      "parents": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini--e1a10ed414831ed369dcd1ee",
+      "status": "partial",
+      "prompt_hash": "a71304a32ce1b58ac3af2992651b08b5d70a1fcee903bce57ab62506a6bd3f3d",
+      "editorial_strategy": "Prioritize preserving the original factual content exactly as presented, avoiding the introduction of unsupported elaboration or synthesis. Opt for concise paraphrasing only when it enhances clarity or readability without altering the meaning or adding details. Ensure all claims remain strictly grounded in the source text, especially when describing features, processes, or testimonials. Maintain a focused approach that addresses target queries through clear, accurate restatement rather than broad",
+      "parents": [
+        "gpt-4.1-mini--27ecbdaa476f3f243ff3e3e6"
+      ]
+    }
+  ],
+  "conclusion": "Full challenger mean0.409092 is below baseline0.409105 despite fewer failures. No promotion. Next full batch could not fit at80/100; incomplete candidates not ranked. No held-out evaluation performed."
+}
