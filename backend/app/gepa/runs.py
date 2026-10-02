@@ -128,7 +128,7 @@ class RunManager:
             def record(result):
                 store.write('evaluation-'+result['candidate_id']+'-'+result['page_id'],result)
                 store.event('page_evaluated',page_id=result['page_id'],candidate_id=result['candidate_id'],
-                            role=result['role'],status=result['status'],score=result.get('score'),raw_p1=result.get('raw_p1'),penalty=result.get('penalty'),delta=result.get('delta'),
+                            role=result['role'],status=result['status'],message=(result.get('scoring_unavailable') or {}).get('reason'),score=result.get('score'),raw_p1=result.get('raw_p1'),penalty=result.get('penalty'),delta=result.get('delta'),
                             budget=budget.snapshot(), usage_by_phase={
                                 'rewrite':result.get('rewrite',{}).get('telemetry',{}),
                                 'fidelity':result.get('fidelity',{}).get('telemetry',{}),

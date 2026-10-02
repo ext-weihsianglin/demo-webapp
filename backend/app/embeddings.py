@@ -23,6 +23,7 @@ from trad_ml_scorer.semantic_features import original_cosines, section_summary
 
 EMBEDDING_IDENTITY = 'e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea'
 _WRITE_LOCK = threading.RLock()
+_EXPORT_LOCK = threading.Lock()
 
 
 def request_locations(store, keys):
@@ -116,7 +117,13 @@ def semantic_features(document, queries, *, provider=None, cache_root=None, befo
         # Reuse the upstream exporter verbatim, including all-or-nothing pooling.
         with tempfile.TemporaryDirectory(prefix='p1-vectors-') as temporary:
             run = Path(temporary)
-            index = export_vectors(run, 'request', cfg, units, store, locations, {})
+            # Each upstream reader retains up to 16 mmap shard handles. Bound
+            # this local I/O phase while keeping provider calls concurrent.
+            with _EXPORT_LOCK:
+                try:
+                    index = export_vectors(run, 'request', cfg, units, store, locations, {})
+                finally:
+                    store.close()  # Release shard handles before the next exporter.
             vectors = SavedVectors(np.load(run / 'vectors/request/vectors.npy', allow_pickle=False), index)
             rows = []
             for unit in query_units:
