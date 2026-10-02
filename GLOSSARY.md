@@ -28,3 +28,12 @@ A frozen collection of source snapshots and their target query sets used to lear
 
 **Final evaluation set**:
 A separate collection of examples kept outside prompt search to assess the selected prompt's generalization.
+
+**Prompt registry**:
+A collection of versioned prompts that distinguishes each rewriter model's baseline, experimental candidates and selected prompts.
+
+**Reflection split**:
+Optimization examples whose rewrite outcomes and diagnostics guide proposed prompt changes.
+
+**Selection split**:
+A fixed set of optimization examples used to compare prompt candidates and choose which to retain. It participates in prompt search and is distinct from the final evaluation set.
