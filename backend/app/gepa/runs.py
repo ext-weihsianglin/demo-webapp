@@ -203,6 +203,9 @@ class RunManager:
         summary=self.status(identity)
         if summary['status'] not in ('completed','stopped') or summary['recommendation']!=candidate_id:
             raise ValueError('Only a complete recommended candidate can be promoted')
+        manifest=self.store(identity).read('manifest')
+        if manifest.get('edit_boundary_version') != EDIT_BOUNDARY_VERSION:
+            raise ValueError('Recommendation uses an older edit boundary; evaluate again before promotion')
         return self.registry.promote(candidate_id,summary['config']['model'])
 
 

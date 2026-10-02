@@ -254,3 +254,22 @@ def test_malformed_rewriter_output_still_trips_technical_breaker(tmp_path, monke
     assert all(r['rewrite']['status'] == 'invalid_output' for r in results)
     assert budget.snapshot()['technical_failures'] == 3
     assert budget.snapshot()['stop_reason'] == 'circuit_breaker'
+
+
+def test_historical_recommendation_cannot_promote_under_new_edit_boundary(tmp_path):
+    import pytest
+    from app.rewriting import EDIT_BOUNDARY_VERSION
+    registry = PromptRegistry(tmp_path/'registry')
+    candidate = registry.create('gpt-4.1-mini', 'Clarify supported answers.', 'old-run', [])
+    manager = RunManager(registry=registry, directory=tmp_path/'runs')
+    store = manager.store('old-run')
+    store.write('summary', {'id':'old-run', 'status':'stopped', 'config':{'model':'gpt-4.1-mini'},
+        'recommendation':candidate['id'], 'candidates':[], 'budget':{}})
+    for manifest in ({}, {'edit_boundary_version':'body-content-v1'}):
+        store.write('manifest', manifest)
+        with pytest.raises(ValueError, match='edit boundary'):
+            manager.promote('old-run', candidate['id'])
+        assert registry.resolve(None, 'gpt-4.1-mini')['id'] == registry.baseline('gpt-4.1-mini')['id']
+    store.write('manifest', {'edit_boundary_version':EDIT_BOUNDARY_VERSION})
+    manager.promote('old-run', candidate['id'])
+    assert registry.resolve(None, 'gpt-4.1-mini')['id'] == candidate['id']
