@@ -188,6 +188,7 @@ class RunManager:
             manifest={}
         boundary=manifest.get('edit_boundary_version')
         summary['edit_boundary_version']=boundary
+        summary['fidelity_policy']=manifest.get('fidelity')
         summary['promotion_block_reason']=(
             'This run uses an older or unrecorded edit boundary. Evaluate again before promotion.'
             if boundary != EDIT_BOUNDARY_VERSION else

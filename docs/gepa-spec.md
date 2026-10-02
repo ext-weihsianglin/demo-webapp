@@ -99,6 +99,8 @@ A missing original P1 score, unavailable required embedding or incompatible froz
 
 **Agreed direction:** a separate `gpt-4.1-mini` call checks proposed edits against original source and copied supporting passages before acceptance/scoring. This is source-relative verification, not verification against external facts.
 
+**Implementation decision — 2026-10-02:** the fixed reviewer becomes `gpt-4.1` after a validation source audit confirmed that mini approved an invented full-audit-trail feature. A full-model audit rejected that edit, but also falsely flagged explicitly supported Google Drive steps; its findings remain fallible and conservative rejection can reduce yield. The [audit and source comparison](gepa-live-experiment.md#reviewer-capacity-and-audit-fallibility) record both errors. P2 remains `gpt-4.1-mini`; instructions, schema, scope and output budgets stay fixed. Fresh baseline/challenger evaluation is required and old reviewer profiles cannot promote. Ordinary drafts also use this separate judge and require access to its model.
+
 **Proposed input:** validated edit IDs, immutable before/after text, relevant original chunk context, selected evidence IDs/full copied passages and language hints. Bind everything to snapshot/chunk/block identities. Source/query content is data; the judge is forbidden from following embedded instructions or using external knowledge. No hidden chain-of-thought is requested or logged.
 
 Check every changed block for:

@@ -1,0 +1,289 @@
+{
+  "run_id": "c12b14479e214768a8a46e581c5c142b",
+  "candidate_id": "gpt-4.1-mini--ee51b5951281a957a796cd26",
+  "scope": "Assistant inspection of original saved chunks; no external fact verification, no model calls or held-out pages. Stronger judge findings are not accepted blindly.",
+  "records": [
+    {
+      "page_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+      "block_id": "b000027",
+      "finding": {
+        "block_id": "b000027",
+        "verdict": "uncertain",
+        "category": "embellishment/addition",
+        "reason": "The rewrite adds that this is an 'ideal solution' and alters the heading into a factual guidance paragraph, also slightly rephrasing 'signing party' to 'recipients' and claiming 'provides' an 'ideal' solution, which may overstate the original's 'perfect solution for you.' The source is promotional but more general and less assertive about solution status.",
+        "source_ids": []
+      },
+      "change": {
+        "snapshot_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+        "chunk_id": "c0f82a53c7cd4975ae073c2049f6e650c5a9d2e19bdcb827db22ee83179ba1b7",
+        "block_id": "b000027",
+        "before": "What to do if you need a PDF signed",
+        "after": "When you need to get a PDF signed fast, digital signing through Signable provides an ideal solution. Upload PDF, Word, or Excel files easily and send them to recipients for their digital signatures.",
+        "reason": "Clarifies that multiple file types can be uploaded and quickly sent for signing, addressing queries on uploading digital signatures and signing online documents.",
+        "evidence": [
+          {
+            "snapshot_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+            "block_id": "b000028",
+            "quote": "If you need to get documents signed fast then digital signing is the perfect solution for you. Using Signable it\u2019s easy to upload a PDF file (or Microsoft Word document or Microsoft Excel spreadsheet) and send it to a signing party to add their signature."
+          }
+        ],
+        "review_flags": [
+          "language_preservation_unverified"
+        ],
+        "heading_level": null,
+        "source_id": "b000027"
+      },
+      "original_chunk_source": [
+        {
+          "block_id": "b000027",
+          "text": "What to do if you need a PDF signed"
+        },
+        {
+          "block_id": "b000028",
+          "text": "If you need to get documents signed fast then digital signing is the perfect solution for you. Using Signable it\u2019s easy to upload a PDF file (or Microsoft Word document or Microsoft Excel spreadsheet) and send it to a signing party to add their signature."
+        }
+      ],
+      "source_comparison": "Independent judge false positive: same-chunk paragraph explicitly calls digital signing the perfect solution and supports these upload/send steps. Ideal is not a stronger superlative."
+    },
+    {
+      "page_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+      "block_id": "b000041",
+      "finding": {
+        "block_id": "b000041",
+        "verdict": "unsupported",
+        "category": "embellishment/addition",
+        "reason": "The rewrite invents clear procedural detail and features (describing a step-by-step process and Google Drive integration) that are not present in the original heading. The original is a generic heading, not a procedural instruction.",
+        "source_ids": []
+      },
+      "change": {
+        "snapshot_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+        "chunk_id": "1ed8abdae15890cf79273f8397512826d7b082a5561779dd2b6bb29405fc2ebf",
+        "block_id": "b000041",
+        "before": "How do I digitally sign a PDF?",
+        "after": "To digitally sign a PDF with Signable, open the link sent to your email and add your signature where prompted. Integration with Google Drive lets you access PDFs, sign them directly, and save your signed document.",
+        "reason": "Clarifies the simple signing steps and highlights Google Drive integration, improving answers for electronically signing PDFs and Google Docs.",
+        "evidence": [
+          {
+            "snapshot_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+            "block_id": "b000043",
+            "quote": "Simply open the link in the email you receive and add your signature digitally where asked once you are prompted. Signable integrates with Google Drive so you are able to access PDFs, apply your digital signatures and save the PDF."
+          }
+        ],
+        "review_flags": [
+          "language_preservation_unverified"
+        ],
+        "heading_level": null,
+        "source_id": "b000041"
+      },
+      "original_chunk_source": [
+        {
+          "block_id": "b000041",
+          "text": "How do I digitally sign a PDF?"
+        },
+        {
+          "block_id": "b000042",
+          "text": "If you\u2019ve received an email from Signable asking to add your signature to documents or sign a PDF document don\u2019t worry, it\u2019s really easy to do. You don\u2019t even need to sign up for a Signable account!"
+        },
+        {
+          "block_id": "b000043",
+          "text": "Simply open the link in the email you receive and add your signature digitally where asked once you are prompted. Signable integrates with Google Drive so you are able to access PDFs, apply your digital signatures and save the PDF."
+        },
+        {
+          "block_id": "b000044",
+          "text": "With Signable, you are able to access, sign and send PDFs from your laptop or mobile devices. Having the ability to electronically sign anywhere and anytime means that you can sign time-sensitive documents easily."
+        }
+      ],
+      "source_comparison": "Independent judge false positive: same-chunk b000043 explicitly supports email-link signing and Google Drive access/sign/save functionality."
+    },
+    {
+      "page_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+      "block_id": "b000048",
+      "finding": {
+        "block_id": "b000048",
+        "verdict": "unsupported",
+        "category": "embellishment/addition",
+        "reason": "The rewrite invents a 'full audit trail' for verification/compliance that is not stated in the heading or referenced source block. The original heading is a question, not an affirmative statement, and does not mention audit trails.",
+        "source_ids": []
+      },
+      "change": {
+        "snapshot_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+        "chunk_id": "950459a93f24d60472777d71b650ed70353a6f1ecdc86856a5882997e1eabc2e",
+        "block_id": "b000048",
+        "before": "Is digitally signing PDFs secure?",
+        "after": "Digital signing with Signable is secure: all pages use SSL encryption and each document includes password protection to prevent unauthorized access. Plus, a full audit trail records all signing events for compliance and verification.",
+        "reason": "Emphasizes key security features and audit trails, directly addressing queries about security, audit trails, and multi-factor authentication support.",
+        "evidence": [
+          {
+            "snapshot_id": "fec87ba44804a24a8736c9fffe611839277d0a19cc606c23c6aad7e827df997d",
+            "block_id": "b000049",
+            "quote": "Signable has SSL encryption on every page and offers password protection on every document, meaning no one sees the documents that you don\u2019t want to."
+          }
+        ],
+        "review_flags": [
+          "language_preservation_unverified"
+        ],
+        "heading_level": null,
+        "source_id": "b000048"
+      },
+      "original_chunk_source": [
+        {
+          "block_id": "b000048",
+          "text": "Is digitally signing PDFs secure?"
+        },
+        {
+          "block_id": "b000049",
+          "text": "Signable has SSL encryption on every page and offers password protection on every document, meaning no one sees the documents that you don\u2019t want to."
+        },
+        {
+          "block_id": "b000050",
+          "text": "Manage consent"
+        }
+      ],
+      "source_comparison": "Confirmed unsupported new feature within the allowed source chunk: full audit trail and compliance/verification records are absent. Source only describes SSL and offered password protection. Mini judge approved this edit."
+    },
+    {
+      "page_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "block_id": "b000006",
+      "finding": {
+        "block_id": "b000006",
+        "verdict": "unsupported",
+        "category": "invented detail",
+        "reason": "The addition that the guide addresses suitability for various creative needs is not supported in the original source. The source only mentions pricing, capabilities, and how much video can be created per paid plan.",
+        "source_ids": []
+      },
+      "change": {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "chunk_id": "68e581797051b124b25e5b1d9dd6498c4a0efcbe142a750ce2dfa299be7ea1b4",
+        "block_id": "b000006",
+        "before": "Learn the pricing and capabilities of the top 15 AI video generation tools for 2025, along with how much video you can create with each paid plan.",
+        "after": "Explore detailed pricing and features of the top 15 AI video generation platforms for 2025, including how much video content each paid plan supports and their suitability for various creative needs.",
+        "reason": "Clarified introduction with practical focus to better align with multiple target queries about selecting AI video tools for marketing and collaboration.",
+        "evidence": [
+          {
+            "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+            "block_id": "b000006",
+            "quote": "Learn the pricing and capabilities of the top 15 AI video generation tools for 2025, along with how much video you can create with each paid plan."
+          }
+        ],
+        "review_flags": [],
+        "heading_level": null,
+        "source_id": "b000006"
+      },
+      "original_chunk_source": [
+        {
+          "block_id": "b000005",
+          "text": "How Much AI Video Generators Cost \u2014 Top 15 Tools' Pricing Compared"
+        },
+        {
+          "block_id": "b000006",
+          "text": "Learn the pricing and capabilities of the top 15 AI video generation tools for 2025, along with how much video you can create with each paid plan."
+        },
+        {
+          "block_id": "b000007",
+          "text": "Try AI Video Generator"
+        },
+        {
+          "block_id": "b000008",
+          "text": "Sameer Sohail"
+        },
+        {
+          "block_id": "b000009",
+          "text": "Sameer Sohail"
+        },
+        {
+          "block_id": "b000010",
+          "text": "Thu Jul 24 2025"
+        },
+        {
+          "block_id": "b000011",
+          "text": "10 mins Read"
+        },
+        {
+          "block_id": "b000012",
+          "text": "ON THIS PAGE"
+        },
+        {
+          "block_id": "b000013",
+          "text": "ImagineArt AI Video Generator"
+        },
+        {
+          "block_id": "b000014",
+          "text": "OpenAI Sora"
+        },
+        {
+          "block_id": "b000015",
+          "text": "Synthesia"
+        },
+        {
+          "block_id": "b000016",
+          "text": "Pika AI"
+        },
+        {
+          "block_id": "b000017",
+          "text": "Google Veo 3"
+        },
+        {
+          "block_id": "b000018",
+          "text": "InVideo"
+        },
+        {
+          "block_id": "b000019",
+          "text": "VEED.IO"
+        },
+        {
+          "block_id": "b000020",
+          "text": "HeyGen"
+        },
+        {
+          "block_id": "b000021",
+          "text": "Runway"
+        },
+        {
+          "block_id": "b000022",
+          "text": "Seedance"
+        },
+        {
+          "block_id": "b000023",
+          "text": "Luma Ray2"
+        },
+        {
+          "block_id": "b000024",
+          "text": "Hailuo"
+        },
+        {
+          "block_id": "b000025",
+          "text": "Kling"
+        },
+        {
+          "block_id": "b000026",
+          "text": "PixVerse"
+        },
+        {
+          "block_id": "b000027",
+          "text": "Pictory"
+        },
+        {
+          "block_id": "b000028",
+          "text": "Final thoughts"
+        },
+        {
+          "block_id": "b000029",
+          "text": "Copy link"
+        },
+        {
+          "block_id": "b000030",
+          "text": "AI video generation saves time and cuts costs \u2014 that\u2019s a given. But before you dive in, it\u2019s important to ask: what do these tools really cost, and more importantly, what quality of output can you expect in return?"
+        },
+        {
+          "block_id": "b000031",
+          "text": "As AI video tools become more powerful and diverse, choosing the right one takes more than going with the most popular option. From advanced cinematic models to low-cost mobile tools, each platform serves a different purpose."
+        },
+        {
+          "block_id": "b000032",
+          "text": "This guide compares 15 leading AI video generators \u2014 breaking down their pricing, features, and how much video you can realistically produce at each subscription tier."
+        }
+      ],
+      "source_comparison": "Debatable stylistic scope: same-chunk paragraphs describe different purposes and choosing among diverse tools; suitability for creative needs is generic framing rather than a specific new tool feature. Independent negative verdict is not external factual truth."
+    }
+  ]
+}

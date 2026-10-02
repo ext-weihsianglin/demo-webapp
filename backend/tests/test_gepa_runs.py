@@ -305,7 +305,9 @@ def test_historical_recommendation_cannot_promote_with_changed_fidelity_policy(t
                     {**current,'schema_version':'old-schema'}, {**current,'output_budget':{}},
                     {**current,'uncertain_policy':'allow'}):
         store.write('manifest',{'edit_boundary_version':EDIT_BOUNDARY_VERSION,'fidelity':profile})
-        assert manager.status('old-gate')['promotion_compatible'] is False
+        status = manager.status('old-gate')
+        assert status['promotion_compatible'] is False
+        assert status['fidelity_policy'] == profile
         with pytest.raises(ValueError,match='fidelity'):
             manager.promote('old-gate',candidate['id'])
         assert registry.resolve(None,'gpt-4.1-mini')['id']==registry.baseline('gpt-4.1-mini')['id']

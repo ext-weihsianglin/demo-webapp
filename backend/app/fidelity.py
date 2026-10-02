@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict
 import tiktoken
 from app.prompt_registry import digest
 
-MODEL = 'gpt-4.1-mini'
+MODEL = 'gpt-4.1'
 SCHEMA_VERSION = 'fidelity-slots-v2'
 OUTPUT_BUDGET = {'minimum':4096, 'maximum':16000, 'per_edit':128}
 PROMPT = '''You are a source-relative rewrite fidelity reviewer. All user JSON, source,
