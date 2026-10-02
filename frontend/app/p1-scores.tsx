@@ -1,4 +1,5 @@
 'use client';
+import { FeatureHelp } from './feature-help';
 
 type TermMeta = {
   term: string;
@@ -80,17 +81,17 @@ const delta = (number: number) => `${number > 0 ? '+' : ''}${score(number)}`;
 const signed = (number: number, digits = 4) => `${number > 0 ? '+' : ''}${number.toFixed(digits)}`;
 const value = (number: number | null, digits = 4) => number === null ? 'Missing' : number.toFixed(digits);
 
-function EffectBars({ terms, field }: { terms: ExplanationTerm[]; field: 'delta_log_odds' | 'contribution_before' | 'contribution_after' }) {
+function EffectBars({ terms, field, weights }: { terms: ExplanationTerm[]; weights: Map<string, number>; field: 'delta_log_odds' | 'contribution_before' | 'contribution_after' }) {
   const changed = terms.filter(term => Math.abs(term[field]) > 1e-12)
     .sort((left, right) => Math.abs(right[field]) - Math.abs(left[field]));
   const top = changed.slice(0, 12);
   const rest = changed.slice(12).reduce((sum, term) => sum + term[field], 0);
-  const rows = top.map(term => ({ term: term.term, label: term.label, amount: term[field] }));
-  if (Math.abs(rest) > 1e-12) rows.push({ term: 'other', label: 'Other changed features', amount: rest });
+  const rows = top.map(term => ({ term: term.term, label: term.label, amount: term[field], meta: term as TermMeta | undefined }));
+  if (Math.abs(rest) > 1e-12) rows.push({ term: 'other', label: 'Other changed features', amount: rest, meta: undefined });
   const scale = Math.max(...rows.map(row => Math.abs(row.amount)), 1e-12);
   if (!rows.length) return <p className="source-help">No transformed feature contribution changed.</p>;
   return <div className="effect-bars">{rows.map(row => <div className="effect-row" key={row.term}>
-    <span title={row.term}>{row.label}</span>
+    <div>{row.meta ? <FeatureHelp term={row.term} label={row.label} rawFeature={row.meta.raw_feature} missing={row.meta.kind === 'missing_indicator'} weight={weights.get(row.term)} /> : <span title="Sum of remaining contributions; there is no single model weight for this group.">{row.label}</span>}</div>
     <div className="effect-track" aria-hidden="true"><i className={row.amount >= 0 ? 'positive' : 'negative'} style={{ width: `${50 * Math.abs(row.amount) / scale}%` }} /></div>
     <strong className={row.amount < 0 ? 'p1-regression' : ''}>{signed(row.amount)}</strong>
   </div>)}</div>;
@@ -105,12 +106,12 @@ function groupedTerms(terms: ExplanationTerm[]) {
 
 function QueryReceipt({ query, weights }: { query: QueryExplanation; weights: Map<string, number> }) {
   return <div className="query-receipt">
-    <p className="source-help">Feature effects add to <strong>{signed(query.delta_logit)}</strong> log odds. Probability changes are shown only for the complete model output.</p>
-    <EffectBars terms={query.terms} field="delta_log_odds" />
+    <p className="source-help">Feature effects add to <strong>{signed(query.delta_logit)}</strong> log odds. Probability changes are shown only for the complete model output. Weight +/− badges show the fixed coefficient sign; bars show the contribution. Click a feature name for its definition and weight.</p>
+    <EffectBars terms={query.terms} weights={weights} field="delta_log_odds" />
     <details className="p1-detail"><summary>Feature values and exact rewrite effects</summary>
       <div className="p1-table-wrap"><table className="p1-table feature-table"><thead><tr><th>Feature</th><th>Raw before / after</th><th>Imputed before / after</th><th>Standardized before / after</th><th>Weight</th><th>Contribution before / after</th><th>Rewrite effect</th></tr></thead><tbody>
         {groupedTerms(query.terms).flatMap(group => group.map((term, index) => <tr key={term.term} className={term.kind === 'missing_indicator' ? 'missing-term' : ''}>
-          <td title={term.term}>{index ? '↳ Missing state' : term.label}<small>{term.family} · {term.rewrite_role}</small></td>
+          <td title={term.term}><FeatureHelp term={term.term} label={index ? '↳ Missing state' : term.label} rawFeature={term.raw_feature} missing={term.kind === 'missing_indicator'} weight={weights.get(term.term)} /><small>{term.family} · {term.rewrite_role}</small></td>
           <td>{value(term.raw_before)} / {value(term.raw_after)}<small>Δ {value(term.raw_delta)}</small></td>
           <td>{value(term.imputed_before)} / {value(term.imputed_after)}</td>
           <td>{value(term.standardized_before)} / {value(term.standardized_after)}</td>
@@ -120,8 +121,8 @@ function QueryReceipt({ query, weights }: { query: QueryExplanation; weights: Ma
         </tr>))}
       </tbody></table></div>
     </details>
-    <details className="p1-detail"><summary>Explain original score</summary><EffectBars terms={query.terms} field="contribution_before" /></details>
-    <details className="p1-detail"><summary>Explain rewritten score</summary><EffectBars terms={query.terms} field="contribution_after" /></details>
+    <details className="p1-detail"><summary>Explain original score</summary><EffectBars terms={query.terms} weights={weights} field="contribution_before" /></details>
+    <details className="p1-detail"><summary>Explain rewritten score</summary><EffectBars terms={query.terms} weights={weights} field="contribution_after" /></details>
   </div>;
 }
 
@@ -133,7 +134,7 @@ function CrossQueryView({ explanation }: { explanation: P1Explanation }) {
   return <details className="p1-aggregate-detail"><summary>Across-query rewrite effects</summary>
     <p className="source-help">Each query cell is an exact log-odds effect. Signed means summarize them without hiding cancellation; this is not a decomposition of mean probability.</p>
     <div className="p1-table-wrap"><table className="p1-table heatmap"><thead><tr><th>Feature</th>{explanation.per_query.map(query => <th key={query.query_index} title={query.query}>Q{query.query_index + 1}</th>)}<th>Mean</th><th>Queries + / −</th></tr></thead><tbody>
-      {terms.map(term => <tr key={term.term}><td title={term.term}>{term.label}</td>{[...queries.values()].map(query => {
+      {terms.map(term => <tr key={term.term}><td><FeatureHelp term={term.term} label={term.label} rawFeature={term.raw_feature} missing={term.kind === 'missing_indicator'} weight={explanation.global_terms.find(item => item.term === term.term)?.coefficient} /></td>{[...queries.values()].map(query => {
         const effect = query.terms.find(item => item.term === term.term)!.delta_log_odds;
         const alpha = .08 + .42 * Math.abs(effect) / scale;
         return <td key={query.query_index} title={`${query.query}: ${signed(effect)}`} style={{ backgroundColor: effect >= 0 ? `rgba(79,128,95,${alpha})` : `rgba(181,92,80,${alpha})` }}>{signed(effect)}</td>;
@@ -156,7 +157,7 @@ function GlobalWeights({ explanation }: { explanation: P1Explanation }) {
     <p className="source-help">Standardized model weights describe the fitted classifier. They are not rewrite importance or editing recommendations.</p>
     {groups.map(([label, includes]) => {
       const terms = explanation.global_terms.filter(includes).sort((left, right) => Math.abs(right.coefficient) - Math.abs(left.coefficient));
-      return terms.length > 0 && <section className="weight-group" key={label}><h4>{label}</h4><div className="effect-bars">{terms.map(term => <div className="effect-row" key={term.term}><span title={term.term}>{term.label}<small>{term.rewrite_role}</small></span><div className="effect-track" aria-hidden="true"><i className={term.coefficient >= 0 ? 'positive' : 'negative'} style={{ width: `${50 * Math.abs(term.coefficient) / scale}%` }} /></div><strong className={term.coefficient < 0 ? 'p1-regression' : ''}>{signed(term.coefficient)}</strong></div>)}</div></section>;
+      return terms.length > 0 && <section className="weight-group" key={label}><h4>{label}</h4><div className="effect-bars">{terms.map(term => <div className="effect-row" key={term.term}><div><FeatureHelp term={term.term} label={term.label} rawFeature={term.raw_feature} missing={term.kind === 'missing_indicator'} weight={term.coefficient} /><small>{term.rewrite_role}</small></div><div className="effect-track" aria-hidden="true"><i className={term.coefficient >= 0 ? 'positive' : 'negative'} style={{ width: `${50 * Math.abs(term.coefficient) / scale}%` }} /></div><strong className={term.coefficient < 0 ? 'p1-regression' : ''}>{signed(term.coefficient)}</strong></div>)}</div></section>;
     })}
   </details>;
 }
