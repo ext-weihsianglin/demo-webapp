@@ -9,10 +9,6 @@ __pycache__/
 *.tsbuildinfo
 backend/data/
 
-prompt-registry/p2/*/candidates/
-prompt-registry/p2/*/selected.json
-
-# Reviewed, opt-in QA prompt shipped with the app; generated candidates stay local.
-!prompt-registry/p2/gpt-4.1-mini/candidates/
-prompt-registry/p2/gpt-4.1-mini/candidates/*
-!prompt-registry/p2/gpt-4.1-mini/candidates/gpt-4.1-mini--procedure--4dc3c4a39237157a3b1a3b02/
+# Prompt candidates and selected defaults are versioned with the application.
+# Ignore only interrupted atomic-write files.
+prompt-registry/**/*.tmp

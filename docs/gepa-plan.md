@@ -72,7 +72,7 @@ Ten workers can reduce elapsed time for independent pages; this is not a promise
 
 Content Studio gets both Model and Prompt selectors. Model selection filters compatible prompts. Prompt changes invalidate stale drafts; every request/result records the exact prompt identity and hash.
 
-**Proposed storage:** committed baseline references and fixed contracts, ignored local candidate artifacts and model-default pointers, and ignored run directories containing traces. Keep baseline v7 intact. Promotion updates a local model-default pointer, without generating a Git commit or deployment.
+**Storage:** commit baseline references, fixed contracts, candidate artifacts and model-default pointers in `prompt-registry/`. Run directories containing traces remain ignored. Keep baseline v7 intact. Promotion updates the model-default pointer; commit it together with its referenced candidate. Promotion itself does not generate a Git commit or deployment.
 
 ## Delivery sequence
 

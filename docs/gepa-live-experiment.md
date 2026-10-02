@@ -262,3 +262,26 @@ The user requested procedure validation and a source audit before further optimi
 The 12 saved-edit fidelity replay produced 11 verdicts and one timeout. Three disputes with the initial assistant assessments involved omitted details; three newly authored controls preserving those details all passed. An explicit retry of the unavailable case was rejected for omissions. The judge showed variability and one flawed rationale, but this audit did not establish a reason to weaken its policy. The original prompt/policy remains in service. These are assistant source assessments, not independent human labels or a measured false-positive rate. See [the complete audit and reproducible fixtures](gepa-fidelity-calibration.md).
 
 Checks: 175 backend tests passed with two opt-in checks skipped; 27 targeted coordinator/API/procedure tests passed again after refining a validator false-positive edge case; diff checks passed. The backend was reloaded only after all runs were terminal. No full GEPA run, held-out comparison, P1 rescoring or promotion was started.
+
+
+### Soft fidelity penalties for GEPA research — 2026-10-02
+
+User requested penalties instead of the binary factual gate during optimization. Mechanically valid proposals now receive raw proposed P1 minus per-block factual deductions (default unsupported .05, uncertain .02, UI-configurable). Reflection receives exact rationales, evidence/block IDs and reward decomposition. Admission/Pareto/numerical ranking use reward; raw P1 and per-query deltas remain distinct. Ordinary drafting keeps its factual checks, and technical/mechanical failures keep their existing accounting. No proposal is partially applied or automatically promoted. See [the reward contract](gepa-fidelity-penalty.md). Historical binary-gate decisions above remain dated evidence.
+
+### P1 v7.1 penalty trial — 2026-10-02
+
+Started `0befe8c8a6ce417aa30a317946dbb4b2` after auditing settings and preparing `validation-90-v71` from the persistent Markdownify corpus. The v7.1 joined records omit split labels: all 9,432 ordered source/snapshot identities match v7, and corpus checksums match, so preparation uses the authoritative v7 split assignments with the current v7.1 parser/scorer contract. Fresh eligibility/selection preserves 89 of 90 former pages with unchanged roles, queries and payloads; one page differs. Historical comparisons therefore are not exact paired trials. Old artifacts remain intact.
+
+The run uses GPT-5-mini rewriting/reflection, GPT-5 fidelity, two proposals, two reflection pages per proposal, concurrency 10, 100 maximum rewrite attempts, 6,000 procedure characters, .05 unsupported/.02 uncertain per-block penalties, and seed 2. The 30-page baseline selection starts first. Complete 128k request budgeting, output reserves, logged repair, technical circuit breaker and explicit promotion remain enabled. The backend explicitly uses the shared persistent embedding store and pinned v7.1 model. Reflection's descriptive model label was corrected from v7 to v7.1. See [settings audit](../verification/gepa-v71-penalty-settings-audit.json). Launch is operational evidence, not a quality result; no prompt was promoted.
+
+### Completed penalty trial and promotion — 2026-10-02
+
+Run `0befe8c8` completed two proposals with 68 rewrites and no technical failures. Candidate `59288bcd` improved selection raw mean P1 from .4073635893 to .4084333919 and penalized reward from .2280302559 to .3544333919. Most improvement is reduced factual penalties, not raw P1. The user explicitly requested promotion; the selected GPT-5-mini default is now `gpt-5-mini--procedure--6b91e526e2c5940d0d11774d`. Ordinary drafting still applies its factual gate. No independent held-out superiority is established.
+
+The reported promotion failure was stale UI state: the server persisted selection, but the mounted selector did not refetch its catalog and still labeled the baseline selected. Promotion now refreshes that catalog, selects the promoted prompt and confirms success beside the action. Verified through the actual browser button and registry API. New defaults are 1,000 rewrite attempts, 30 parallel page evaluations and 50 candidate rounds; the latest 1,000 log events are visible. These changes do not alter historical run configurations or start a new run. Verification: 181 backend tests passed, two opt-in skipped; frontend build/typecheck and diff checks passed.
+
+### 30-worker cache file-limit correction — 2026-10-02
+
+Run `gpt-5-mini-fidelity-search-20261002-155633-22a1f675` failed during original P1 scoring before any rewrite dispatch. A cache-only replay with 30 workers reproduced `EMFILE` (process soft limit 256; each upstream reader retains up to 16 mmap shard handles). Cache export is now serialized and closes its reader before releasing the lock; page/LLM concurrency remains 30. File-access failures carry safe reason codes into page events. The identical 30-page, 30-worker replay now scores all pages successfully without live calls. Backend checks: 183 passed, two opt-in skipped.
+
+Retried as `evidence-first-penalty-search-20261002-160122-ff558978` with the same promoted prompt, frozen dataset, 1,000 rewrite attempts, 50 candidate proposals, penalties and model settings. Failed run artifacts remain preserved. Retry startup is not a quality result.

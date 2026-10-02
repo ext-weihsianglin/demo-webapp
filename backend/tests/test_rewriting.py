@@ -264,3 +264,18 @@ def test_link_wrapped_paragraph_is_read_only_even_without_block_links():
     payload = json.loads(client.requests[0]['input'][0]['content'])
     assert linked['text'] in {b['text'] for b in payload['read_only_context']}
     assert linked in outcome['document']['blocks']
+
+
+def test_research_factual_flags_do_not_relax_ordinary_drafts_or_mechanical_checks():
+    document,chunks=extract_document(SOURCE,'html','https://example.com/shoes','example.com')
+    def flagged(proposal,response,data):
+        proposal['edits'][0]['review_flags']=['unsupported_addition']
+    args=(document,chunks,'Road shoes?','Preserve original',False)
+    assert rewrite(*args,client=StubClient(flagged))['status']=='unsupported_output'
+    researched=rewrite(*args,client=StubClient(flagged),research_fidelity=True)
+    assert researched['status']=='succeeded'
+    assert 'unsupported_addition' in researched['changes'][0]['review_flags']
+    def invalid(proposal,response,data):
+        flagged(proposal,response,data)
+        proposal['edits'][0]['evidence']=[{'block_id':'nonexistent'}]
+    assert rewrite(*args,client=StubClient(invalid),research_fidelity=True)['status']=='invalid_output'

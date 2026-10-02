@@ -40,15 +40,20 @@ Do not copy example brands, topic categories, prices or claims into the reusable
 procedure. Few-shot examples are not enabled in this contract yet; do not embed
 source-specific demonstrations or page facts in the procedure.
 
-The served P1 v7 uses original-space query-to-document similarities plus context
+The served P1 v7.1 uses original-space query-to-document similarities plus context
 features. Consider accurate supported subjects, relationships and answers in
 editable body headings and paragraphs, not just word substitutions. Title/URL
 metadata, block structure, source inventory and parser warnings remain fixed.
 Feature signs are hypotheses, not guarantees. Do not manipulate length/vocabulary
 ratios, flags or scores through padding, deletion of facts, repetition or stuffing.
 Optimize measured mean P1 while inspecting every query regression and failures.
-One unsupported edit rejects the entire proposal, erasing its potential score gain.
-Use fidelity findings to distinguish a method's failures from score improvements.
+Research reward is the proposed page's raw mean P1 minus per-edit fidelity penalties.
+Unsupported and uncertain findings reduce reward; their detailed factual rationales,
+source block IDs and deductions are included in Feedback.reward_components.
+Use those reasons to fix specific added claims, omissions, changed numbers or lost
+qualifiers in the next procedure. A lower penalty can improve reward even before
+raw P1 improves. Inspect both signals. Penalties are research feedback, not permission
+to invent facts. Ordinary drafts retain fidelity findings for explicit human review.
 
 Never weaken the fixed security, factual, schema, evidence, same-chunk, protected
 content or language constraints. Preserve scope, attribution, qualifications,
@@ -138,6 +143,7 @@ class Adapter:
                 'Generated Outputs':outputs,
                 'Feedback':{'status':result['status'],'original':result['original'],'after':result['after'],
                             'delta':result['delta'],'fidelity':result.get('fidelity'),
+                            'reward_components':result.get('reward_components'),
                             'proposed_edit_count':len(changes) if edits_available else None,
                             'proposed_edits_by_type':dict(Counter(block_types[c['source_id']] for c in changes)) if edits_available else None,
                             'validation':result.get('rewrite',{}).get('summary')}})
@@ -260,7 +266,11 @@ class Callbacks(GEPACallback):
                      'after':proposed['score'],'delta':proposed['score']-original['score'],
                      'baseline_delta':proposed['score']-seed['score']}
                     for original,seed,proposed in zip(result['original']['per_query'],baseline['after']['per_query'],result['after']['per_query'])]})
-            entry.update(status='evaluated',selection_mean=event['average_score'],failure_rate=failures/len(results),
+            entry.update(status='evaluated',selection_reward=event['average_score'],
+                         selection_mean=sum(r['after']['mean_score'] for r in results)/len(results),
+                         selection_penalty=sum(r.get('penalty',0) for r in results)/len(results),
+                         fidelity_violation_rate=sum(bool(r.get('fidelity_violation')) for r in results)/len(results),
+                         failure_rate=failures/len(results),
                          parents=parents,selection_pages=len(results),query_deltas=comparisons)
             a.full_scores[record['id']]=entry
             for candidate_id, candidate_entry in a.full_scores.items():
@@ -270,7 +280,7 @@ class Callbacks(GEPACallback):
                     for (h,page_id),value in a.evaluator.cache.items()
                     if value['candidate_id']==candidate_id and value['role']=='selection')
                 a.store.write('candidate-'+candidate_id,candidate_entry)
-            a.store.event('selection',candidate_id=record['id'],mean=entry['selection_mean'],failure_rate=entry['failure_rate'])
+            a.store.event('selection',candidate_id=record['id'],mean=entry['selection_mean'],reward=entry['selection_reward'],penalty=entry['selection_penalty'],failure_rate=entry['failure_rate'])
 
     def on_candidate_rejected(self,event):
         with self.adapter.lock:

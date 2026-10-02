@@ -89,14 +89,31 @@ def test_real_gepa_mutates_selects_and_saves_without_reflection_leakage(tmp_path
     assert manager.store(run['id']).read('manifest')['edit_boundary_version'] == 'body-content-v5'
 
 
-def test_semantic_rejection_keeps_original_reward_without_technical_breaker(tmp_path,monkeypatch):
+def test_fidelity_penalty_scores_proposals_and_reaches_reflection_without_breaker(tmp_path,monkeypatch):
+    import pytest
     make_dataset(tmp_path,monkeypatch)
-    manager=RunManager(registry=PromptRegistry(tmp_path/'registry'),client=ResearchClient('unsupported'),scorer=scorer,directory=tmp_path/'runs')
+    client=ResearchClient('unsupported')
+    manager=RunManager(registry=PromptRegistry(tmp_path/'registry'),client=client,scorer=scorer,directory=tmp_path/'runs')
     final=wait(manager,manager.start(RunConfig(dataset_id='fixture',candidates=1,enable_live_calls=True))['id'])
-    assert final['status']=='completed'
-    assert final['recommendation'] is None and final['budget']['technical_failures']==0
-    baseline=next(c for c in final['candidates'] if c.get('selection_pages')==30)
-    assert baseline['selection_mean']==.2 and baseline['failure_rate']==1
+    assert final['status']=='completed' and final['recommendation']
+    assert final['budget']['technical_failures']==0
+    baseline=next(c for c in final['candidates'] if c['id'].endswith('--rewrite-page-v7'))
+    candidate=next(c for c in final['candidates'] if c['id']==final['recommendation'])
+    assert baseline['selection_mean']==pytest.approx(.4)
+    assert baseline['selection_reward']==pytest.approx(.35)
+    assert candidate['selection_mean']==pytest.approx(.6)
+    assert candidate['selection_reward']==pytest.approx(.55)
+    assert baseline['failure_rate']==0 and baseline['fidelity_violation_rate']==1
+    feedback=client.reflection_examples[0]['Feedback']
+    component=feedback['reward_components']
+    assert component['fidelity_penalty']==.05
+    assert component['reward']==pytest.approx(component['raw_p1']-.05)
+    assert component['factual_violations'][0]['reason']=='Unsupported certainty.'
+    assert component['factual_violations'][0]['block_id']
+    exported=manager.store(final['id']).export()
+    assert exported['manifest']['reward_policy']['unsupported_per_edit']==.05
+    row=next(v for k,v in exported['artifacts'].items() if k.startswith('evaluation-'))
+    assert row['status']=='evaluated_with_penalty' and row['after']['mean_score']!=row['original']['mean_score']
 
 
 def test_reasoning_reflection_request_matches_persisted_run_settings(tmp_path, monkeypatch):
@@ -312,20 +329,21 @@ def test_full_reflection_context_cannot_dispatch_an_oversized_request(tmp_path):
     assert len(dataset['editorial_strategy'][0]['Inputs']['source'][0]['text'])>1000000
 
 
-def test_rewriter_unsupported_flags_are_semantic_failures_not_infrastructure(tmp_path, monkeypatch):
+def test_rewriter_factual_flags_are_penalties_not_infrastructure_failures(tmp_path, monkeypatch):
     from app.gepa.evaluation import PageEvaluator, AttemptBudget
     make_dataset(tmp_path, monkeypatch)
     pages = load_dataset('fixture')['pages'][:3]
     for flag in ('unsupported_addition', 'missing_evidence'):
-        client = StubClient(lambda proposal, response, data:
-            proposal['edits'][0].update(review_flags=[flag]))
+        client = ResearchClient()
+        client.mutate = lambda proposal, response, data: proposal['edits'][0].update(review_flags=[flag])
         budget = AttemptBudget(100)
         evaluator = PageEvaluator(budget, 1, client=client, scorer=scorer)
         results = evaluator.evaluate(pages, PromptRegistry(tmp_path/'registry').baseline('gpt-4.1-mini'))
         assert len(results) == 3
-        assert all(r['failed'] and r['status'] == 'retained_original' for r in results)
-        assert all(r['after'] == r['original'] and r['score'] == .2 for r in results)
-        assert all(r['rewrite']['status'] == 'unsupported_output' for r in results)
+        assert all(not r['failed'] and r['status'] == 'evaluated_with_penalty' for r in results)
+        assert all(r['raw_p1'] == .4 and r['penalty'] == (.05 if flag=='unsupported_addition' else .02) for r in results)
+        assert all(r['rewrite']['status'] == 'succeeded' for r in results)
+        assert all(r['reward_components']['factual_violations'][0]['category']=='rewriter_self_report' for r in results)
         assert all(not r['technical_failure'] for r in results)
         assert budget.snapshot()['technical_failures'] == 0
         assert budget.snapshot()['stop_reason'] is None
@@ -367,6 +385,7 @@ def test_historical_recommendation_cannot_promote_under_new_edit_boundary(tmp_pa
     from app.prompt_registry import digest
     store.write('manifest', {'edit_boundary_version':EDIT_BOUNDARY_VERSION, 'component_contract':'query-procedure-v1',
         'component_profile':registry.procedure_contract,
+        'reward_policy':__import__('app.gepa.reward',fromlist=['policy']).policy(),
         'request_budget':__import__('app.request_budget',fromlist=['PROFILE']).PROFILE, 'fidelity':{
         'model':MODEL,'prompt_hash':digest(PROMPT),'schema_version':SCHEMA_VERSION,
         'output_budget':OUTPUT_BUDGET,'batch_size':BATCH_SIZE,'reasoning_effort':REASONING_EFFORT,

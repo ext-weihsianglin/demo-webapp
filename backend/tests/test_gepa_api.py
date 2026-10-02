@@ -21,6 +21,8 @@ def test_http_research_requires_explicit_live_flag_and_exports_promotable_result
     started=client.post('/api/gepa/runs',json={'dataset_id':'fixture','candidates':1,'enable_live_calls':True})
     assert started.status_code==202
     identity=started.json()['id']
+    assert identity.startswith('gpt-4-1-mini-fidelity-search-')
+    assert started.json()['display_name'] == identity
     for _ in range(300):
         result=client.get('/api/gepa/runs/'+identity).json()
         if result['status'] not in ('running','preflighting','stopping'):

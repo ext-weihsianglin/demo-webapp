@@ -6,6 +6,7 @@ Markdown as a new snapshot or change metadata to inflate a score.
 """
 from copy import deepcopy
 from functools import lru_cache
+import errno
 import hashlib
 import os
 import sqlite3
@@ -76,7 +77,11 @@ def score_document(document, content, format, queries, *, provider=None, cache_r
     except EmbeddingUnavailable as error:
         return {**common, 'status': 'unavailable', 'reason': error.status, 'embedding': error.telemetry,
                 'summary': 'P1 embedding inputs unavailable. Cache misses require explicitly enabled live embeddings; no scores substituted.', 'per_query': []}
-    except (ValueError, KeyError, TypeError, OSError, sqlite3.Error):
+    except OSError as error:
+        reason = 'file_descriptor_limit' if error.errno in (errno.EMFILE, errno.ENFILE) else 'scoring_io_error'
+        return {**common, 'status': 'unavailable', 'reason': reason,
+                'summary': 'P1 local file access failed; no scores substituted.', 'per_query': []}
+    except (ValueError, KeyError, TypeError, sqlite3.Error):
         return {**common, 'status': 'unavailable', 'summary': 'P1 model or feature validation failed. No mock scores substituted.', 'per_query': []}
 
 
