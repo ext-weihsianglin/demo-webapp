@@ -12,8 +12,9 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
+from app.language_guard import confident_language, compare_language
 
-PROMPT_VERSION = 'rewrite-page-v5'
+PROMPT_VERSION = 'rewrite-page-v6'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 def model_options():
@@ -225,6 +226,7 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
         payload = {'task': 'Rewrite this entire page in one coordinated proposal for all target queries.', 'scope': 'whole_page', 'target_queries': queries, 'p1_feedback': p1_feedback or {'status': 'unavailable'},
                    'optimization_objective': 'Increase the equal-weight mean P1 score across every distinct target query; avoid per-query regressions. Preserve source evidence even if scores cannot improve.',
                    'editorial_tone': tone, 'allow_structure': allow_structure,
+                   'language_policy': {'mode': 'preserve_each_source_block', 'translation_allowed': False, 'target_queries_do_not_set_output_language': True},
                    'snapshot_id': document['snapshot_id'], 'extraction': document['selection'],
                    'source_metadata': metadata, 'heading_outline': document.get('outline', []),
                    'chunks': [{**{k: chunk[k] for k in ('order', 'block_ids', 'heading_path')}, 'chunk_id': chunk_alias[chunk['chunk_id']]} for chunk in batch],
@@ -234,6 +236,8 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
             block = blocks[identity]
             item = {k: block.get(k) for k in ('block_id', 'order', 'parent_id', 'type', 'text', 'heading_level')}
             item['chunk_id'] = chunk_for[identity]
+            if editable(block):
+                item['source_language_hint'] = confident_language(block['text'])
             payload['editable_blocks' if editable(block) else 'read_only_context'].append(item)
         data = json.dumps(payload, ensure_ascii=False)
         count = len(encoding.encode(PROMPT + data + json.dumps(response_schema(document, batch, allow_structure)))) + 256
@@ -324,6 +328,17 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
             changed = [edit for edit in proposal.edits if edit.after.strip() != edit.before.strip()
                        or (edit.heading_level is not None and edit.heading_level != blocks[edit.block_id]['heading_level'])]
             telemetry['ignored_unchanged_edits'] = telemetry.get('ignored_unchanged_edits', 0) + len(proposal.edits) - len(changed)
+            for edit in changed:
+                language = compare_language(blocks[edit.block_id]['text'], edit.after)
+                if language['status'] == 'changed':
+                    raise RewriteFailure('invalid_output',
+                        f'Block {edit.block_id} changed language from {language["source_language"]} to {language["proposed_language"]}; no draft applied.',
+                        {'edit_block_id': edit.block_id, 'checks_failed': ['language_changed'], **language})
+                if language['status'] == 'unverified':
+                    edit.review_flags.append('language_preservation_unverified')
+                    telemetry['language_unverified_edits'] = telemetry.get('language_unverified_edits', 0) + 1
+            if telemetry.get('language_unverified_edits'):
+                accumulated_flags.append('Language preservation could not be verified for short, mixed or ambiguous edits; review required.')
             edits.extend(changed)
             summaries.append(proposal.summary)
         if len({e.block_id for e in edits}) != len(edits):

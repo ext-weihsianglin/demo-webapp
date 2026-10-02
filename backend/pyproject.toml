@@ -8,6 +8,7 @@ dependencies = [
     "content-optimization-exploration==0.1.1",
     "openai>=2,<3",
     "tiktoken>=0.12,<1",
+    "lingua-language-detector>=2,<3",
 ]
 [tool.uv.sources]
 content-optimization-exploration = { path = "packages/content_optimization_exploration-0.1.1-py3-none-any.whl" }

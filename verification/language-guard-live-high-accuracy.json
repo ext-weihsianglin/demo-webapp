@@ -1,0 +1,32 @@
+{
+  "http_status": 200,
+  "status": "succeeded",
+  "telemetry": {
+    "prompt_version": "rewrite-page-v6",
+    "model": "gpt-4.1-mini",
+    "status": "succeeded",
+    "calls": 1,
+    "input_tokens": 18928,
+    "output_tokens": 2378,
+    "estimated_cost_usd": null,
+    "usage_complete": true,
+    "tokenizer": "o200k_base",
+    "budgeted_input_tokens": 22042,
+    "planned_calls": 1,
+    "original_chunks": 22,
+    "context_tokens": 128000,
+    "output_reserve_tokens": 16000,
+    "ignored_unchanged_edits": 0,
+    "language_unverified_edits": 1,
+    "latency_ms": 19229
+  },
+  "changes": 18,
+  "detector": "Lingua high-accuracy, lazy models",
+  "regression_suite": "83 passed, one opt-in live suite test skipped",
+  "saved_english_replay": {
+    "edits": 45,
+    "preserved": 41,
+    "unverified": 4,
+    "false_language_changes": 0
+  }
+}
