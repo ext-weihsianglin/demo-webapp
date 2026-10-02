@@ -85,6 +85,7 @@ def test_real_gepa_mutates_selects_and_saves_without_reflection_leakage(tmp_path
     manager.promote(run['id'],candidate['id'])
     assert manager.registry.resolve(None,'gpt-4.1-mini')['id']==candidate['id']
     assert manager.store(run['id']).export()['events']
+    assert manager.store(run['id']).read('manifest')['semantic_rewrite_failures'] == ['unsupported_output']
 
 
 def test_semantic_rejection_keeps_original_reward_without_technical_breaker(tmp_path,monkeypatch):
@@ -217,3 +218,38 @@ def test_reflection_uses_complete_relevant_source_text_once_and_schema_length_bo
     assert dataset['editorial_strategy'][0]['Inputs']['source_scope'] == 'changed_chunks'
     adapter.propose_new_texts({'editorial_strategy':registry.editorial},dataset,['editorial_strategy'])
     assert client.schema['properties']['editorial_strategy']['maxLength'] == int(len(registry.editorial)*1.5)
+
+
+def test_rewriter_unsupported_flags_are_semantic_failures_not_infrastructure(tmp_path, monkeypatch):
+    from app.gepa.evaluation import PageEvaluator, AttemptBudget
+    make_dataset(tmp_path, monkeypatch)
+    pages = load_dataset('fixture')['pages'][:3]
+    for flag in ('unsupported_addition', 'missing_evidence'):
+        client = StubClient(lambda proposal, response, data:
+            proposal['edits'][0].update(review_flags=[flag]))
+        budget = AttemptBudget(100)
+        evaluator = PageEvaluator(budget, 1, client=client, scorer=scorer)
+        results = evaluator.evaluate(pages, PromptRegistry(tmp_path/'registry').baseline('gpt-4.1-mini'))
+        assert len(results) == 3
+        assert all(r['failed'] and r['status'] == 'retained_original' for r in results)
+        assert all(r['after'] == r['original'] and r['score'] == .2 for r in results)
+        assert all(r['rewrite']['status'] == 'unsupported_output' for r in results)
+        assert all(not r['technical_failure'] for r in results)
+        assert budget.snapshot()['technical_failures'] == 0
+        assert budget.snapshot()['stop_reason'] is None
+        assert len(client.requests) == 3
+
+
+def test_malformed_rewriter_output_still_trips_technical_breaker(tmp_path, monkeypatch):
+    from app.gepa.evaluation import PageEvaluator, AttemptBudget
+    make_dataset(tmp_path, monkeypatch)
+    pages = load_dataset('fixture')['pages'][:3]
+    client = StubClient(lambda proposal, response, data:
+        proposal['edits'][0].update(after='Invalid\nmultiline replacement'))
+    budget = AttemptBudget(100)
+    evaluator = PageEvaluator(budget, 1, client=client, scorer=scorer)
+    results = evaluator.evaluate(pages, PromptRegistry(tmp_path/'registry').baseline('gpt-4.1-mini'))
+    assert all(r['failed'] and r['technical_failure'] for r in results)
+    assert all(r['rewrite']['status'] == 'invalid_output' for r in results)
+    assert budget.snapshot()['technical_failures'] == 3
+    assert budget.snapshot()['stop_reason'] == 'circuit_breaker'

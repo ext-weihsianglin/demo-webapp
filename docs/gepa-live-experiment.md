@@ -52,6 +52,14 @@ The [revised live diagnosis](../verification/gepa-judge-diagnostic-v2.json) cove
 
 New run manifests freeze the judge schema version and output-budget policy as well as its instructions. This changes the gate profile, so baseline and challengers must be evaluated together in a fresh run; old and new control scores are not interchangeable. Reflection now suggests focused one-paragraph policies when broad proposals fail, preserving the complete input, nullable edit slots and whole-proposal guardrails. The successful optimization, winner promotion/restart and paired held-out comparison remain pending.
 
+## Sixth frozen trial and instrumentation
+
+Run `14fb1db59c26428daa7f47866d7d2250` freezes the revised gate and reflection instructions with the same 90-page roles, models, seed 1 and 100-attempt cap. Its baseline completed 30 selection pages at mean 0.407759 and failure fraction 0.8. The first full challenger `gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8` scored 0.410894 with failure fraction 0.7; it meets validation promotion criteria provisionally while the run continues. This is validation evidence, not a held-out result or automatic promotion.
+
+Its saved traces exposed self-reported `unsupported_output` responses being counted as technical failures. These remain rejected proposals with original-score fallback and candidate failure penalties, but a correction now treats them as semantic feedback rather than infrastructure failures. The real stubbed rewrite pipeline reproduces both unsupported-addition and missing-evidence flags; malformed output still trips the technical breaker. New manifests record the semantic status list. The active sixth trial keeps its originally loaded accounting unchanged until terminal; its saved technical counts are not retroactively rewritten.
+
+At the current browser width, the two-column research layout pushed mean P1 and failure columns out of view. The research panels now stack at narrower desktop widths; the candidate table uses a shorter ID column and per-query tables have explicit horizontal overflow containers. Browser checks show all four comparison columns together while progress and open candidate details survive hot reload. Backend verification: 130 passed, two explicitly opt-in checks skipped; frontend production build/typecheck pass. Both review axes found no defects in the accounting correction.
+
 ## Remaining limits
 
 Whole-proposal rejection can retain the original page when only one edit fails fidelity, reducing accepted sample yield. The frozen v7 context-feature training/serving mismatch remains deliberately deferred under upstream issue #15. Model stochasticity and two already exposed P1-test hosts limit dogfood conclusions. The agreed 100-attempt cap may permit fewer than two fully evaluated challengers; incomplete selection vectors cannot be ranked or promoted.

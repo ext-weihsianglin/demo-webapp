@@ -14,7 +14,7 @@ from app.fidelity import PROMPT as GATE_PROMPT, MODEL as GATE_MODEL, SCHEMA_VERS
 from app.prompt_registry import digest
 from app.gepa.datasets import load_dataset, root
 from app.gepa.storage import RunStore, safe_id
-from app.gepa.evaluation import AttemptBudget, PageEvaluator, RunStopped
+from app.gepa.evaluation import AttemptBudget, PageEvaluator, RunStopped, SEMANTIC_REWRITE_FAILURES
 from app.gepa.adapter import Adapter, Callbacks, REFLECTION_PROMPT
 
 TERMINAL={'completed','stopped','failed','interrupted'}
@@ -86,6 +86,7 @@ class RunManager:
                 'baseline':baseline,'rewrite_settings':settings.__dict__,
                 'fidelity':{'model':GATE_MODEL,'prompt_hash':digest(GATE_PROMPT),'schema_version':SCHEMA_VERSION,
                             'output_budget':OUTPUT_BUDGET,'uncertain_policy':'reject_whole_proposal'},
+                'semantic_rewrite_failures':sorted(SEMANTIC_REWRITE_FAILURES),
                 'reflection_prompt_hash':digest(REFLECTION_PROMPT),'gepa_version':importlib.metadata.version('gepa'),
                 'cache_scope':'per_run','merge_enabled':False,'created_at':datetime.now(timezone.utc).isoformat()}
             store.write('manifest',manifest)

@@ -9,6 +9,9 @@ from app.rewriting import rewrite
 from app.scoring import score_document
 
 
+SEMANTIC_REWRITE_FAILURES = frozenset({'unsupported_output'})
+
+
 class RunStopped(Exception):
     pass
 
@@ -149,7 +152,7 @@ class PageEvaluator:
             result.update(rewrite=outcome, original_document=document)
             after = before
             failure = outcome['status'] not in ('succeeded','abstained')
-            technical = failure
+            technical = failure and outcome['status'] not in SEMANTIC_REWRITE_FAILURES
             if outcome['status'] == 'succeeded':
                 self.budget.check()
                 gate = check_fidelity(document,outcome['changes'],client=GuardedClient(self._client(),self.budget))
