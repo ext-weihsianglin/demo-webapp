@@ -34,11 +34,13 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--live',action='store_true');parser.add_argument('--example-id');parser.add_argument('--example-query', action='append', help='Repeat to override the full example query set');parser.add_argument('--only-example',action='store_true');parser.add_argument('--output',required=True);parser.add_argument('--samples',default='evaluation/samples.json');args=parser.parse_args()
     if Path(args.output).exists():
         parser.error('Output exists; choose a fresh path to preserve frozen reports')
+    if not args.live:
+        os.environ['P1_ENABLE_LIVE_EMBEDDINGS'] = '0'
     samples=json.loads(Path(args.samples).read_text())['samples']
     if args.only_example:
         samples=[]
     if args.example_id:
-        samples.append({'id':'extraction-heldout-'+args.example_id,**load_example(args.example_id)})
+        samples.append({'id':'p1-test-'+args.example_id,**load_example(args.example_id)})
     if args.example_query and args.example_id:
         samples[-1]['queries']=args.example_query
     report={'prompt_version':PROMPT_VERSION,'live_enabled':args.live,'quality_scope':'Exploratory baseline; lexical proxies are not quality grades. Human review required. No measured citation uplift.','runs':[]}

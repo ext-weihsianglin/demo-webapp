@@ -8,7 +8,9 @@ from copy import deepcopy
 from functools import lru_cache
 from io import BytesIO
 import hashlib
+import json
 import os
+import sqlite3
 from pathlib import Path
 
 import joblib
@@ -16,10 +18,15 @@ import numpy as np
 import preprocessing
 from preprocessing.quality import source_inventory
 from scripts.analyze_content import words
-from trad_ml_scorer import retention_features as features
+from trad_ml_scorer import robust_features as features
+from trad_ml_scorer.feature_dependencies import feature_group
+from trad_ml_scorer.semantic_features import NAMES
+from app.embeddings import EmbeddingUnavailable, EMBEDDING_IDENTITY, semantic_features
 
-MODEL_SHA256 = 'f78ca1f8e51f147a5b52a16cafed6819d165f18eff8bf6e0f5ed61cf5c918b92'
-INTERPRETATION = 'Frozen P1 v2: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Extraction-held-out does not imply P1-test-held-out.'
+MODEL_SHA256 = '2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b'
+FEATURE_VERSION = 'lr-semantic-v7'
+SERVING_POLICY = 'markdownify-context-v1'
+INTERPRETATION = 'P1 v7 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Context features use current Markdownify documents; frozen-training parser mismatch is deferred in upstream issue #15.'
 OBJECTIVE = 'Equal-weight mean across distinct usable target queries. Review every per-query regression.'
 
 
@@ -31,40 +38,33 @@ def _load_model(path, size, mtime):
     if hashlib.sha256(payload).hexdigest() != MODEL_SHA256:
         raise ValueError('Frozen P1 model hash mismatch')
     bundle = joblib.load(BytesIO(payload))
-    if (bundle['feature_version'] != features.FEATURE_VERSION
-            or bundle['parser_policy'] != features.PARSER_POLICY
-            or bundle['feature_names'] != features.FEATURE_NAMES):
+    if (bundle['version'] != FEATURE_VERSION or bundle['variant'] != 'semantic_context'
+            or bundle['serializer_version'] != 'blocks-v3-markdownify'
+            or bundle['embedding_model']['embedding_identity'] != EMBEDDING_IDENTITY
+            or bundle['feature_names'][:10] != NAMES or len(bundle['feature_names']) != 55
+            or any(feature_group(name) not in ('prompt', 'doc') for name in bundle['feature_names'][10:])):
         raise ValueError('Unsupported P1 feature contract')
     root = Path(preprocessing.__file__).resolve().parent.parent
-    checked = set()
-    for filename, expected in bundle['parser_hashes'].items():
-        if filename.startswith('preprocessing/'):
-            local = root / filename
-        elif filename.endswith('retention_features.py'):
-            local = Path(features.__file__)
-        else:
+    provenance = json.loads((Path(__file__).resolve().parents[1] / 'packages/provenance-v2.json').read_text())
+    for filename, expected in provenance['module_sha256'].items():
+        if not filename.endswith('.py'):
             continue
+        local = root / filename
         if hashlib.sha256(local.read_bytes()).hexdigest() != expected:
             raise ValueError('P1 parser or feature fingerprint mismatch')
-        checked.add(local.resolve())
-    required = {root / name for name in ('preprocessing/schema.py', 'preprocessing/blocks.py',
-                'preprocessing/quality.py', 'preprocessing/select.py', 'preprocessing/downstream.py',
-                'preprocessing/adapters/local.py')}
-    required.add(Path(features.__file__).resolve())
-    if not required.issubset(checked):
-        raise ValueError('Incomplete P1 parser fingerprints')
     return bundle
 
 
-def score_document(document, content, format, queries):
-    common = {'feature_version': features.FEATURE_VERSION, 'model_sha256': MODEL_SHA256,
+def score_document(document, content, format, queries, *, provider=None, cache_root=None):
+    common = {'feature_version': FEATURE_VERSION, 'model_sha256': MODEL_SHA256,
+              'serving_policy': SERVING_POLICY, 'context_contract_issue': 'https://github.com/ext-weihsianglin/content-optimization-system/issues/15',
               'interpretation': INTERPRETATION, 'objective': OBJECTIVE,
               'query_count': len(queries), 'unique_query_count': len(set(queries))}
     if document['selection']['status'] == 'source_insufficient' or not document['blocks']:
         return {**common, 'status': 'source_insufficient', 'summary': 'No retained source to score.', 'per_query': []}
     path = Path(os.getenv('P1_MODEL_PATH', Path(__file__).resolve().parents[1] / 'data/scoring/model.joblib'))
     if not path.is_file():
-        return {**common, 'status': 'unavailable', 'summary': 'Install the pinned P1 v2 model to measure scores. No mock scores substituted.', 'per_query': []}
+        return {**common, 'status': 'unavailable', 'summary': 'Install the pinned P1 v7 semantic_context model to measure scores. No mock scores substituted.', 'per_query': []}
     try:
         # Cache by path + modification identity, checking the model bytes on cache misses.
         stat = path.stat()
@@ -72,15 +72,19 @@ def score_document(document, content, format, queries):
         doc = deepcopy(document)
         inventory = source_inventory(content, document['source']['href'], format)
         doc['scorer_source_word_count'] = len(words(inventory['body_text']))
-        rows = [features.features_from_document(query, doc) for query in queries]
+        semantics, telemetry = semantic_features(doc, queries, provider=provider, cache_root=cache_root)
+        rows = [{**features.robust_features(query, doc), **semantic} for query, semantic in zip(queries, semantics)]
         matrix = np.array([[row[name] for name in bundle['feature_names']] for row in rows], dtype=float)
         probabilities = bundle['pipeline'].predict_proba(matrix)[:, 1]
         results = [{'query_index': i, 'query': query, 'score': float(probabilities[i])}
                    for i, query in enumerate(queries)]
-        return {**common, 'status': 'scored', 'per_query': results,
+        return {**common, 'status': 'scored', 'per_query': results, 'embedding': telemetry,
                 'mean_score': float(np.mean(probabilities)), 'min_score': float(np.min(probabilities)),
                 'max_score': float(np.max(probabilities))}
-    except (ValueError, KeyError, TypeError, OSError):
+    except EmbeddingUnavailable as error:
+        return {**common, 'status': 'unavailable', 'reason': error.status, 'embedding': error.telemetry,
+                'summary': 'P1 embedding inputs unavailable. Cache misses require explicitly enabled live embeddings; no scores substituted.', 'per_query': []}
+    except (ValueError, KeyError, TypeError, OSError, sqlite3.Error):
         return {**common, 'status': 'unavailable', 'summary': 'P1 model or feature validation failed. No mock scores substituted.', 'per_query': []}
 
 

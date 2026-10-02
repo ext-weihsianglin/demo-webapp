@@ -14,7 +14,7 @@ export type Example = {
   query_scope?: string;
   query_records?: {query:string;href:string;usable:boolean}[];
   format: string;
-  split: 'heldout';
+  split: 'test';
   characters: number;
   content?: string;
 };

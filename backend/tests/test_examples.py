@@ -10,13 +10,23 @@ from preprocessing.schema import snapshot_identity
 client = TestClient(app)
 
 
+def write_catalog(path, example, records=None):
+    records = records or [{'query': example['query'], 'href': example['href'], 'usable': True} for _ in range(10)]
+    example.update(queries=list(dict.fromkeys(r['query'].strip() for r in records if r['usable'])),
+        query_records=records, query_scope='host', query_record_count=len(records),
+        unusable_query_count=sum(not r['usable'] for r in records),
+        query_set_hash=hashlib.sha256(json.dumps(records, sort_keys=True, separators=(',', ':')).encode()).hexdigest())
+    (path/'catalog.json').write_text(json.dumps({'bundle_version': 3, 'p1_version': 'lr-semantic-v7',
+        'p1_split_hash': 'd'*64, 'examples': [example], 'manifest_hash': 'b'*64}))
+
+
 @pytest.fixture
 def bundle(tmp_path, monkeypatch):
     monkeypatch.setenv("CONTENT_EXAMPLES_DIR", str(tmp_path))
     content = "# Saved source\n\nKeep this original qualified claim.\n"
     _, identity = snapshot_identity(content, "https://example.com/page")
-    example = {"snapshot_id": identity, "payload_hash": hashlib.sha256(content.encode()).hexdigest(), "href": "https://example.com/page", "hostname": "example.com", "format": "markdown", "split": "heldout", "title": "Saved source", "query": "Original target query?", "characters": len(content)}
-    (tmp_path / "catalog.json").write_text(json.dumps({"examples": [example], "manifest_hash": "b" * 64}))
+    example = {"snapshot_id": identity, "payload_hash": hashlib.sha256(content.encode()).hexdigest(), "href": "https://example.com/page", "hostname": "example.com", "format": "markdown", "split": "test", 'p1_split': 'test', "title": "Saved source", "query": "Original target query?", "characters": len(content)}
+    write_catalog(tmp_path, example)
     (tmp_path / f"{identity}.txt").write_text(content)
     return tmp_path, example, content
 
@@ -31,7 +41,7 @@ def test_examples_support_custom_queries_and_keep_original_identity(bundle, draf
     analysis = client.post("/api/analyze", json=payload)
     assert analysis.status_code == 200
     assert analysis.json()["source_origin"]["snapshot_id"] == example["snapshot_id"]
-    assert analysis.json()["source_origin"]["split"] == "heldout"
+    assert analysis.json()["source_origin"]["split"] == "test"
     original = client.post("/api/analyze", json={**payload, "query": example["query"]}).json()
     assert original["sections"] == analysis.json()["sections"]
     draft = client.post("/api/draft", json=payload).json()
@@ -51,8 +61,9 @@ def test_unlisted_and_changed_sources_are_rejected(bundle):
 
 def test_development_catalog_is_not_served(bundle):
     path, example, _ = bundle
-    (path / "catalog.json").write_text(json.dumps({"examples": [{**example, "split": "dev"}], "manifest_hash": "b" * 64}))
-    assert client.get("/api/examples").status_code == 503
+    for split in ('train', 'validation', 'heldout'):
+        write_catalog(path, {**example, 'split': split, 'p1_split': split})
+        assert client.get("/api/examples").status_code == 503
 
 
 def test_empty_catalog_keeps_custom_flow_available(tmp_path, monkeypatch):
@@ -72,7 +83,7 @@ def test_large_examples_keep_full_source_but_custom_input_is_bounded(bundle):
     _, identity = snapshot_identity(content, example['href'])
     example = {**example, "snapshot_id": identity}
     (path / f"{example['snapshot_id']}.txt").write_text(content)
-    (path / "catalog.json").write_text(json.dumps({"examples": [{**example, "payload_hash": hashlib.sha256(content.encode()).hexdigest()}], "manifest_hash": "b" * 64}))
+    write_catalog(path, {**example, 'payload_hash': hashlib.sha256(content.encode()).hexdigest()})
     result = client.post("/api/analyze", json={"example_id": example["snapshot_id"], "query": "Target query?"})
     assert result.status_code == 200
     assert result.json()["sections"][0]["text"] == content.strip()

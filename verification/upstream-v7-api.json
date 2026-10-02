@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "test_hosts": 97,
+  "example_id": "b865950b1b9867c9d2b2e1357a283d994abc5b4059095a6e67d288cd4cc73784",
+  "p1_version": "lr-semantic-v7",
+  "query_count": 8,
+  "serving_policy": "markdownify-context-v1",
+  "embedding": {
+    "model": "text-embedding-3-large",
+    "dimensions": 3072,
+    "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+    "serializer_version": "blocks-v3-markdownify",
+    "calls": 0,
+    "input_tokens": 0,
+    "cached_requests": 23,
+    "missing_requests": 0
+  },
+  "source_split": "test",
+  "scope": "Cache-only API wiring check; no quality or uplift measurement"
+}

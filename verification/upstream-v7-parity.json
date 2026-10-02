@@ -1,0 +1,159 @@
+{
+  "status": "passed",
+  "upstream": {
+    "repository": "https://github.com/ext-weihsianglin/content-optimization-system",
+    "revision": "864e6634a54ad80ac1657129e994b18c3a1f7eff",
+    "package_version": "0.2.0",
+    "serializer": "markdownify-structured-v1"
+  },
+  "records": [
+    {
+      "snapshot_id": "2510ee4b046ae09df43f15090f7ab37f34aba24d491e06ba07a48476d5217dbe",
+      "record_id": "a1c46c527fa922bf6102669d9ec2f996e6ce707d83b1e670f6d54c0e413a9e43",
+      "split": "validation",
+      "parser_checks": {
+        "snapshot_id": true,
+        "blocks": true,
+        "chunks": true,
+        "chunk_ids": true,
+        "outline": true,
+        "text": true,
+        "markdown": true,
+        "selection": true,
+        "source_metadata": true,
+        "representation": true,
+        "scorer_source_word_count": true
+      },
+      "semantic_max_absolute_error": 1.1920928955078125e-07,
+      "embedding": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_requests": 126,
+        "missing_requests": 0
+      }
+    },
+    {
+      "snapshot_id": "bc8337414409037271a7bc20c439cffa81ca684f6331a17a6f853566538f4219",
+      "record_id": "40342c6c7df3ae583abe6593cbbb5eb88e62d85534d867392d8d1201deee444c",
+      "split": "validation",
+      "parser_checks": {
+        "snapshot_id": true,
+        "blocks": true,
+        "chunks": true,
+        "chunk_ids": true,
+        "outline": true,
+        "text": true,
+        "markdown": true,
+        "selection": true,
+        "source_metadata": true,
+        "representation": true,
+        "scorer_source_word_count": true
+      },
+      "semantic_max_absolute_error": 1.1920928955078125e-07,
+      "embedding": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_requests": 116,
+        "missing_requests": 0
+      }
+    },
+    {
+      "snapshot_id": "af1921c7c5c1b8cb9a0e161191c9b13cdf4aa250b1875379e485d5a33bb2237c",
+      "record_id": "6a262ad2ee3da83f37bb7005465c291914121804551f7cf9b3539a05cbaff75c",
+      "split": "validation",
+      "parser_checks": {
+        "snapshot_id": true,
+        "blocks": true,
+        "chunks": true,
+        "chunk_ids": true,
+        "outline": true,
+        "text": true,
+        "markdown": true,
+        "selection": true,
+        "source_metadata": true,
+        "representation": true,
+        "scorer_source_word_count": true
+      },
+      "semantic_max_absolute_error": 1.1920928955078125e-07,
+      "embedding": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_requests": 136,
+        "missing_requests": 0
+      }
+    },
+    {
+      "snapshot_id": "569cc79d611a7fc8e8f293fcc893d48056b760c7eca16ee0a37bf87373ff985a",
+      "record_id": "7fe78daace7db14d0d05887eedd7ee735f91d0be0e4129fca4cc5599130d92ce",
+      "split": "validation",
+      "parser_checks": {
+        "snapshot_id": true,
+        "blocks": true,
+        "chunks": true,
+        "chunk_ids": true,
+        "outline": true,
+        "text": true,
+        "markdown": true,
+        "selection": true,
+        "source_metadata": true,
+        "representation": true,
+        "scorer_source_word_count": true
+      },
+      "semantic_max_absolute_error": 5.960464477539063e-08,
+      "embedding": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_requests": 143,
+        "missing_requests": 0
+      }
+    },
+    {
+      "snapshot_id": "1d07c87a59d6b4e1a50e04da5b603c85c22c8b75da6248e6d7856fa19a52a523",
+      "record_id": "2f8e5096a16a011e33a50e64ad80f9089fd176d5624805be9f3b64a441ed0481",
+      "split": "validation",
+      "parser_checks": {
+        "snapshot_id": true,
+        "blocks": true,
+        "chunks": true,
+        "chunk_ids": true,
+        "outline": true,
+        "text": true,
+        "markdown": true,
+        "selection": true,
+        "source_metadata": true,
+        "representation": true,
+        "scorer_source_word_count": true
+      },
+      "semantic_max_absolute_error": 2.9802322387695312e-08,
+      "embedding": {
+        "model": "text-embedding-3-large",
+        "dimensions": 3072,
+        "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+        "serializer_version": "blocks-v3-markdownify",
+        "calls": 0,
+        "input_tokens": 0,
+        "cached_requests": 139,
+        "missing_requests": 0
+      }
+    }
+  ],
+  "scope": "Offline parser and ten original-space semantic features only; not legacy-context parity or quality uplift",
+  "live_calls": 0,
+  "corpus_manifest_sha256": "48b4d9a837dee1bf33af258e7acf460f5712a047f8479c8b14672f6a9b52f0a5"
+}

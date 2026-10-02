@@ -18,7 +18,7 @@ export type Extraction = { method: string | null; status: string; quality_flags:
 
 export function ExtractionStatus({ extraction }: { extraction: Extraction }) {
   return <div className="extraction-status" role="status">
-    <strong>{extraction.method === 'conservative_dom' ? 'Conservative DOM extraction' : extraction.method === 'markdown_text' ? 'Native Markdown / text extraction' : 'Source needs attention'}</strong>
+    <strong>{extraction.method === 'conservative_dom' ? 'Structured HTML extraction' : extraction.method === 'markdown_text' ? 'Native Markdown / text extraction' : 'Source needs attention'}</strong>
     <span>{extraction.status === 'selected' ? 'Parsed' : extraction.status === 'needs_review' ? 'Review required' : 'Insufficient source content'}</span>
     <p>{extraction.quality_flags.length ? extraction.quality_flags.map(flag => flag.replaceAll('_', ' ')).join(' · ') : 'Structured blocks and source references retained.'}</p>
     {extraction.status !== 'selected' && <p>{extraction.reasons.join(' ')}</p>}

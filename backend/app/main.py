@@ -115,7 +115,7 @@ def source_origin(source):
     if not source.example_id:
         return {"kind": "custom"}
     item = load_example(source.example_id)
-    return {"kind": "example", "snapshot_id": item["snapshot_id"], "split": item["split"], "manifest_hash": item["manifest_hash"], "payload_hash": item["payload_hash"]}
+    return {"kind": "example", "snapshot_id": item["snapshot_id"], "split": item["split"], "manifest_hash": item["manifest_hash"], "payload_hash": item["payload_hash"], 'p1_split_hash': item['p1_split_hash']}
 
 @app.post('/api/analyze')
 def analyze(source: Source):
