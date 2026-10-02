@@ -1,9 +1,10 @@
-"""Invoke the pinned upstream retention parser for any submitted snapshot."""
+"""Invoke the pinned upstream Markdownify corpus parser for submitted snapshots."""
 from importlib.metadata import version
 from preprocessing.api import PARSER_REVISION, parse_snapshot
 
 UPSTREAM = {"repository": "https://github.com/ext-weihsianglin/content-optimization-system",
-            "revision": PARSER_REVISION, "package_version": version("content-optimization-exploration")}
+            "revision": PARSER_REVISION, "package_version": version("content-optimization-exploration"),
+            "serializer": "markdownify-structured-v1"}
 
 
 def extract_document(content, format, href, hostname):
@@ -12,5 +13,7 @@ def extract_document(content, format, href, hostname):
 
 def section_view(block):
     kind = {"heading": f"h{block['heading_level']}", "paragraph": "p", "list": "ol" if block.get("ordered") else "ul",
-            "list_item": "li", "code": "pre", "quote": "blockquote", "table": "table", "image": "img"}[block["type"]]
+            "list_item": "li", "code": "pre", "quote": "blockquote", "table": "table", "image": "img",
+            "definition_list": "dl", "definition_term": "dt", "definition_description": "dd",
+            "thematic_break": "hr"}[block["type"]]
     return {"id": block["block_id"], "kind": kind, "text": block["text"]}

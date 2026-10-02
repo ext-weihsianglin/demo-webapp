@@ -1,5 +1,19 @@
 # Project context and session handoff
 
+## V7/Markdownify webapp foundation — 2026-10-02 UTC
+
+The GEPA checkout refreshed to merged demo PR #3 head `cf84c33`, retaining its keyed `rewrite-page-v7` proposal contract and verified model catalog. It imports research main `864e6634a54ad80ac1657129e994b18c3a1f7eff` (PR #13 includes #14) through a new 0.2.0 wheel. Historical wheels/reports are preserved. Packaging and explicit-format/tuple API adaptations are recorded in `backend/packages/provenance-v2.json` and `content-optimization-library-v2.patch`; `build_upstream_package.py` reproduces the build.
+
+HTML uses the completed corpus's source-owned Markdownify hotfix flow. Definition/thematic-break blocks are supported in compatibility sections. P1 loads trusted frozen v7 semantic_context bytes, ten OpenAI text-embedding-3-large original-3072D cosine summaries and 45 context inputs. The app imports upstream serialization, splitting, vector cache/provider validation, normalized pooling and semantic helpers; PCA is excluded. Original source inventory remains fixed while proposals regenerate text, outline, chunks and changed embedding inputs.
+
+At the user's explicit direction, the mixed legacy-context training contract is deferred. Serving recomputes context features from current Markdownify documents under `markdownify-context-v1`; outputs disclose this adaptation and link [upstream issue #15](https://github.com/ext-weihsianglin/content-optimization-system/issues/15), filed during this session. This is not exact legacy-context score parity and no scorer was retrained.
+
+Webapp example preparation now joins v7 row assignments to the completed corpus and preserves ten host queries, original bytes and provenance. Only P1 test hosts are served; legacy bundles without that proof are rejected. The local ignored bundle contains 97 hosts, and the trusted model is installed under `backend/data/scoring/model.joblib`. GEPA remains unimplemented: its train/validation manifest and run design are still pending.
+
+`P1_ENABLE_LIVE_EMBEDDINGS=1` explicitly enables cache-miss requests; default scoring is cache-only. Configure `EMBEDDING_CACHE_ROOT` to reuse the existing shared store. Live embedding requests are preflighted against `P1_MAX_EMBEDDING_REQUESTS` (default 512 per scoring operation), batched with a 60-second provider timeout and no retry. Failed/missing embeddings remain unavailable without substitution. New candidate text may incur embedding calls in addition to rewriting/reflection costs. Source inspection remains available when scoring is unavailable.
+
+Verification: [five-record validation parity audit](../verification/upstream-v7-parity.json) matched saved parser blocks/chunks/text/metadata/status exactly and all ten semantic features within `1.19e-7`, with zero provider calls. [API audit](../verification/upstream-v7-api.json) checks test-only catalog and full-query v7 wiring using cached vectors. These are bounded parity/integration evidence, not factual verification, exact legacy-context parity, citation uplift or untouched P2 final-test evidence. Backend suite, frontend build/typecheck and locked sync are recorded with this integration; no live embedding or rewrite checks were performed.
+
 ## Current integration — 2026-10-01
 
 PR #2 has merged into `main`. PR #3 reconciles the source-verification workspace with that real OpenAI rewrite implementation. The default view inspects the original snapshot with typed blocks, chunks, source passages, metadata groups and source comparisons. Opening optional draft tools loads the server model catalog; extraction inspection works without OpenAI credentials or rewrite configuration. Proposed blocks are separately labeled and never receive original-source match certificates. Local production verification and current validation results are recorded in `verification/pr3-deployment-verification.md`.

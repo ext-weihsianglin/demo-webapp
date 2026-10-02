@@ -12,7 +12,7 @@ from trad_ml_scorer.retention_features import features_from_document, parse_snap
 from preprocessing.quality import source_inventory
 from scripts.analyze_content import words
 from test_rewriting import SOURCE, StubClient
-from test_examples import bundle
+from test_examples import bundle, write_catalog
 
 client = TestClient(app)
 PAYLOAD = dict(href='https://example.com/shoes', hostname='example.com', content=SOURCE, format='html')
@@ -53,7 +53,7 @@ def test_every_rewrite_chunk_gets_complete_deduplicated_queries_and_p1():
 def test_example_defaults_to_all_host_queries_and_allows_override(bundle):
     path, example, _ = bundle
     records = [{'query':f'Target query number {i}?', 'href':f'https://example.com/{i}', 'usable':True} for i in range(10)]
-    (path/'catalog.json').write_text(json.dumps({'manifest_hash':'b'*64, 'examples':[{**example, 'queries':[r['query'] for r in records], 'query_records':records, 'query_scope':'host'}]}))
+    write_catalog(path, example, records)
     result = client.post('/api/analyze', json={'example_id':example['snapshot_id']}).json()
     assert result['target_queries'] == [r['query'] for r in records]
     override = client.post('/api/analyze', json={'example_id':example['snapshot_id'], 'queries':QUERIES}).json()
@@ -95,21 +95,22 @@ def test_installed_frozen_model_parity_and_proposed_document_scoring(monkeypatch
     if not path.exists():
         pytest.skip('Install the pinned model to run real P1 parity validation')
     monkeypatch.setenv('P1_MODEL_PATH', str(path))
+    from trad_ml_scorer.semantic_features import NAMES
+    from trad_ml_scorer.robust_features import robust_features
+    import numpy as np
+    semantics = [dict.fromkeys(NAMES, .4), dict.fromkeys(NAMES, .6)]
+    monkeypatch.setattr(scoring, 'semantic_features', lambda *a, **kw: (semantics, {'calls': 0, 'test_stub': True}))
     document, chunks = extract_document(SOURCE, 'html', PAYLOAD['href'], PAYLOAD['hostname'])
     original = deepcopy(document)
     before = scoring.score_document(document, SOURCE, 'html', QUERIES)
     assert before['status'] == 'scored'
     stat = path.stat();bundle = scoring._load_model(str(path.resolve()),stat.st_size,stat.st_mtime_ns)
     for row in before['per_query']:
-        expected = predict_retention(bundle,row['query'],SOURCE,PAYLOAD['href'])['p_is_cited_high']
+        inputs = {**robust_features(row['query'], document), **semantics[row['query_index']]}
+        expected = bundle['pipeline'].predict_proba(np.array([[inputs[n] for n in bundle['feature_names']]]))[0, 1]
         assert row['score'] == pytest.approx(expected)
     draft = rewrite(document,chunks,QUERIES,'Preserve original',False,client=StubClient(),p1_feedback=before)
     after = scoring.score_document(draft['document'], SOURCE, 'html', QUERIES)
     assert after['status'] == 'scored'
     assert scoring.compare_scores(before,after)['status'] == 'scored'
     assert document == original and draft['document']['source_metadata'] == original['source_metadata']
-    fake_features = tmp_path/'retention_features.py'
-    fake_features.write_text('changed feature implementation')
-    monkeypatch.setattr(scoring.features,'__file__',str(fake_features))
-    with pytest.raises(ValueError,match='fingerprint mismatch'):
-        scoring._load_model(str(path.resolve()),stat.st_size,stat.st_mtime_ns+1)

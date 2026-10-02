@@ -40,23 +40,20 @@ The running-shoes example is illustrative, with no invented product rankings or 
 
 ## Held-out examples
 
-Prepare the local bundle from the research repository's existing frozen manifest,
-materialized `data/evaluation/` snapshots, and original `data/raw/` parquet files:
+Prepare a version-3 local bundle from the completed Markdownify corpus, original Parquet snapshots, and frozen P1 v7 row assignments:
 
 ```sh
 cd backend
 uv sync --dev
-uv run python scripts/prepare_examples.py --research-root /path/to/content-optimization-system
+uv run python scripts/prepare_examples.py \
+  --corpus /path/to/processed/markdownify-corpus-v1-complete \
+  --split-root /path/to/trad_ml_scorer/v7 \
+  --raw-root /path/to/raw
 ```
 
-This packages only the designated `heldout` split, checks development/held-out
-host and payload isolation, verifies source hashes and original parquet rows, and
-preserves all ten original host prompt records and their source URLs/shard rows. Usable prompts are trimmed and deduplicated by exact text; blank/invalid prompts are explicitly counted and excluded. No citation labels enter scoring or generation. It does not resample or fetch live pages. The
-current manifest provides 40 hosts/pages. The generated bundle lives in
-`backend/data/examples/`, is excluded from Git, and is not overwritten on reruns.
-Use `--output /new/path` to prepare another bundle and set
-`CONTENT_EXAMPLES_DIR=/new/path` when starting the API to serve it. Paths set in
-the environment are resolved relative to the backend process working directory.
+Only **P1 test hosts** enter the webapp. The current bundle contains 97 hosts, one deterministic saved page per host, with all ten original host prompt records. Preparation checks split/corpus/raw hashes and host/payload separation from train/validation. Queries are trimmed and deduplicated; unusable prompts remain counted in provenance. Labels never enter generation or scoring.
+
+The generated bundle lives in ignored `backend/data/examples/`; it is never overwritten. Use `--output /new/path` and `CONTENT_EXAMPLES_DIR=/new/path` for another bundle. Old extraction-held-out bundles are rejected because that designation does not establish P1 test membership. Paths in environment variables are relative to the backend process working directory.
 
 `GET /api/examples` lists host/page/query metadata without payloads or citation
 labels; `GET /api/examples/{snapshot_id}` loads a hash-verified saved snapshot.
@@ -69,26 +66,30 @@ saved examples support up to 8,000,000 characters without truncation. Switching
 back to **Your own page** restores the previous custom inputs. User edits to a
 query or source invalidate previous analysis and drafts.
 
-These examples are held out for the extraction benchmark. Interactive prompt
-experimentation is exploratory; it does not establish an untouched P2 rewrite
-test set. Reserve separate examples when measuring GEPA or memory improvements.
+These examples are P1 test data. GEPA must use separately frozen train/validation data. Interactive test-page inspection and baseline debugging are recorded exposure; test membership alone does not establish an untouched final P2 evaluation.
 
 ## Frozen P1 model
 
-Install the trusted v2 artifact locally (raw research data and models remain outside Git):
+Install the trusted v7 `semantic_context` artifact locally:
 
 ```sh
 cd backend
-uv run python scripts/prepare_p1.py --model /path/to/content-optimization-system/data/trad_ml_scorer/v2/model.joblib
+uv run python scripts/prepare_p1.py --model /path/to/trad_ml_scorer/v7/semantic_context.joblib
 ```
 
-The pinned SHA-256 is `f78ca1f8e51f147a5b52a16cafed6819d165f18eff8bf6e0f5ed61cf5c918b92`. The default installed path is `backend/data/scoring/model.joblib`; `P1_MODEL_PATH` can point elsewhere but must contain those same trusted bytes. The installer refuses an existing output. No model is retrained or substituted. Source inspection and custom snapshots still work without the model.
+Pinned SHA-256: `2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b`. Default installed path: `backend/data/scoring/model.joblib`; override with `P1_MODEL_PATH`. The installer refuses an existing destination; use a fresh path when replacing v2. No retraining or fallback model is included.
 
-P1 predicts the sampled within-host top class among already-cited pages. Scores are shown on a 0–100 scale for comparison, not as citation probabilities. Extraction-held-out hosts are not necessarily P1-test-held-out. All ten host records stay visible in provenance; distinct usable queries receive equal weight. Some prompts refer to other URLs on the host. No new snapshot is sampled and the selected original payload stays unchanged.
+V7 uses ten original-space cosine summaries from OpenAI `text-embedding-3-large` (3,072 dimensions), plus 45 context features and the frozen fitted pipeline. PCA coordinates are not scorer inputs. `app/embeddings.py` imports the upstream serialization, byte splitting, cache identity, vector validation, normalized byte-weighted pooling and cosine helpers. Query/title/H1/outline/page/path/section inputs match `blocks-v3-markdownify`.
+
+Set `EMBEDDING_CACHE_ROOT` to the prepared shared store to reuse existing vectors. Cache-only scoring is the default. New queries/pages/rewrites need fresh embeddings on cache misses; explicitly enable `P1_ENABLE_LIVE_EMBEDDINGS=1` in the backend configuration for those calls. `P1_MAX_EMBEDDING_REQUESTS` caps new unique requests per scoring operation (default 512); all misses are preflighted before provider calls. Calls have the upstream 60-second timeout and no automatic retry. Failed/missing embeddings remain visible; no lexical-only substitute is used. Responses include embedding calls, cache counts and reported token usage. Extraction inspection remains available without credentials or P1 inputs.
+
+**Serving adaptation:** the webapp computes v7's context features from current Markdownify documents. Frozen training used legacy cached context columns. This intentionally deferred mismatch is disclosed as `markdownify-context-v1` and tracked in [upstream issue #15](https://github.com/ext-weihsianglin/content-optimization-system/issues/15); the webapp does not claim exact frozen-context parity. Original source inventory/metadata remain fixed for proposals, while changed text, outline, chunks and embeddings are rebuilt.
+
+P1 estimates sampled within-host top class among already-cited pages. Scores are comparative classifier outputs, not citation probabilities or causal uplift. V7 is an experimental development choice; its semantic features alone do not establish superior quality.
 
 ## What is real vs. mocked
 
-- **Real:** frozen upstream P1 v2 scoring when the trusted model is installed, complete query-set feedback in rewriting, before/after per-query comparisons, API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, frontend/API round trips, review/export.
+- **Real:** frozen upstream P1 v7 scoring when the trusted model is installed, complete query-set feedback in rewriting, before/after per-query comparisons, API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, frontend/API round trips, review/export.
 - **Mock:** query alignment and answer clarity scores; structural score uses only heading count. P1 changes are classifier-score changes, not measured citation uplift. There is no automatic demo rewrite fallback.
 - **Not connected:** optional clean extraction candidates, calibrated graders, phase 2 GEPA or prompt-optimized model, persistent runs, live URL fetching, source-style rendering, HTML patching.
 
@@ -105,21 +106,29 @@ insufficient source content prevents draft generation. Block IDs are document-lo
 so use `(snapshot_id, block_id)` for references. Chunks use a soft character target,
 not a model token budget.
 
-The library is installed by `uv sync` from the local wheel declared in
-`backend/pyproject.toml`. It was built from `origin/main` at
-`3d4d35d3c32ac5b8c14983f99f92c2f633669417` plus packaging metadata and an importable
-snapshot API; the existing parser files are unchanged. Wheel identity and the
-reviewable upstream patch are in `backend/packages/provenance.json` and
-`backend/packages/content-optimization-library.patch`. Packaging changes are local
-and not yet published upstream. This keeps the app runnable without a sibling
-checkout or temporary path; a pinned Git dependency can replace the wheel after
-the packaging changes are published. No extraction code is copied into the app.
+The library is installed by `uv sync` from the pinned local 0.2.0 wheel declared in `backend/pyproject.toml`. It bundles merged upstream revision `864e6634a54ad80ac1657129e994b18c3a1f7eff`, including Markdownify hotfixes, v7 and representations. [provenance-v2.json](backend/packages/provenance-v2.json) records wheel/module hashes; [content-optimization-library-v2.patch](backend/packages/content-optimization-library-v2.patch) records packaging, the tuple facade and explicit source-format override. Extraction logic stays upstream. Rebuild with `uv run python scripts/build_upstream_package.py`. Historical wheel/provenance remain intact.
+
+HTML uses the same source-owned `dom-blocks-v3` and pinned `markdownify==1.2.3` path as the completed corpus, preserving inline syntax, tables, code and definitions. This is not a bare Markdownify call over arbitrary HTML. Native Markdown/text keep their adapter and explicit format. The source remains untrusted and is never executed.
 
 Validated draft generation uses the library's `blocks_to_markdown` so nested lists,
 code whitespace and table spans survive export. Source metadata and JSON-LD remain
 separate from generated body content.
 
-`app/scoring.py` invokes the installed upstream P1 v2 feature implementation for each distinct target query. It verifies the trusted model SHA-256 and fitted parser/feature fingerprints before use. Both source and proposal are scored as structured documents with the same original source inventory and metadata, without reparsing exported Markdown. Missing/incompatible models produce explicit unavailability, never mock P1 values. Preserve disagreements/abstention and structural diagnostics; do not treat relative within-host labels as citation probabilities.
+`app/scoring.py` verifies the trusted v7 model before deserialization, the ordered 55-feature contract and packaged module fingerprints. Original and proposed structured documents are scored over the same query set and immutable source inventory. Scoring is separate from extraction and HTTP handling. Missing/incompatible models or embeddings produce explicit unavailability.
+
+Reproduce the bounded cache-only parser/semantic parity audit:
+
+```sh
+cd backend
+uv run python scripts/verify_upstream_parity.py \
+  --corpus /path/to/processed/markdownify-corpus-v1-complete \
+  --split-root /path/to/trad_ml_scorer/v7 \
+  --raw-root /path/to/raw \
+  --cache-root /path/to/representations/shared-store \
+  --output ../verification/new-parity.json
+```
+
+[Recorded audit](verification/upstream-v7-parity.json): five validation records matched saved parser fields exactly; all ten semantic features differed by at most `1.19e-7`. No provider calls. This establishes bounded parser/semantic parity, not legacy-context parity or quality uplift.
 
 `backend/app/rewriting.py` owns generation, token budgeting, source validation and rendering, independently of extraction and the endpoint. Its current hand-written prompt is `backend/app/prompts/rewrite-page-v7.txt`; `rewrite-baseline-v1.txt` and `rewrite-multiquery-v1.txt` remain historical baselines. Every request includes all distinct target queries and whole-page P1 feedback. Each draft request makes one whole-page OpenAI call with all retained blocks and target queries. Extraction chunks remain evidence/provenance boundaries, not generation batches. The user payload separates `editable_blocks` (the only valid edit targets) from `read_only_context` (context/evidence only), preserving original order fields and chunk membership through short request-local chunk aliases. Block text appears once; raw DOM locators, JSON-LD, visibility diagnostics and duplicate chunk text/Markdown stay in the original document for review and scoring. A bounded response schema defines the proposal shape and, within its size allowance, binds editable targets to evidence IDs in the same original chunk; the server validates editable IDs, exact before text and same-chunk evidence. Fully validated unchanged edits are ignored and cannot satisfy the body-edit requirement. The objective is their equal-weight mean while avoiding individual regressions. This is one proposal followed by rescoring, not an iterative optimizer or a guarantee of improvement on every query. Unsupported host queries remain missing-evidence review items; they do not justify invented content. No GEPA or retrieval memory is included. All source/query/metadata content is untrusted data in the user message; the fixed editorial/security instructions are separate.
 
@@ -164,7 +173,7 @@ RUN_OPENAI_LIVE=1 uv run pytest -q tests/test_live_rewriting.py
 RUN_OPENAI_LIVE=1 RUN_OPENAI_LIVE_MODELS=gpt-4.1,gpt-5 uv run pytest -q tests/test_live_rewriting.py
 # Explicitly enables real calls and writes full sources, proposals, telemetry and checks:
 uv run --env-file .env python scripts/evaluate_rewriting.py --live --output evaluation/new-report.json
-# Add an extraction held-out example; its original query is editable interactively:
+# Add a P1-test example; its original query is editable interactively:
 uv run --env-file .env python scripts/evaluate_rewriting.py --live --example-id SNAPSHOT_ID --example-query "A source-supported query" --output evaluation/new-report.json
 ```
 

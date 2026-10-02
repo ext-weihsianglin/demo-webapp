@@ -21,7 +21,9 @@ def catalog():
         rows = data["examples"]
         if not re.fullmatch(r"[a-f0-9]{64}", data["manifest_hash"]):
             raise ValueError("Invalid manifest identity")
-        if data.get("bundle_version") == 2:
+        if data.get('bundle_version') != 3 or data.get('p1_version') != 'lr-semantic-v7' or not re.fullmatch(r'[a-f0-9]{64}', data.get('p1_split_hash', '')):
+            raise ValueError('Rebuild a P1-test-only version-3 bundle')
+        if data.get("bundle_version") == 3:
             for row in rows:
                 records = row["query_records"]
                 digest = hashlib.sha256(json.dumps(records, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
@@ -32,11 +34,11 @@ def catalog():
                 expected = list(dict.fromkeys(record["query"].strip() for record in records if record["usable"]))
                 if row["queries"] != expected or row["unusable_query_count"] != sum(not r["usable"] for r in records):
                     raise ValueError("Invalid deduplicated query set")
-        if any(row["split"] != "heldout" or not re.fullmatch(r"[a-f0-9]{64}", row["snapshot_id"]) for row in rows):
+        if any(row["split"] != "test" or row.get('p1_split') != 'test' or not re.fullmatch(r"[a-f0-9]{64}", row["snapshot_id"]) for row in rows):
             raise ValueError("Invalid held-out catalog")
     except (OSError, ValueError, KeyError, TypeError):
         raise HTTPException(503, "The example catalog is invalid. Rebuild the local bundle.")
-    return {"examples": rows, "manifest_hash": data["manifest_hash"], "message": "Saved examples from the host-separated extraction held-out split."}
+    return {"examples": rows, "manifest_hash": data["manifest_hash"], 'p1_split_hash': data['p1_split_hash'], "message": "Saved examples strictly from the frozen P1 test split."}
 
 
 def load_example(snapshot_id):
@@ -51,4 +53,4 @@ def load_example(snapshot_id):
         content = payload.decode("utf-8")
     except (OSError, ValueError):
         raise HTTPException(503, "The saved example is missing or changed. Rebuild the local bundle.")
-    return {**row, "content": content, "manifest_hash": listing["manifest_hash"]}
+    return {**row, "content": content, "manifest_hash": listing["manifest_hash"], 'p1_split_hash': listing['p1_split_hash']}

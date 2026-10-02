@@ -1,0 +1,5 @@
+*
+!.gitignore
+!content_optimization_exploration-0.2.0-py3-none-any.whl
+!content-optimization-library-v2.patch
+!provenance-v2.json

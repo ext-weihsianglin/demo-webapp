@@ -400,7 +400,8 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                 block['heading_level'] = edit.heading_level
         result['text'] = blocks_to_text(result['blocks'])
         result['markdown'] = blocks_to_markdown(result['blocks'])
-        result['outline'], _ = structure_chunks(result['snapshot_id'], result['selection']['method'], result['blocks'], 6000)
+        result['outline'], result['chunks'] = structure_chunks(result['snapshot_id'], result['selection']['method'], result['blocks'], 6000)
+        result['chunk_ids'] = [chunk['chunk_id'] for chunk in result['chunks']]
         result['artifact_kind'] = 'proposed_content_based_on_source_snapshot'
         output = finish('succeeded', ' '.join(summaries), document=result, markdown=result['markdown'],
                         changes=[{**e.model_dump(), 'source_id': e.block_id} for e in edits],

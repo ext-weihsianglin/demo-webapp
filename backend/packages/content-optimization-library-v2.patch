@@ -1,0 +1,61 @@
+diff --git a/preprocessing/api.py b/preprocessing/api.py
+new file mode 100644
+index 0000000..8a44b8c
+--- /dev/null
++++ b/preprocessing/api.py
+@@ -0,0 +1,9 @@
++"""Tuple facade over the exact upstream corpus parser."""
++from trad_ml_scorer.retention_features import parse_snapshot as _parse
++
++PARSER_REVISION = "864e6634a54ad80ac1657129e994b18c3a1f7eff"
++
++def parse_snapshot(payload, href, hostname="", *, source_format=None, source=None):
++    doc = _parse(payload, href, hostname, source, source_format=source_format)
++    doc["candidate_diagnostics"] = dict(doc.get("representation", {}))
++    return doc, doc["chunks"]
+diff --git a/pyproject.toml b/pyproject.toml
+index d491396..ec6f600 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,6 +1,6 @@
+ [project]
+ name = "content-optimization-exploration"
+-version = "0.1.0"
++version = "0.2.0"
+ description = "Reproducible preliminary analysis of the citation dataset"
+ requires-python = ">=3.12"
+ dependencies = [
+@@ -27,8 +27,14 @@ local-embeddings = [
+     "voyage-4-nano-mlx ; platform_machine == 'arm64' and sys_platform == 'darwin'",
+ ]
+ 
+-[tool.uv]
+-package = false
++[build-system]
++requires = ["hatchling>=1.27,<2"]
++build-backend = "hatchling.build"
++
++[tool.hatch.build.targets.wheel]
++packages = ["preprocessing", "trad_ml_scorer", "representations", "scripts"]
++exclude = ["**/*.html", "**/*.svg", "**/*.png", "trad_ml_scorer/v*", "trad_ml_scorer/interpretation"]
++
+ 
+ [tool.uv.sources]
+ voyage-4-nano-mlx = { git = "https://github.com/sanjay920/voyage-4-nano-mlx", rev = "5001811de8d5ab39bcdab1c9b40b925d8d7d3983" }
+diff --git a/trad_ml_scorer/retention_features.py b/trad_ml_scorer/retention_features.py
+index 28c486f..4ddcd41 100644
+--- a/trad_ml_scorer/retention_features.py
++++ b/trad_ml_scorer/retention_features.py
+@@ -28,10 +28,10 @@ FEATURE_NAMES = WHOLE_NAMES + SECTION
+ FAMILIES = {"prompt": PROMPT, "url": URL, "whole_alignment": ALIGNMENT, "content_size": [f"log_{name}" for name in COUNTS], "structure": STRUCTURE, "source_metadata": METADATA, "quality": QUALITY, "section_alignment": SECTION}
+ 
+ 
+-def parse_snapshot(payload, href, hostname="", source=None):
++def parse_snapshot(payload, href, hostname="", source=None, *, source_format=None):
+     """Same source inventory, adapters, selection, and document builder as preprocessing."""
+     payload_hash, identity = snapshot_identity(payload, href)
+-    format_name = classify_payload(payload)
++    format_name = source_format if source_format is not None else classify_payload(payload)
+     snapshot = Snapshot(identity, payload_hash, href, hostname, payload, format_name)
+     inventory = source_inventory(payload, href, format_name)
+     candidate = extract_conservative(snapshot) if format_name == "html" else extract_markdown_text(snapshot)
