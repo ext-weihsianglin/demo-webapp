@@ -153,3 +153,7 @@ The local ignored `validation-90-v2` dataset contains 90 hash-verified validatio
 
 
 A 2026-10-02 backend restart interrupted a user-started run after its 30 baseline selection rewrites. All page outcomes were retained, including six fidelity-approved/rescored proposals. Progress was recovered from saved events. The frontend now handles plain-text proxy failures, and graceful shutdown stops later provider phases. Final verification: 117 backend tests passed, 2 opt-in checks skipped; 3 frontend API-error regression checks passed; production build/typecheck and diff checks passed. See [the handoff](gepa-implementation.md#proxy-error-and-interrupted-run-recovery--2026-10-02).
+
+## Isolated issue #14 URL suffix spike — 2026-10-02
+
+The separate opt-in URL suffix proposal workflow preserves source identity and canonical metadata while applying a request-local hypothetical URL to canonical P1 scoring. Body-only defaults remain unchanged. [Spike policy and handoff](url-suffix-spike.md) records deterministic H1 grounding, full-query scenario comparisons, route constraints, predeclared development/validation/final examples and semantic limits. Cache-only development/validation runs produced no scores because this isolated checkout lacks the pinned model artifact; they establish no neutral/negative/positive P1 effect. Final evaluation remains reserved. No URL was fetched, published, redirected or migrated.

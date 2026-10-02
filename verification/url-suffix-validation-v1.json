@@ -1,0 +1,624 @@
+{
+  "declaration_sha256": "29ddedc0a04ac17321974e4c5da91a8e730a637557d335822e39664d3ac4a7b5",
+  "policy": "source-h1-suffix-v1",
+  "split": "validation",
+  "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+  "live_calls_enabled": false,
+  "interpretation": "Synthetic diagnostic fixtures; no citation measurement, no population-quality conclusion.",
+  "reports": [
+    {
+      "id": "val-descriptive",
+      "policy": "source-h1-suffix-v1",
+      "snapshot_id": "e9732bbe15aa275b3e789946c8008f2e9b7ba93f8f3949b53913af7568b8f991",
+      "original_href": "https://example.com/journal/road-shoe-fit",
+      "source_metadata": {
+        "title": "",
+        "language": null,
+        "direction": null,
+        "description": null,
+        "canonical": null,
+        "headings": [],
+        "quality_flags": [],
+        "jsonld": [],
+        "counts": {
+          "body_words": 15
+        },
+        "visibility": [],
+        "metadata": {}
+      },
+      "target_queries": [
+        "How should I choose road shoes?",
+        "How important is comfortable fit?"
+      ],
+      "original": {
+        "feature_version": "lr-semantic-v7.1",
+        "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+        "serving_policy": "markdownify-v7.1",
+        "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 2,
+        "unique_query_count": 2,
+        "status": "unavailable",
+        "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+        "per_query": []
+      },
+      "body_only": {
+        "feature_version": "lr-semantic-v7.1",
+        "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+        "serving_policy": "markdownify-v7.1",
+        "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 2,
+        "unique_query_count": 2,
+        "status": "unavailable",
+        "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+        "per_query": []
+      },
+      "body_comparison": {
+        "status": "unavailable",
+        "summary": "Before/after P1 scores could not both be measured."
+      },
+      "body_fidelity": "Imported edits checked mechanically; semantic/language fidelity not re-certified.",
+      "candidates": [
+        {
+          "proposed_href": "https://example.com/journal/road-shoe-fit",
+          "keep_current": true,
+          "rationale": "Explicit no-change option.",
+          "evidence": [],
+          "query_coverage": [],
+          "path_only": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 2,
+            "unique_query_count": 2,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "combined": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 2,
+            "unique_query_count": 2,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "comparisons": {
+            "path_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_body": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            }
+          }
+        }
+      ],
+      "selected_href": "https://example.com/journal/road-shoe-fit",
+      "limitations": [
+        "Heading support is not semantic entailment or factual verification. Query coverage is lexical and may overstate relevance.",
+        "P1 deltas are classifier effects, not measured citation uplift. Path similarity is query-to-path, not query-to-title.",
+        "Routes, collisions, redirects and canonical/internal-link/sitemap changes require a separately authorized migration."
+      ],
+      "migration_recommendation": {
+        "status": "hypothetical_review_only",
+        "original_href": "https://example.com/journal/road-shoe-fit",
+        "proposed_href": "https://example.com/journal/road-shoe-fit",
+        "required_separate_checks": [
+          "route constraints and existence",
+          "collision checks",
+          "permanent redirects",
+          "canonical/internal links/sitemap updates",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "val-multiquery",
+      "policy": "source-h1-suffix-v1",
+      "snapshot_id": "407d39ce638e603ed4a0971f341c46acd1a36cce35135d8c5d9434cce4ac49b9",
+      "original_href": "https://example.com/articles/42.html?lang=en#fit",
+      "source_metadata": {
+        "title": "",
+        "language": null,
+        "direction": null,
+        "description": null,
+        "canonical": null,
+        "headings": [],
+        "quality_flags": [],
+        "jsonld": [],
+        "counts": {
+          "body_words": 24
+        },
+        "visibility": [],
+        "metadata": {}
+      },
+      "target_queries": [
+        "How should road shoes fit?",
+        "What should I look for in trail shoes?",
+        "Cheapest hotels in Tokyo?"
+      ],
+      "original": {
+        "feature_version": "lr-semantic-v7.1",
+        "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+        "serving_policy": "markdownify-v7.1",
+        "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 3,
+        "unique_query_count": 3,
+        "status": "unavailable",
+        "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+        "per_query": []
+      },
+      "body_only": {
+        "feature_version": "lr-semantic-v7.1",
+        "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+        "serving_policy": "markdownify-v7.1",
+        "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 3,
+        "unique_query_count": 3,
+        "status": "unavailable",
+        "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+        "per_query": []
+      },
+      "body_comparison": {
+        "status": "unavailable",
+        "summary": "Before/after P1 scores could not both be measured."
+      },
+      "body_fidelity": "Imported edits checked mechanically; semantic/language fidelity not re-certified.",
+      "candidates": [
+        {
+          "proposed_href": "https://example.com/articles/42.html?lang=en#fit",
+          "keep_current": true,
+          "rationale": "Explicit no-change option.",
+          "evidence": [],
+          "query_coverage": [],
+          "path_only": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 3,
+            "unique_query_count": 3,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "combined": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 3,
+            "unique_query_count": 3,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "comparisons": {
+            "path_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_body": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            }
+          }
+        },
+        {
+          "proposed_href": "https://example.com/articles/comfortable-road-shoes.html?lang=en#fit",
+          "keep_current": false,
+          "rationale": "Descriptive suffix copied from the original retained page H1; human topic/route review required.",
+          "evidence": [
+            {
+              "snapshot_id": "407d39ce638e603ed4a0971f341c46acd1a36cce35135d8c5d9434cce4ac49b9",
+              "block_id": "b000000",
+              "text": "Comfortable road shoes"
+            }
+          ],
+          "query_coverage": [
+            {
+              "query": "How should road shoes fit?",
+              "overlapping_terms": [
+                "road",
+                "shoes"
+              ],
+              "status": "lexical_overlap_only"
+            },
+            {
+              "query": "What should I look for in trail shoes?",
+              "overlapping_terms": [
+                "shoes"
+              ],
+              "status": "lexical_overlap_only"
+            },
+            {
+              "query": "Cheapest hotels in Tokyo?",
+              "overlapping_terms": [],
+              "status": "no_lexical_evidence"
+            }
+          ],
+          "path_only": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 3,
+            "unique_query_count": 3,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "combined": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 3,
+            "unique_query_count": 3,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "comparisons": {
+            "path_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_body": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            }
+          }
+        }
+      ],
+      "selected_href": "https://example.com/articles/42.html?lang=en#fit",
+      "limitations": [
+        "Heading support is not semantic entailment or factual verification. Query coverage is lexical and may overstate relevance.",
+        "P1 deltas are classifier effects, not measured citation uplift. Path similarity is query-to-path, not query-to-title.",
+        "Routes, collisions, redirects and canonical/internal-link/sitemap changes require a separately authorized migration."
+      ],
+      "migration_recommendation": {
+        "status": "hypothetical_review_only",
+        "original_href": "https://example.com/articles/42.html?lang=en#fit",
+        "proposed_href": "https://example.com/articles/42.html?lang=en#fit",
+        "required_separate_checks": [
+          "route constraints and existence",
+          "collision checks",
+          "permanent redirects",
+          "canonical/internal links/sitemap updates",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "val-unicode",
+      "policy": "source-h1-suffix-v1",
+      "snapshot_id": "e748bcc892f0a4f3fca81355c16311bf4620cb6c5213cb840ace43e518004266",
+      "original_href": "https://example.com/fr/42/",
+      "source_metadata": {
+        "title": "",
+        "language": null,
+        "direction": null,
+        "description": null,
+        "canonical": null,
+        "headings": [],
+        "quality_flags": [],
+        "jsonld": [],
+        "counts": {
+          "body_words": 23
+        },
+        "visibility": [],
+        "metadata": {}
+      },
+      "target_queries": [
+        "Comment choisir des chaussures de course?",
+        "Hotels in Paris?"
+      ],
+      "original": {
+        "feature_version": "lr-semantic-v7.1",
+        "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+        "serving_policy": "markdownify-v7.1",
+        "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 2,
+        "unique_query_count": 2,
+        "status": "unavailable",
+        "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+        "per_query": []
+      },
+      "body_only": {
+        "feature_version": "lr-semantic-v7.1",
+        "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+        "serving_policy": "markdownify-v7.1",
+        "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 2,
+        "unique_query_count": 2,
+        "status": "unavailable",
+        "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+        "per_query": []
+      },
+      "body_comparison": {
+        "status": "unavailable",
+        "summary": "Before/after P1 scores could not both be measured."
+      },
+      "body_fidelity": "Imported edits checked mechanically; semantic/language fidelity not re-certified.",
+      "candidates": [
+        {
+          "proposed_href": "https://example.com/fr/42/",
+          "keep_current": true,
+          "rationale": "Explicit no-change option.",
+          "evidence": [],
+          "query_coverage": [],
+          "path_only": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 2,
+            "unique_query_count": 2,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "combined": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 2,
+            "unique_query_count": 2,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "comparisons": {
+            "path_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_body": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            }
+          }
+        },
+        {
+          "proposed_href": "https://example.com/fr/chaussures-de-course/",
+          "keep_current": false,
+          "rationale": "Descriptive suffix copied from the original retained page H1; human topic/route review required.",
+          "evidence": [
+            {
+              "snapshot_id": "e748bcc892f0a4f3fca81355c16311bf4620cb6c5213cb840ace43e518004266",
+              "block_id": "b000000",
+              "text": "Chaussures de course"
+            }
+          ],
+          "query_coverage": [
+            {
+              "query": "Comment choisir des chaussures de course?",
+              "overlapping_terms": [
+                "chaussures",
+                "course",
+                "de"
+              ],
+              "status": "lexical_overlap_only"
+            },
+            {
+              "query": "Hotels in Paris?",
+              "overlapping_terms": [],
+              "status": "no_lexical_evidence"
+            }
+          ],
+          "path_only": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 2,
+            "unique_query_count": 2,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "combined": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 2,
+            "unique_query_count": 2,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "comparisons": {
+            "path_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_body": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            }
+          }
+        }
+      ],
+      "selected_href": "https://example.com/fr/42/",
+      "limitations": [
+        "Heading support is not semantic entailment or factual verification. Query coverage is lexical and may overstate relevance.",
+        "P1 deltas are classifier effects, not measured citation uplift. Path similarity is query-to-path, not query-to-title.",
+        "Routes, collisions, redirects and canonical/internal-link/sitemap changes require a separately authorized migration."
+      ],
+      "migration_recommendation": {
+        "status": "hypothetical_review_only",
+        "original_href": "https://example.com/fr/42/",
+        "proposed_href": "https://example.com/fr/42/",
+        "required_separate_checks": [
+          "route constraints and existence",
+          "collision checks",
+          "permanent redirects",
+          "canonical/internal links/sitemap updates",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "val-route-abstention",
+      "policy": "source-h1-suffix-v1",
+      "snapshot_id": "5f71fe087e0e27ea417da5d3b656d94d5d37eb54bb2e250771af477c2425452c",
+      "original_href": "https://example.com/help/view.php?id=42",
+      "source_metadata": {
+        "title": "",
+        "language": null,
+        "direction": null,
+        "description": null,
+        "canonical": null,
+        "headings": [],
+        "quality_flags": [],
+        "jsonld": [],
+        "counts": {
+          "body_words": 15
+        },
+        "visibility": [],
+        "metadata": {}
+      },
+      "target_queries": [
+        "How should I choose road shoes?"
+      ],
+      "original": {
+        "feature_version": "lr-semantic-v7.1",
+        "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+        "serving_policy": "markdownify-v7.1",
+        "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 1,
+        "unique_query_count": 1,
+        "status": "unavailable",
+        "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+        "per_query": []
+      },
+      "body_only": {
+        "feature_version": "lr-semantic-v7.1",
+        "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+        "serving_policy": "markdownify-v7.1",
+        "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 1,
+        "unique_query_count": 1,
+        "status": "unavailable",
+        "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+        "per_query": []
+      },
+      "body_comparison": {
+        "status": "unavailable",
+        "summary": "Before/after P1 scores could not both be measured."
+      },
+      "body_fidelity": "Imported edits checked mechanically; semantic/language fidelity not re-certified.",
+      "candidates": [
+        {
+          "proposed_href": "https://example.com/help/view.php?id=42",
+          "keep_current": true,
+          "rationale": "Explicit no-change option.",
+          "evidence": [],
+          "query_coverage": [],
+          "path_only": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 1,
+            "unique_query_count": 1,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "combined": {
+            "feature_version": "lr-semantic-v7.1",
+            "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+            "serving_policy": "markdownify-v7.1",
+            "interpretation": "P1 v7.1 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Semantic and context inputs use the same Markdownify feature contract.",
+            "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+            "query_count": 1,
+            "unique_query_count": 1,
+            "status": "unavailable",
+            "summary": "Install the pinned P1 v7.1 semantic_context model to measure scores. No mock scores substituted.",
+            "per_query": []
+          },
+          "comparisons": {
+            "path_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_original": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            },
+            "combined_vs_body": {
+              "status": "unavailable",
+              "summary": "Before/after P1 scores could not both be measured."
+            }
+          }
+        }
+      ],
+      "selected_href": "https://example.com/help/view.php?id=42",
+      "limitations": [
+        "Heading support is not semantic entailment or factual verification. Query coverage is lexical and may overstate relevance.",
+        "P1 deltas are classifier effects, not measured citation uplift. Path similarity is query-to-path, not query-to-title.",
+        "Routes, collisions, redirects and canonical/internal-link/sitemap changes require a separately authorized migration."
+      ],
+      "migration_recommendation": {
+        "status": "hypothetical_review_only",
+        "original_href": "https://example.com/help/view.php?id=42",
+        "proposed_href": "https://example.com/help/view.php?id=42",
+        "required_separate_checks": [
+          "route constraints and existence",
+          "collision checks",
+          "permanent redirects",
+          "canonical/internal links/sitemap updates",
+          "monitoring"
+        ]
+      }
+    }
+  ]
+}

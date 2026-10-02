@@ -250,3 +250,7 @@ It uses one reflection-page rewrite and one reflection mutation, with no selecti
 
 
 New GEPA runs use a query-driven procedure component (6,000 characters by default, configurable in the research tab). Expand **Reflection requests, queries and score feedback** to inspect saved complete reflection requests; candidate details show the rationale, trace reference and prompt diff. Complete-request token checks cover rewriting, reflection and fidelity. Grounded few-shot examples remain disabled. See [current implementation limits](docs/gepa-implementation.md#query-driven-procedure-monitoring--2026-10-02).
+
+## Opt-in hypothetical URL suffix experiment
+
+Source/draft review offers a separate, disabled-by-default URL proposal mode. It preserves the original snapshot and canonical metadata, proposes source-H1 suffixes plus keep current, and compares all-query original/body/path/combined P1 effects when the pinned model and canonical embeddings are available. It never fetches proposed URLs or performs a migration. See [policy, predeclared evaluation and limitations](docs/url-suffix-spike.md).

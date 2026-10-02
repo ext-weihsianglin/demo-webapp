@@ -1,5 +1,5 @@
 """Upstream retention extraction, mock grading and OpenAI baseline rewriting."""
-from app.rewriting import rewrite, model_options
+from app.rewriting import rewrite, model_options, Proposal
 from app.prompt_registry import PromptRegistry
 from app.fidelity import check_fidelity
 from app.gepa.routes import router as gepa_router
@@ -205,3 +205,24 @@ def draft(source: DraftRequest):
     result.update(target_queries=source.queries, p1_before=public_scores(analysis['p1']),
                   p1_after=public_scores(after), p1_comparison=comparison)
     return result
+
+
+class URLProposalRequest(Source):
+    opt_in: Literal[True]
+    body_proposal: Proposal | None = None
+    allow_structure: bool = False
+
+
+@app.post('/api/url-proposals')
+def url_proposals(source: URLProposalRequest):
+    from app.url_proposals import body_view, experiment
+    from app.rewriting import RewriteFailure
+    parsed, _ = extract_document(source.content, source.format, source.href, source.hostname)
+    origin = source_origin(source)
+    if source.example_id and parsed['snapshot_id'] != source.example_id:
+        raise HTTPException(503, 'Example identity does not match the parsed snapshot.')
+    try:
+        body = body_view(parsed, source.body_proposal, source.allow_structure)
+    except RewriteFailure as error:
+        raise HTTPException(422, error.message) from None
+    return {**experiment(parsed, source.content, source.format, source.queries, body=body), 'source_origin': origin}

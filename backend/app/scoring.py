@@ -43,7 +43,7 @@ def _load_model(path, size, mtime):
 
 
 def score_document(document, content, format, queries, *, provider=None, cache_root=None,
-                   before_call=None, on_embedding=None, explain=False):
+                   before_call=None, on_embedding=None, explain=False, proposed_href=None):
     common = {'feature_version': FEATURE_VERSION, 'model_sha256': MODEL_SHA256,
               'serving_policy': SERVING_POLICY,
               'interpretation': INTERPRETATION, 'objective': OBJECTIVE,
@@ -60,6 +60,9 @@ def score_document(document, content, format, queries, *, provider=None, cache_r
         doc = deepcopy(document)
         inventory = source_inventory(content, document['source']['href'], format)
         doc['scorer_source_word_count'] = len(words(inventory['body_text']))
+        if proposed_href is not None:
+            # Request-local intervention only. Inventory/canonical/source identities stay original.
+            doc['source']['href'] = proposed_href
         semantics, telemetry = semantic_features(doc, queries, provider=provider, cache_root=cache_root, before_call=before_call, on_telemetry=on_embedding)
         matrix = np.stack([feature_row(query, doc, semantic) for query, semantic in zip(queries, semantics)])
         probabilities = np.array([predict_document(bundle, query, doc, semantic)
