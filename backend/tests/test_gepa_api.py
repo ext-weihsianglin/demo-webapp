@@ -46,3 +46,23 @@ def test_broken_research_registry_does_not_disable_source_analysis(tmp_path, mon
     client = TestClient(app)
     assert client.post('/api/analyze', json=SOURCE).status_code == 200
     assert client.get('/api/prompts', params={'model':'gpt-4.1-mini'}).status_code == 400
+
+
+def test_http_source_rejection_is_validated_and_blocks_promotion(tmp_path, monkeypatch):
+    from app.gepa.runs import RunConfig
+    from test_gepa_runs import wait
+    make_dataset(tmp_path, monkeypatch)
+    manager=RunManager(registry=PromptRegistry(tmp_path/'registry'),client=ResearchClient(),scorer=scorer,directory=tmp_path/'runs')
+    monkeypatch.setattr(routes,'manager',manager)
+    final=wait(manager,manager.start(RunConfig(dataset_id='fixture',candidates=1,enable_live_calls=True))['id'])
+    candidate=final['recommendation']
+    path=f'/api/gepa/runs/{final["id"]}/candidates/{candidate}/reject'
+    client=TestClient(app)
+    assert client.post(path,json={'reason':''}).status_code == 422
+    assert client.post(path,json={'reason':'  '}).status_code == 400
+    assert client.post(path,json={'reason':'Unstated guarantee in b1.','approved':True}).status_code == 422
+    rejected=client.post(path,json={'reason':'Unstated guarantee in b1.'})
+    assert rejected.status_code == 200
+    assert not rejected.json()['promotion_compatible']
+    assert client.post(f'/api/prompts/{candidate}/promote',json={'run_id':final['id']}).status_code == 400
+    assert client.get(f'/api/gepa/runs/{final["id"]}/export').json()['summary']['source_rejections'][candidate]['reason'] == 'Unstated guarantee in b1.'

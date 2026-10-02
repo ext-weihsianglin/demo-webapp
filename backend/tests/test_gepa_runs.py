@@ -126,6 +126,33 @@ def test_reasoning_reflection_request_matches_persisted_run_settings(tmp_path, m
         assert event['usage']['max_output_tokens'] == profile['max_output_tokens']
 
 
+def test_source_review_rejection_blocks_promotion_after_restart(tmp_path, monkeypatch):
+    import pytest
+    make_dataset(tmp_path, monkeypatch)
+    registry = PromptRegistry(tmp_path/'registry')
+    manager = RunManager(registry=registry, client=ResearchClient(), scorer=scorer, directory=tmp_path/'runs')
+    final = wait(manager, manager.start(RunConfig(dataset_id='fixture', candidates=1, enable_live_calls=True))['id'])
+    winner = final['recommendation']
+    assert winner and final['promotion_compatible']
+    manager.reject_candidate(final['id'], winner, 'Source audit found an unsupported guarantee in block b1.')
+    fresh = RunManager(registry=registry, directory=tmp_path/'runs')
+    restored = fresh.status(final['id'])
+    assert restored['recommendation'] == winner  # Keep numerical results visible.
+    assert not restored['promotion_compatible']
+    assert 'unsupported guarantee' in restored['promotion_block_reason']
+    assert restored['source_rejections'][winner]['prompt_hash'] == registry.resolve(winner, 'gpt-4.1-mini')['prompt_hash']
+    with pytest.raises(ValueError, match='source review'):
+        fresh.promote(final['id'], winner)
+    assert registry.resolve(None, 'gpt-4.1-mini')['id'] == registry.baseline('gpt-4.1-mini')['id']
+    exported = fresh.store(final['id']).export()
+    assert 'source-review-'+winner in exported['artifacts']
+    assert any(e['phase'] == 'source_review_rejected' for e in exported['events'])
+    with pytest.raises(ValueError):
+        fresh.reject_candidate(final['id'], winner, '   ')
+    with pytest.raises(FileNotFoundError):
+        fresh.reject_candidate(final['id'], 'unknown', 'Unsupported claim.')
+
+
 def test_stop_preserves_dispatched_result_and_does_not_call_next_phase(tmp_path,monkeypatch):
     import threading
     from app.gepa.evaluation import PageEvaluator, AttemptBudget, RunStopped

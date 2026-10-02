@@ -1,7 +1,7 @@
 """HTTP validation only; coordinator and artifacts own research behavior."""
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 from app.prompt_registry import PromptRegistry
 from app.rewriting import model_options
 from app.gepa.datasets import list_datasets
@@ -82,6 +82,16 @@ def export(identity: str):
         result['summary']=manager.status(identity)
         return JSONResponse(result,headers={'Content-Disposition':f'attachment; filename="gepa-{safe_id(identity)}.json"'})
     return invoke(document)
+
+
+class SourceRejection(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    reason: str=Field(min_length=1,max_length=2000)
+
+
+@router.post('/api/gepa/runs/{identity}/candidates/{candidate_id}/reject')
+def reject_candidate(identity: str,candidate_id: str,request: SourceRejection):
+    return invoke(lambda:manager.reject_candidate(identity,candidate_id,request.reason))
 
 
 class Promotion(BaseModel):

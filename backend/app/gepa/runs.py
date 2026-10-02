@@ -196,8 +196,36 @@ class RunManager:
             if boundary != EDIT_BOUNDARY_VERSION else
             'This run uses an older or unrecorded fidelity policy. Evaluate again before promotion.'
             if manifest.get('fidelity') != fidelity_profile() else None)
+        rejections={record['candidate_id']:record for path in store.path.glob('source-review-*.json')
+                    for record in [store.read(path.stem)]}
+        summary['source_rejections']=rejections
+        rejected=rejections.get(summary.get('recommendation'))
+        if rejected:
+            summary['promotion_block_reason']='Candidate rejected by source review: '+rejected['reason']
         summary['promotion_compatible']=summary['promotion_block_reason'] is None
         return summary
+
+    def reject_candidate(self, identity, candidate_id, reason):
+        reason=reason.strip()
+        if not reason or len(reason)>2000:
+            raise ValueError('Source review requires a reason of 1–2,000 characters')
+        with self.lock:
+            store=self.store(identity)
+            candidate=store.read('candidate-'+safe_id(candidate_id))
+            name='source-review-'+safe_id(candidate_id)
+            try:
+                existing=store.read(name)
+            except FileNotFoundError:
+                existing=None
+            if existing:
+                if existing['reason']!=reason:
+                    raise ValueError('A source review rejection is immutable')
+                return self.status(identity)
+            store.write(name,{'candidate_id':candidate_id,'prompt_hash':candidate['prompt_hash'],
+                'reason':reason,'review_kind':'operator_source_rejection',
+                'created_at':datetime.now(timezone.utc).isoformat()})
+            store.event('source_review_rejected',candidate_id=candidate_id,reason=reason)
+            return self.status(identity)
 
     def stop(self, identity):
         with self.lock:
@@ -219,12 +247,13 @@ class RunManager:
         return [self.status(p.parent.name) for p in sorted(directory.glob('*/summary.json'),reverse=True)]
 
     def promote(self, identity, candidate_id):
-        summary=self.status(identity)
-        if summary['status'] not in ('completed','stopped') or summary['recommendation']!=candidate_id:
-            raise ValueError('Only a complete recommended candidate can be promoted')
-        if not summary['promotion_compatible']:
-            raise ValueError(summary['promotion_block_reason'])
-        return self.registry.promote(candidate_id,summary['config']['model'])
+        with self.lock:
+            summary=self.status(identity)
+            if summary['status'] not in ('completed','stopped') or summary['recommendation']!=candidate_id:
+                raise ValueError('Only a complete recommended candidate can be promoted')
+            if not summary['promotion_compatible']:
+                raise ValueError(summary['promotion_block_reason'])
+            return self.registry.promote(candidate_id,summary['config']['model'])
 
 
 class RunLogger:

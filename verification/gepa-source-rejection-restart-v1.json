@@ -1,0 +1,27 @@
+{
+  "run_id": "db4545d1d3bf468c94e0d92341ce6c63",
+  "backend_restarted": true,
+  "browser_source_rejection_saved": true,
+  "source_rejections": {
+    "gpt-4.1-mini--dd6770387811951918ca88f4": {
+      "candidate_id": "gpt-4.1-mini--dd6770387811951918ca88f4",
+      "prompt_hash": "4d67f1d090d97c5727e83be2d791fb76b10a9faa23f8b584d890a6f6ccb19152",
+      "reason": "Assistant source audit: b000031 at www.hometheater.com.br adds precise calibration (calibrar com precis\u00e3o), while its entire allowed original chunk describes only a basic adjustment and test-image downloads. See verification/gepa-reasoning-reflection-source-check-v1.json.",
+      "review_kind": "operator_source_rejection",
+      "created_at": "2026-10-02T11:12:59.539581+00:00"
+    }
+  },
+  "promotion_compatible": false,
+  "promotion_block_reason": "Candidate rejected by source review: Assistant source audit: b000031 at www.hometheater.com.br adds precise calibration (calibrar com precis\u00e3o), while its entire allowed original chunk describes only a basic adjustment and test-image downloads. See verification/gepa-reasoning-reflection-source-check-v1.json.",
+  "promotion_http_status": 400,
+  "budget_and_usage_unchanged": true,
+  "candidate_prompt_hashes_unchanged": true,
+  "heldout_calls": 0,
+  "registry": {
+    "model": "gpt-4.1-mini",
+    "selected_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidate_id": "gpt-4.1-mini--dd6770387811951918ca88f4",
+    "candidate_prompt_hash": "4d67f1d090d97c5727e83be2d791fb76b10a9faa23f8b584d890a6f6ccb19152",
+    "candidate_present": true
+  }
+}
