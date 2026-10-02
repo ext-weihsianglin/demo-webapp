@@ -1,0 +1,711 @@
+{
+  "optimization_run": "05ff4eaaf1d64107a2b0f542238e5bbe",
+  "candidate_id": "gpt-4.1-mini--5d40897402fa5cf1dae4f4e4",
+  "page_id": "38733e7b50c1b81b6b9f54effebd988c36fb0d2a177430c1aa18cb0a0727621c",
+  "scope": "Replay saved validation rewrite only; no new P2 call or test pages. Diagnostic judge usage is outside run totals.",
+  "edit_count": 36,
+  "before_gate": {
+    "status": "passed",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000028",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "The expanded text accurately describes the French Homestay Immersion in France, consistent with source mentions of France as a destination for French immersion programs.",
+        "source_ids": [
+          "b000030"
+        ]
+      },
+      {
+        "block_id": "b000030",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "The description of France providing a vibrant cultural environment and authentic French living aligns with the source's mention of French Homestay Immersion.",
+        "source_ids": [
+          "b000028"
+        ]
+      },
+      {
+        "block_id": "b000032",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "The expanded description of Spanish Homestay Immersion encompassing multiple Spanish-speaking countries matches the source list of countries like Argentina, Chile, Mexico, and Spain.",
+        "source_ids": [
+          "b000034"
+        ]
+      },
+      {
+        "block_id": "b000034",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "The expanded text correctly associates Argentina with Spanish homestay immersion and cultural experience, consistent with the source.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000037",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Chile is correctly presented as a Spanish homestay immersion destination consistent with the source listing.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000040",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Mexico is described as a Spanish homestay immersion location matching source information.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000043",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Spain is correctly identified as a Spanish homestay immersion country, consistent with source data.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000045",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "The expanded description of English Homestay Immersion across various countries aligns with multiple country mentions in the source for this language immersion.",
+        "source_ids": [
+          "b000047"
+        ]
+      },
+      {
+        "block_id": "b000047",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Australia is correctly contextualized as a key destination for English homestay immersion programs, consistent with source listings.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000050",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Canada's inclusion among English homestay immersion countries matches source content.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000053",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "China is mentioned as a destination offering English homestay immersion opportunities, consistent with source information.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000056",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Ireland is highlighted accurately as an English homestay immersion destination, matching source listings.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000059",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Malta is correctly included as an English homestay immersion location, consistent with source data.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000062",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "New Zealand is appropriately described for its English homestay immersion offerings, as per the source.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000065",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "United Kingdom is accurately presented as an English homestay immersion destination, consistent with source.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000068",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "United States is correctly described in the context of English homestay immersion programs, consistent with source.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000070",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Dutch Homestay Immersion description aligns with source mentioning the Netherlands for such programs.",
+        "source_ids": [
+          "b000072"
+        ]
+      },
+      {
+        "block_id": "b000074",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "German Homestay Immersion accurately reflects source content about Germany as a destination.",
+        "source_ids": [
+          "b000076"
+        ]
+      },
+      {
+        "block_id": "b000078",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Italian Homestay Immersion correctly extends source content about Italy as a homestay immersion country.",
+        "source_ids": [
+          "b000080"
+        ]
+      },
+      {
+        "block_id": "b000082",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Japanese Homestay Immersion accurately describes Japan as a hosting country for such programs per source.",
+        "source_ids": [
+          "b000084"
+        ]
+      },
+      {
+        "block_id": "b000086",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Portuguese Homestay Immersion correctly includes Brazil and Portugal as destinations, matching source.",
+        "source_ids": [
+          "b000088"
+        ]
+      },
+      {
+        "block_id": "b000119",
+        "verdict": "supported",
+        "category": "Paraphrase",
+        "reason": "Summary captures the essence of teen immersion programs expecting active participation and cultural adaptation, matching source details",
+        "source_ids": [
+          "b000121"
+        ]
+      },
+      {
+        "block_id": "b000123",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Listing multiple languages for homestay immersion matches the language options described in source text blocks describing language programs.",
+        "source_ids": [
+          "b000126"
+        ]
+      },
+      {
+        "block_id": "b000147",
+        "verdict": "supported",
+        "category": "Summary",
+        "reason": "Expanded listing of countries offering homestay programs is consistent with source's multiple country mentions and lists.",
+        "source_ids": [
+          "b000148"
+        ]
+      },
+      {
+        "block_id": "b000190",
+        "verdict": "supported",
+        "category": "Paraphrase",
+        "reason": "Description accurately reflects the source emphasizing language skills as well as intercultural understanding and friendships by participating in summer programs.",
+        "source_ids": [
+          "b000191"
+        ]
+      },
+      {
+        "block_id": "b000208",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Adult homestay immersion programs described correctly with private teacher and family based lessons matching source.",
+        "source_ids": [
+          "b000209"
+        ]
+      },
+      {
+        "block_id": "b000213",
+        "verdict": "supported",
+        "category": "Summary",
+        "reason": "List of countries for adult homestay programs corresponds with source's enumeration of adult program destinations.",
+        "source_ids": [
+          "b000219"
+        ]
+      },
+      {
+        "block_id": "b000238",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Listing additional possible destinations on request is consistent with the source.",
+        "source_ids": [
+          "b000213"
+        ]
+      },
+      {
+        "block_id": "b000247",
+        "verdict": "supported",
+        "category": "Summary",
+        "reason": "Expanded title and description summarize the type of content found in linked articles and guides relevant to homestay programs.",
+        "source_ids": [
+          "b000258"
+        ]
+      },
+      {
+        "block_id": "b000259",
+        "verdict": "supported",
+        "category": "Summary",
+        "reason": "Expansion correctly describes the FAQ section and its contents per source snippet referring to sales conditions and program queries.",
+        "source_ids": [
+          "b000262"
+        ]
+      },
+      {
+        "block_id": "b000262",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "The elaboration on sales conditions matches source instructions to refer to detailed terms on the website.",
+        "source_ids": [
+          "b000262"
+        ]
+      },
+      {
+        "block_id": "b000274",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Expanded text providing advice on contacting the team using any method is consistent with source.",
+        "source_ids": [
+          "b000274"
+        ]
+      },
+      {
+        "block_id": "b000282",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Expanded description of host family selection process corresponds exactly with source text.",
+        "source_ids": [
+          "b000282"
+        ]
+      },
+      {
+        "block_id": "b000287",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Advice to apply early with additional reasoning aligns well with source's advice about application timing and seasonality.",
+        "source_ids": [
+          "b000287"
+        ]
+      },
+      {
+        "block_id": "b000320",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Expanded encouragement aligns with source commitment to helping choose the right program.",
+        "source_ids": [
+          "b000320"
+        ]
+      },
+      {
+        "block_id": "b000334",
+        "verdict": "supported",
+        "category": "Expansion",
+        "reason": "Additional detail about resources and program management matches the source description.",
+        "source_ids": [
+          "b000334"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+      "calls": 1,
+      "input_tokens": 14076,
+      "output_tokens": 1526,
+      "estimated_cost_usd": null,
+      "schema_version": "fidelity-slots-v1",
+      "schema_hash": "6bb5cda4892cae4c12c7942665d5edac7541d5eb1638f3ff18f93f3318eba18c",
+      "output_limit": 4608,
+      "latency_ms": 12933
+    }
+  },
+  "after_gate": {
+    "status": "rejected",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000028",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The original source only states the heading and the country name 'France', without details about the program structure, language practice, cultural activities, or rapid progress claims.",
+        "source_ids": [
+          "b000030"
+        ]
+      },
+      {
+        "block_id": "b000030",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source only mentions 'France' without details on welcoming families or cultural experience. The added description is not supported by the source.",
+        "source_ids": [
+          "b000028"
+        ]
+      },
+      {
+        "block_id": "b000032",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The original source only has the heading 'Spanish Homestay Immersion' and country listings without elaborations on program approach or benefits as in the proposal.",
+        "source_ids": [
+          "b000034"
+        ]
+      },
+      {
+        "block_id": "b000034",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source lists only the country name 'Argentina' under Spanish Homestay Immersion without elaboration on the experience or language advancement.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000037",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The original content only states 'Chile' without describing the homestay immersion or language improvement details.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000040",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "Only 'Mexico' is mentioned in the source without further contextual details on cultural or language aspects.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000043",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source lists 'Spain' without elaboration on program details or cultural immersion claims.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000045",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source only provides the heading and country names such as Australia without description on program, cultural exchange, or personal growth benefits.",
+        "source_ids": [
+          "b000047"
+        ]
+      },
+      {
+        "block_id": "b000047",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "Only 'Australia' is mentioned, lacking program details or learning benefits presented in the rewrite.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000050",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source just mentions 'Canada' with no supporting details about homestay immersion or community interaction benefits.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000053",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "Only 'China' is cited without any elaboration about English immersion or cultural exposure.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000056",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source states 'Ireland' alone without contextual information about cultural heritage or immersion experience.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000059",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The original text only lists 'Malta' without further descriptions about the immersion program or cultural setting.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000062",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source solely mentions 'New Zealand' with no additional detail on immersion or cultural experience.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000065",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "Only 'United Kingdom' is noted without claims about English education or cultural experiences.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000068",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source only lists 'United States' without further support for program characteristics or benefits described in the edit.",
+        "source_ids": [
+          "b000045"
+        ]
+      },
+      {
+        "block_id": "b000070",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "Only 'Dutch Homestay Immersion' and 'Netherlands' are listed without details on effective language acquisition or customs experience.",
+        "source_ids": [
+          "b000072"
+        ]
+      },
+      {
+        "block_id": "b000074",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source mentions 'German Homestay Immersion' and 'Germany' but does not provide in-depth details about language fluency or cultural understanding.",
+        "source_ids": [
+          "b000076"
+        ]
+      },
+      {
+        "block_id": "b000078",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "Only 'Italian Homestay Immersion' and 'Italy' are mentioned with no supporting details regarding lifestyle or immersion benefits.",
+        "source_ids": [
+          "b000080"
+        ]
+      },
+      {
+        "block_id": "b000082",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source includes 'Japanese Homestay Immersion' and 'Japan' without description of continuous daily interaction or cultural traditions learning.",
+        "source_ids": [
+          "b000084"
+        ]
+      },
+      {
+        "block_id": "b000086",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The original text only lists 'Portuguese Homestay Immersion' with 'Brazil' and 'Portugal' without detailed description as in the edit.",
+        "source_ids": [
+          "b000088"
+        ]
+      },
+      {
+        "block_id": "b000119",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source contains detailed expectations for teens in immersion programs but does not explicitly summarize as combined language learning and active participation promoting rapid language acquisition as in the edit.",
+        "source_ids": [
+          "b000121"
+        ]
+      },
+      {
+        "block_id": "b000123",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The original text lists languages and corresponding homestay immersion locations but does not offer the consolidated description of unique cultural immersion experiences for each language as in the edit.",
+        "source_ids": [
+          "b000126"
+        ]
+      },
+      {
+        "block_id": "b000147",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source lists many countries but does not explicitly specify the full list or combine them into a comprehensive list as in the edit.",
+        "source_ids": [
+          "b000148"
+        ]
+      },
+      {
+        "block_id": "b000190",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source mentions language acquisition plus international understanding and intercultural skills but does not frame it as gaining cultural competence and forming international friendships as in the edit.",
+        "source_ids": [
+          "b000191"
+        ]
+      },
+      {
+        "block_id": "b000208",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source offers homestay immersions for adults with one-to-one private classes and family living but does not mention customized language instruction combined with authentic cultural experiences as in the edit.",
+        "source_ids": [
+          "b000209"
+        ]
+      },
+      {
+        "block_id": "b000213",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source lists countries offering adult homestay immersion but does not summarize all in one sentence as proposed, including personalized one-to-one language lessons and cultural integration keywords.",
+        "source_ids": [
+          "b000219"
+        ]
+      },
+      {
+        "block_id": "b000238",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source merely lists other destinations on request without mention of tailored immersion experiences based on participant preferences found in the edit.",
+        "source_ids": [
+          "b000213"
+        ]
+      },
+      {
+        "block_id": "b000247",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The original listing of articles and guides does not provide the descriptive overview of the guides or their practical nature as in the edit.",
+        "source_ids": [
+          "b000258"
+        ]
+      },
+      {
+        "block_id": "b000259",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source starts the FAQ with questions and some answers but does not summarize the FAQ as providing answers on durations, host selection, planning, or cultural activities as in the edit.",
+        "source_ids": [
+          "b000262"
+        ]
+      },
+      {
+        "block_id": "b000262",
+        "verdict": "unsupported",
+        "category": "Content extension",
+        "reason": "The source only states 'Please refer to our Sales Conditions section on this website.' The expansion to detailed terms on booking, payment, and cancellation policies is not in the source.",
+        "source_ids": [
+          "b000262"
+        ]
+      },
+      {
+        "block_id": "b000274",
+        "verdict": "unsupported",
+        "category": "Content extension",
+        "reason": "The original sentence invites use of communication channels but does not mention connecting with the team or expert advice opportunities as in the addition.",
+        "source_ids": [
+          "b000274"
+        ]
+      },
+      {
+        "block_id": "b000282",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source mentions selection, visits, screening host families, and providing explanations but does not include guaranteeing a safe and immersive cultural experience as in the edit.",
+        "source_ids": [
+          "b000282"
+        ]
+      },
+      {
+        "block_id": "b000287",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source states applying early is better, especially in summer, but does not claim early application improves host family matching or smoother placement.",
+        "source_ids": [
+          "b000287"
+        ]
+      },
+      {
+        "block_id": "b000320",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The original text only offers confidence to choose the right program without describing language immersion and cultural experience assurance ensuring success abroad as added.",
+        "source_ids": [
+          "b000320"
+        ]
+      },
+      {
+        "block_id": "b000334",
+        "verdict": "unsupported",
+        "category": "Content addition",
+        "reason": "The source states managing program and accessing resources but does not mention tips on maximizing language and cultural immersion experience as in the edit.",
+        "source_ids": [
+          "b000334"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1-mini",
+      "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+      "calls": 1,
+      "input_tokens": 18072,
+      "output_tokens": 1788,
+      "estimated_cost_usd": null,
+      "schema_version": "fidelity-slots-v2",
+      "schema_hash": "6bb5cda4892cae4c12c7942665d5edac7541d5eb1638f3ff18f93f3318eba18c",
+      "output_limit": 4608,
+      "latency_ms": 13996
+    }
+  },
+  "example": {
+    "snapshot_id": "38733e7b50c1b81b6b9f54effebd988c36fb0d2a177430c1aa18cb0a0727621c",
+    "chunk_id": "b87371cc8a146303293d3767a78e4b5c0989539bef7fb076ff0875af1929d71d",
+    "block_id": "b000028",
+    "before": "French Homestay Immersion",
+    "after": "French Homestay Immersion offers you the chance to fully experience French language and culture by living with a local host family in France. This immersive program allows you to practice French daily while engaging in authentic cultural activities and daily life, ensuring rapid language progress and cultural understanding.",
+    "reason": "Added a clear introductory sentence about cultural immersion and language experience to clarify the program's nature and set user expectations for French immersion.",
+    "evidence": [
+      {
+        "snapshot_id": "38733e7b50c1b81b6b9f54effebd988c36fb0d2a177430c1aa18cb0a0727621c",
+        "block_id": "b000030",
+        "quote": "France"
+      }
+    ],
+    "review_flags": [
+      "language_preservation_unverified"
+    ],
+    "heading_level": null,
+    "source_id": "b000028"
+  }
+}

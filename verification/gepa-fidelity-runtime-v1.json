@@ -1,0 +1,21 @@
+{
+  "run_id": "05ff4eaaf1d64107a2b0f542238e5bbe",
+  "actual_backend_restart": true,
+  "recorded_edit_boundary": "body-content-v3",
+  "promotion_compatible": false,
+  "promotion_block_reason": "This run uses an older or unrecorded fidelity policy. Evaluate again before promotion.",
+  "promotion_status": 400,
+  "promotion_error": {
+    "detail": "Research configuration or frozen artifact is invalid/unavailable"
+  },
+  "selected_id": "gpt-4.1-mini--rewrite-page-v7",
+  "budget_preserved": {
+    "attempts": 80,
+    "reserved": 0,
+    "completed": 80,
+    "technical_failures": 4,
+    "stop_reason": "attempt_budget",
+    "limit": 100
+  },
+  "candidate_id": "gpt-4.1-mini--5d40897402fa5cf1dae4f4e4"
+}

@@ -20,6 +20,11 @@ from app.gepa.adapter import Adapter, Callbacks, REFLECTION_PROMPT
 TERMINAL={'completed','stopped','failed','interrupted'}
 
 
+def fidelity_profile():
+    return {'model':GATE_MODEL,'prompt_hash':digest(GATE_PROMPT),'schema_version':SCHEMA_VERSION,
+            'output_budget':OUTPUT_BUDGET,'uncertain_policy':'reject_whole_proposal'}
+
+
 class RunConfig(BaseModel):
     model_config=ConfigDict(extra='forbid',allow_inf_nan=False)
     dataset_id: str
@@ -84,8 +89,7 @@ class RunManager:
             manifest={'run_id':identity,'config':config.model_dump(),'dataset':{k:v for k,v in data.items() if k!='pages'},
                 'page_roles':[{k:p[k] for k in ('snapshot_id','role','query_set_hash')} for p in data['pages']],
                 'baseline':baseline,'rewrite_settings':settings.__dict__,'edit_boundary_version':EDIT_BOUNDARY_VERSION,
-                'fidelity':{'model':GATE_MODEL,'prompt_hash':digest(GATE_PROMPT),'schema_version':SCHEMA_VERSION,
-                            'output_budget':OUTPUT_BUDGET,'uncertain_policy':'reject_whole_proposal'},
+                'fidelity':fidelity_profile(),
                 'semantic_rewrite_failures':sorted(SEMANTIC_REWRITE_FAILURES),
                 'reflection_prompt_hash':digest(REFLECTION_PROMPT),'gepa_version':importlib.metadata.version('gepa'),
                 'cache_scope':'per_run','merge_enabled':False,'created_at':datetime.now(timezone.utc).isoformat()}
@@ -179,13 +183,17 @@ class RunManager:
                     candidates=[store.read(path.stem) for path in sorted(store.path.glob('candidate-*.json'))])
                 store.write('summary',summary)
         try:
-            boundary=store.read('manifest').get('edit_boundary_version')
+            manifest=store.read('manifest')
         except FileNotFoundError:
-            boundary=None
+            manifest={}
+        boundary=manifest.get('edit_boundary_version')
         summary['edit_boundary_version']=boundary
-        summary['promotion_compatible']=boundary == EDIT_BOUNDARY_VERSION
-        summary['promotion_block_reason']=None if summary['promotion_compatible'] else (
-            'This run uses an older or unrecorded edit boundary. Evaluate again before promotion.')
+        summary['promotion_block_reason']=(
+            'This run uses an older or unrecorded edit boundary. Evaluate again before promotion.'
+            if boundary != EDIT_BOUNDARY_VERSION else
+            'This run uses an older or unrecorded fidelity policy. Evaluate again before promotion.'
+            if manifest.get('fidelity') != fidelity_profile() else None)
+        summary['promotion_compatible']=summary['promotion_block_reason'] is None
         return summary
 
     def stop(self, identity):
@@ -211,9 +219,8 @@ class RunManager:
         summary=self.status(identity)
         if summary['status'] not in ('completed','stopped') or summary['recommendation']!=candidate_id:
             raise ValueError('Only a complete recommended candidate can be promoted')
-        manifest=self.store(identity).read('manifest')
-        if manifest.get('edit_boundary_version') != EDIT_BOUNDARY_VERSION:
-            raise ValueError('Recommendation uses an older edit boundary; evaluate again before promotion')
+        if not summary['promotion_compatible']:
+            raise ValueError(summary['promotion_block_reason'])
         return self.registry.promote(candidate_id,summary['config']['model'])
 
 

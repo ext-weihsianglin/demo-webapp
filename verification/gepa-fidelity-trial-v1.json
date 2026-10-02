@@ -1,0 +1,40 @@
+{
+  "previous_run": "05ff4eaaf1d64107a2b0f542238e5bbe",
+  "run_id": "5958785abc174789bc7a079d715a1d9b",
+  "unchanged_manifest_fields": {
+    "config": true,
+    "page_roles": true,
+    "baseline": true,
+    "rewrite_settings": true,
+    "edit_boundary_version": true,
+    "semantic_rewrite_failures": true,
+    "reflection_prompt_hash": true,
+    "gepa_version": true,
+    "cache_scope": true,
+    "merge_enabled": true
+  },
+  "fidelity_before": {
+    "model": "gpt-4.1-mini",
+    "prompt_hash": "8a0e4e9b173d3ff9669810e13599ff14e6faadd943ffe199b3f95c7685cd3030",
+    "schema_version": "fidelity-slots-v1",
+    "output_budget": {
+      "minimum": 4096,
+      "maximum": 16000,
+      "per_edit": 128
+    },
+    "uncertain_policy": "reject_whole_proposal"
+  },
+  "fidelity_after": {
+    "model": "gpt-4.1-mini",
+    "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+    "schema_version": "fidelity-slots-v2",
+    "output_budget": {
+      "minimum": 4096,
+      "maximum": 16000,
+      "per_edit": 128
+    },
+    "uncertain_policy": "reject_whole_proposal"
+  },
+  "initial_status": "preflighting",
+  "purpose": "Fresh baseline/challenger GEPA comparison under corrected chunk-scoped fidelity; same gpt-4.1-mini P2, gpt-4.1 reflection and100attempt cap."
+}

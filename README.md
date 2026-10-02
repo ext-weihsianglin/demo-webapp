@@ -118,6 +118,8 @@ separate from generated body content.
 
 The webapp adds query-independent `source_role_context` metadata for HTML controls whose ARIA ancestry is omitted from upstream blocks. This overlay leaves core parser/scorer fields unchanged. The `body-content-v3` rewrite boundary protects site chrome, forms and controls using source DOM paths, normalized roles and conservative navigation class/ID tokens; article headers inside `main`/`article` remain editable.
 
+The source-relative fidelity gate reviews each edit against its original chunk and rejects cross-chunk support. Labels and topical plausibility cannot establish new benefits or guarantees. Promotion requires the recorded fidelity profile to match the current policy; historical recommendations need fresh evaluation after a policy change. The judge remains fallible.
+
 `app/scoring.py` verifies the trusted v7 model before deserialization, the ordered 55-feature contract and packaged module fingerprints. Original and proposed structured documents are scored over the same query set and immutable source inventory. Scoring is separate from extraction and HTTP handling. Missing/incompatible models or embeddings produce explicit unavailability.
 
 Reproduce the bounded cache-only parser/semantic parity audit:

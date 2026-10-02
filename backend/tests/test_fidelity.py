@@ -72,3 +72,21 @@ def test_incomplete_coverage_remains_unavailable():
     doc['blocks'].append({'block_id':'b2','text':'The treatment may help.'})
     doc['chunks'][0]['block_ids'].append('b2')
     assert check_fidelity(doc,changes()+[{**changes()[0],'source_id':'b2'}],client=Judge('supported'))['status']=='unavailable'
+
+
+def test_another_edited_chunk_cannot_support_a_claim():
+    import json
+    doc = document()
+    doc['blocks'].append({'block_id':'b2','text':'A different treatment will help.'})
+    doc['chunks'].append({'chunk_id':'c2','block_ids':['b2']})
+    edits = changes()+[{'source_id':'b2','chunk_id':'c2','before':'A different treatment will help.',
+        'after':'A different treatment helps.','evidence':[{'block_id':'b2','quote':'A different treatment will help.'}]}]
+    class CrossChunkJudge:
+        responses = property(lambda self:self)
+        def create(self, **request):
+            return NS(status='completed',output=[],usage=None,output_text=json.dumps({'edits':{
+                identity:{'verdict':'supported','category':'claim','reason':'The treatment will help.',
+                    'source_ids':['b2']} for identity in ('b1','b2')}}))
+    result = check_fidelity(doc,edits,client=CrossChunkJudge())
+    assert result['status']=='unavailable'
+    assert result['reason']=='invalid_judge_output'
