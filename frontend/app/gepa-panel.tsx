@@ -1,4 +1,5 @@
 'use client';
+import { readApiResponse } from './api-client';
 import { useCallback, useEffect, useState } from 'react';
 import { PromptSelector } from './prompt-selector';
 
@@ -13,7 +14,7 @@ const knobs:{key:keyof Config;label:string;min:number;max:number;step?:number}[]
  {key:'attempts',label:'Maximum rewrite attempts',min:30,max:2000},{key:'concurrency',label:'Concurrent page evaluations',min:1,max:20},
  {key:'length_multiplier',label:'Editorial length multiplier',min:1,max:3,step:.1},{key:'consecutive_failures',label:'Consecutive technical failures',min:1,max:20},
  {key:'failure_rate',label:'Technical failure fraction',min:.01,max:1,step:.01},{key:'failure_minimum',label:'Failure-rate minimum attempts',min:1,max:100},{key:'seed',label:'Sampling seed',min:0,max:2147483647}];
-async function api(path:string,body?:unknown){const r=await fetch('/api/'+path,body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await r.json();if(!r.ok)throw new Error(typeof data.detail==='string'?data.detail:JSON.stringify(data.detail));return data;}
+async function api(path:string,body?:unknown){const r=await fetch('/api/'+path,body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return await readApiResponse(r);}
 const pct=(n?:number)=>n===undefined?'—':(n*100).toFixed(2);
 
 export function GepaPanel(){
@@ -29,7 +30,7 @@ export function GepaPanel(){
    const running=h.runs.find((r:Run)=>['preflighting','running','stopping'].includes(r.status));if(running)setRun(running);
  }).catch(e=>{if(alive)setError(e.message);});return()=>{alive=false;};},[]);
  useEffect(()=>{if(!run)return;let alive=true;const id=run.id;const poll=async()=>{
-   try{const [next,log]=await Promise.all([api(`gepa/runs/${id}`),api(`gepa/runs/${id}/events`)]);if(alive){setRun(next);setEvents(log.events);}}
+   try{const [next,log]=await Promise.all([api(`gepa/runs/${id}`),api(`gepa/runs/${id}/events`)]);if(alive){setRun(next);setEvents(log.events);setError(previous=>previous.startsWith('API temporarily unavailable')||previous.startsWith('Unexpected token')?'':previous);}}
    catch(e){if(alive)setError((e as Error).message);}
  };void poll();const timer=active?setInterval(poll,1500):undefined;return()=>{alive=false;if(timer)clearInterval(timer);};},[run?.id,active]);
  async function start(){setError('');setPending(true);try{const next=await api('gepa/runs',config);setRun(next);setEvents([]);setDetail(null);setHistory(h=>[next,...h]);}catch(e){setError((e as Error).message);}finally{setPending(false);}}

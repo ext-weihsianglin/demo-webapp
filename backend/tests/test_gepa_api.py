@@ -33,3 +33,16 @@ def test_http_research_requires_explicit_live_flag_and_exports_promotable_result
     assert exported['summary']['usage']['rewrite']['calls']==64
     assert client.post('/api/prompts/'+result['recommendation']+'/promote',json={'run_id':identity}).status_code==200
     assert client.post('/api/gepa/runs/'+identity+'/stop').status_code==200
+
+
+def test_broken_research_registry_does_not_disable_source_analysis(tmp_path, monkeypatch):
+    from test_api import SOURCE
+    import app.gepa.runs as run_module
+    def unavailable():
+        raise ValueError('Prompt fixed contract changed')
+    monkeypatch.setattr(run_module, 'PromptRegistry', unavailable)
+    manager = run_module.RunManager()
+    monkeypatch.setattr(routes, 'manager', manager)
+    client = TestClient(app)
+    assert client.post('/api/analyze', json=SOURCE).status_code == 200
+    assert client.get('/api/prompts', params={'model':'gpt-4.1-mini'}).status_code == 400

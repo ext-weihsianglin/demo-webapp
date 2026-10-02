@@ -3,6 +3,8 @@ from app.rewriting import rewrite, model_options
 from app.prompt_registry import PromptRegistry
 from app.fidelity import check_fidelity
 from app.gepa.routes import router as gepa_router
+from app.gepa import routes as gepa_routes
+from contextlib import asynccontextmanager
 from urllib.parse import urlparse
 from typing import Literal
 from fastapi import FastAPI, HTTPException
@@ -12,7 +14,15 @@ from app.scoring import score_document, compare_scores
 from app.extraction import UPSTREAM, extract_document, section_view
 from app.verification import SourceInspector, verify_document
 
-app = FastAPI(title="Content Studio", version="0.1.0")
+@asynccontextmanager
+async def lifespan(app):
+    try:
+        yield
+    finally:
+        gepa_routes.manager.shutdown()
+
+
+app = FastAPI(title="Content Studio", version="0.1.0", lifespan=lifespan)
 app.include_router(gepa_router)
 
 class Source(BaseModel):

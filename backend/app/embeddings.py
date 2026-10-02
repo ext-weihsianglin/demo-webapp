@@ -53,7 +53,7 @@ def prepare_units(document, queries):
     return config, units, query_units
 
 
-def semantic_features(document, queries, *, provider=None, cache_root=None, before_call=None):
+def semantic_features(document, queries, *, provider=None, cache_root=None, before_call=None, on_telemetry=None):
     config, doc_units, query_units = prepare_units(document, queries)
     cfg = config['models']['openai-large']
     units = doc_units + list({u['unit_id']: u for u in query_units}.values())
@@ -121,3 +121,5 @@ def semantic_features(document, queries, *, provider=None, cache_root=None, befo
         raise EmbeddingUnavailable('embedding_provider_error', {**telemetry, 'provider_error': error.reason}) from None
     finally:
         store.close()
+        if on_telemetry:
+            on_telemetry(dict(telemetry))

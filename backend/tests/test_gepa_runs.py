@@ -133,3 +133,59 @@ def test_dataset_tampering_and_test_assignment_are_rejected(tmp_path,monkeypatch
     path.write_text(json.dumps(data))
     with pytest.raises(ValueError,match='validation'):
         load_dataset('fixture')
+
+
+def test_repeated_mutation_preserves_existing_selection_winner(tmp_path, monkeypatch):
+    make_dataset(tmp_path, monkeypatch)
+    manager = RunManager(registry=PromptRegistry(tmp_path/'registry'), client=ResearchClient(),
+                         scorer=scorer, directory=tmp_path/'runs')
+    final = wait(manager, manager.start(RunConfig(dataset_id='fixture', candidates=2, enable_live_calls=True))['id'])
+    assert final['status'] == 'completed'
+    assert final['proposals'] == 2
+    assert final['recommendation']
+    winner = next(c for c in final['candidates'] if c['id'] == final['recommendation'])
+    assert winner['selection_pages'] == 30 and winner['selection_mean'] == .6
+
+
+def test_post_embedding_score_failure_preserves_dispatched_usage(tmp_path, monkeypatch):
+    import pytest
+    import app.gepa.evaluation as evaluation
+    make_dataset(tmp_path, monkeypatch)
+    records = []
+    def unavailable_proposal(document, content, format, queries, **options):
+        proposed = document.get('artifact_kind') == 'proposed_content_based_on_source_snapshot'
+        options['on_embedding']({'calls':2 if proposed else 0,'input_tokens':10 if proposed else 0})
+        return {'status':'unavailable','per_query':[]} if proposed else scorer(document, content, format, queries)
+    monkeypatch.setattr(evaluation, 'score_document', unavailable_proposal)
+    evaluator = evaluation.PageEvaluator(evaluation.AttemptBudget(100), 1, client=ResearchClient(), record=records.append)
+    with pytest.raises(ValueError, match='Proposed P1 unavailable'):
+        evaluator.evaluate([load_dataset('fixture')['pages'][0]], PromptRegistry(tmp_path/'registry').baseline('gpt-4.1-mini'))
+    assert records[0]['proposed_embedding']['calls'] == 2
+    assert records[0]['proposed_embedding']['input_tokens'] == 10
+
+
+def test_server_shutdown_stops_next_phase_and_saved_progress_is_recoverable(tmp_path, monkeypatch):
+    import threading
+    make_dataset(tmp_path, monkeypatch)
+    started, release = threading.Event(), threading.Event()
+    class SlowClient(ResearchClient):
+        def create(self, **kwargs):
+            started.set()
+            assert release.wait(5)
+            return super().create(**kwargs)
+    registry = PromptRegistry(tmp_path/'registry')
+    manager = RunManager(registry=registry, client=SlowClient(), scorer=scorer, directory=tmp_path/'runs')
+    run = manager.start(RunConfig(dataset_id='fixture', concurrency=1, enable_live_calls=True))
+    assert started.wait(3)
+    manager.shutdown()
+    release.set()
+    final = wait(manager, run['id'])
+    assert final['status'] == 'stopped' and final['stop_reason'] == 'server_shutdown'
+    assert final['budget']['attempts'] == 1 and final['usage']['fidelity']['calls'] == 0
+    # An interrupted coordinator's persisted summary can lag page/candidate files.
+    store = manager.store(run['id'])
+    store.write('summary', {**final,'status':'running','budget':{'attempts':0,'reserved':30,'limit':100},'candidates':[]})
+    fresh = RunManager(registry=registry, directory=tmp_path/'runs')
+    recovered = fresh.status(run['id'])
+    assert recovered['status'] == 'interrupted' and recovered['budget']['attempts'] == 1
+    assert recovered['budget']['reserved'] == 0 and recovered['candidates']

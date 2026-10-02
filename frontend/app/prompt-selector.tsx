@@ -1,4 +1,5 @@
 'use client';
+import { readApiResponse } from './api-client';
 import { useEffect, useState } from 'react';
 
 type Entry = {id:string;kind:string;prompt_hash:string;selected:boolean};
@@ -10,7 +11,7 @@ export function PromptSelector({model,value,onChange,disabled=false}: {model:str
     if(!model)return;
     fetch(`/api/prompts?model=${encodeURIComponent(model)}`,{signal:controller.signal}).then(async r=>{
       if(!r.ok)throw new Error('Prompt registry unavailable');
-      const data=await r.json();
+      const data=await readApiResponse(r);
       setEntries(data.prompts);onChange(data.prompts.some((p:Entry)=>p.id===value)?value:data.selected_id);
     }).catch(e=>{if(e.name!=='AbortError')setError(e.message);});
     return ()=>controller.abort();

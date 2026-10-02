@@ -14,4 +14,27 @@ Run data and registry candidates are local ignored JSON artifacts. One process o
 
 Numeric UI/server bounds: 1–50 proposals, 1–20 reflection pages, 30–2,000 attempts, 1–20 workers, 1–3× mutable length, 1–20 consecutive failures, failure fraction (0,1], minimum 1–100 completions. Defaults remain 10 / 2 / 100 / 10 / 1.5× / 3 / 0.2 / 10. These are pre-run controls; increasing a cap is an explicit configuration choice.
 
-Verification: locked dependency sync passed; 113 backend tests passed, 2 opt-in checks skipped; frontend production build and typecheck passed; diff whitespace check passed. A stubbed integration executes the actual GEPA optimizer end to end: one improved mutation uses 64 rewrite attempts, excludes selection pages from reflection, evaluates all 30 selection pages, exports traces and promotes explicitly. A separate real-provider smoke on one reflection page measured original v7 scores from cached original-space embeddings, made one P2 call that abstained and made one reflection mutation. It did not exercise the fidelity/rescore branch or make a quality claim. Further live branch evidence is recorded separately. No optimized prompt is automatically promoted, and classifier improvements do not establish citation uplift or factual truth.
+Verification: locked dependency sync passed; 117 backend tests passed, 2 opt-in checks skipped; frontend production build and typecheck passed; diff whitespace check passed. A stubbed integration executes the actual GEPA optimizer end to end: one improved mutation uses 64 rewrite attempts, excludes selection pages from reflection, evaluates all 30 selection pages, exports traces and promotes explicitly. A separate real-provider smoke on one reflection page measured original v7 scores from cached original-space embeddings, made one P2 call that abstained and made one reflection mutation. It did not exercise the fidelity/rescore branch or make a quality claim. A second bounded live check produced six edits; the source-relative gate rejected the whole proposal, and reflection received those findings. Both bounded checks retained original scores. A later user-started baseline run saved 30 selection outcomes, including six applied, fidelity-approved proposals that were rescored with real v7/embeddings; optimization was interrupted before reflection. No candidate was promoted. See [live wiring evidence](../verification/gepa-live-smoke.json). No optimized prompt is automatically promoted, and classifier improvements do not establish citation uplift or factual truth.
+
+
+Review fixes: prompt registry initialization is lazy, preserving source analysis when research configuration is invalid; candidate polling returns a locked deep snapshot; repeated/no-op mutations preserve full selection metrics; interrupted embedding phases save already dispatched call/token counts. Regression tests cover each operational boundary. The reviewed original design remains in Git history at `6c1788c`.
+
+
+## Standards review
+
+Two documented issues (eager registry startup dependency and stale README status) and one shared-state concern were identified and resolved. Focused follow-up found no remaining actionable standards defects.
+
+## Spec review
+
+Two preservation defects were identified and resolved: repeated candidates could lose selection metrics, and interrupted embeddings could lose usage counts. Follow-up identified one related overwrite after post-embedding scorer failure; that is fixed and covered by a regression. No remaining actionable spec defects are known.
+
+Review axes remain separate: Standards 2 documented findings + 1 heuristic concern, all resolved; Spec 2 findings + 1 related follow-up edge, all resolved.
+
+
+## Proxy error and interrupted-run recovery — 2026-10-02
+
+A backend restart during user polling made the Next proxy return plain-text HTTP 500. The GEPA client attempted JSON parsing and displayed `Unexpected token I`. The shared API response reader now detects non-JSON proxy errors, preserves structured backend diagnostics and clears transient polling errors after recovery. Three frontend regression checks reproduce the exact parser symptom and verify the corrected behavior (`node --test frontend/app/api-client.test.mjs`). Production build/typecheck pass.
+
+Graceful shutdown now signals the research budget, preventing further rewrite/judge/reflection/embedding phases after already dispatched work. Restarted coordinators restore saved candidate artifacts and attempt counters from page events without resuming or recommending partial runs. A shutdown/recovery regression passes. Unique atomic temporary paths protect artifacts during overlapping shutdown/recovery writes.
+
+The user's interrupted `d0df3554` run retained all 30 baseline outcomes: 6 applied/rescored and 24 retained original, 30 P2 calls, 28 fidelity calls and 8 embedding batches. These are operational outcomes, not uplift evidence. The browser and API are available; no full optimized live run is claimed.

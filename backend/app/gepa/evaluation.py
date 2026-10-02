@@ -1,6 +1,5 @@
 """Budgeted page evaluation; original scores remain in the fixed denominator."""
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from functools import partial
 import threading
 
 from openai import OpenAI
@@ -90,13 +89,21 @@ class PageEvaluator:
         self.budget, self.workers = budget, workers
         self.client = client
         self.settings = settings
-        self.scorer = scorer or partial(score_document, before_call=budget.check)
+        self.scorer = scorer
         self.record = record or (lambda result: None)
         self.cache, self.originals = {}, {}
         self.lock = threading.RLock()
 
     def _client(self):
         return self.client or OpenAI(timeout=120, max_retries=0)
+
+    def _score(self, document, page, result, phase):
+        if self.scorer:
+            value = self.scorer(document,page['content'],page['format'],page['queries'])
+            result[phase] = value.get('embedding')
+            return value
+        return score_document(document,page['content'],page['format'],page['queries'],
+            before_call=self.budget.check,on_embedding=lambda usage: result.update({phase:usage}))
 
     def evaluate(self, pages, prompt):
         missing = [p for p in pages if (prompt['prompt_hash'], p['snapshot_id']) not in self.cache]
@@ -128,11 +135,10 @@ class PageEvaluator:
             before = self.originals.get(page['snapshot_id'])
             if before is None:
                 self.budget.check()
-                before = self.scorer(document,page['content'],page['format'],page['queries'])
+                before = self._score(document,page,result,'original_embedding')
                 if before['status'] != 'scored':
                     raise ValueError('Original P1 unavailable')
                 self.originals[page['snapshot_id']] = before
-                result['original_embedding'] = before.get('embedding')
             result['original'] = before
             outcome = rewrite(document,chunks,page['queries'],'Preserve original',False,
                 model=prompt['model'], prompt=prompt['effective_prompt'],prompt_id=prompt['id'],
@@ -149,8 +155,7 @@ class PageEvaluator:
                 technical = gate['status'] == 'unavailable'
                 if not failure:
                     self.budget.check()
-                    after = self.scorer(outcome['document'],page['content'],page['format'],page['queries'])
-                    result['proposed_embedding'] = after.get('embedding')
+                    after = self._score(outcome['document'],page,result,'proposed_embedding')
                     if after['status'] != 'scored':
                         raise ValueError('Proposed P1 unavailable')
             result.update(status='retained_original' if failure or outcome['status']=='abstained' else 'applied',

@@ -6,6 +6,7 @@ import os
 import re
 import threading
 from datetime import datetime, timezone
+from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[2] / 'prompt-registry'
 BASE = Path(__file__).parent / 'prompts/rewrite-page-v7.txt'
@@ -19,9 +20,12 @@ def digest(value):
 
 def atomic_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix('.tmp')
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + '\n')
-    temporary.replace(path)
+    temporary = path.with_name(path.name + '.' + uuid4().hex + '.tmp')
+    try:
+        temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + '\n')
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 class PromptRegistry:

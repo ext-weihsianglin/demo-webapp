@@ -1,0 +1,162 @@
+{
+  "scope": "Two explicitly enabled bounded live checks. No selection evaluation, promotion or quality claim. Accepted-rewrite rescore remains unverified live; exercised by stubbed integration.",
+  "runs": [
+    {
+      "scope": "one reflection page; no selection evaluation, promotion or quality conclusion",
+      "dataset_id": "validation-90-v2",
+      "dataset_hash": "59e416d1942b57ddd9ac4a4cde561bb1d44d48790e9de4734da209a65c29774b",
+      "page_id": "313c12551734e4380e416f819bd22a700663a1a469daeadb4a4fd022e2afad2a",
+      "p1_split": "validation",
+      "role": "reflection",
+      "query_count": 9,
+      "baseline_prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "mutation_prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "status": "retained_original",
+      "budget": {
+        "attempts": 1,
+        "reserved": 0,
+        "completed": 1,
+        "technical_failures": 0,
+        "stop_reason": null,
+        "limit": 1
+      },
+      "rewrite": {
+        "prompt_version": "gpt-4.1-mini--rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "abstained",
+        "calls": 1,
+        "input_tokens": 2478,
+        "output_tokens": 111,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 2932,
+        "planned_calls": 1,
+        "original_chunks": 1,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 0,
+        "latency_ms": 2272
+      },
+      "p1": {
+        "status": "scored",
+        "feature_version": "lr-semantic-v7",
+        "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+        "serving_policy": "markdownify-context-v1",
+        "embedding": {
+          "model": "text-embedding-3-large",
+          "dimensions": 3072,
+          "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+          "serializer_version": "blocks-v3-markdownify",
+          "calls": 0,
+          "input_tokens": 0,
+          "cached_requests": 11,
+          "missing_requests": 0
+        }
+      },
+      "reflection": [
+        {
+          "calls": 1,
+          "model": "gpt-4.1-mini",
+          "input_tokens": 2245,
+          "output_tokens": 154,
+          "estimated_cost_usd": null,
+          "latency_ms": 3278
+        }
+      ],
+      "fidelity_status": null,
+      "fidelity_telemetry": null,
+      "verdict_counts": {
+        "supported": 0,
+        "unsupported": 0,
+        "uncertain": 0
+      },
+      "proposed_rescore_exercised": false
+    },
+    {
+      "scope": "one reflection page; no selection evaluation, promotion or quality conclusion",
+      "dataset_id": "validation-90-v2",
+      "dataset_hash": "59e416d1942b57ddd9ac4a4cde561bb1d44d48790e9de4734da209a65c29774b",
+      "page_id": "a82e3910528907d89359139c129fb5281c185e98ebbcf426d6e83346e5dc093a",
+      "p1_split": "validation",
+      "role": "reflection",
+      "query_count": 10,
+      "baseline_prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "mutation_prompt_hash": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+      "status": "retained_original",
+      "budget": {
+        "attempts": 1,
+        "reserved": 0,
+        "completed": 1,
+        "technical_failures": 0,
+        "stop_reason": null,
+        "limit": 1
+      },
+      "rewrite": {
+        "prompt_version": "gpt-4.1-mini--rewrite-page-v7",
+        "model": "gpt-4.1-mini",
+        "status": "succeeded",
+        "calls": 1,
+        "input_tokens": 10615,
+        "output_tokens": 1756,
+        "estimated_cost_usd": null,
+        "usage_complete": true,
+        "reasoning_effort": null,
+        "tokenizer": "o200k_base",
+        "budgeted_input_tokens": 12448,
+        "planned_calls": 1,
+        "original_chunks": 10,
+        "context_tokens": 128000,
+        "output_reserve_tokens": 16000,
+        "normalized_duplicate_keys": 0,
+        "ignored_unchanged_edits": 24,
+        "language_unverified_edits": 4,
+        "latency_ms": 13582
+      },
+      "p1": {
+        "status": "scored",
+        "feature_version": "lr-semantic-v7",
+        "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+        "serving_policy": "markdownify-context-v1",
+        "embedding": {
+          "model": "text-embedding-3-large",
+          "dimensions": 3072,
+          "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+          "serializer_version": "blocks-v3-markdownify",
+          "calls": 0,
+          "input_tokens": 0,
+          "cached_requests": 33,
+          "missing_requests": 0
+        }
+      },
+      "reflection": [
+        {
+          "calls": 1,
+          "model": "gpt-4.1-mini",
+          "input_tokens": 76262,
+          "output_tokens": 254,
+          "estimated_cost_usd": null,
+          "latency_ms": 3953
+        }
+      ],
+      "fidelity_status": "rejected",
+      "fidelity_telemetry": {
+        "model": "gpt-4.1-mini",
+        "prompt_hash": "05f954abe0751717cd4377463bcac837eab8bfddfaf9ac7d49af7cb694ecace5",
+        "calls": 1,
+        "input_tokens": 2188,
+        "output_tokens": 380,
+        "estimated_cost_usd": null,
+        "latency_ms": 2732
+      },
+      "verdict_counts": {
+        "supported": 3,
+        "unsupported": 3,
+        "uncertain": 0
+      },
+      "proposed_rescore_exercised": false
+    }
+  ]
+}

@@ -48,11 +48,18 @@ class RunConfig(BaseModel):
 
 class RunManager:
     def __init__(self, *, registry=None, client=None, scorer=None, directory=None):
-        self.registry=registry or PromptRegistry()
+        self._registry=registry
         self.client,self.scorer,self.directory=client,scorer,directory
         self.lock=threading.RLock()
         self.active=None
         self.contexts={}
+
+    @property
+    def registry(self):
+        with self.lock:
+            if self._registry is None:
+                self._registry=PromptRegistry()
+            return self._registry
 
     def store(self, identity):
         return RunStore(identity,self.directory)
@@ -129,7 +136,7 @@ class RunManager:
             status,reason='failed',budget.stop_reason or 'fatal_'+type(error).__name__
             store.event('failed',reason=reason)
         finally:
-            candidates=list(adapter.candidates.values()) if adapter else []
+            candidates=adapter.snapshot() if adapter else []
             baseline=adapter.full_scores.get(context['baseline']['id']) if adapter else None
             eligible=[c for c in candidates if c.get('selection_pages')==30 and baseline and
                       c.get('selection_mean',-1)>baseline['selection_mean'] and c['failure_rate']<=baseline['failure_rate']]
@@ -146,7 +153,8 @@ class RunManager:
         store=self.store(identity)
         summary=store.read('summary')
         usage={phase:{'calls':0,'input_tokens':0,'output_tokens':0,'cached_requests':0} for phase in ('rewrite','fidelity','reflection','embedding')}
-        for event in store.events():
+        events=store.events()
+        for event in events:
             for phase, values in event.get('usage_by_phase',{}).items():
                 for key in usage[phase]:
                     usage[phase][key]+=values.get(key,0)
@@ -160,10 +168,13 @@ class RunManager:
                 summary['budget']=context['budget'].snapshot()
                 adapter=context.get('adapter')
                 if adapter:
-                    summary['candidates']=list(adapter.candidates.values())
+                    summary['candidates']=adapter.snapshot()
                     summary['proposals']=adapter.proposals
-            elif summary['status'] not in TERMINAL:
-                summary.update(status='interrupted',stop_reason='server_restart')
+            elif summary['status'] not in TERMINAL or summary['status']=='interrupted':
+                last_budget=next((event['budget'] for event in reversed(events) if 'budget' in event),summary['budget'])
+                summary.update(status='interrupted',stop_reason='server_restart',recommendation=None,
+                    budget={**last_budget,'reserved':0,'stop_reason':'server_restart'},
+                    candidates=[store.read(path.stem) for path in sorted(store.path.glob('candidate-*.json'))])
                 store.write('summary',summary)
         return summary
 
@@ -176,6 +187,11 @@ class RunManager:
                 summary['status']='stopping'
                 context['store'].write('summary',summary)
         return self.status(identity)
+
+    def shutdown(self):
+        with self.lock:
+            for context in self.contexts.values():
+                context['budget'].stop('server_shutdown')
 
     def list(self):
         directory=Path(self.directory or root()/'runs')

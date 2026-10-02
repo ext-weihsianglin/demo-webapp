@@ -1,4 +1,5 @@
 'use client';
+import { readApiResponse } from './api-client';
 import { useState, useEffect } from 'react';
 import { GepaPanel } from './gepa-panel';
 import { PromptSelector } from './prompt-selector';
@@ -39,7 +40,7 @@ export default function Page(){
   const result=await request('examples/'+id);
   if(result){setSelectedExample(result);setQuery((result.queries || [result.query]).join('\n'));setHref(result.href);setHostname(result.hostname);setContent(result.content);setFormat(result.format);}
  }
- async function request(path:string,body?:object){setBusy(true);setError('');try{const res=await fetch('/api/'+path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!res.ok){const data=await res.json().catch(()=>null);throw new Error(data?.detail && typeof data.detail==='object' && data.detail.summary ? `${data.detail.status}: ${data.detail.summary}` : typeof data?.detail==='string' ? data.detail : data?.detail?.[0]?.msg || 'The API is unavailable. Start the FastAPI server and try again.');}return await res.json();}catch(e){setError(e instanceof Error?e.message:'Something went wrong.');return null;}finally{setBusy(false);}}
+ async function request(path:string,body?:object){setBusy(true);setError('');try{const res=await fetch('/api/'+path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return await readApiResponse(res);}catch(e){setError(e instanceof Error?e.message:'Something went wrong.');return null;}finally{setBusy(false);}}
  async function analyze(){const result=await request('analyze',payload);if(result){setAnalysis(result);setDraft(null);setStructure(false);setStep(1);}}
  useEffect(()=>{setDraft(null);},[promptId]);
  async function generate(){setDraft(null);const result=await request('draft',{...payload,allow_structure:structure,tone,model,prompt_id:promptId});if(result){setDraft(result);setStep(2);}}

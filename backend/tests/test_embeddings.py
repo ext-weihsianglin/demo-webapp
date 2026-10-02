@@ -75,7 +75,9 @@ def test_stop_between_embedding_batches_prevents_next_provider_call(tmp_path):
             budget.stop()
             return result
     provider = StoppingProvider()
+    telemetry = []
     with pytest.raises(RunStopped):
         semantic_features(parsed(), ['How to choose shoes?'], provider=provider,
-                          cache_root=tmp_path, before_call=budget.check)
+                          cache_root=tmp_path, before_call=budget.check, on_telemetry=telemetry.append)
     assert len(provider.calls) == 1
+    assert telemetry[0]['calls'] == 1 and telemetry[0]['input_tokens'] > 0

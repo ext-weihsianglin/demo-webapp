@@ -1,4 +1,6 @@
 """GEPA protocol bridge: per-page rewards and reflection-only diagnostics."""
+from copy import deepcopy
+import threading
 import difflib
 import json
 import time
@@ -23,6 +25,7 @@ change summary, not hidden reasoning. The fixed harness remains authoritative.''
 class Adapter:
     def __init__(self, evaluator, registry, baseline, store, config):
         self.evaluator,self.registry,self.baseline,self.store,self.config=evaluator,registry,baseline,store,config
+        self.lock=threading.RLock()
         self.proposals=0
         self.entries={baseline['editorial_strategy']:baseline}
         self.indices={}
@@ -31,15 +34,20 @@ class Adapter:
         self.last_proposal=None
         self.store.write('candidate-'+baseline['id'],self.candidates[baseline['id']])
 
+    def snapshot(self):
+        with self.lock:
+            return deepcopy(list(self.candidates.values()))
+
     def prompt(self, candidate):
-        text=candidate['editorial_strategy']
-        if set(candidate)!= {'editorial_strategy'}:
-            raise ValueError('GEPA attempted to change fixed components')
-        if text not in self.entries:
-            record=self.registry.create(self.config.model,text,self.store.path.name,[],self.config.length_multiplier)
-            self.entries[text]=record
-            self.candidates[record['id']]={**record,'status':'partial'}
-        return self.entries[text]
+        with self.lock:
+            text=candidate['editorial_strategy']
+            if set(candidate)!= {'editorial_strategy'}:
+                raise ValueError('GEPA attempted to change fixed components')
+            if text not in self.entries:
+                record=self.registry.create(self.config.model,text,self.store.path.name,[],self.config.length_multiplier)
+                self.entries[text]=record
+                self.candidates[record['id']]={**record,'status':'partial'}
+            return self.entries[text]
 
     def evaluate(self, batch, candidate, capture_traces=False):
         prompt=self.prompt(candidate)
@@ -102,9 +110,11 @@ class Adapter:
             return dict(candidate)
         self.entries[body['editorial_strategy']]=record
         diff=''.join(difflib.unified_diff(candidate['editorial_strategy'].splitlines(True),body['editorial_strategy'].splitlines(True),fromfile=parent['id'],tofile=record['id']))
-        self.candidates[record['id']]={**record,'parents':[parent['id']],'status':'partial','diff':diff,'proposal_summary':body['summary']}
+        with self.lock:
+            self.candidates.setdefault(record['id'],{**record,'parents':[parent['id']],'status':'partial','diff':diff,'proposal_summary':body['summary']})
+            saved=deepcopy(self.candidates[record['id']])
         self.last_proposal=record['id'] if record['id']!=parent['id'] else None
-        self.store.write('candidate-'+record['id'],self.candidates[record['id']])
+        self.store.write('candidate-'+record['id'],saved)
         self.store.event('proposal',candidate_id=record['id'],parent_ids=[parent['id']],summary=body['summary'])
         return {'editorial_strategy':body['editorial_strategy']}
 
@@ -114,44 +124,46 @@ class Callbacks(GEPACallback):
         self.adapter=adapter
 
     def on_valset_evaluated(self,event):
-        a=self.adapter
-        record=a.prompt(event['candidate'])
-        parents=[a.indices[i] for i in event['parent_ids'] if i in a.indices]
-        a.indices[event['candidate_idx']]=record['id']
-        # Only complete selection vectors can be ranked or promoted.
-        if event['num_examples_evaluated']!=event['total_valset_size']:
-            return
-        results=[r for (prompt_hash,_),r in a.evaluator.cache.items() if prompt_hash==record['prompt_hash'] and r['role']=='selection']
-        failures=sum(bool(r['failed']) for r in results)
-        entry=a.candidates[record['id']]
-        comparisons=[]
-        for result in results:
-            baseline=a.evaluator.cache[(a.baseline['prompt_hash'],result['page_id'])]
-            comparisons.append({'page_id':result['page_id'],'queries':[
-                {'query':original['query'],'original':original['score'],'baseline':seed['score'],
-                 'after':proposed['score'],'delta':proposed['score']-original['score'],
-                 'baseline_delta':proposed['score']-seed['score']}
-                for original,seed,proposed in zip(result['original']['per_query'],baseline['after']['per_query'],result['after']['per_query'])]})
-        entry.update(status='evaluated',selection_mean=event['average_score'],failure_rate=failures/len(results),
-                     parents=parents,selection_pages=len(results),query_deltas=comparisons)
-        a.full_scores[record['id']]=entry
-        for candidate_id, candidate_entry in a.full_scores.items():
-            candidate_entry['frontier']=any(
-                value['score'] >= max(other['score'] for (h,p),other in a.evaluator.cache.items()
-                    if p==page_id and other['role']=='selection' and other['candidate_id'] in a.full_scores)
-                for (h,page_id),value in a.evaluator.cache.items()
-                if value['candidate_id']==candidate_id and value['role']=='selection')
-            a.store.write('candidate-'+candidate_id,candidate_entry)
-        a.store.event('selection',candidate_id=record['id'],mean=entry['selection_mean'],failure_rate=entry['failure_rate'])
+        with self.adapter.lock:
+            a=self.adapter
+            record=a.prompt(event['candidate'])
+            parents=[a.indices[i] for i in event['parent_ids'] if i in a.indices]
+            a.indices[event['candidate_idx']]=record['id']
+            # Only complete selection vectors can be ranked or promoted.
+            if event['num_examples_evaluated']!=event['total_valset_size']:
+                return
+            results=[r for (prompt_hash,_),r in a.evaluator.cache.items() if prompt_hash==record['prompt_hash'] and r['role']=='selection']
+            failures=sum(bool(r['failed']) for r in results)
+            entry=a.candidates[record['id']]
+            comparisons=[]
+            for result in results:
+                baseline=a.evaluator.cache[(a.baseline['prompt_hash'],result['page_id'])]
+                comparisons.append({'page_id':result['page_id'],'queries':[
+                    {'query':original['query'],'original':original['score'],'baseline':seed['score'],
+                     'after':proposed['score'],'delta':proposed['score']-original['score'],
+                     'baseline_delta':proposed['score']-seed['score']}
+                    for original,seed,proposed in zip(result['original']['per_query'],baseline['after']['per_query'],result['after']['per_query'])]})
+            entry.update(status='evaluated',selection_mean=event['average_score'],failure_rate=failures/len(results),
+                         parents=parents,selection_pages=len(results),query_deltas=comparisons)
+            a.full_scores[record['id']]=entry
+            for candidate_id, candidate_entry in a.full_scores.items():
+                candidate_entry['frontier']=any(
+                    value['score'] >= max(other['score'] for (h,p),other in a.evaluator.cache.items()
+                        if p==page_id and other['role']=='selection' and other['candidate_id'] in a.full_scores)
+                    for (h,page_id),value in a.evaluator.cache.items()
+                    if value['candidate_id']==candidate_id and value['role']=='selection')
+                a.store.write('candidate-'+candidate_id,candidate_entry)
+            a.store.event('selection',candidate_id=record['id'],mean=entry['selection_mean'],failure_rate=entry['failure_rate'])
 
     def on_candidate_rejected(self,event):
-        a=self.adapter
-        if a.last_proposal:
-            record=a.candidates[a.last_proposal]
-            if record.get('selection_pages')!=30:
-                record['status']='rejected'
-                a.store.write('candidate-'+record['id'],record)
-        a.store.event('gepa_rejected',details=event)
+        with self.adapter.lock:
+            a=self.adapter
+            if a.last_proposal:
+                record=a.candidates[a.last_proposal]
+                if record.get('selection_pages')!=30:
+                    record['status']='rejected'
+                    a.store.write('candidate-'+record['id'],record)
+            a.store.event('gepa_rejected',details=event)
 
     def on_pareto_front_updated(self,event):
         a=self.adapter

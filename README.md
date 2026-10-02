@@ -6,7 +6,7 @@ A Next.js + FastAPI demo with multi-query OpenAI rewriting, frozen P1 scoring an
 
 Read [project context and dated handoff](docs/project-context.md) for current architecture, workstream provenance, model verification limits and the historical handoff. Repository editing guidance lives in [AGENTS.md](AGENTS.md), with scoped instructions in [backend/AGENTS.md](backend/AGENTS.md) and [frontend/AGENTS.md](frontend/AGENTS.md).
 
-GEPA planning: [implementation plan](docs/gepa-plan.md) and [specification](docs/gepa-spec.md). The optimizer and research tab are not implemented yet.
+GEPA planning: [implementation plan](docs/gepa-plan.md) and [specification](docs/gepa-spec.md). The optimizer and research tab are implemented for bounded local experiments.
 
 ## Run
 
