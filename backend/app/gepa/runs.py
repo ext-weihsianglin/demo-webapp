@@ -178,6 +178,14 @@ class RunManager:
                     budget={**last_budget,'reserved':0,'stop_reason':'server_restart'},
                     candidates=[store.read(path.stem) for path in sorted(store.path.glob('candidate-*.json'))])
                 store.write('summary',summary)
+        try:
+            boundary=store.read('manifest').get('edit_boundary_version')
+        except FileNotFoundError:
+            boundary=None
+        summary['edit_boundary_version']=boundary
+        summary['promotion_compatible']=boundary == EDIT_BOUNDARY_VERSION
+        summary['promotion_block_reason']=None if summary['promotion_compatible'] else (
+            'This run uses an older or unrecorded edit boundary. Evaluate again before promotion.')
         return summary
 
     def stop(self, identity):

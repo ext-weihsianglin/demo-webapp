@@ -1,10 +1,24 @@
 """Resolve semantic-role provenance without changing upstream content extraction."""
+import re
 from bs4 import BeautifulSoup, Tag
 from preprocessing.blocks import _dom_index, PRESERVE_WHITESPACE_TAGS
 
 PROTECTED_ROLES = frozenset({'button', 'navigation', 'menu', 'menubar', 'banner',
     'contentinfo', 'link', 'checkbox', 'radio', 'switch', 'textbox', 'combobox',
     'listbox', 'option', 'slider', 'spinbutton', 'tab', 'tablist', 'searchbox', 'toolbar', 'form'})
+
+
+NAVIGATION_TOKENS = frozenset({'nav', 'navbar', 'navigation', 'menu', 'submenu', 'menubar', 'subnav'})
+
+
+def navigation_roles(attributes):
+    classes = attributes.get('class') or []
+    if isinstance(classes, str):
+        classes = [classes]
+    labels = ' '.join([str(attributes.get('id') or ''), *map(str, classes)])
+    labels = re.sub(r'([a-z0-9])([A-Z])', r'\1 \2', labels).lower()
+    tokens = set(re.findall(r'[a-z0-9]+', labels))
+    return ('navigation',) if tokens & NAVIGATION_TOKENS else ()
 
 
 def protected_roles(value):
@@ -20,6 +34,9 @@ def html_role_context(content, blocks):
     while pending:
         node, inherited = pending.pop()
         own = protected_roles(node.attrs.get('role'))
+        # Body/page classification classes are not navigation-container evidence.
+        if node.name not in ('html', 'body', '[document]'):
+            own += navigation_roles(node.attrs)
         roles = tuple(dict.fromkeys(inherited + own))
         if roles:
             contexts[paths[id(node)]] = list(roles)

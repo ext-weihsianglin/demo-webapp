@@ -148,7 +148,7 @@ def test_provider_cannot_rewrite_a_read_only_control_even_with_known_evidence():
     outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=StubClient(control_edit))
     assert outcome['status'] == 'invalid_output'
     assert 'document' not in outcome and 'markdown' not in outcome
-    assert outcome['telemetry']['edit_boundary_version'] == 'body-content-v2'
+    assert outcome['telemetry']['edit_boundary_version'] == 'body-content-v3'
 
 
 @pytest.mark.parametrize('control', ['<p role="button">Subscribe now</p>', '<div role="button"><p>Subscribe now</p></div>'])
@@ -178,3 +178,42 @@ def test_inline_control_role_tokens_are_read_only(role):
     assert outcome['status'] == 'succeeded'
     payload = json.loads(client.requests[0]['input'][0]['content'])
     assert 'Subscribe now' in {b['text'] for b in payload['read_only_context']}
+
+
+@pytest.mark.parametrize('attribute', ['class="simple_sub_menu_container"', 'id="main-navigation"', 'class="mainNavbar"'])
+def test_unmarked_navigation_containers_are_read_only(attribute):
+    source = f'<div {attribute}><div><span>Individual &amp; Family</span></div></div><main><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main>'
+    document, chunks = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    def body_edit(proposal, response, data):
+        block = next(b for b in data['editable_blocks'] if b['text'].startswith('For everyday'))
+        proposal['edits'][0].update(block_id=block['block_id'], evidence=[{'block_id':block['block_id']}])
+    client = StubClient(body_edit)
+    outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=client)
+    assert outcome['status'] == 'succeeded'
+    payload = json.loads(client.requests[0]['input'][0]['content'])
+    assert 'Individual & Family' in {b['text'] for b in payload['read_only_context']}
+    assert 'Individual & Family' not in {b['text'] for b in payload['editable_blocks']}
+
+
+def test_body_page_class_is_not_navigation_container_evidence():
+    from app.rewriting import editable
+    source = '<html><body class="menu-page"><main><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main></body></html>'
+    document, _ = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    body = next(b for b in document['blocks'] if b['text'].startswith('For everyday'))
+    assert editable(body, document)
+
+
+def test_link_wrapped_paragraph_is_read_only_even_without_block_links():
+    source = '<main><a href="/subscribe"><p>Read the detailed subscription information for monthly billing.</p></a><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main>'
+    document, chunks = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    linked = next(b for b in document['blocks'] if b['text'].startswith('Read the detailed'))
+    assert linked['links'] == []  # Upstream retains the wrapper only in the DOM path.
+    def body_edit(proposal, response, data):
+        block = next(b for b in data['editable_blocks'] if b['text'].startswith('For everyday'))
+        proposal['edits'][0].update(block_id=block['block_id'], evidence=[{'block_id':block['block_id']}])
+    client = StubClient(body_edit)
+    outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=client)
+    assert outcome['status'] == 'succeeded'
+    payload = json.loads(client.requests[0]['input'][0]['content'])
+    assert linked['text'] in {b['text'] for b in payload['read_only_context']}
+    assert linked in outcome['document']['blocks']

@@ -116,7 +116,7 @@ Validated draft generation uses the library's `blocks_to_markdown` so nested lis
 code whitespace and table spans survive export. Source metadata and JSON-LD remain
 separate from generated body content.
 
-The webapp adds query-independent `source_role_context` metadata for HTML controls whose ARIA ancestry is omitted from upstream blocks. This overlay leaves core parser/scorer fields unchanged. The `body-content-v2` rewrite boundary protects site chrome, forms and controls using source DOM paths and normalized roles; article headers inside `main`/`article` remain editable.
+The webapp adds query-independent `source_role_context` metadata for HTML controls whose ARIA ancestry is omitted from upstream blocks. This overlay leaves core parser/scorer fields unchanged. The `body-content-v3` rewrite boundary protects site chrome, forms and controls using source DOM paths, normalized roles and conservative navigation class/ID tokens; article headers inside `main`/`article` remain editable.
 
 `app/scoring.py` verifies the trusted v7 model before deserialization, the ordered 55-feature contract and packaged module fingerprints. Original and proposed structured documents are scored over the same query set and immutable source inventory. Scoring is separate from extraction and HTTP handling. Missing/incompatible models or embeddings produce explicit unavailability.
 

@@ -13,10 +13,10 @@ import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
 from app.language_guard import confident_language, compare_language
-from app.source_context import protected_roles
+from app.source_context import protected_roles, navigation_roles
 
 PROMPT_VERSION = 'rewrite-page-v7'
-EDIT_BOUNDARY_VERSION = 'body-content-v2'
+EDIT_BOUNDARY_VERSION = 'body-content-v3'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 SUPPORTED_REWRITE_MODELS = ('gpt-4.1-mini', 'gpt-4.1', 'gpt-4.1-nano', 'gpt-5', 'gpt-5-mini', 'gpt-5-nano')
@@ -140,13 +140,14 @@ def _protected_html_context(node):
     # Use parser-owned provenance; never fetch or execute the original HTML.
     path = (node.get('source_locator') or {}).get('dom_path', '')
     tags = [part.split('[', 1)[0].lower() for part in path.split('/') if part]
-    controls = {'nav', 'footer', 'form', 'button', 'input', 'select', 'textarea', 'option', 'summary'}
+    controls = {'a', 'nav', 'footer', 'form', 'button', 'input', 'select', 'textarea', 'option', 'summary'}
     if any(tag in controls for tag in tags) or node.get('tag') in controls:
         return True
     # An article's own header is editorial content; a site header is page chrome.
     if 'header' in tags and not any(tag in ('main', 'article') for tag in tags[:tags.index('header')]):
         return True
-    if protected_roles((node.get('attributes') or {}).get('role')):
+    attributes = node.get('attributes') or {}
+    if protected_roles(attributes.get('role')) or navigation_roles(attributes):
         return True
     return any(_protected_html_context(child) for child in node.get('inline_nodes', node.get('children', [])))
 

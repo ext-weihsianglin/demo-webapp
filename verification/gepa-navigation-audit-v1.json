@@ -1,0 +1,94 @@
+{
+  "run_id": "bd1c877280164b8c9367eabb4093dd30",
+  "candidate_id": "gpt-4.1-mini--0f1af82910a42b5fe41ef19e",
+  "edit_boundary_version": "body-content-v3",
+  "scope": "Validation-only replay with current adapter; identical core source blocks, no provider calls/rescoring/test feedback. Historical qualification is superseded; any newly protected edit rejects whole proposal.",
+  "applied_selection_pages": 7,
+  "affected_selection_pages": 1,
+  "rows": [
+    {
+      "hostname": "www.prompts.ai",
+      "snapshot_id": "81f623e2aa0a75075e79428c9e68f2dc6dcd49030c3f316150fc31b2efbf57f6",
+      "historical_status": "applied",
+      "changes": 18,
+      "newly_protected_changes": 0,
+      "examples": []
+    },
+    {
+      "hostname": "www.healthinsurance.org",
+      "snapshot_id": "8a99e945ecf23b431225ed5b070003ea0bfa390a269e9a0fcda86dfb8d7c0a93",
+      "historical_status": "applied",
+      "changes": 40,
+      "newly_protected_changes": 13,
+      "examples": [
+        {
+          "block_id": "b000018",
+          "original_text": "Individual & Family",
+          "replacement_text": "Individual & Family coverage options include ACA Marketplace plans that can be compared and purchased online through the Illinois Marketplace.",
+          "dom_path": "/html[1]/body[1]/div[7]/div[1]/div[1]/div[1]",
+          "source_context": [
+            "navigation"
+          ]
+        },
+        {
+          "block_id": "b000020",
+          "original_text": "Supplemental",
+          "replacement_text": "Supplemental plans such as dental, vision, and accident insurance are available, but prescription weight loss drugs qualifications are not detailed here.",
+          "dom_path": "/html[1]/body[1]/div[7]/div[1]/div[1]/div[2]",
+          "source_context": [
+            "navigation"
+          ]
+        },
+        {
+          "block_id": "b000022",
+          "original_text": "Coverage by state",
+          "replacement_text": "Coverage options vary by state, with Illinois moving to a state-based Marketplace platform in 2026 for ACA plans.",
+          "dom_path": "/html[1]/body[1]/div[7]/div[1]/div[1]/div[3]",
+          "source_context": [
+            "navigation"
+          ]
+        }
+      ]
+    },
+    {
+      "hostname": "www.centraleyes.com",
+      "snapshot_id": "14a998e2b5bae6fc22dc6684b97890e661e47799d1e245181fed27d065b04bf2",
+      "historical_status": "applied",
+      "changes": 53,
+      "newly_protected_changes": 0,
+      "examples": []
+    },
+    {
+      "hostname": "www.hometheater.com.br",
+      "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+      "historical_status": "applied",
+      "changes": 6,
+      "newly_protected_changes": 0,
+      "examples": []
+    },
+    {
+      "hostname": "www.imagine.art",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "historical_status": "applied",
+      "changes": 41,
+      "newly_protected_changes": 0,
+      "examples": []
+    },
+    {
+      "hostname": "www.looppanel.com",
+      "snapshot_id": "b191b108c8b69a880125d0e5f15c7e74ec3a288e1ace5b424fb22f2acad3b26b",
+      "historical_status": "applied",
+      "changes": 11,
+      "newly_protected_changes": 0,
+      "examples": []
+    },
+    {
+      "hostname": "www.ssh.com",
+      "snapshot_id": "afc05859b7b01d821dea8993cb70fe6c950ad1f478e54b600ec7151c4a567e6f",
+      "historical_status": "applied",
+      "changes": 10,
+      "newly_protected_changes": 0,
+      "examples": []
+    }
+  ]
+}

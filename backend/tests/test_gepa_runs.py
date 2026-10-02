@@ -86,7 +86,7 @@ def test_real_gepa_mutates_selects_and_saves_without_reflection_leakage(tmp_path
     assert manager.registry.resolve(None,'gpt-4.1-mini')['id']==candidate['id']
     assert manager.store(run['id']).export()['events']
     assert manager.store(run['id']).read('manifest')['semantic_rewrite_failures'] == ['unsupported_output']
-    assert manager.store(run['id']).read('manifest')['edit_boundary_version'] == 'body-content-v2'
+    assert manager.store(run['id']).read('manifest')['edit_boundary_version'] == 'body-content-v3'
 
 
 def test_semantic_rejection_keeps_original_reward_without_technical_breaker(tmp_path,monkeypatch):
@@ -267,9 +267,13 @@ def test_historical_recommendation_cannot_promote_under_new_edit_boundary(tmp_pa
         'recommendation':candidate['id'], 'candidates':[], 'budget':{}})
     for manifest in ({}, {'edit_boundary_version':'body-content-v1'}):
         store.write('manifest', manifest)
+        assert manager.status('old-run')['promotion_compatible'] is False
+        assert manager.status('old-run')['promotion_block_reason']
         with pytest.raises(ValueError, match='edit boundary'):
             manager.promote('old-run', candidate['id'])
         assert registry.resolve(None, 'gpt-4.1-mini')['id'] == registry.baseline('gpt-4.1-mini')['id']
     store.write('manifest', {'edit_boundary_version':EDIT_BOUNDARY_VERSION})
+    assert manager.status('old-run')['promotion_compatible'] is True
+    assert manager.status('old-run')['edit_boundary_version'] == EDIT_BOUNDARY_VERSION
     manager.promote('old-run', candidate['id'])
     assert registry.resolve(None, 'gpt-4.1-mini')['id'] == candidate['id']
