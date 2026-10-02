@@ -1,0 +1,51 @@
+{
+  "model": "gpt-4.1",
+  "prompt_hash": "b172408a20a3170c64469902a045a558a221dbef8e6b3b03618a4784dff842f3",
+  "change": {
+    "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+    "chunk_id": "d3e6b045d634da83189e18c1f9def82feb1386be6561ceab03004c3f17d5c5f3",
+    "block_id": "b000116",
+    "before": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They\u2019re ideal for prosumers or creative agencies.",
+    "after": "The Google Ultra plan includes approximately 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They\u2019re ideal for prosumers or creative agencies.",
+    "reason": "Specified plan limits and alternatives making high-quality cinematic video accessible to various users.",
+    "evidence": [
+      {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "block_id": "b000116",
+        "quote": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They\u2019re ideal for prosumers or creative agencies."
+      }
+    ],
+    "review_flags": [],
+    "heading_level": null,
+    "source_id": "b000116"
+  },
+  "result": {
+    "status": "passed",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000116",
+        "verdict": "supported",
+        "category": "wording change (minor)",
+        "reason": "The change from 'around' to 'approximately' preserves the original factual meaning with a minor wording difference, which is fully supported by the source text.",
+        "source_ids": [
+          "b000116"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1",
+      "prompt_hash": "b172408a20a3170c64469902a045a558a221dbef8e6b3b03618a4784dff842f3",
+      "calls": 1,
+      "input_tokens": 1319,
+      "output_tokens": 64,
+      "estimated_cost_usd": null,
+      "schema_version": "fidelity-slots-v2",
+      "schema_hash": "a3a22ef47ce4c3de0b989dd961e7f951c2c858a418a3c4102a19a4a2e49c4fe3",
+      "output_limit": 4096,
+      "latency_ms": 1058
+    }
+  },
+  "held_out_calls": 0,
+  "p2_calls": 0
+}

@@ -1,0 +1,398 @@
+{
+  "run_id": "da27d5e95eab43d08ac4b1e0430afe6a",
+  "candidate_id": "gpt-4.1-mini--4288bb3d1e63fc0c3a0413f4",
+  "model": "gpt-4.1",
+  "prompt_hash": "b172408a20a3170c64469902a045a558a221dbef8e6b3b03618a4784dff842f3",
+  "edit_count": 41,
+  "old_status": "passed",
+  "new_result": {
+    "status": "passed",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000006",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Change from 'how much video you can create' to 'how much video content can be produced' does not materially alter the meaning; both refer to quantity of video produced per plan.",
+        "source_ids": [
+          "b000006"
+        ]
+      },
+      {
+        "block_id": "b000030",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The rewording removes a conversational tone and maintains the questions about cost and quality, consistent with the source.",
+        "source_ids": [
+          "b000030"
+        ]
+      },
+      {
+        "block_id": "b000031",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The edit maintains the distinction between different tool types and the need to choose based on purpose, consistent with the source.",
+        "source_ids": [
+          "b000031"
+        ]
+      },
+      {
+        "block_id": "b000032",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Change from 'how much video you can realistically produce at each subscription tier' to 'expected video production amounts at different subscription levels' is faithful and clear.",
+        "source_ids": [
+          "b000032"
+        ]
+      },
+      {
+        "block_id": "b000048",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The changed meaning is faithful; cost-effectiveness and entry-level generosity remain scoped to ImagineArt and hybrid creators.",
+        "source_ids": [
+          "b000048"
+        ]
+      },
+      {
+        "block_id": "b000049",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The reworded text still discusses credit usage per video model, fitting the prompt.",
+        "source_ids": [
+          "b000049"
+        ]
+      },
+      {
+        "block_id": "b000067",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Meaning and examples for balancing credit use are unchanged and faithful.",
+        "source_ids": [
+          "b000067"
+        ]
+      },
+      {
+        "block_id": "b000068",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Original claim about the number of monthly videos and dependency on model choice is retained.",
+        "source_ids": [
+          "b000068"
+        ]
+      },
+      {
+        "block_id": "b000069",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The edit maintains the original's cautious recommendation and scope for ImagineArt's format versatility.",
+        "source_ids": [
+          "b000069"
+        ]
+      },
+      {
+        "block_id": "b000071",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "All claims about Sora's focus, use, and OpenAI's role remain intact.",
+        "source_ids": [
+          "b000071"
+        ]
+      },
+      {
+        "block_id": "b000072",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Scope for Sora's realism and conceptual utility are unchanged.",
+        "source_ids": [
+          "b000072"
+        ]
+      },
+      {
+        "block_id": "b000079",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The plan features and distinctions are presented as in the source.",
+        "source_ids": [
+          "b000079"
+        ]
+      },
+      {
+        "block_id": "b000081",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Synthesia's niche, reliability, and focus are preserved in the edit.",
+        "source_ids": [
+          "b000081"
+        ]
+      },
+      {
+        "block_id": "b000082",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "All major points remain, including interface and limited creative flexibility.",
+        "source_ids": [
+          "b000082"
+        ]
+      },
+      {
+        "block_id": "b000093",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Plan scopes and uses remain true to original meaning.",
+        "source_ids": [
+          "b000093"
+        ]
+      },
+      {
+        "block_id": "b000095",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The attributes and user feedback described are still present, only less promotional.",
+        "source_ids": [
+          "b000095"
+        ]
+      },
+      {
+        "block_id": "b000107",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Feature and scope details for each plan are accurately preserved.",
+        "source_ids": [
+          "b000107"
+        ]
+      },
+      {
+        "block_id": "b000109",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "All model attributes and user impressions are present and accurate.",
+        "source_ids": [
+          "b000109"
+        ]
+      },
+      {
+        "block_id": "b000116",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "All plan coverage and comparative statements persist, with no added invention.",
+        "source_ids": [
+          "b000116"
+        ]
+      },
+      {
+        "block_id": "b000119",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "No new claims are introduced and all described features and limitations match the source.",
+        "source_ids": [
+          "b000119"
+        ]
+      },
+      {
+        "block_id": "b000132",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The Plus, Max, and Generative plan features are preserved in line with the source scope.",
+        "source_ids": [
+          "b000132"
+        ]
+      },
+      {
+        "block_id": "b000134",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Descriptions of VEED.IO features and value remain as given in the source.",
+        "source_ids": [
+          "b000134"
+        ]
+      },
+      {
+        "block_id": "b000145",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Functions and features attributed to VEED.IO tiers are preserved without expanding or generalizing claims.",
+        "source_ids": [
+          "b000145"
+        ]
+      },
+      {
+        "block_id": "b000147",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "All major claims regarding avatar technology and use cases are intact and accurate.",
+        "source_ids": [
+          "b000147"
+        ]
+      },
+      {
+        "block_id": "b000158",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "No features or benefits are invented, and tier-specific functions are clearly defined.",
+        "source_ids": [
+          "b000158"
+        ]
+      },
+      {
+        "block_id": "b000160",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The revised text preserves all important product and user experience details.",
+        "source_ids": [
+          "b000160"
+        ]
+      },
+      {
+        "block_id": "b000173",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The quantities and scope for video production at each plan are as stated in the source, restated clearly.",
+        "source_ids": [
+          "b000173"
+        ]
+      },
+      {
+        "block_id": "b000175",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "No new claims or attributions are introduced and all features are present.",
+        "source_ids": [
+          "b000175"
+        ]
+      },
+      {
+        "block_id": "b000182",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The numbers, features, and ideal use-cases are unchanged and remain accurate.",
+        "source_ids": [
+          "b000182"
+        ]
+      },
+      {
+        "block_id": "b000184",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Key features and user perceptions for Luma Ray2 are preserved and scope is accurate.",
+        "source_ids": [
+          "b000184"
+        ]
+      },
+      {
+        "block_id": "b000197",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Plan and tier features, quantities, and key distinctions match original meanings.",
+        "source_ids": [
+          "b000197"
+        ]
+      },
+      {
+        "block_id": "b000199",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Product description, feature controls, and user feedback remain factual and attributable.",
+        "source_ids": [
+          "b000199"
+        ]
+      },
+      {
+        "block_id": "b000210",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "No added features or overgeneralizations; all statements fit source details.",
+        "source_ids": [
+          "b000210"
+        ]
+      },
+      {
+        "block_id": "b000212",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Attributes and user feedback for Kling and its plans remain present and unaltered.",
+        "source_ids": [
+          "b000212"
+        ]
+      },
+      {
+        "block_id": "b000223",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "All features and quantities mentioned are as per source; suitability and scope are preserved.",
+        "source_ids": [
+          "b000223"
+        ]
+      },
+      {
+        "block_id": "b000225",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "The versatile features, controls, and performance claims for PixVerse are restated without overgeneralization.",
+        "source_ids": [
+          "b000225"
+        ]
+      },
+      {
+        "block_id": "b000226",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Features of fusion, speech, and interface are preserved and accurately reworded.",
+        "source_ids": [
+          "b000226"
+        ]
+      },
+      {
+        "block_id": "b000239",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "All licensing, upgrade, and suitability statements remain clear and sourced.",
+        "source_ids": [
+          "b000239"
+        ]
+      },
+      {
+        "block_id": "b000241",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "All key functionality, popularity, and user feedback are preserved in a reworded form.",
+        "source_ids": [
+          "b000241"
+        ]
+      },
+      {
+        "block_id": "b000254",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Plan scopes, features, and use cases are as per the source wording.",
+        "source_ids": [
+          "b000254"
+        ]
+      },
+      {
+        "block_id": "b000261",
+        "verdict": "supported",
+        "category": "faithful minor rewording",
+        "reason": "Specialization and value proposition remain unchanged with minor clarification.",
+        "source_ids": [
+          "b000261"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1",
+      "prompt_hash": "b172408a20a3170c64469902a045a558a221dbef8e6b3b03618a4784dff842f3",
+      "calls": 1,
+      "input_tokens": 20310,
+      "output_tokens": 2191,
+      "estimated_cost_usd": null,
+      "schema_version": "fidelity-slots-v2",
+      "schema_hash": "815049ff42a0b80f7f9533c3f78171bd26980f6bb0e5adf16f81214577aeeee1",
+      "output_limit": 5248,
+      "latency_ms": 17892
+    }
+  },
+  "held_out_calls": 0,
+  "p2_calls": 0,
+  "scope": "Saved selection edits replayed under revised reviewer instructions; extra diagnostic judge usage outside original run totals."
+}

@@ -1,0 +1,71 @@
+{
+  "run_id": "da27d5e95eab43d08ac4b1e0430afe6a",
+  "candidate_id": "gpt-4.1-mini--4288bb3d1e63fc0c3a0413f4",
+  "hostname": "www.imagine.art",
+  "change": {
+    "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+    "chunk_id": "d3e6b045d634da83189e18c1f9def82feb1386be6561ceab03004c3f17d5c5f3",
+    "block_id": "b000116",
+    "before": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They\u2019re ideal for prosumers or creative agencies.",
+    "after": "The Google Ultra plan offers approximately 10 minutes of premium 1080p footage monthly, representing Google's current highest usage limits for Veo 3, while third-party plans provide affordable alternatives with similar model access but fewer rendering features, suitable for prosumers and agencies.",
+    "reason": "Specified plan limits and alternatives making high-quality cinematic video accessible to various users.",
+    "evidence": [
+      {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "block_id": "b000116",
+        "quote": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They\u2019re ideal for prosumers or creative agencies."
+      }
+    ],
+    "review_flags": [],
+    "heading_level": null,
+    "source_id": "b000116"
+  },
+  "original_chunk": {
+    "chunk_id": "d3e6b045d634da83189e18c1f9def82feb1386be6561ceab03004c3f17d5c5f3",
+    "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+    "method": "conservative_dom",
+    "order": 6,
+    "block_ids": [
+      "b000108",
+      "b000109",
+      "b000110",
+      "b000111",
+      "b000112",
+      "b000113",
+      "b000114",
+      "b000115",
+      "b000116",
+      "b000117"
+    ],
+    "block_schema_versions": [
+      "dom-blocks-v3"
+    ],
+    "heading_path": [
+      {
+        "block_id": "b000005",
+        "level": 1,
+        "text": "How Much AI Video Generators Cost \u2014 Top 15 Tools' Pricing Compared"
+      },
+      {
+        "block_id": "b000108",
+        "level": 2,
+        "text": "Google Veo 3"
+      }
+    ],
+    "text": "Google Veo 3\n\nVeo 3 is Google\u2019s state-of-the-art cinematic video model, capable of producing 8-sec 1080p clips with ambient audio, character realism, and smooth transitions. It\u2019s widely seen as a benchmark in visual quality, although it's considered complex and expensive for casual use.\n\nPricing\n\nGoogle AI Pro \u2013 $19.99/mo\n\nGoogle AI Ultra \u2013 $249.99/mo\n\nThe Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They\u2019re ideal for prosumers or creative agencies.\n\nIf you want to use this (or the older Veo 2 model) on a reduced budget, then you can try it on ImagineArt\u2019s Veo 3 AI video generator.",
+    "markdown": "## Google Veo\u202f3\n\nVeo 3 is Google\u2019s state-of-the-art cinematic video model, capable of producing 8-sec 1080p clips with ambient audio, character realism, and smooth transitions. It\u2019s widely seen as a benchmark in visual quality, although it's considered complex and expensive for casual use.\n\n**Pricing**\n\n- Google AI Pro \u2013 $19.99/mo\n- Google AI Ultra \u2013 $249.99/mo\n\nThe Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They\u2019re ideal for prosumers or creative agencies.\n\nIf you want to use this (or the older Veo 2 model) on a reduced budget, then you can try it on ImagineArt\u2019s [Veo 3 AI video generator](<https://www.imagine.art/features/veo-3>).",
+    "characters": 869,
+    "oversized": false
+  },
+  "judge_finding": {
+    "block_id": "b000116",
+    "verdict": "supported",
+    "category": "paraphrase",
+    "reason": "This rewording keeps all original facts regarding limits and third-party plans.",
+    "source_ids": [
+      "b000116"
+    ]
+  },
+  "source_assessment": "Google claims are their highest limits becomes representing Google current highest usage limits. The allowed chunk provides only the attributed claim, not an independently established highest-limit fact. Attribution is a material evidentiary qualifier and is lost. Source-relative assessment only; no external verification.",
+  "disposition": "Unsafe numerical recommendation; no promotion or held-out calls."
+}
