@@ -209,3 +209,15 @@ backend/.venv/bin/python backend/scripts/diagnose_gepa_score_controls.py --live-
 ```
 
 Backend suite: **162 passed, two opt-in skipped**. Seven model-selection API cases previously stubbed only P2 and accidentally left the judge live; they now use the existing draft stub to isolate both external boundaries. New regression checks validate the provider’s actual JSON schema against chunk hashes, cross-chunk references and empty supported evidence, and reject oversized schemas before dispatch. Guarded winner qualification, current-policy held-out superiority and the stronger rewrite benchmark remain unfinished.
+
+## Fixed answer-first reflection benchmark and v4 trial
+
+[Seven predeclared paragraph edits](../verification/gepa-answer-first-controls-v1.json) on three reflection pages put existing answers/subjects first while preserving source qualifications, prices and limits. No held-out or selection page was used to construct these edits. The [complete benchmark](../verification/gepa-answer-first-benchmark-v1.json) ran saved replacements through real rewrite/schema/evidence/language validation, the live v4 judge, and original/proposed P1 scoring. All three controls passed the judge. Mean deltas were **+0.000132** (Google courses), **−0.000248** (AI app builders), and **+0.000184** (invoicing), an equal-page mean of **+0.000023**. Individual query deltas ranged from **−0.001277** to **+0.000560**. These fixed, manually written controls involved zero P2-provider calls and three judge calls, plus separately recorded embedding work. They were not revised after scores. A passed judge is fallible; manual edits are neither a learned prompt nor an attainable ceiling. The result supports weak local reward sensitivity for these allowed clarifications, not the conclusion that larger safe gains are impossible.
+
+Reproduce with a fresh output from the repository root:
+
+```sh
+backend/.venv/bin/python backend/scripts/benchmark_gepa_controls.py --live --controls verification/gepa-answer-first-controls-v1.json --cache-root /path/to/shared-store --output verification/new-answer-first-benchmark.json
+```
+
+[Fresh v4 run c536094b](../verification/gepa-fidelity-v4-trial-v1.json) changes only the fidelity profile among evaluation fields; configuration, dataset, baseline, P2 mini and reflection mini remain identical to db4545d1. It retains the 100-attempt cap and does not use the fixed controls as optimizer inputs. The browser adopted the active run and displayed GPT-5 / fidelity-slots-v4, locked configuration, a Stop control, progress and saved provider usage. The running-trial record is not a final result. Current-policy qualification, source review, explicit promotion/restart and fixed-pair held-out superiority remain unfinished.

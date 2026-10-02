@@ -1,0 +1,907 @@
+{
+  "diagnostic_only": true,
+  "controls_sha256": "254c9fa8e25da12131f03fcc1b2f4bd2c12f69db182af62766aaf7b999765aa7",
+  "dataset_manifest_hash": "59e416d1942b57ddd9ac4a4cde561bb1d44d48790e9de4734da209a65c29774b",
+  "fidelity_profile": {
+    "model": "gpt-5",
+    "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+    "schema_version": "fidelity-slots-v4",
+    "output_budget": {
+      "minimum": 8192,
+      "maximum": 16000,
+      "per_edit": 128
+    },
+    "batch_size": 8,
+    "reasoning_effort": "low",
+    "schema_limits": {
+      "enum_values": 1000,
+      "schema_characters": 120000,
+      "large_enum_characters": 15000
+    },
+    "uncertain_policy": "reject_whole_proposal"
+  },
+  "rewrite_provider_calls": 0,
+  "heldout_calls": 0,
+  "complete": true,
+  "cases": [
+    {
+      "hostname": "grow.google",
+      "page_id": "0efcb5d3452ca9bd144a112e3bcf7be510785ca5d1aa8cd93d891f747f128d55",
+      "role": "reflection",
+      "edits": [
+        {
+          "block_id": "b000007",
+          "before": "Flexible online training programs, designed to put you on the fast track to jobs in high-paying fields, now including practical AI training. No experience necessary.",
+          "after": "No experience is necessary for these flexible online training programs. Designed to put learners on the fast track to jobs in high-paying fields, the programs now include practical AI training."
+        },
+        {
+          "block_id": "b000231",
+          "before": "The Google Career Certificate program is an online training program that offers professional certificates in high-paying technology fields. The program is designed by Google and taught by experts in the areas of IT, user experience design, project management, and more, and combines skills training with hands-on practice. In addition, job seekers receive support and practical tips for resumes, interviews, and job searches, helping them to land jobs in the technology sector.",
+          "after": "Google Career Certificates are professional certificates offered through an online training program in high-paying technology fields. Designed by Google and taught by experts in IT, user experience design, project management and other areas, the program combines skills training with hands-on practice. Job seekers also receive support and practical tips for resumes, interviews and job searches, helping them to land jobs in the technology sector."
+        }
+      ],
+      "rewrite_validation_status": "succeeded",
+      "fidelity": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000007",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "The rewrite preserves all original claims: flexibility, online format, fast track to high-paying jobs, inclusion of practical AI training, and no experience required.",
+            "source_ids": [
+              "b000007"
+            ]
+          },
+          {
+            "block_id": "b000231",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "The revision restates the same information about the program\u2019s nature, fields, designers/instructors, training format, and job-seeker support without adding or omitting claims.",
+            "source_ids": [
+              "b000231"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1712,
+          "output_tokens": 726,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1712,
+              "output_tokens": 726,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "b606ce839bfd982e50d8057537bb5b61df5ed8c8cb99c10fb6bf2d192a55cfaa",
+              "output_limit": 8192,
+              "latency_ms": 8787
+            }
+          ],
+          "requested_edits": 2,
+          "reviewed_edits": 2,
+          "latency_ms": 8802
+        }
+      },
+      "original": {
+        "feature_version": "lr-semantic-v7",
+        "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+        "serving_policy": "markdownify-context-v1",
+        "context_contract_issue": "https://github.com/ext-weihsianglin/content-optimization-system/issues/15",
+        "interpretation": "P1 v7 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Context features use current Markdownify documents; frozen-training parser mismatch is deferred in upstream issue #15.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 9,
+        "unique_query_count": 9,
+        "status": "scored",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "Are there online courses designed for working adults?",
+            "score": 0.3452877056883631
+          },
+          {
+            "query_index": 1,
+            "query": "\u00bfCu\u00e1les son los programas en l\u00ednea m\u00e1s respetados por los empleadores a nivel mundial?",
+            "score": 0.35479930517932884
+          },
+          {
+            "query_index": 2,
+            "query": "What is the best beginner data analysis certification?",
+            "score": 0.43879819990677815
+          },
+          {
+            "query_index": 3,
+            "query": "Best websites to get verified certificates in digital marketing and data science",
+            "score": 0.5652202154147759
+          },
+          {
+            "query_index": 4,
+            "query": "Where can I study cybersecurity and tech support?",
+            "score": 0.32753467801777064
+          },
+          {
+            "query_index": 5,
+            "query": "I am curious about the Google certifications available and their relevance.",
+            "score": 0.4925881681069843
+          },
+          {
+            "query_index": 6,
+            "query": "Who provides fast-track IT support training for entry-level careers?",
+            "score": 0.37166777602466716
+          },
+          {
+            "query_index": 7,
+            "query": "How does Digital marketing management work?",
+            "score": 0.27086553490255155
+          },
+          {
+            "query_index": 8,
+            "query": "Best learning platforms for professional skills",
+            "score": 0.49540841620160947
+          }
+        ],
+        "embedding": {
+          "model": "text-embedding-3-large",
+          "dimensions": 3072,
+          "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+          "serializer_version": "blocks-v3-markdownify",
+          "calls": 0,
+          "input_tokens": 0,
+          "cached_requests": 82,
+          "missing_requests": 0
+        },
+        "mean_score": 0.4069077777158699,
+        "min_score": 0.27086553490255155,
+        "max_score": 0.5652202154147759
+      },
+      "after": {
+        "feature_version": "lr-semantic-v7",
+        "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+        "serving_policy": "markdownify-context-v1",
+        "context_contract_issue": "https://github.com/ext-weihsianglin/content-optimization-system/issues/15",
+        "interpretation": "P1 v7 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Context features use current Markdownify documents; frozen-training parser mismatch is deferred in upstream issue #15.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 9,
+        "unique_query_count": 9,
+        "status": "scored",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "Are there online courses designed for working adults?",
+            "score": 0.3453560897603734
+          },
+          {
+            "query_index": 1,
+            "query": "\u00bfCu\u00e1les son los programas en l\u00ednea m\u00e1s respetados por los empleadores a nivel mundial?",
+            "score": 0.35496266624903483
+          },
+          {
+            "query_index": 2,
+            "query": "What is the best beginner data analysis certification?",
+            "score": 0.4393557537301032
+          },
+          {
+            "query_index": 3,
+            "query": "Best websites to get verified certificates in digital marketing and data science",
+            "score": 0.565441994129624
+          },
+          {
+            "query_index": 4,
+            "query": "Where can I study cybersecurity and tech support?",
+            "score": 0.3275322054082764
+          },
+          {
+            "query_index": 5,
+            "query": "I am curious about the Google certifications available and their relevance.",
+            "score": 0.4929453475670809
+          },
+          {
+            "query_index": 6,
+            "query": "Who provides fast-track IT support training for entry-level careers?",
+            "score": 0.3714875027878328
+          },
+          {
+            "query_index": 7,
+            "query": "How does Digital marketing management work?",
+            "score": 0.2709170575677316
+          },
+          {
+            "query_index": 8,
+            "query": "Best learning platforms for professional skills",
+            "score": 0.49536051933975933
+          }
+        ],
+        "embedding": {
+          "model": "text-embedding-3-large",
+          "dimensions": 3072,
+          "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+          "serializer_version": "blocks-v3-markdownify",
+          "calls": 1,
+          "input_tokens": 3236,
+          "cached_requests": 78,
+          "missing_requests": 4
+        },
+        "mean_score": 0.40703990405997964,
+        "min_score": 0.2709170575677316,
+        "max_score": 0.565441994129624
+      },
+      "applied": true,
+      "mean_delta": 0.00013212634410975088,
+      "per_query": [
+        {
+          "query": "Are there online courses designed for working adults?",
+          "before": 0.3452877056883631,
+          "after": 0.3453560897603734,
+          "delta": 6.838407201031904e-05
+        },
+        {
+          "query": "\u00bfCu\u00e1les son los programas en l\u00ednea m\u00e1s respetados por los empleadores a nivel mundial?",
+          "before": 0.35479930517932884,
+          "after": 0.35496266624903483,
+          "delta": 0.00016336106970599173
+        },
+        {
+          "query": "What is the best beginner data analysis certification?",
+          "before": 0.43879819990677815,
+          "after": 0.4393557537301032,
+          "delta": 0.0005575538233250632
+        },
+        {
+          "query": "Best websites to get verified certificates in digital marketing and data science",
+          "before": 0.5652202154147759,
+          "after": 0.565441994129624,
+          "delta": 0.00022177871484818645
+        },
+        {
+          "query": "Where can I study cybersecurity and tech support?",
+          "before": 0.32753467801777064,
+          "after": 0.3275322054082764,
+          "delta": -2.4726094942639776e-06
+        },
+        {
+          "query": "I am curious about the Google certifications available and their relevance.",
+          "before": 0.4925881681069843,
+          "after": 0.4929453475670809,
+          "delta": 0.0003571794600966127
+        },
+        {
+          "query": "Who provides fast-track IT support training for entry-level careers?",
+          "before": 0.37166777602466716,
+          "after": 0.3714875027878328,
+          "delta": -0.0001802732368343385
+        },
+        {
+          "query": "How does Digital marketing management work?",
+          "before": 0.27086553490255155,
+          "after": 0.2709170575677316,
+          "delta": 5.152266518004822e-05
+        },
+        {
+          "query": "Best learning platforms for professional skills",
+          "before": 0.49540841620160947,
+          "after": 0.49536051933975933,
+          "delta": -4.789686185013853e-05
+        }
+      ]
+    },
+    {
+      "hostname": "www.lindy.ai",
+      "page_id": "92e678faacd11130d26a0f4600a9f42a8bb3fb3f36b2787417bae88e6c19e79a",
+      "role": "reflection",
+      "edits": [
+        {
+          "block_id": "b000106",
+          "before": "AI app builders generate layouts, logic, and data connections for you based on natural language input, while no-code tools require you to drag, configure, and build those parts yourself.",
+          "after": "The difference between AI app builders and no-code tools is how layouts, logic and data connections are created. AI app builders generate these parts from natural language input; no-code tools require you to drag, configure and build them yourself."
+        },
+        {
+          "block_id": "b000478",
+          "before": "Glide is best for lightweight internal tools powered by spreadsheets. Builder.ai is aimed at larger businesses that want custom apps built by a managed dev team.",
+          "after": "For lightweight internal tools powered by spreadsheets, Glide is best. Builder.ai is aimed at larger businesses seeking custom apps built by a managed development team."
+        }
+      ],
+      "rewrite_validation_status": "succeeded",
+      "fidelity": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000106",
+            "verdict": "supported",
+            "category": "faithful paraphrase",
+            "reason": "The rewrite preserves the original meaning and scope, restating that AI app builders generate layouts, logic, and data connections from natural language while no-code tools require manual assembly.",
+            "source_ids": [
+              "b000106"
+            ]
+          },
+          {
+            "block_id": "b000478",
+            "verdict": "supported",
+            "category": "faithful paraphrase",
+            "reason": "The rewrite maintains the original claims about Glide being best for lightweight spreadsheet-powered internal tools and Builder.ai targeting larger businesses wanting managed-team custom apps.",
+            "source_ids": [
+              "b000478"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1722,
+          "output_tokens": 528,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1722,
+              "output_tokens": 528,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "87ba4cfc4345fb801237254c77dd56e763e7d705f1962d78f8761cecc96f9e08",
+              "output_limit": 8192,
+              "latency_ms": 4795
+            }
+          ],
+          "requested_edits": 2,
+          "reviewed_edits": 2,
+          "latency_ms": 4798
+        }
+      },
+      "original": {
+        "feature_version": "lr-semantic-v7",
+        "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+        "serving_policy": "markdownify-context-v1",
+        "context_contract_issue": "https://github.com/ext-weihsianglin/content-optimization-system/issues/15",
+        "interpretation": "P1 v7 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Context features use current Markdownify documents; frozen-training parser mismatch is deferred in upstream issue #15.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 10,
+        "unique_query_count": 10,
+        "status": "scored",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "which AI development software is the best for app building",
+            "score": 0.6095750977152532
+          },
+          {
+            "query_index": 1,
+            "query": "leading AI agent for workflow automation",
+            "score": 0.4876354044423838
+          },
+          {
+            "query_index": 2,
+            "query": "top recruiting software that uses AI",
+            "score": 0.4734265066823641
+          },
+          {
+            "query_index": 3,
+            "query": "what's the best AI software for talent analytics",
+            "score": 0.4711390508194691
+          },
+          {
+            "query_index": 4,
+            "query": "\u00bfQui\u00e9n no deber\u00eda usar Zapier?",
+            "score": 0.253243362906404
+          },
+          {
+            "query_index": 5,
+            "query": "Can Zapier's AI features compete with Gumloop?",
+            "score": 0.39857409738024013
+          },
+          {
+            "query_index": 6,
+            "query": "best way to build AI chat bot for free",
+            "score": 0.5392364611182333
+          },
+          {
+            "query_index": 7,
+            "query": "Does Zapier offer the same AI capabilities as Lindy?",
+            "score": 0.4242388291454892
+          },
+          {
+            "query_index": 8,
+            "query": "Who offers AI-driven inbox prioritization and email labeling?",
+            "score": 0.325871679345185
+          },
+          {
+            "query_index": 9,
+            "query": "Who offers AI content generators for LinkedIn or Instagram?",
+            "score": 0.40550492306556796
+          }
+        ],
+        "embedding": {
+          "model": "text-embedding-3-large",
+          "dimensions": 3072,
+          "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+          "serializer_version": "blocks-v3-markdownify",
+          "calls": 0,
+          "input_tokens": 0,
+          "cached_requests": 94,
+          "missing_requests": 0
+        },
+        "mean_score": 0.4388445412620589,
+        "min_score": 0.253243362906404,
+        "max_score": 0.6095750977152532
+      },
+      "after": {
+        "feature_version": "lr-semantic-v7",
+        "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+        "serving_policy": "markdownify-context-v1",
+        "context_contract_issue": "https://github.com/ext-weihsianglin/content-optimization-system/issues/15",
+        "interpretation": "P1 v7 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Context features use current Markdownify documents; frozen-training parser mismatch is deferred in upstream issue #15.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 10,
+        "unique_query_count": 10,
+        "status": "scored",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "which AI development software is the best for app building",
+            "score": 0.6085477781574626
+          },
+          {
+            "query_index": 1,
+            "query": "leading AI agent for workflow automation",
+            "score": 0.4871995845629885
+          },
+          {
+            "query_index": 2,
+            "query": "top recruiting software that uses AI",
+            "score": 0.4734242919207145
+          },
+          {
+            "query_index": 3,
+            "query": "what's the best AI software for talent analytics",
+            "score": 0.4715474138357388
+          },
+          {
+            "query_index": 4,
+            "query": "\u00bfQui\u00e9n no deber\u00eda usar Zapier?",
+            "score": 0.252601132299506
+          },
+          {
+            "query_index": 5,
+            "query": "Can Zapier's AI features compete with Gumloop?",
+            "score": 0.39878860357243257
+          },
+          {
+            "query_index": 6,
+            "query": "best way to build AI chat bot for free",
+            "score": 0.5379596771209665
+          },
+          {
+            "query_index": 7,
+            "query": "Does Zapier offer the same AI capabilities as Lindy?",
+            "score": 0.4246695958069328
+          },
+          {
+            "query_index": 8,
+            "query": "Who offers AI-driven inbox prioritization and email labeling?",
+            "score": 0.32599197447709666
+          },
+          {
+            "query_index": 9,
+            "query": "Who offers AI content generators for LinkedIn or Instagram?",
+            "score": 0.40523679158178033
+          }
+        ],
+        "embedding": {
+          "model": "text-embedding-3-large",
+          "dimensions": 3072,
+          "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+          "serializer_version": "blocks-v3-markdownify",
+          "calls": 1,
+          "input_tokens": 7480,
+          "cached_requests": 88,
+          "missing_requests": 6
+        },
+        "mean_score": 0.4385966843335619,
+        "min_score": 0.252601132299506,
+        "max_score": 0.6085477781574626
+      },
+      "applied": true,
+      "mean_delta": -0.00024785692849699226,
+      "per_query": [
+        {
+          "query": "which AI development software is the best for app building",
+          "before": 0.6095750977152532,
+          "after": 0.6085477781574626,
+          "delta": -0.0010273195577905625
+        },
+        {
+          "query": "leading AI agent for workflow automation",
+          "before": 0.4876354044423838,
+          "after": 0.4871995845629885,
+          "delta": -0.00043581987939528277
+        },
+        {
+          "query": "top recruiting software that uses AI",
+          "before": 0.4734265066823641,
+          "after": 0.4734242919207145,
+          "delta": -2.214761649577124e-06
+        },
+        {
+          "query": "what's the best AI software for talent analytics",
+          "before": 0.4711390508194691,
+          "after": 0.4715474138357388,
+          "delta": 0.00040836301626967497
+        },
+        {
+          "query": "\u00bfQui\u00e9n no deber\u00eda usar Zapier?",
+          "before": 0.253243362906404,
+          "after": 0.252601132299506,
+          "delta": -0.0006422306068979977
+        },
+        {
+          "query": "Can Zapier's AI features compete with Gumloop?",
+          "before": 0.39857409738024013,
+          "after": 0.39878860357243257,
+          "delta": 0.00021450619219243183
+        },
+        {
+          "query": "best way to build AI chat bot for free",
+          "before": 0.5392364611182333,
+          "after": 0.5379596771209665,
+          "delta": -0.0012767839972668282
+        },
+        {
+          "query": "Does Zapier offer the same AI capabilities as Lindy?",
+          "before": 0.4242388291454892,
+          "after": 0.4246695958069328,
+          "delta": 0.00043076666144359343
+        },
+        {
+          "query": "Who offers AI-driven inbox prioritization and email labeling?",
+          "before": 0.325871679345185,
+          "after": 0.32599197447709666,
+          "delta": 0.00012029513191164076
+        },
+        {
+          "query": "Who offers AI content generators for LinkedIn or Instagram?",
+          "before": 0.40550492306556796,
+          "after": 0.40523679158178033,
+          "delta": -0.00026813148378762586
+        }
+      ]
+    },
+    {
+      "hostname": "tech.co",
+      "page_id": "2bb4591118effbfb8d09d04596192a33660aa27645c7f3f31a4c99e469a5affe",
+      "role": "reflection",
+      "edits": [
+        {
+          "block_id": "b000019",
+          "before": "Any business that grows beyond a couple of customers a month can stand to benefit from an invoice software. Invoice software allows a business to create and track invoices and estimates, which can then be tracked and paid through easily accessible payment portals.",
+          "after": "Invoice software lets businesses create and track invoices and estimates, with easily accessible payment portals for tracking and payment. A business that grows beyond a couple of customers a month can stand to benefit from this software."
+        },
+        {
+          "block_id": "b000120",
+          "before": "Zoho Invoice technically offers four plans, but one of them is a free plan that only allows for five clients, so won\u2019t last very long in any growing business. But if you\u2019re a small business looking to test out the software, or only send a few invoices a month, it might be perfect for you.",
+          "after": "Zoho Invoice offers four plans, including a free plan limited to five clients. That limit means the free plan will not last long for a growing business, but it might be perfect for a small business testing the software or sending only a few invoices a month."
+        },
+        {
+          "block_id": "b000147",
+          "before": "FreshBooks is an accounting platform for small businesses. With great help and support options, and an intuitive interface that won't deter first-time users, it's a great solution for sole traders or companies with very few staff, who can't afford to invest too much time becoming acquainted with a new platform. It has four pricing plans, ranging from $21 per month to $65 per month, with one plan that has no public pricing.",
+          "after": "FreshBooks is a small-business accounting platform with great help and support options and an intuitive interface that will not deter first-time users. It is a great solution for sole traders or companies with very few staff who cannot invest much time in learning a new platform. There are four pricing plans: publicly listed prices range from $21 to $65 per month, and one plan has no public pricing."
+        }
+      ],
+      "rewrite_validation_status": "succeeded",
+      "fidelity": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000019",
+            "verdict": "supported",
+            "category": "Paraphrase",
+            "reason": "Reordered sentences and used synonyms without altering meaning or scope.",
+            "source_ids": [
+              "b000019"
+            ]
+          },
+          {
+            "block_id": "b000120",
+            "verdict": "supported",
+            "category": "Paraphrase",
+            "reason": "Faithful restatement of plan count, free plan limit, and suitability; no new claims added.",
+            "source_ids": [
+              "b000120"
+            ]
+          },
+          {
+            "block_id": "b000147",
+            "verdict": "supported",
+            "category": "Paraphrase",
+            "reason": "Keeps the same claims about audience, interface, support, and pricing ranges including one plan without public pricing.",
+            "source_ids": [
+              "b000147"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 3625,
+          "output_tokens": 993,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 3625,
+              "output_tokens": 993,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "b416d1e36fe5b0309b6c0dbd9078f41a19f4fd138c18e3a4f6b805ccdb9c0722",
+              "output_limit": 8192,
+              "latency_ms": 12010
+            }
+          ],
+          "requested_edits": 3,
+          "reviewed_edits": 3,
+          "latency_ms": 12012
+        }
+      },
+      "original": {
+        "feature_version": "lr-semantic-v7",
+        "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+        "serving_policy": "markdownify-context-v1",
+        "context_contract_issue": "https://github.com/ext-weihsianglin/content-optimization-system/issues/15",
+        "interpretation": "P1 v7 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Context features use current Markdownify documents; frozen-training parser mismatch is deferred in upstream issue #15.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 10,
+        "unique_query_count": 10,
+        "status": "scored",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "What\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s the top platform for small business invoicing?",
+            "score": 0.5732078747293571
+          },
+          {
+            "query_index": 1,
+            "query": "what's the best low-cost telecom provider for small businesses",
+            "score": 0.4072218191233309
+          },
+          {
+            "query_index": 2,
+            "query": "What provider has the best global calling rates?",
+            "score": 0.2881428410704009
+          },
+          {
+            "query_index": 3,
+            "query": "What software keeps my client workflow streamlined and organized?",
+            "score": 0.37203268746153173
+          },
+          {
+            "query_index": 4,
+            "query": "Best AI website builder",
+            "score": 0.3984723568240896
+          },
+          {
+            "query_index": 5,
+            "query": "Who offers user-friendly tools to browse company and contact info?",
+            "score": 0.3000233343894867
+          },
+          {
+            "query_index": 6,
+            "query": "best accounting software with payroll feature",
+            "score": 0.5999539435881294
+          },
+          {
+            "query_index": 7,
+            "query": "What are the best fully remote tech companies?",
+            "score": 0.34221048798225184
+          },
+          {
+            "query_index": 8,
+            "query": "Which companies offer the best AI music creation software?",
+            "score": 0.3492565005152081
+          },
+          {
+            "query_index": 9,
+            "query": "What is Squarespace\u2019s cost relative to other website builders?",
+            "score": 0.2795159758286915
+          }
+        ],
+        "embedding": {
+          "model": "text-embedding-3-large",
+          "dimensions": 3072,
+          "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+          "serializer_version": "blocks-v3-markdownify",
+          "calls": 0,
+          "input_tokens": 0,
+          "cached_requests": 60,
+          "missing_requests": 0
+        },
+        "mean_score": 0.39100378215124776,
+        "min_score": 0.2795159758286915,
+        "max_score": 0.5999539435881294
+      },
+      "after": {
+        "feature_version": "lr-semantic-v7",
+        "model_sha256": "2ff334173b83364fb49685fcdca7339f71b1c88bcef154d71e0a21d595587d6b",
+        "serving_policy": "markdownify-context-v1",
+        "context_contract_issue": "https://github.com/ext-weihsianglin/content-optimization-system/issues/15",
+        "interpretation": "P1 v7 experimental classifier: sampled within-host top class among already-cited pages. Not citation probability, factual verification or causal uplift. Context features use current Markdownify documents; frozen-training parser mismatch is deferred in upstream issue #15.",
+        "objective": "Equal-weight mean across distinct usable target queries. Review every per-query regression.",
+        "query_count": 10,
+        "unique_query_count": 10,
+        "status": "scored",
+        "per_query": [
+          {
+            "query_index": 0,
+            "query": "What\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s the top platform for small business invoicing?",
+            "score": 0.5732235695678055
+          },
+          {
+            "query_index": 1,
+            "query": "what's the best low-cost telecom provider for small businesses",
+            "score": 0.4071348781277699
+          },
+          {
+            "query_index": 2,
+            "query": "What provider has the best global calling rates?",
+            "score": 0.2882022544911027
+          },
+          {
+            "query_index": 3,
+            "query": "What software keeps my client workflow streamlined and organized?",
+            "score": 0.37234325404311913
+          },
+          {
+            "query_index": 4,
+            "query": "Best AI website builder",
+            "score": 0.3985803102212202
+          },
+          {
+            "query_index": 5,
+            "query": "Who offers user-friendly tools to browse company and contact info?",
+            "score": 0.300456236515573
+          },
+          {
+            "query_index": 6,
+            "query": "best accounting software with payroll feature",
+            "score": 0.6004006688632122
+          },
+          {
+            "query_index": 7,
+            "query": "What are the best fully remote tech companies?",
+            "score": 0.34277043545351205
+          },
+          {
+            "query_index": 8,
+            "query": "Which companies offer the best AI music creation software?",
+            "score": 0.3494228395099324
+          },
+          {
+            "query_index": 9,
+            "query": "What is Squarespace\u2019s cost relative to other website builders?",
+            "score": 0.2793433471305344
+          }
+        ],
+        "embedding": {
+          "model": "text-embedding-3-large",
+          "dimensions": 3072,
+          "embedding_identity": "e8f0823f296ef4653dc4c01ed9a2e7c507f727193135c847728322e4ca8245ea",
+          "serializer_version": "blocks-v3-markdownify",
+          "calls": 1,
+          "input_tokens": 10618,
+          "cached_requests": 50,
+          "missing_requests": 10
+        },
+        "mean_score": 0.3911877793923781,
+        "min_score": 0.2793433471305344,
+        "max_score": 0.6004006688632122
+      },
+      "applied": true,
+      "mean_delta": 0.00018399724113032923,
+      "per_query": [
+        {
+          "query": "What\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s the top platform for small business invoicing?",
+          "before": 0.5732078747293571,
+          "after": 0.5732235695678055,
+          "delta": 1.5694838448432336e-05
+        },
+        {
+          "query": "what's the best low-cost telecom provider for small businesses",
+          "before": 0.4072218191233309,
+          "after": 0.4071348781277699,
+          "delta": -8.694099556100232e-05
+        },
+        {
+          "query": "What provider has the best global calling rates?",
+          "before": 0.2881428410704009,
+          "after": 0.2882022544911027,
+          "delta": 5.941342070181488e-05
+        },
+        {
+          "query": "What software keeps my client workflow streamlined and organized?",
+          "before": 0.37203268746153173,
+          "after": 0.37234325404311913,
+          "delta": 0.00031056658158740147
+        },
+        {
+          "query": "Best AI website builder",
+          "before": 0.3984723568240896,
+          "after": 0.3985803102212202,
+          "delta": 0.00010795339713060015
+        },
+        {
+          "query": "Who offers user-friendly tools to browse company and contact info?",
+          "before": 0.3000233343894867,
+          "after": 0.300456236515573,
+          "delta": 0.00043290212608632084
+        },
+        {
+          "query": "best accounting software with payroll feature",
+          "before": 0.5999539435881294,
+          "after": 0.6004006688632122,
+          "delta": 0.00044672527508282656
+        },
+        {
+          "query": "What are the best fully remote tech companies?",
+          "before": 0.34221048798225184,
+          "after": 0.34277043545351205,
+          "delta": 0.0005599474712602026
+        },
+        {
+          "query": "Which companies offer the best AI music creation software?",
+          "before": 0.3492565005152081,
+          "after": 0.3494228395099324,
+          "delta": 0.00016633899472429103
+        },
+        {
+          "query": "What is Squarespace\u2019s cost relative to other website builders?",
+          "before": 0.2795159758286915,
+          "after": 0.2793433471305344,
+          "delta": -0.0001726286981570957
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Fixed manual edits are not a learned prompt or an attainable ceiling.",
+    "No retries, omitted outcomes or revisions based on scores.",
+    "A passed LLM judge is not factual verification."
+  ]
+}
