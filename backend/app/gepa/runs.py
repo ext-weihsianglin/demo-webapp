@@ -34,10 +34,10 @@ class RunConfig(BaseModel):
     model: str='gpt-4.1-mini'
     reflection_model: str='gpt-4.1-mini'
     prompt_id: str | None=None
-    candidates: int=Field(default=10,ge=1,le=50)
+    candidates: int=Field(default=50,ge=1,le=50)
     reflection_batch: int=Field(default=2,ge=1,le=20)
-    attempts: int=Field(default=100,ge=30,le=2000)
-    concurrency: int=Field(default=10,ge=1,le=20)
+    attempts: int=Field(default=1000,ge=30,le=2000)
+    concurrency: int=Field(default=30,ge=1,le=30)
     strategy_characters: int=Field(default=6000,ge=1000,le=16000)
     unsupported_penalty: float=Field(default=.05,ge=0,le=1)
     uncertain_penalty: float=Field(default=.02,ge=0,le=1)
