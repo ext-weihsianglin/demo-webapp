@@ -24,6 +24,7 @@ The UI now displays a remotely started run's frozen settings, updates saved-run 
 - [Parser/semantic parity](../verification/gepa-cache-parity-v1.json): five validation records pass without provider calls.
 - [Live fidelity probes](../verification/gepa-guardrails-v1.json): four unsupported rewrites rejected and faithful control accepted. This is bounded guardrail evidence, not a claim that an LLM judge cannot be fooled.
 - A fresh-process registry test resolves a promoted candidate and its exact prompt bytes/hash after restart.
+- [Live candidate registry check](../verification/gepa-registry-live-v1.json): a fresh Python process resolves the same catalog as the running API, validating actual generated candidate prompt bytes/hashes. No live candidate has qualified for promotion yet, so the selected-winner backend restart remains pending.
 
 ## Live optimization status
 
@@ -32,6 +33,8 @@ Retry `37f8e094ccee4fbf8a0502a87a2a39b3` stopped at the ten-proposal ceiling aft
 Reflection now presents original source text once, with changes and evidence referenced by ID, and excludes raw DOM diagnostics. When edits exist it includes their complete source chunks; otherwise it includes the entire page. The response schema enforces the mutable-text character bound, and preflight failures are logged without counting a provider proposal. No source text is truncated and fixed rewriter/gate instructions remain unchanged.
 
 Third run `062a765eb15343ba8d96ba282f12abdb` uses those corrections with the same frozen configuration. Its baseline selection mean is 0.409264 and failure fraction 0.833333. Mutations are now being registered and evaluated. Its terminal result, actual selected-prompt restart check and paired held-out comparison will be added when complete. No optimized superiority is claimed while these checks remain pending.
+
+Its first full challenger, `gpt-4.1-mini--885bc0d8059b6913d10c2554`, scores 0.407539 with the same failure fraction, below baseline; it cannot be recommended. That strategy named its two reflection pages' topic (cat food), exposing a generalization pitfall before any test-page evaluation. Subsequent reflection instructions explicitly request a generic editing method, prohibit example-specific names/topics, prioritize fidelity-approved focused edits, and ask for complete sentences below the length bound. This change is prepared for a new frozen run; it does not alter the active run or its manifest.
 
 All UI API consumers now handle non-JSON proxy failures, including evidence inspection and example loading. The proxy error regression, frontend build and typecheck pass. A plain-text HTTP 500 is presented as an availability error; it does not become a draft or a fabricated score.
 
