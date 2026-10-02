@@ -148,7 +148,7 @@ def test_provider_cannot_rewrite_a_read_only_control_even_with_known_evidence():
     outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=StubClient(control_edit))
     assert outcome['status'] == 'invalid_output'
     assert 'document' not in outcome and 'markdown' not in outcome
-    assert outcome['telemetry']['edit_boundary_version'] == 'body-content-v3'
+    assert outcome['telemetry']['edit_boundary_version'] == 'body-content-v4'
 
 
 @pytest.mark.parametrize('control', ['<p role="button">Subscribe now</p>', '<div role="button"><p>Subscribe now</p></div>'])
@@ -195,9 +195,37 @@ def test_unmarked_navigation_containers_are_read_only(attribute):
     assert 'Individual & Family' not in {b['text'] for b in payload['editable_blocks']}
 
 
-def test_body_page_class_is_not_navigation_container_evidence():
+@pytest.mark.parametrize('attribute', ['class="MainFoot"', 'id="site-footer"', 'class="footer_container"'])
+def test_footer_containers_remain_source_context_without_edit_targets(attribute):
+    source = f'<main><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main><div {attribute}><p>Copyright © 2025 Example. All rights reserved.</p><div><p>Stay current with subscriber-only offers.</p></div></div>'
+    document, chunks = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    def body_edit(proposal, response, data):
+        body = next(b for b in data['editable_blocks'] if b['text'].startswith('For everyday'))
+        proposal['edits'][0].update(block_id=body['block_id'], evidence=[{'block_id':body['block_id']}])
+    client = StubClient(body_edit)
+    outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=client)
+    assert outcome['status'] == 'succeeded'
+    payload = json.loads(client.requests[0]['input'][0]['content'])
+    retained = {b['text'] for b in document['blocks'] if b['text'].startswith(('Copyright', 'Stay current'))}
+    assert retained  # The regression must exercise retained footer content.
+    assert retained <= {b['text'] for b in payload['read_only_context']}
+    assert not retained & {b['text'] for b in payload['editable_blocks']}
+    assert all(b in outcome['document']['blocks'] for b in document['blocks'] if b['text'] in retained)
+
+
+@pytest.mark.parametrize('page_class', ['menu-page', 'site-footer'])
+def test_body_page_class_is_not_navigation_container_evidence(page_class):
     from app.rewriting import editable
-    source = '<html><body class="menu-page"><main><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main></body></html>'
+    source = f'<html><body class="{page_class}"><main><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></main></body></html>'
+    document, _ = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
+    body = next(b for b in document['blocks'] if b['text'].startswith('For everyday'))
+    assert editable(body, document)
+
+
+@pytest.mark.parametrize('section_class', ['football', 'footwear', 'foot-care'])
+def test_editorial_foot_topics_are_not_footer_containers(section_class):
+    from app.rewriting import editable
+    source = f'<main><article class="{section_class}"><p>For everyday road runs, choose a comfortable fit. No single shoe is best for every runner.</p></article></main>'
     document, _ = extract_document(source, 'html', 'https://example.com/guide', 'example.com')
     body = next(b for b in document['blocks'] if b['text'].startswith('For everyday'))
     assert editable(body, document)

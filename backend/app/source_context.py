@@ -11,14 +11,19 @@ PROTECTED_ROLES = frozenset({'button', 'navigation', 'menu', 'menubar', 'banner'
 NAVIGATION_TOKENS = frozenset({'nav', 'navbar', 'navigation', 'menu', 'submenu', 'menubar', 'subnav'})
 
 
-def navigation_roles(attributes):
+def container_roles(attributes):
     classes = attributes.get('class') or []
     if isinstance(classes, str):
         classes = [classes]
     labels = ' '.join([str(attributes.get('id') or ''), *map(str, classes)])
     labels = re.sub(r'([a-z0-9])([A-Z])', r'\1 \2', labels).lower()
     tokens = set(re.findall(r'[a-z0-9]+', labels))
-    return ('navigation',) if tokens & NAVIGATION_TOKENS else ()
+    roles = ('navigation',) if tokens & NAVIGATION_TOKENS else ()
+    # Treat common footer names conservatively, without matching arbitrary
+    # substrings such as "football" or "footwear".
+    if 'footer' in tokens or ('foot' in tokens and tokens & {'main', 'site', 'page'}):
+        roles += ('contentinfo',)
+    return roles
 
 
 def protected_roles(value):
@@ -36,7 +41,7 @@ def html_role_context(content, blocks):
         own = protected_roles(node.attrs.get('role'))
         # Body/page classification classes are not navigation-container evidence.
         if node.name not in ('html', 'body', '[document]'):
-            own += navigation_roles(node.attrs)
+            own += container_roles(node.attrs)
         roles = tuple(dict.fromkeys(inherited + own))
         if roles:
             contexts[paths[id(node)]] = list(roles)

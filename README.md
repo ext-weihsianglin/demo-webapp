@@ -116,7 +116,7 @@ Validated draft generation uses the library's `blocks_to_markdown` so nested lis
 code whitespace and table spans survive export. Source metadata and JSON-LD remain
 separate from generated body content.
 
-The webapp adds query-independent `source_role_context` metadata for HTML controls whose ARIA ancestry is omitted from upstream blocks. This overlay leaves core parser/scorer fields unchanged. The `body-content-v3` rewrite boundary protects site chrome, forms and controls using source DOM paths, normalized roles and conservative navigation class/ID tokens; article headers inside `main`/`article` remain editable.
+The webapp adds query-independent `source_role_context` metadata for HTML controls whose ARIA ancestry is omitted from upstream blocks. This overlay leaves core parser/scorer fields unchanged. The `body-content-v4` rewrite boundary protects site chrome, forms and controls using source DOM paths, normalized roles and conservative navigation/footer class/ID tokens; article headers inside `main`/`article` remain editable.
 
 The separate `gpt-4.1` source-relative fidelity gate reviews each edit against its original chunk and rejects cross-chunk support. Labels and topical plausibility cannot establish new benefits or guarantees. Promotion requires the recorded fidelity profile to match the current policy; historical recommendations need fresh evaluation after a policy change. The judge remains fallible.
 

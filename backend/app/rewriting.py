@@ -13,10 +13,10 @@ import tiktoken
 from preprocessing.blocks import blocks_to_markdown, blocks_to_text
 from preprocessing.downstream import structure_chunks
 from app.language_guard import confident_language, compare_language
-from app.source_context import protected_roles, navigation_roles
+from app.source_context import protected_roles, container_roles
 
 PROMPT_VERSION = 'rewrite-page-v7'
-EDIT_BOUNDARY_VERSION = 'body-content-v3'
+EDIT_BOUNDARY_VERSION = 'body-content-v4'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 SUPPORTED_REWRITE_MODELS = ('gpt-4.1-mini', 'gpt-4.1', 'gpt-4.1-nano', 'gpt-5', 'gpt-5-mini', 'gpt-5-nano')
@@ -147,7 +147,7 @@ def _protected_html_context(node):
     if 'header' in tags and not any(tag in ('main', 'article') for tag in tags[:tags.index('header')]):
         return True
     attributes = node.get('attributes') or {}
-    if protected_roles(attributes.get('role')) or navigation_roles(attributes):
+    if protected_roles(attributes.get('role')) or container_roles(attributes):
         return True
     return any(_protected_html_context(child) for child in node.get('inline_nodes', node.get('children', [])))
 
