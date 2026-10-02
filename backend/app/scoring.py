@@ -55,7 +55,7 @@ def _load_model(path, size, mtime):
     return bundle
 
 
-def score_document(document, content, format, queries, *, provider=None, cache_root=None):
+def score_document(document, content, format, queries, *, provider=None, cache_root=None, before_call=None):
     common = {'feature_version': FEATURE_VERSION, 'model_sha256': MODEL_SHA256,
               'serving_policy': SERVING_POLICY, 'context_contract_issue': 'https://github.com/ext-weihsianglin/content-optimization-system/issues/15',
               'interpretation': INTERPRETATION, 'objective': OBJECTIVE,
@@ -72,7 +72,7 @@ def score_document(document, content, format, queries, *, provider=None, cache_r
         doc = deepcopy(document)
         inventory = source_inventory(content, document['source']['href'], format)
         doc['scorer_source_word_count'] = len(words(inventory['body_text']))
-        semantics, telemetry = semantic_features(doc, queries, provider=provider, cache_root=cache_root)
+        semantics, telemetry = semantic_features(doc, queries, provider=provider, cache_root=cache_root, before_call=before_call)
         rows = [{**features.robust_features(query, doc), **semantic} for query, semantic in zip(queries, semantics)]
         matrix = np.array([[row[name] for name in bundle['feature_names']] for row in rows], dtype=float)
         probabilities = bundle['pipeline'].predict_proba(matrix)[:, 1]

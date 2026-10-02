@@ -252,7 +252,7 @@ def parse_provider_proposal(raw, document):
     return proposal, duplicates
 
 
-def plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback=None):
+def plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback=None, *, prompt=None):
     """Build exactly one whole-page request, preserving all text and queries.
 
     Source locators, HTML serialization, JSON-LD and visibility diagnostics are
@@ -283,7 +283,7 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
                 item['source_language_hint'] = confident_language(block['text'])
             payload['editable_blocks' if editable(block) else 'read_only_context'].append(item)
         data = json.dumps(payload, ensure_ascii=False)
-        count = len(encoding.encode(PROMPT + data + json.dumps(response_schema(document, batch, allow_structure)))) + 256
+        count = len(encoding.encode((PROMPT if prompt is None else prompt) + data + json.dumps(response_schema(document, batch, allow_structure)))) + 256
         # Estimate space if each editable block receives one ordinary edit.
         # Output remains strictly capped, and incomplete output never applies.
         output_estimate = 256
@@ -305,11 +305,12 @@ def plan_requests(document, chunks, queries, tone, allow_structure, settings, en
     return [request]
 
 
-def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None):
+def rewrite(document, chunks, query, tone, allow_structure, *, client=None, settings=None, model=None, p1_feedback=None, prompt=None, prompt_id=None):
+    effective_prompt = PROMPT if prompt is None else prompt
     queries = list(dict.fromkeys([query] if isinstance(query, str) else query))
     start = time.monotonic()
     accumulated_flags = []
-    telemetry = {'prompt_version': PROMPT_VERSION, 'model': None, 'status': 'started', 'calls': 0,
+    telemetry = {'prompt_version': prompt_id or PROMPT_VERSION, 'model': None, 'status': 'started', 'calls': 0,
                  'input_tokens': 0, 'output_tokens': 0, 'estimated_cost_usd': None, 'usage_complete': True}
     def finish(status, message, **extra):
         telemetry.update(status=status, latency_ms=round((time.monotonic()-start)*1000))
@@ -334,7 +335,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
             encoding = tiktoken.get_encoding('o200k_base')
             telemetry['tokenizer'] = 'o200k_base (fallback; verify model compatibility)'
         blocks = {b['block_id']: b for b in document['blocks']}
-        requests = plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback)
+        requests = plan_requests(document, chunks, queries, tone, allow_structure, settings, encoding, p1_feedback, prompt=effective_prompt)
         telemetry.update(budgeted_input_tokens=sum(r[2] for r in requests),
                          planned_calls=len(requests), original_chunks=len(chunks),
                          context_tokens=settings.context_tokens, output_reserve_tokens=settings.output_tokens)
@@ -349,7 +350,7 @@ def rewrite(document, chunks, query, tone, allow_structure, *, client=None, sett
                 continue
             schema = response_schema(document, batch, allow_structure)
             telemetry['calls'] += 1
-            response = client.responses.create(model=settings.model, instructions=PROMPT,
+            response = client.responses.create(model=settings.model, instructions=effective_prompt,
                 input=[{'role': 'user', 'content': data}], store=False, max_output_tokens=settings.output_tokens,
                 text={'format': {'type': 'json_schema', 'name': 'rewrite_proposal', 'strict': True, 'schema': schema}}, **reasoning)
             if response.usage:

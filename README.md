@@ -91,9 +91,9 @@ P1 estimates sampled within-host top class among already-cited pages. Scores are
 
 ## What is real vs. mocked
 
-- **Real:** frozen upstream P1 v7 scoring when the trusted model is installed, complete query-set feedback in rewriting, before/after per-query comparisons, API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, frontend/API round trips, review/export.
+- **Real:** bounded GEPA optimization and persistent local research traces, model-specific prompt selection, source-relative fidelity checks, frozen upstream P1 v7 scoring when the trusted model is installed, complete query-set feedback in rewriting, before/after per-query comparisons, API validation, installed retention-first extraction/selection for HTML/Markdown/text, typed blocks, metadata/JSON-LD, source mappings, quality flags, structured chunks, frontend/API round trips, review/export.
 - **Mock:** query alignment and answer clarity scores; structural score uses only heading count. P1 changes are classifier-score changes, not measured citation uplift. There is no automatic demo rewrite fallback.
-- **Not connected:** optional clean extraction candidates, calibrated graders, phase 2 GEPA or prompt-optimized model, persistent runs, live URL fetching, source-style rendering, HTML patching.
+- **Not connected:** optional clean extraction candidates, calibrated graders, live URL fetching, source-style rendering, HTML patching.
 
 ## Integration boundaries
 
@@ -213,3 +213,33 @@ CONTENT_EXAMPLES_DIR=/absolute/path/to/examples uv run --project backend python 
 ```
 
 The command refuses existing output files. `--artifacts-dir /fresh/path` optionally records full provider output and proposed source data for debugging. Reports distinguish successful body drafts, valid abstentions, timeouts and validation failures; they do not establish factual entailment or citation uplift. Null entries keep original blocks intact. The keyed schema has its own size guard and fails before generation when too large, without dropping source content.
+
+## GEPA research
+
+The GEPA Optimization tab runs `gepa==0.1.4` against a separate frozen **P1 validation** dataset. Prepare it once, using a fresh output path:
+
+```sh
+cd backend
+uv run python scripts/prepare_gepa.py \
+  --corpus /path/to/processed/markdownify-corpus-v1-complete \
+  --split-root /path/to/trad_ml_scorer/v7 \
+  --raw-root /path/to/raw \
+  --output data/gepa/datasets/validation-90-v1
+```
+
+Preparation verifies source/split hashes and eligibility without provider calls, then freezes 60 reflection and 30 selection pages from distinct hosts. The webapp test catalog is excluded. Configure the trusted P1 model, backend `OPENAI_API_KEY`, embedding cache and explicit `P1_ENABLE_LIVE_EMBEDDINGS=1` before research. Dataset/run storage defaults to `backend/data/gepa`; `GEPA_DATA_ROOT` overrides it.
+
+Choose the rewriter, reflection model and seed prompt; edit limits before Start. Defaults are 100 total page rewrite attempts, concurrency 10, two reflection pages per mutation and ten proposed mutations. Baseline selection consumes 30 attempts. Reflection, fidelity and embedding calls are additional and counted separately. Enable live research calls explicitly. Start/Stop, saved outcomes, prompt diffs, per-query original/baseline/candidate comparisons and JSON export are available. Stop saves in-flight results; restart leaves interrupted runs inspectable without resuming them. One backend process owns one active run.
+
+Only the baseline's first editorial paragraph evolves; its remaining instructions and mechanical harness stay fixed. Prompt registry entries are model-specific and content-addressed. Baselines reproduce v7 bytes. Experimental entries are selectable in Content Studio; promotion updates a local model default only when a complete 30-page candidate improves baseline mean without increasing failure rate. Generated prompts/defaults and run data are ignored local files. `PROMPT_REGISTRY_ROOT` overrides generated registry storage.
+
+Both research and ordinary real drafts use the same source-relative `gpt-4.1-mini` fidelity gate. Unsupported or uncertain edits reject the whole proposal. Research retains the original page and measured score; semantic rejection is feedback, while judge/provider failures count toward the technical breaker. A passed gate is an LLM judgment, not factual verification. This adds a provider call for changed drafts.
+
+For a bounded live wiring check, explicitly run:
+
+```sh
+uv run python scripts/smoke_gepa.py --live --dataset validation-90-v1 \
+  --output data/gepa/smoke-report-v1.json
+```
+
+It uses one reflection-page rewrite and one reflection mutation, with no selection evaluation or promotion. Ordinary tests use stub clients. See [implementation spec](docs/gepa-spec.md) for invariants and [implementation handoff](docs/gepa-implementation.md) for choices and verification limits.

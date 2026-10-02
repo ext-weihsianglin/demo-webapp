@@ -1,5 +1,8 @@
 """Upstream retention extraction, mock grading and OpenAI baseline rewriting."""
 from app.rewriting import rewrite, model_options
+from app.prompt_registry import PromptRegistry
+from app.fidelity import check_fidelity
+from app.gepa.routes import router as gepa_router
 from urllib.parse import urlparse
 from typing import Literal
 from fastapi import FastAPI, HTTPException
@@ -10,6 +13,7 @@ from app.extraction import UPSTREAM, extract_document, section_view
 from app.verification import SourceInspector, verify_document
 
 app = FastAPI(title="Content Studio", version="0.1.0")
+app.include_router(gepa_router)
 
 class Source(BaseModel):
     example_id: str | None = None
@@ -79,6 +83,7 @@ class EvidenceRequest(Source):
     block_id: str = Field(min_length=1, max_length=64)
 
 class DraftRequest(Source):
+    prompt_id: str | None = Field(default=None, min_length=1, max_length=200)
     model: str | None = Field(default=None, min_length=1, max_length=200)
 
     @field_validator('model')
@@ -161,12 +166,25 @@ def evidence(source: EvidenceRequest):
 
 @app.post('/api/draft')
 def draft(source: DraftRequest):
+    selected_model = source.model or model_options()['default_model']
+    try:
+        prompt = PromptRegistry().resolve(source.prompt_id, selected_model)
+    except (ValueError, OSError, KeyError):
+        raise HTTPException(400, 'Prompt is missing, changed or incompatible with the selected model.') from None
     analysis = analyze(source)
-    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=analysis['p1'])
+    result = rewrite(analysis['document'], analysis['chunks'], source.queries, source.tone, source.allow_structure, model=source.model, p1_feedback=analysis['p1'], prompt=prompt['effective_prompt'], prompt_id=prompt['id'])
+    result['telemetry'].update(prompt_id=prompt['id'], prompt_hash=prompt['prompt_hash'], contract_version=prompt['contract_version'])
     result.update(source_origin=analysis['source_origin'], extraction=analysis['extraction'])
     if result['status'] != 'succeeded':
         code = 422 if result['status'] in ('source_insufficient', 'context_limit', 'abstained') else 503 if result['status'] == 'missing_credentials' else 502
         raise HTTPException(code, detail=result)
+    gate = check_fidelity(analysis['document'], result['changes'])
+    result['fidelity'] = gate
+    if gate['status'] != 'passed':
+        raise HTTPException(422 if gate['status']=='rejected' else 502, detail={
+            'status':'fidelity_rejected' if gate['status']=='rejected' else 'fidelity_unavailable',
+            'summary':'Source-relative fidelity check did not pass; no draft applied.',
+            'fidelity':gate, 'telemetry':result['telemetry'], 'rejected_changes':result['changes']})
     after = score_document(result['document'], source.content, source.format, source.queries)
     result.update(target_queries=source.queries, p1_before=analysis['p1'], p1_after=after,
                   p1_comparison=compare_scores(analysis['p1'], after))

@@ -1,0 +1,6 @@
+{
+  "version": "rewrite-page-v7",
+  "baseline_sha256": "c7935470d43655dfa02fbbe8d0a5b7441ed069c9b4c9924203152a09ec688bc0",
+  "fixed_sha256": "0c2fd406c60caea3927db3ff16718d4f99f3552f5d1b66cde3f578b9afa73278",
+  "mutable_region": "first paragraph; all remaining instructions fixed"
+}

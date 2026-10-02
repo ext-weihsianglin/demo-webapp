@@ -64,3 +64,18 @@ def test_preflight_limit_and_provider_errors_visible(tmp_path, monkeypatch):
         semantic_features(parsed(), ['How to choose shoes?'], provider=Failed(), cache_root=tmp_path)
     assert failure.value.status == 'embedding_provider_error'
     assert failure.value.telemetry['provider_error'] == 'http_429'
+
+
+def test_stop_between_embedding_batches_prevents_next_provider_call(tmp_path):
+    from app.gepa.evaluation import AttemptBudget, RunStopped
+    budget = AttemptBudget(100)
+    class StoppingProvider(StubEmbeddings):
+        def embed(self, texts, role):
+            result = super().embed(texts, role)
+            budget.stop()
+            return result
+    provider = StoppingProvider()
+    with pytest.raises(RunStopped):
+        semantic_features(parsed(), ['How to choose shoes?'], provider=provider,
+                          cache_root=tmp_path, before_call=budget.check)
+    assert len(provider.calls) == 1

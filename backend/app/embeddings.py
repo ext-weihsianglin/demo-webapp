@@ -53,7 +53,7 @@ def prepare_units(document, queries):
     return config, units, query_units
 
 
-def semantic_features(document, queries, *, provider=None, cache_root=None):
+def semantic_features(document, queries, *, provider=None, cache_root=None, before_call=None):
     config, doc_units, query_units = prepare_units(document, queries)
     cfg = config['models']['openai-large']
     units = doc_units + list({u['unit_id']: u for u in query_units}.values())
@@ -87,6 +87,8 @@ def semantic_features(document, queries, *, provider=None, cache_root=None):
                             if batch and size + byte_size > cfg['batch_bytes']:
                                 break
                             batch.append(pending.pop(0)); size += byte_size
+                        if before_call:
+                            before_call()
                         telemetry['calls'] += 1
                         vectors, usage = provider.embed([u['text'] for _, u in batch], role)
                         vectors = validated_vectors([{'index': i, 'embedding': v} for i, v in enumerate(vectors)], len(batch), cfg['dimensions'])

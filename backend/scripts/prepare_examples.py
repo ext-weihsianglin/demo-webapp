@@ -11,7 +11,7 @@ from preprocessing.schema import snapshot_identity
 from representations.storage import file_hash
 
 
-def prepare(corpus: Path, split_root: Path, raw_root: Path, output: Path):
+def prepare(corpus: Path, split_root: Path, raw_root: Path, output: Path, *, split="test", row_filter=None):
     if output.exists():
         raise ValueError('Output already exists; choose a fresh bundle path.')
     manifest = json.loads((corpus / 'manifest.json').read_text())
@@ -40,17 +40,17 @@ def prepare(corpus: Path, split_root: Path, raw_root: Path, output: Path):
                 continue
             assignment = json.loads(line)
             row = by_key[(assignment['source_file_hash'], assignment['source_row'])]
-            split = assignment['split']
-            if split not in ('train', 'validation', 'test') or row['snapshot_id'] != assignment['snapshot_id']:
+            row_split = assignment['split']
+            if row_split not in ('train', 'validation', 'test') or row['snapshot_id'] != assignment['snapshot_id']:
                 raise ValueError('Invalid P1 row assignment')
             host = row['hostname']
-            if host in hosts and hosts[host] != split:
+            if host in hosts and hosts[host] != row_split:
                 raise ValueError('P1 host overlaps splits')
-            hosts[host] = split
-            if split == 'test' and assignment['extraction_status'] in ('selected', 'needs_review'):
+            hosts[host] = row_split
+            if row_split == split and assignment['extraction_status'] in ('selected', 'needs_review'):
                 eligible[host].append(row)
     test_payloads = {row['payload_hash'] for rows in eligible.values() for row in rows}
-    other_payloads = {row['payload_hash'] for row in records if hosts.get(row['hostname']) in ('train', 'validation')}
+    other_payloads = {row['payload_hash'] for row in records if hosts.get(row['hostname']) in ({'train', 'validation', 'test'} - {split})}
     if test_payloads & other_payloads:
         raise ValueError('P1 test payload overlaps train/validation')
     host_records = defaultdict(list)
@@ -59,7 +59,7 @@ def prepare(corpus: Path, split_root: Path, raw_root: Path, output: Path):
             host_records[row['hostname']].append(row)
     selected = []
     for host, rows in sorted(eligible.items()):
-        usable = [r for r in rows if isinstance(r['prompt'], str) and 3 <= len(r['prompt'].strip()) <= 1000]
+        usable = [r for r in rows if isinstance(r['prompt'], str) and 3 <= len(r['prompt'].strip()) <= 1000 and (row_filter is None or row_filter(r))]
         if usable:
             selected.append(min(usable, key=lambda r: (r['source_file'], r['source_row'])))
     verified = set()
@@ -91,7 +91,9 @@ def prepare(corpus: Path, split_root: Path, raw_root: Path, output: Path):
             if len(queries) != 10:
                 raise ValueError('Expected ten original observations per test host')
             examples.append({'snapshot_id': identity, 'payload_hash': payload_hash, 'href': row['href'],
-                'hostname': row['hostname'], 'format': doc['source']['format'], 'split': 'test', 'p1_split': 'test',
+                'source_file': row['source_file'], 'source_file_hash': row['source_file_hash'],
+                'source_row': row['source_row'], 'document_path': row['document_path'],
+                'hostname': row['hostname'], 'format': doc['source']['format'], 'split': split, 'p1_split': split,
                 'title': doc['source_metadata'].get('title') or row['href'], 'query': raw[0], 'characters': len(payload),
                 'queries': list(dict.fromkeys(q['query'] for q in queries if q['usable'])), 'query_records': queries,
                 'query_scope': 'host', 'query_record_count': len(queries), 'unusable_query_count': sum(not q['usable'] for q in queries),
@@ -105,7 +107,7 @@ def prepare(corpus: Path, split_root: Path, raw_root: Path, output: Path):
     (output / 'catalog.json').write_text(json.dumps({'bundle_version': 3,
         'manifest_hash': file_hash(corpus / 'manifest.json'), 'p1_split_hash': split_hash,
         'p1_version': split_manifest['version'], 'examples': examples}, indent=2) + '\n')
-    print(f'Prepared {len(examples)} P1-test-only examples in {output}')
+    print(f'Prepared {len(examples)} P1-{split}-only examples in {output}')
 
 
 if __name__ == '__main__':

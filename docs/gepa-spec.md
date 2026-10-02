@@ -1,6 +1,6 @@
 # GEPA implementation specification
 
-Status: draft for review; application changes are not implemented. This spec consolidates agreed requirements and proposes concrete interfaces. **Agreed** labels reference user decisions; **proposed** labels identify implementation defaults that were not separately confirmed. See the [plan](gepa-plan.md) and [interview record](gepa-design.md).
+Status: implemented for local research; see [implementation handoff](gepa-implementation.md). The agreed requirements and proposed defaults below preserve the reviewed design record; the handoff identifies the implementation choices.
 
 ## 1. Scope and invariants
 

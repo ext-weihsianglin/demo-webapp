@@ -1,6 +1,6 @@
 # GEPA implementation plan
 
-Status: planning draft compiled from the design interview. No GEPA implementation is claimed. Decisions marked **agreed** are user decisions; items marked **proposed** are defaults for review. The user stopped the interview and requested these documents before implementation.
+Status: implemented for local research; see [implementation handoff](gepa-implementation.md). The agreed requirements and proposed defaults below preserve the reviewed design record; the handoff identifies the implementation choices.
 
 Read the [implementation spec](gepa-spec.md) for contracts and acceptance criteria, [interview record](gepa-design.md) for provenance, and [glossary](../GLOSSARY.md) for terminology.
 

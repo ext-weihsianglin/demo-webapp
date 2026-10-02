@@ -1,0 +1,61 @@
+'use client';
+import { useCallback, useEffect, useState } from 'react';
+import { PromptSelector } from './prompt-selector';
+
+type Config={dataset_id:string;model:string;reflection_model:string;prompt_id:string;candidates:number;reflection_batch:number;attempts:number;concurrency:number;length_multiplier:number;consecutive_failures:number;failure_rate:number;failure_minimum:number;seed:number;enable_live_calls:boolean};
+type Candidate={id:string;status:string;frontier?:boolean;selection_mean?:number;selection_pages?:number;failure_rate?:number;parents:string[];effective_prompt:string;editorial_strategy:string;prompt_hash:string;diff?:string;proposal_summary?:string;query_deltas?:{page_id:string;queries:{query:string;original:number;baseline:number;after:number;delta:number;baseline_delta:number}[]}[]};
+type Run={id:string;status:string;config:Config;budget:{attempts:number;reserved:number;limit:number;technical_failures:number};candidates:Candidate[];recommendation:string|null;stop_reason:string|null;proposals?:number;usage?:Record<string,{calls:number;input_tokens:number;output_tokens:number;cached_requests:number}>};
+type Event={event_id:number;phase:string;time:string;usage?:{calls:number;input_tokens:number;output_tokens:number;model:string};message?:string;status?:string;candidate_id?:string;score?:number;delta?:number};
+type Evaluation={page_id:string;role:string;status:string;failed?:boolean;score?:number;delta?:number;fidelity?:{status:string;reason:string;findings:{block_id:string;verdict:string;category:string;reason:string}[]};rewrite?:{changes?:{before:string;after:string;evidence:{quote:string}[]}[]}};
+const defaults:Config={dataset_id:'',model:'gpt-4.1-mini',reflection_model:'gpt-4.1-mini',prompt_id:'',candidates:10,reflection_batch:2,attempts:100,concurrency:10,length_multiplier:1.5,consecutive_failures:3,failure_rate:.2,failure_minimum:10,seed:0,enable_live_calls:false};
+const knobs:{key:keyof Config;label:string;min:number;max:number;step?:number}[]=[
+ {key:'candidates',label:'Proposed candidates',min:1,max:50},{key:'reflection_batch',label:'Reflection batch pages',min:1,max:20},
+ {key:'attempts',label:'Maximum rewrite attempts',min:30,max:2000},{key:'concurrency',label:'Concurrent page evaluations',min:1,max:20},
+ {key:'length_multiplier',label:'Editorial length multiplier',min:1,max:3,step:.1},{key:'consecutive_failures',label:'Consecutive technical failures',min:1,max:20},
+ {key:'failure_rate',label:'Technical failure fraction',min:.01,max:1,step:.01},{key:'failure_minimum',label:'Failure-rate minimum attempts',min:1,max:100},{key:'seed',label:'Sampling seed',min:0,max:2147483647}];
+async function api(path:string,body?:unknown){const r=await fetch('/api/'+path,body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await r.json();if(!r.ok)throw new Error(typeof data.detail==='string'?data.detail:JSON.stringify(data.detail));return data;}
+const pct=(n?:number)=>n===undefined?'—':(n*100).toFixed(2);
+
+export function GepaPanel(){
+ const [config,setConfig]=useState<Config>(defaults),[datasets,setDatasets]=useState<{id:string;reflection:number;selection:number}[]>([]),[models,setModels]=useState<string[]>([]);
+ const [run,setRun]=useState<Run|null>(null),[history,setHistory]=useState<Run[]>([]),[events,setEvents]=useState<Event[]>([]),[detail,setDetail]=useState<{candidate:Candidate;evaluations:Evaluation[]}|null>(null);
+ const [message,setMessage]=useState('');
+ const [error,setError]=useState(''),[pending,setPending]=useState(false);
+ const active=!!run&&['preflighting','running','stopping'].includes(run.status);
+ const choosePrompt=useCallback((id:string)=>setConfig(c=>({...c,prompt_id:id})),[]);
+ useEffect(()=>{let alive=true;Promise.all([api('gepa/datasets'),api('rewrite-models'),api('gepa/runs')]).then(([d,m,h])=>{
+   if(!alive)return;setDatasets(d.datasets);setModels(m.models);setHistory(h.runs);
+   setConfig(c=>({...c,dataset_id:d.datasets[0]?.id||'',model:m.models.includes(c.model)?c.model:m.default_model,reflection_model:m.models.includes(c.reflection_model)?c.reflection_model:m.default_model}));
+   const running=h.runs.find((r:Run)=>['preflighting','running','stopping'].includes(r.status));if(running)setRun(running);
+ }).catch(e=>{if(alive)setError(e.message);});return()=>{alive=false;};},[]);
+ useEffect(()=>{if(!run)return;let alive=true;const id=run.id;const poll=async()=>{
+   try{const [next,log]=await Promise.all([api(`gepa/runs/${id}`),api(`gepa/runs/${id}/events`)]);if(alive){setRun(next);setEvents(log.events);}}
+   catch(e){if(alive)setError((e as Error).message);}
+ };void poll();const timer=active?setInterval(poll,1500):undefined;return()=>{alive=false;if(timer)clearInterval(timer);};},[run?.id,active]);
+ async function start(){setError('');setPending(true);try{const next=await api('gepa/runs',config);setRun(next);setEvents([]);setDetail(null);setHistory(h=>[next,...h]);}catch(e){setError((e as Error).message);}finally{setPending(false);}}
+ async function stop(){if(!run)return;try{setRun(await api(`gepa/runs/${run.id}/stop`,{}));}catch(e){setError((e as Error).message);}}
+ async function inspect(id:string){if(!run)return;try{setDetail(await api(`gepa/runs/${run.id}/candidates/${encodeURIComponent(id)}`));}catch(e){setError((e as Error).message);}}
+ async function promote(){if(!run?.recommendation)return;try{await api(`prompts/${encodeURIComponent(run.recommendation)}/promote`,{run_id:run.id});setError('');setMessage('Model default prompt updated.');}catch(e){setError((e as Error).message);}}
+ const reflection=events.filter(e=>e.phase==='reflection').reduce((n,e)=>n+(e.usage?.calls||0),0);
+ return <section className="gepa"><div className="heading"><div><div className="eyebrow">PROMPT RESEARCH</div><h1>GEPA Optimization</h1><p>Evolve model-specific editorial prompts with source-relative fidelity checks and frozen P1 feedback.</p></div></div>
+ <p className="note">90 P1-validation pages: 60 reflection / 30 selection. P1 test pages remain outside optimization. P1 is a classifier proxy, not citation uplift. Current Markdownify context adaptation remains in effect.</p>
+ {message&&<p role="status">{message}</p>}{error&&<p role="alert" className="error">{error}</p>}
+ <div className="gepa-grid"><section className="card controls"><h2>Configure research run</h2><fieldset disabled={active||pending}>
+ <label htmlFor="gepa-data">Frozen dataset</label><select id="gepa-data" value={config.dataset_id} onChange={e=>setConfig(c=>({...c,dataset_id:e.target.value}))}>{!datasets.length&&<option value="">Prepare a dataset on the backend first</option>}{datasets.map(d=><option key={d.id}>{d.id}</option>)}</select>
+ <label htmlFor="gepa-model">Rewriter model</label><select id="gepa-model" value={config.model} onChange={e=>setConfig(c=>({...c,model:e.target.value,prompt_id:''}))}>{models.map(m=><option key={m}>{m}</option>)}</select>
+ <PromptSelector model={config.model} value={config.prompt_id} onChange={choosePrompt} disabled={active}/>
+ <label htmlFor="gepa-reflection">Reflection model</label><select id="gepa-reflection" value={config.reflection_model} onChange={e=>setConfig(c=>({...c,reflection_model:e.target.value}))}>{models.map(m=><option key={m}>{m}</option>)}</select>
+ <div className="gepa-knobs">{knobs.map(k=><label key={k.key}>{k.label}<input type="number" min={k.min} max={k.max} step={k.step||1} value={Number(config[k.key])} onChange={e=>setConfig(c=>({...c,[k.key]:Number(e.target.value)}))}/></label>)}</div>
+ <p className="source-help">100 attempts includes baseline and reflection rewrites. With a fresh cache, two full challengers plus baseline can use 98 attempts. Reflection, fidelity and embedding calls are additional. No automatic resume.</p>
+ <label className="check-label"><input type="checkbox" checked={config.enable_live_calls} onChange={e=>setConfig(c=>({...c,enable_live_calls:e.target.checked}))}/><span>Enable live research calls<small>Source text goes to OpenAI for rewriting, reflection, fidelity and missing embeddings.</small></span></label>
+ <button className="primary wide" disabled={!config.dataset_id||!config.prompt_id||!config.enable_live_calls} onClick={start}>{pending?'Starting…':'Start GEPA run'}</button></fieldset></section>
+ <section className="card gepa-progress"><h2>Run progress</h2><label htmlFor="gepa-history">Saved runs</label><select id="gepa-history" disabled={active} value={run?.id||''} onChange={e=>{const selected=history.find(r=>r.id===e.target.value);if(selected){setRun(selected);setDetail(null);}}}><option value="">Select a run</option>{history.map(r=><option key={r.id} value={r.id}>{r.id.slice(0,8)} · {r.status}</option>)}</select>
+ {run?<><p><strong>{run.status}</strong> · {run.id.slice(0,8)} · {run.stop_reason||'working'}</p><p>{run.budget.attempts}/{run.budget.limit} dispatched rewrites · {run.budget.reserved} reserved · {run.budget.technical_failures} technical failures · {reflection} reflection calls</p>
+ <div className="gepa-usage">{Object.entries(run.usage||{}).map(([phase,u])=><p key={phase}>{phase}: {u.calls} calls · {u.input_tokens} input / {u.output_tokens} output tokens{phase==='embedding'?` · ${u.cached_requests} cached inputs`:''}</p>)}</div><progress value={run.budget.attempts} max={run.budget.limit}/><div className="actions">{active&&<button className="secondary" onClick={stop}>Stop</button>}<a className="secondary" href={`/api/gepa/runs/${run.id}/export`}>Export full traces</a>{run.recommendation&&!active&&<button className="primary" onClick={promote}>Promote recommended prompt</button>}</div>
+ <div className="p1-table-wrap"><table className="p1-table"><thead><tr><th>Prompt</th><th>Status</th><th>Mean P1 /100</th><th>Failures</th></tr></thead><tbody>{run.candidates.map(c=><tr key={c.id}><td><button className="text-button" onClick={()=>inspect(c.id)}>{c.prompt_hash.slice(0,8)}{c.id===run.recommendation?' · recommended':''}</button></td><td>{c.status}{c.frontier?' · frontier':''}</td><td>{pct(c.selection_mean)}</td><td>{pct(c.failure_rate)}%</td></tr>)}</tbody></table></div>
+ <details><summary>Live event log · {events.length} events</summary><div className="gepa-log">{events.slice(-100).map(e=><p key={e.event_id}>{e.event_id}. {e.phase} · {e.message||e.status||e.candidate_id||''}{e.score!==undefined?' · P1 '+pct(e.score):''}</p>)}</div></details></>:<p>Start a run to compare the baseline and prompt candidates. Completed and interrupted runs remain inspectable.</p>}</section></div>
+ {detail&&<section className="card gepa-detail"><h2>Candidate {detail.candidate.prompt_hash.slice(0,8)}</h2><p>{detail.candidate.proposal_summary||'Baseline editorial strategy'} · parents: {detail.candidate.parents.join(', ')||'none'}</p><details open><summary>Prompt diff</summary><pre>{detail.candidate.diff||'Baseline: no parent diff'}</pre></details><details><summary>Full effective prompt · fixed contract included</summary><pre>{detail.candidate.effective_prompt}</pre></details>
+ <details><summary>Per-query P1 changes</summary>{detail.candidate.query_deltas?.map(p=><div key={p.page_id}><h3>{p.page_id.slice(0,12)}</h3><table className="p1-table"><thead><tr><th>Query</th><th>Original</th><th>Baseline</th><th>Candidate</th><th>Δ original</th><th>Δ baseline</th></tr></thead><tbody>{p.queries.map(q=><tr key={q.query}><td>{q.query}</td><td>{pct(q.original)}</td><td>{pct(q.baseline)}</td><td>{pct(q.after)}</td><td className={q.delta<0?'p1-regression':''}>{pct(q.delta)}</td><td className={q.baseline_delta<0?'p1-regression':''}>{pct(q.baseline_delta)}</td></tr>)}</tbody></table></div>)}</details>
+ <details><summary>Page outcomes and fidelity findings · {detail.evaluations.length}</summary>{detail.evaluations.map(p=><article key={p.role+p.page_id}><h3>{p.page_id.slice(0,12)} · {p.role} · {p.status}</h3><p>P1 {pct(p.score)} · delta {pct(p.delta)} · fidelity {p.fidelity?.status||'not called'}</p>{p.fidelity?.findings.map(f=><p key={f.block_id}>{f.verdict} · {f.category}: {f.reason}</p>)}{p.rewrite?.changes?.map((c,i)=><div key={i}><del>{c.before}</del><p>{c.after}</p><details><summary>Source evidence</summary>{c.evidence.map((e,j)=><blockquote key={j}>{e.quote}</blockquote>)}</details></div>)}</article>)}</details></section>}
+ </section>;
+}
