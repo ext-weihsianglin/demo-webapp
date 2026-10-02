@@ -52,6 +52,12 @@ Finish every sentence. Use terse editorial prose; do not restate
 the fixed harness rules. The fixed harness remains authoritative.'''
 
 
+def reflection_settings(model):
+    reasoning = model in {'gpt-5', 'gpt-5-mini', 'gpt-5-nano'}
+    return {'reasoning_effort':'low' if reasoning else None,
+            'max_output_tokens':8192 if reasoning else 4096}
+
+
 class Adapter:
     def __init__(self, evaluator, registry, baseline, store, config):
         self.evaluator,self.registry,self.baseline,self.store,self.config=evaluator,registry,baseline,store,config
@@ -129,7 +135,8 @@ class Adapter:
                 'description':f'A generic editing method in one or two complete sentences. Aim for at most {character_target} characters; finish before the hard maximum.'},'summary':{'type':'string'}},
                 'required':['editorial_strategy','summary'],'additionalProperties':False}
         input_tokens=len(tiktoken.get_encoding('o200k_base').encode(payload+REFLECTION_PROMPT+json.dumps(schema)))
-        if input_tokens+4096>128000:
+        settings=reflection_settings(self.config.reflection_model)
+        if input_tokens+settings['max_output_tokens']>128000:
             self.store.event('reflection_skipped',reason='context_limit',input_tokens=input_tokens)
             raise ValueError('Reflection context exceeds budget; no examples truncated')
         self.proposals+=1
@@ -137,11 +144,13 @@ class Adapter:
         try:
             response=GuardedClient(self.evaluator._client(),self.evaluator.budget).responses.create(
                 model=self.config.reflection_model,instructions=REFLECTION_PROMPT,input=[{'role':'user','content':payload}],
-                store=False,max_output_tokens=4096,text={'format':{'type':'json_schema','name':'prompt_mutation','strict':True,'schema':schema}})
+                store=False,max_output_tokens=settings['max_output_tokens'],
+                **({'reasoning':{'effort':settings['reasoning_effort']}} if settings['reasoning_effort'] else {}),
+                text={'format':{'type':'json_schema','name':'prompt_mutation','strict':True,'schema':schema}})
         except APIError as error:
-            self.store.event('reflection',proposal=self.proposals,usage={'calls':1,'model':self.config.reflection_model},status='provider_error')
+            self.store.event('reflection',proposal=self.proposals,usage={'calls':1,'model':self.config.reflection_model,**settings},status='provider_error')
             raise ValueError('reflection_rate_limited' if getattr(error,'status_code',None)==429 else 'reflection_provider_error') from None
-        usage={'calls':1,'model':self.config.reflection_model,'input_tokens':response.usage.input_tokens if response.usage else 0,
+        usage={'calls':1,'model':self.config.reflection_model,**settings,'input_tokens':response.usage.input_tokens if response.usage else 0,
                'output_tokens':response.usage.output_tokens if response.usage else 0,'estimated_cost_usd':None,
                'latency_ms':round((time.monotonic()-started)*1000)}
         self.store.event('reflection',proposal=self.proposals,usage=usage)

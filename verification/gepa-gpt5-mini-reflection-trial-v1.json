@@ -1,0 +1,45 @@
+{
+  "previous_run": "71ce94c64ae740eca51231e53a119425",
+  "run_id": "db4545d1d3bf468c94e0d92341ce6c63",
+  "config": {
+    "dataset_id": "validation-90-v2",
+    "model": "gpt-4.1-mini",
+    "reflection_model": "gpt-5-mini",
+    "prompt_id": "gpt-4.1-mini--rewrite-page-v7",
+    "candidates": 10,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 2,
+    "enable_live_calls": true
+  },
+  "manifest_deltas": [
+    "run_id",
+    "config",
+    "reflection_settings",
+    "created_at"
+  ],
+  "reflection_settings": {
+    "reasoning_effort": "low",
+    "max_output_tokens": 8192
+  },
+  "unchanged_evaluation_fields": [
+    "dataset",
+    "page_roles",
+    "baseline",
+    "rewrite_settings",
+    "edit_boundary_version",
+    "fidelity",
+    "semantic_rewrite_failures",
+    "reflection_prompt_hash",
+    "gepa_version",
+    "cache_scope",
+    "merge_enabled"
+  ],
+  "smoke": "gepa-gpt5-mini-reflection-smoke-v1.json",
+  "quality_claim": false
+}

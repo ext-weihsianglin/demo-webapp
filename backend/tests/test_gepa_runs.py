@@ -99,6 +99,33 @@ def test_semantic_rejection_keeps_original_reward_without_technical_breaker(tmp_
     assert baseline['selection_mean']==.2 and baseline['failure_rate']==1
 
 
+def test_reasoning_reflection_request_matches_persisted_run_settings(tmp_path, monkeypatch):
+    make_dataset(tmp_path, monkeypatch)
+    class Capture(ResearchClient):
+        def create(self, **request):
+            if request['text']['format']['name'] == 'prompt_mutation':
+                self.reflection_request = request
+            return super().create(**request)
+    for model in ('gpt-4.1', 'gpt-5-mini'):
+        client = Capture()
+        manager = RunManager(registry=PromptRegistry(tmp_path/'registry'), client=client,
+                             scorer=scorer, directory=tmp_path/'runs')
+        final = wait(manager, manager.start(RunConfig(dataset_id='fixture',
+            reflection_model=model, candidates=1, enable_live_calls=True))['id'])
+        assert final['recommendation'], final
+        manifest = manager.store(final['id']).read('manifest')
+        profile = manifest['reflection_settings']
+        request = client.reflection_request
+        assert request['model'] == model
+        assert request['max_output_tokens'] == profile['max_output_tokens']
+        assert request.get('reasoning', {}).get('effort') == profile['reasoning_effort']
+        assert profile == {'reasoning_effort':'low' if model == 'gpt-5-mini' else None,
+                           'max_output_tokens':8192 if model == 'gpt-5-mini' else 4096}
+        event = next(e for e in manager.store(final['id']).export()['events'] if e['phase'] == 'reflection')
+        assert event['usage']['reasoning_effort'] == profile['reasoning_effort']
+        assert event['usage']['max_output_tokens'] == profile['max_output_tokens']
+
+
 def test_stop_preserves_dispatched_result_and_does_not_call_next_phase(tmp_path,monkeypatch):
     import threading
     from app.gepa.evaluation import PageEvaluator, AttemptBudget, RunStopped

@@ -15,7 +15,7 @@ from app.prompt_registry import digest
 from app.gepa.datasets import load_dataset, root
 from app.gepa.storage import RunStore, safe_id
 from app.gepa.evaluation import AttemptBudget, PageEvaluator, RunStopped, SEMANTIC_REWRITE_FAILURES
-from app.gepa.adapter import Adapter, Callbacks, REFLECTION_PROMPT
+from app.gepa.adapter import Adapter, Callbacks, REFLECTION_PROMPT, reflection_settings
 
 TERMINAL={'completed','stopped','failed','interrupted'}
 
@@ -91,7 +91,9 @@ class RunManager:
                 'baseline':baseline,'rewrite_settings':settings.__dict__,'edit_boundary_version':EDIT_BOUNDARY_VERSION,
                 'fidelity':fidelity_profile(),
                 'semantic_rewrite_failures':sorted(SEMANTIC_REWRITE_FAILURES),
-                'reflection_prompt_hash':digest(REFLECTION_PROMPT),'gepa_version':importlib.metadata.version('gepa'),
+                'reflection_prompt_hash':digest(REFLECTION_PROMPT),
+                'reflection_settings':reflection_settings(config.reflection_model),
+                'gepa_version':importlib.metadata.version('gepa'),
                 'cache_scope':'per_run','merge_enabled':False,'created_at':datetime.now(timezone.utc).isoformat()}
             store.write('manifest',manifest)
             store.write('summary',{'id':identity,'status':'preflighting','config':config.model_dump(),

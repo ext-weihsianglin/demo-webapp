@@ -1,0 +1,50 @@
+{
+  "source_run": "71ce94c64ae740eca51231e53a119425",
+  "page_ids": [
+    "0efcb5d3452ca9bd144a112e3bcf7be510785ca5d1aa8cd93d891f747f128d55",
+    "2bb4591118effbfb8d09d04596192a33660aa27645c7f3f31a4c99e469a5affe"
+  ],
+  "roles": [
+    "reflection",
+    "reflection"
+  ],
+  "reflection_model": "gpt-5-mini",
+  "reflection_settings": {
+    "reasoning_effort": "low",
+    "max_output_tokens": 8192
+  },
+  "events": [
+    {
+      "event_id": 1,
+      "time": "2026-10-02T10:49:43.264837+00:00",
+      "phase": "reflection",
+      "proposal": 1,
+      "usage": {
+        "calls": 1,
+        "model": "gpt-5-mini",
+        "reasoning_effort": "low",
+        "max_output_tokens": 8192,
+        "input_tokens": 46139,
+        "output_tokens": 317,
+        "estimated_cost_usd": null,
+        "latency_ms": 4218
+      }
+    },
+    {
+      "event_id": 2,
+      "time": "2026-10-02T10:49:43.265902+00:00",
+      "phase": "proposal",
+      "candidate_id": "gpt-4.1-mini--d12892bd8f8618b3176ff1d2",
+      "parent_ids": [
+        "gpt-4.1-mini--rewrite-page-v7"
+      ],
+      "summary": "Policy: limit edits to a small, operationally defined set of paragraphs (max 3), only reword existing facts without adding or removing factual scope, preserve qualifiers/attribution/numbers, and use edit counts/types to detect overbroad changes."
+    }
+  ],
+  "candidate": {
+    "editorial_strategy": "Choose 1\u20133 existing body paragraphs total and produce focused replacements only for those paragraphs: preserve all facts, numbers, qualifiers and attributions exactly, clarify ambiguous wording, tighten sentence order, and avoid adding new claims or outside details. Leave all other content unchanged; ensure proposed_edit_count and edits_by_type match the replacements."
+  },
+  "rewrite_calls": 0,
+  "heldout_calls": 0,
+  "quality_claim": false
+}
