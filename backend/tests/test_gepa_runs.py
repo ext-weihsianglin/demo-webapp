@@ -217,6 +217,11 @@ def test_reflection_uses_complete_relevant_source_text_once_and_schema_length_bo
     serialized = json.dumps(dataset)
     assert serialized.count(source_text) == 1 and 'raw_html' not in serialized
     assert dataset['editorial_strategy'][0]['Inputs']['source_scope'] == 'changed_chunks'
+    failed = {**result,'status':'retained_original','rewrite':{'status':'unsupported_output'}}
+    feedback = adapter.make_reflective_dataset({},
+        EvaluationBatch(outputs=[failed],scores=[.2],trajectories=[failed]),['editorial_strategy'])['editorial_strategy'][0]['Feedback']
+    assert feedback['proposed_edit_count'] is None
+    assert feedback['proposed_edits_by_type'] is None
     adapter.propose_new_texts({'editorial_strategy':registry.editorial},dataset,['editorial_strategy'])
     assert client.schema['properties']['editorial_strategy']['maxLength'] == int(len(registry.editorial)*1.5)
 

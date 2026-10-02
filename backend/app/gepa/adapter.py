@@ -1,5 +1,6 @@
 """GEPA protocol bridge: per-page rewards and reflection-only diagnostics."""
 from copy import deepcopy
+from collections import Counter
 import threading
 import difflib
 import json
@@ -32,6 +33,15 @@ An abstract policy can select one to three paragraphs, clarify wording using the
 existing facts, and leave every other slot null. Derive the policy from outcomes;
 do not copy this example automatically. Before returning, remove domain nouns,
 product categories and named activities borrowed from the diagnostic pages.
+Use proposed_edit_count and proposed_edits_by_type to assess whether the rewriter
+followed the strategy: a small-edit instruction can still produce page-wide edits.
+Counts cover mechanically validated edit traces; null means the trace was
+unavailable, not that the provider proposed zero edits.
+For a focused policy, make its scope operational: the limit applies to non-null
+paragraph replacements TOTAL across the whole page, all queries and all sections,
+not per query or section. Leave heading slots and all unselected slots null.
+Prefer rewording facts already in each selected paragraph over expanding headings
+or short labels into prose. A short topic label is not a factual paragraph.
 Never weaken fixed security, schema, evidence, preservation,
 language or fidelity constraints. Do not encourage fabricated claims, repetition,
 keyword stuffing, unsupported clickbait or answering queries unsupported by source.
@@ -86,7 +96,9 @@ class Adapter:
             if result['role']!='reflection':
                 raise ValueError('Selection/test data cannot enter reflection')
             changes=result.get('rewrite',{}).get('changes',[])
+            edits_available='changes' in result.get('rewrite',{})
             document=result['original_document']
+            block_types={b['block_id']:b['type'] for b in document['blocks']}
             changed_chunks={change['chunk_id'] for change in changes}
             source_ids={block_id for chunk in document['chunks'] if chunk['chunk_id'] in changed_chunks for block_id in chunk['block_ids']}
             source=[{key:block[key] for key in ('block_id','type','text','parent_id','heading_level') if key in block}
@@ -98,6 +110,8 @@ class Adapter:
                 'Generated Outputs':outputs,
                 'Feedback':{'status':result['status'],'original':result['original'],'after':result['after'],
                             'delta':result['delta'],'fidelity':result.get('fidelity'),
+                            'proposed_edit_count':len(changes) if edits_available else None,
+                            'proposed_edits_by_type':dict(Counter(block_types[c['source_id']] for c in changes)) if edits_available else None,
                             'validation':result.get('rewrite',{}).get('summary')}})
         return {'editorial_strategy':records}
 
