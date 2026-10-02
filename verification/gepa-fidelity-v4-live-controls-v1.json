@@ -1,0 +1,768 @@
+{
+  "diagnostic_only": true,
+  "deployed": false,
+  "fidelity_profile": {
+    "model": "gpt-5",
+    "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+    "schema_version": "fidelity-slots-v4",
+    "output_budget": {
+      "minimum": 8192,
+      "maximum": 16000,
+      "per_edit": 128
+    },
+    "batch_size": 8,
+    "reasoning_effort": "low",
+    "schema_limits": {
+      "enum_values": 1000,
+      "schema_characters": 120000,
+      "large_enum_characters": 15000
+    },
+    "uncertain_policy": "reject_whole_proposal"
+  },
+  "rewrite_calls": 0,
+  "heldout_calls": 0,
+  "cases": [
+    {
+      "case": "saved_six_edits",
+      "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+      "changes": [
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+          "block_id": "b000028",
+          "before": "As tonalidades escuras ficam menos intensas, fazendo com que a imagem inteira pareça um pouco “lavada”. Felizmente esse problema inerente aos displays LCDs, sobretudo os de linhas mais populares, pode ser corrigido ao menos parcialmente com ajustes simples. Basta entrar no menu, diminuir o brilho e aumentar o contraste.",
+          "after": "Tons escuros perdem intensidade, deixando a imagem geral com aspecto ligeiramente “lavado”. Esse problema comum em displays LCD, principalmente nos modelos mais econômicos, pode ser parcialmente corrigido com ajustes simples: basta reduzir o brilho e aumentar o contraste no menu da TV.",
+          "reason": "Clarified brightness adjustment impact on dark tones and simplified phrasing for better user understanding.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000028",
+              "quote": "As tonalidades escuras ficam menos intensas, fazendo com que a imagem inteira pareça um pouco “lavada”. Felizmente esse problema inerente aos displays LCDs, sobretudo os de linhas mais populares, pode ser corrigido ao menos parcialmente com ajustes simples. Basta entrar no menu, diminuir o brilho e aumentar o contraste."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000028"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+          "block_id": "b000030",
+          "before": "Para obter bons níveis de tons escuros, o brilho geral da imagem deverá ser menor. Quando o ambiente é escuro ou durante uma sessão noturna, o ajuste de brilho mais baixo não é um problema. Porém, o mesmo não podemos dizer com o uso da TV de dia, ou numa sala onde não há controle de luz externa, mesmo fechando janela e cortina.",
+          "after": "Para preservar bons detalhes em tons escuros, o brilho geral deve ser reduzido. Em ambientes escuros ou em sessões noturnas, isso não é problema. Contudo, em uso durante o dia ou em salas com luz natural sem controle, mesmo com cortinas fechadas, esse ajuste pode comprometer a experiência visual.",
+          "reason": "Improved explanation of brightness adjustment effects in different ambient lighting conditions.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000030",
+              "quote": "Para obter bons níveis de tons escuros, o brilho geral da imagem deverá ser menor. Quando o ambiente é escuro ou durante uma sessão noturna, o ajuste de brilho mais baixo não é um problema. Porém, o mesmo não podemos dizer com o uso da TV de dia, ou numa sala onde não há controle de luz externa, mesmo fechando janela e cortina."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000030"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+          "block_id": "b000031",
+          "before": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+          "after": "Sugerimos usar imagens de referência, como cenas de filmes, documentários ou fotos de alta resolução compatíveis com sua TV. Utilize fontes como pen drive, videogame ou Blu-ray player. Também é possível baixar imagens de teste, inclusive da THX, pela internet e transferi-las para um pen drive para calibrar com precisão.",
+          "reason": "Improved clarity on using reference images and sources for calibration.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000031",
+              "quote": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000031"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "18ad2f6bf6b3ede2c3772bd6dd46a37b92516bc941513d9f4f151e0a848065bc",
+          "block_id": "b000034",
+          "before": "Congele uma cena noturna como a de um filme do Batman (O Cavaleiro das Trevas) ou algum de terror. Aumente o controle de brilho até ver os detalhes nas áreas mais escuras da imagem. Depois, diminua-o novamente para que fique o mais preto possível, sem ocultar esses detalhes. Para ver os resultados reais desse ajuste, é preciso desativar a função “Brilho Adaptável” ou “Sensor de Luz Automático”, presente em alguns modelos.",
+          "after": "Pause uma cena noturna, por exemplo, de um filme como \"Batman – O Cavaleiro das Trevas\" ou de terror. Aumente o brilho até revelar detalhes nas áreas escuras, depois reduza para que essas áreas fiquem o mais pretas possível sem perder tais detalhes. Para avaliar corretamente esse ajuste, desative funções como “Brilho Adaptável” ou “Sensor de Luz Automático”, presentes em alguns modelos.",
+          "reason": "Clarified step-by-step brightness calibration process with practical advice.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000034",
+              "quote": "Congele uma cena noturna como a de um filme do Batman (O Cavaleiro das Trevas) ou algum de terror. Aumente o controle de brilho até ver os detalhes nas áreas mais escuras da imagem. Depois, diminua-o novamente para que fique o mais preto possível, sem ocultar esses detalhes. Para ver os resultados reais desse ajuste, é preciso desativar a função “Brilho Adaptável” ou “Sensor de Luz Automático”, presente em alguns modelos."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000034"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "0e4e6c10c0f1ba42552bac0e61658a9a3bade4eace07e48355cfe2a67e816661",
+          "block_id": "b000037",
+          "before": "Encontre uma imagem com muito branco, como um vestido de noiva ou um céu cheio de nuvens brancas. Diminua o controle de contraste até ver todos os detalhes, como as sombras nas dobras do vestido ou os sutis tons de cinza das nuvens. Em seguida, aumente para obter a imagem mais nítida possível sem lavar esses detalhes.",
+          "after": "Escolha uma imagem com predomínio de branco, como um vestido de noiva ou um céu nublado. Diminua o contraste até que todos os detalhes, como sombras nas dobras do vestido ou tons sutis nas nuvens, fiquem visíveis. Em seguida, aumente o contraste para obter a imagem mais nítida possível sem perder esses detalhes devido a uma aparência “lavada”.",
+          "reason": "Improved step-by-step instructions for contrast adjustment focusing on detail preservation.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000037",
+              "quote": "Encontre uma imagem com muito branco, como um vestido de noiva ou um céu cheio de nuvens brancas. Diminua o controle de contraste até ver todos os detalhes, como as sombras nas dobras do vestido ou os sutis tons de cinza das nuvens. Em seguida, aumente para obter a imagem mais nítida possível sem lavar esses detalhes."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000037"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "d6504b003befedae210258986d652700ac1f975dc2bc7f234046ff3ac04071bd",
+          "block_id": "b000040",
+          "before": "Esse ajuste não afeta significativamente a qualidade geral da imagem. Aumentar a luminosidade resultará em imagem mais clara, o que é importante no uso diurno, mas também pode aumentar os vazamentos de luz nas extremidades da tela, perceptíveis quando a sala estiver escura. O ideal é deixar a luz de fundo o mais baixa possível, ficando confortável para as condições de luz ambiente, o que ajuda a evitar a fadiga dos olhos.",
+          "after": "Esse ajuste não altera significativamente a qualidade geral da imagem. Aumentar a luz de fundo torna a imagem mais clara, importante para ambientes diurnos, mas pode causar vazamento de luz nas bordas da tela, perceptível em ambientes escuros. O ideal é manter a luz de fundo no menor nível confortável para a luz ambiente, reduzindo a fadiga visual.",
+          "reason": "Adapted phrase for clarity on backlight adjustment effects and benefits.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000040",
+              "quote": "Esse ajuste não afeta significativamente a qualidade geral da imagem. Aumentar a luminosidade resultará em imagem mais clara, o que é importante no uso diurno, mas também pode aumentar os vazamentos de luz nas extremidades da tela, perceptíveis quando a sala estiver escura. O ideal é deixar a luz de fundo o mais baixa possível, ficando confortável para as condições de luz ambiente, o que ajuda a evitar a fadiga dos olhos."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000040"
+        }
+      ],
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000028",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "The rewrite preserves meaning: dark tones look washed out and can be partially corrected by lowering brightness and increasing contrast in the TV menu, especially on budget LCDs.",
+            "source_ids": [
+              "b000028"
+            ]
+          },
+          {
+            "block_id": "b000030",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "Keeps the original intent: reducing brightness helps dark tones in dark rooms but is problematic for daytime or uncontrolled-light environments.",
+            "source_ids": [
+              "b000030"
+            ]
+          },
+          {
+            "block_id": "b000031",
+            "verdict": "unsupported",
+            "category": "Introduces unsupported claim",
+            "reason": "Adds “calibrar com precisão” (calibrate with precision), which is not stated or implied in the source; the source only suggests using reference images and test patterns.",
+            "source_ids": []
+          },
+          {
+            "block_id": "b000034",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "Accurately restates steps: pause a dark scene, raise brightness to reveal details, then lower to keep blacks without losing detail; disable adaptive brightness features.",
+            "source_ids": [
+              "b000034"
+            ]
+          },
+          {
+            "block_id": "b000037",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "Maintains guidance: use a mostly white image, lower contrast to reveal details, then increase for sharpness without washing out details.",
+            "source_ids": [
+              "b000037"
+            ]
+          },
+          {
+            "block_id": "b000040",
+            "verdict": "supported",
+            "category": "Faithful paraphrase",
+            "reason": "Conveys that backlight changes don’t significantly affect overall quality; higher backlight aids daytime use but may increase edge light bleed; keep it as low as comfortable to reduce eye fatigue.",
+            "source_ids": [
+              "b000040"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 4500,
+          "output_tokens": 1460,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 4500,
+              "output_tokens": 1460,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "999d57009ca06ad488cedd665185c537e3704817c60ac7cd2c3f63d84000f662",
+              "output_limit": 8192,
+              "latency_ms": 29686
+            }
+          ],
+          "requested_edits": 6,
+          "reviewed_edits": 6,
+          "latency_ms": 29686
+        }
+      },
+      "provider_outputs": [
+        {
+          "status": "completed",
+          "output_text": "{\"edits\":{\"b000028\":{\"verdict\":\"supported\",\"category\":\"Faithful paraphrase\",\"reason\":\"The rewrite preserves meaning: dark tones look washed out and can be partially corrected by lowering brightness and increasing contrast in the TV menu, especially on budget LCDs.\",\"source_ids\":[\"b000028\"]},\"b000030\":{\"verdict\":\"supported\",\"category\":\"Faithful paraphrase\",\"reason\":\"Keeps the original intent: reducing brightness helps dark tones in dark rooms but is problematic for daytime or uncontrolled-light environments.\",\"source_ids\":[\"b000030\"]},\"b000031\":{\"verdict\":\"unsupported\",\"category\":\"Introduces unsupported claim\",\"reason\":\"Adds “calibrar com precisão” (calibrate with precision), which is not stated or implied in the source; the source only suggests using reference images and test patterns.\",\"source_ids\":[]},\"b000034\":{\"verdict\":\"supported\",\"category\":\"Faithful paraphrase\",\"reason\":\"Accurately restates steps: pause a dark scene, raise brightness to reveal details, then lower to keep blacks without losing detail; disable adaptive brightness features.\",\"source_ids\":[\"b000034\"]},\"b000037\":{\"verdict\":\"supported\",\"category\":\"Faithful paraphrase\",\"reason\":\"Maintains guidance: use a mostly white image, lower contrast to reveal details, then increase for sharpness without washing out details.\",\"source_ids\":[\"b000037\"]},\"b000040\":{\"verdict\":\"supported\",\"category\":\"Faithful paraphrase\",\"reason\":\"Conveys that backlight changes don’t significantly affect overall quality; higher backlight aids daytime use but may increase edge light bleed; keep it as low as comfortable to reduce eye fatigue.\",\"source_ids\":[\"b000040\"]}}}"
+        }
+      ]
+    },
+    {
+      "case": "six_faithful_controls",
+      "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+      "changes": [
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+          "block_id": "b000028",
+          "before": "As tonalidades escuras ficam menos intensas, fazendo com que a imagem inteira pareça um pouco “lavada”. Felizmente esse problema inerente aos displays LCDs, sobretudo os de linhas mais populares, pode ser corrigido ao menos parcialmente com ajustes simples. Basta entrar no menu, diminuir o brilho e aumentar o contraste.",
+          "after": "As tonalidades escuras ficam menos intensas, fazendo com que a imagem como um todo pareça um pouco “lavada”. Felizmente esse problema inerente aos displays LCDs, sobretudo os de linhas mais populares, pode ser corrigido ao menos parcialmente com ajustes simples. Basta entrar no menu, diminuir o brilho e aumentar o contraste.",
+          "reason": "Clarified brightness adjustment impact on dark tones and simplified phrasing for better user understanding.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000028",
+              "quote": "As tonalidades escuras ficam menos intensas, fazendo com que a imagem inteira pareça um pouco “lavada”. Felizmente esse problema inerente aos displays LCDs, sobretudo os de linhas mais populares, pode ser corrigido ao menos parcialmente com ajustes simples. Basta entrar no menu, diminuir o brilho e aumentar o contraste."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000028"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+          "block_id": "b000030",
+          "before": "Para obter bons níveis de tons escuros, o brilho geral da imagem deverá ser menor. Quando o ambiente é escuro ou durante uma sessão noturna, o ajuste de brilho mais baixo não é um problema. Porém, o mesmo não podemos dizer com o uso da TV de dia, ou numa sala onde não há controle de luz externa, mesmo fechando janela e cortina.",
+          "after": "Para obter bons níveis de tons escuros, o brilho geral da imagem deverá ser menor. Quando o ambiente é escuro ou durante uma sessão à noite, o ajuste de brilho mais baixo não é um problema. Porém, o mesmo não podemos dizer com o uso da TV de dia, ou numa sala onde não há controle de luz externa, mesmo fechando janela e cortina.",
+          "reason": "Improved explanation of brightness adjustment effects in different ambient lighting conditions.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000030",
+              "quote": "Para obter bons níveis de tons escuros, o brilho geral da imagem deverá ser menor. Quando o ambiente é escuro ou durante uma sessão noturna, o ajuste de brilho mais baixo não é um problema. Porém, o mesmo não podemos dizer com o uso da TV de dia, ou numa sala onde não há controle de luz externa, mesmo fechando janela e cortina."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000030"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "9cfbcb94ccf175c2c31231ce4b563e685587afbd739c740c9fa4bbe9add82ad9",
+          "block_id": "b000031",
+          "before": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+          "after": "Para um ajuste básico, sugerimos algumas imagens usadas como referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive.",
+          "reason": "Improved clarity on using reference images and sources for calibration.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000031",
+              "quote": "Para um ajuste básico, sugerimos algumas imagens de referência; pode ser de uma cena de filme, documentário ou uma foto da família tirada por uma boa câmera com resolução igual ou superior a da sua tela. Use como fonte de sinal um pen drive, videogame ou player de Blu-ray. Na internet é possível baixar imagens de testes, inclusive da THX, em um computador e transferir para um pen drive."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000031"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "18ad2f6bf6b3ede2c3772bd6dd46a37b92516bc941513d9f4f151e0a848065bc",
+          "block_id": "b000034",
+          "before": "Congele uma cena noturna como a de um filme do Batman (O Cavaleiro das Trevas) ou algum de terror. Aumente o controle de brilho até ver os detalhes nas áreas mais escuras da imagem. Depois, diminua-o novamente para que fique o mais preto possível, sem ocultar esses detalhes. Para ver os resultados reais desse ajuste, é preciso desativar a função “Brilho Adaptável” ou “Sensor de Luz Automático”, presente em alguns modelos.",
+          "after": "Pause uma cena noturna como a de um filme do Batman (O Cavaleiro das Trevas) ou algum de terror. Aumente o controle de brilho até ver os detalhes nas áreas mais escuras da imagem. Depois, diminua-o novamente para que fique o mais preto possível, sem ocultar esses detalhes. Para ver os resultados reais desse ajuste, é preciso desativar a função “Brilho Adaptável” ou “Sensor de Luz Automático”, presente em alguns modelos.",
+          "reason": "Clarified step-by-step brightness calibration process with practical advice.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000034",
+              "quote": "Congele uma cena noturna como a de um filme do Batman (O Cavaleiro das Trevas) ou algum de terror. Aumente o controle de brilho até ver os detalhes nas áreas mais escuras da imagem. Depois, diminua-o novamente para que fique o mais preto possível, sem ocultar esses detalhes. Para ver os resultados reais desse ajuste, é preciso desativar a função “Brilho Adaptável” ou “Sensor de Luz Automático”, presente em alguns modelos."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000034"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "0e4e6c10c0f1ba42552bac0e61658a9a3bade4eace07e48355cfe2a67e816661",
+          "block_id": "b000037",
+          "before": "Encontre uma imagem com muito branco, como um vestido de noiva ou um céu cheio de nuvens brancas. Diminua o controle de contraste até ver todos os detalhes, como as sombras nas dobras do vestido ou os sutis tons de cinza das nuvens. Em seguida, aumente para obter a imagem mais nítida possível sem lavar esses detalhes.",
+          "after": "Escolha uma imagem com muito branco, como um vestido de noiva ou um céu cheio de nuvens brancas. Diminua o controle de contraste até ver todos os detalhes, como as sombras nas dobras do vestido ou os sutis tons de cinza das nuvens. Em seguida, aumente para obter a imagem mais nítida possível sem lavar esses detalhes.",
+          "reason": "Improved step-by-step instructions for contrast adjustment focusing on detail preservation.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000037",
+              "quote": "Encontre uma imagem com muito branco, como um vestido de noiva ou um céu cheio de nuvens brancas. Diminua o controle de contraste até ver todos os detalhes, como as sombras nas dobras do vestido ou os sutis tons de cinza das nuvens. Em seguida, aumente para obter a imagem mais nítida possível sem lavar esses detalhes."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000037"
+        },
+        {
+          "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+          "chunk_id": "d6504b003befedae210258986d652700ac1f975dc2bc7f234046ff3ac04071bd",
+          "block_id": "b000040",
+          "before": "Esse ajuste não afeta significativamente a qualidade geral da imagem. Aumentar a luminosidade resultará em imagem mais clara, o que é importante no uso diurno, mas também pode aumentar os vazamentos de luz nas extremidades da tela, perceptíveis quando a sala estiver escura. O ideal é deixar a luz de fundo o mais baixa possível, ficando confortável para as condições de luz ambiente, o que ajuda a evitar a fadiga dos olhos.",
+          "after": "Esse ajuste não afeta significativamente a qualidade geral da imagem. Elevar a luminosidade resultará em imagem mais clara, o que é importante no uso diurno, mas também pode aumentar os vazamentos de luz nas extremidades da tela, perceptíveis quando a sala estiver escura. O ideal é deixar a luz de fundo o mais baixa possível, ficando confortável para as condições de luz ambiente, o que ajuda a evitar a fadiga dos olhos.",
+          "reason": "Adapted phrase for clarity on backlight adjustment effects and benefits.",
+          "evidence": [
+            {
+              "snapshot_id": "276b266100a09d2ec3ff1e1b13f6275d964fc08fb425a1d1ab8e7d5f49efd9f8",
+              "block_id": "b000040",
+              "quote": "Esse ajuste não afeta significativamente a qualidade geral da imagem. Aumentar a luminosidade resultará em imagem mais clara, o que é importante no uso diurno, mas também pode aumentar os vazamentos de luz nas extremidades da tela, perceptíveis quando a sala estiver escura. O ideal é deixar a luz de fundo o mais baixa possível, ficando confortável para as condições de luz ambiente, o que ajuda a evitar a fadiga dos olhos."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000040"
+        }
+      ],
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000028",
+            "verdict": "supported",
+            "category": "stylistic paraphrase",
+            "reason": "Substitui \"imagem inteira\" por \"imagem como um todo\" sem alterar o significado; restante inalterado.",
+            "source_ids": [
+              "b000028"
+            ]
+          },
+          {
+            "block_id": "b000030",
+            "verdict": "supported",
+            "category": "stylistic paraphrase",
+            "reason": "Troca \"sessão noturna\" por \"sessão à noite\" mantendo o mesmo sentido; demais partes preservadas.",
+            "source_ids": [
+              "b000030"
+            ]
+          },
+          {
+            "block_id": "b000031",
+            "verdict": "supported",
+            "category": "stylistic paraphrase",
+            "reason": "Inclui \"usadas\" em \"imagens usadas como referência\" sem mudar o conteúdo factual do original.",
+            "source_ids": [
+              "b000031"
+            ]
+          },
+          {
+            "block_id": "b000034",
+            "verdict": "supported",
+            "category": "stylistic paraphrase",
+            "reason": "Troca \"Congele\" por \"Pause\" como sinônimo no contexto; instruções e escopo idênticos.",
+            "source_ids": [
+              "b000034"
+            ]
+          },
+          {
+            "block_id": "b000037",
+            "verdict": "supported",
+            "category": "stylistic paraphrase",
+            "reason": "Substitui \"Encontre\" por \"Escolha\" mantendo orientação e detalhes iguais.",
+            "source_ids": [
+              "b000037"
+            ]
+          },
+          {
+            "block_id": "b000040",
+            "verdict": "supported",
+            "category": "stylistic paraphrase",
+            "reason": "Altera \"Aumentar\" para \"Elevar\" sem mudar o significado; conteúdo e cautelas preservados.",
+            "source_ids": [
+              "b000040"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 4560,
+          "output_tokens": 756,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 4560,
+              "output_tokens": 756,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "999d57009ca06ad488cedd665185c537e3704817c60ac7cd2c3f63d84000f662",
+              "output_limit": 8192,
+              "latency_ms": 13103
+            }
+          ],
+          "requested_edits": 6,
+          "reviewed_edits": 6,
+          "latency_ms": 13103
+        }
+      },
+      "provider_outputs": [
+        {
+          "status": "completed",
+          "output_text": "{\"edits\":{\"b000028\":{\"verdict\":\"supported\",\"category\":\"stylistic paraphrase\",\"reason\":\"Substitui \\\"imagem inteira\\\" por \\\"imagem como um todo\\\" sem alterar o significado; restante inalterado.\",\"source_ids\":[\"b000028\"]},\"b000030\":{\"verdict\":\"supported\",\"category\":\"stylistic paraphrase\",\"reason\":\"Troca \\\"sessão noturna\\\" por \\\"sessão à noite\\\" mantendo o mesmo sentido; demais partes preservadas.\",\"source_ids\":[\"b000030\"]},\"b000031\":{\"verdict\":\"supported\",\"category\":\"stylistic paraphrase\",\"reason\":\"Inclui \\\"usadas\\\" em \\\"imagens usadas como referência\\\" sem mudar o conteúdo factual do original.\",\"source_ids\":[\"b000031\"]},\"b000034\":{\"verdict\":\"supported\",\"category\":\"stylistic paraphrase\",\"reason\":\"Troca \\\"Congele\\\" por \\\"Pause\\\" como sinônimo no contexto; instruções e escopo idênticos.\",\"source_ids\":[\"b000034\"]},\"b000037\":{\"verdict\":\"supported\",\"category\":\"stylistic paraphrase\",\"reason\":\"Substitui \\\"Encontre\\\" por \\\"Escolha\\\" mantendo orientação e detalhes iguais.\",\"source_ids\":[\"b000037\"]},\"b000040\":{\"verdict\":\"supported\",\"category\":\"stylistic paraphrase\",\"reason\":\"Altera \\\"Aumentar\\\" para \\\"Elevar\\\" sem mudar o significado; conteúdo e cautelas preservados.\",\"source_ids\":[\"b000040\"]}}}"
+        }
+      ]
+    },
+    {
+      "case": "commercial_scope_saved_edit",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "changes": [
+        {
+          "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+          "chunk_id": "84c94dafeae436ee2c57a8f979f8576e437ec5455a02a325d3d4fcf1c5e612c9",
+          "block_id": "b000210",
+          "before": "The free tier provides roughly 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+          "after": "Its free plan allows about 20–30 short, 5–10 second watermarked clips monthly. The Standard plan removes watermarks and supports HD exports with faster queue access. The Unlimited tier permits unrestricted content generation, ideal for regular short-form or social posts.",
+          "reason": "Specified Hailuo plan details regarding clip limits, watermark policies, and usage suitability.",
+          "evidence": [
+            {
+              "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+              "block_id": "b000210",
+              "quote": "The free tier provides roughly 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000210"
+        }
+      ],
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000210",
+            "verdict": "unsupported",
+            "category": "Adds unsupported timing, comparative, and strength claims; alters qualifiers/content scope",
+            "reason": "The rewrite adds “monthly,” changes “fast queue access” to the comparative “faster,” upgrades “suitable” to “ideal,” and alters details by replacing “daily social media posts” and “short-form storytelling” with “regular short-form or social posts.” These changes introduce unsupported specifics, stronger claims, and omit material qualifiers from the source.",
+            "source_ids": [
+              "b000210"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1410,
+          "output_tokens": 546,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1410,
+              "output_tokens": 546,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "e0608bba1bffc070e1eeb20dcd4180fd81c29977f25147338c9a014215f2c015",
+              "output_limit": 8192,
+              "latency_ms": 8451
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 8452
+        }
+      },
+      "provider_outputs": [
+        {
+          "status": "completed",
+          "output_text": "{\"edits\":{\"b000210\":{\"verdict\":\"unsupported\",\"category\":\"Adds unsupported timing, comparative, and strength claims; alters qualifiers/content scope\",\"reason\":\"The rewrite adds “monthly,” changes “fast queue access” to the comparative “faster,” upgrades “suitable” to “ideal,” and alters details by replacing “daily social media posts” and “short-form storytelling” with “regular short-form or social posts.” These changes introduce unsupported specifics, stronger claims, and omit material qualifiers from the source.\",\"source_ids\":[\"b000210\"]}}}"
+        }
+      ]
+    },
+    {
+      "case": "commercial_scope_faithful_control",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "changes": [
+        {
+          "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+          "chunk_id": "84c94dafeae436ee2c57a8f979f8576e437ec5455a02a325d3d4fcf1c5e612c9",
+          "block_id": "b000210",
+          "before": "The free tier provides roughly 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+          "after": "The free tier provides approximately 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+          "reason": "Specified Hailuo plan details regarding clip limits, watermark policies, and usage suitability.",
+          "evidence": [
+            {
+              "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+              "block_id": "b000210",
+              "quote": "The free tier provides roughly 20–30 short (5–10 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000210"
+        }
+      ],
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000210",
+            "verdict": "supported",
+            "category": "faithful paraphrase",
+            "reason": "The change from 'roughly' to 'approximately' is a synonymous, non-substantive wording adjustment that preserves the original meaning and scope of the statement without introducing new claims.",
+            "source_ids": [
+              "b000210"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1413,
+          "output_tokens": 189,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1413,
+              "output_tokens": 189,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "e0608bba1bffc070e1eeb20dcd4180fd81c29977f25147338c9a014215f2c015",
+              "output_limit": 8192,
+              "latency_ms": 3370
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 3370
+        }
+      },
+      "provider_outputs": [
+        {
+          "status": "completed",
+          "output_text": "{\"edits\":{\"b000210\":{\"verdict\":\"supported\",\"category\":\"faithful paraphrase\",\"reason\":\"The change from 'roughly' to 'approximately' is a synonymous, non-substantive wording adjustment that preserves the original meaning and scope of the statement without introducing new claims.\",\"source_ids\":[\"b000210\"]}}}"
+        }
+      ]
+    },
+    {
+      "case": "attribution_saved_edit",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "changes": [
+        {
+          "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+          "chunk_id": "d3e6b045d634da83189e18c1f9def82feb1386be6561ceab03004c3f17d5c5f3",
+          "block_id": "b000116",
+          "before": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies.",
+          "after": "The Google Ultra plan offers approximately 10 minutes of premium 1080p footage monthly, representing Google's current highest usage limits for Veo 3, while third-party plans provide affordable alternatives with similar model access but fewer rendering features, suitable for prosumers and agencies.",
+          "reason": "Specified plan limits and alternatives making high-quality cinematic video accessible to various users.",
+          "evidence": [
+            {
+              "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+              "block_id": "b000116",
+              "quote": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000116"
+        }
+      ],
+      "result": {
+        "status": "rejected",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000116",
+            "verdict": "unsupported",
+            "category": "Lost qualifiers and attribution; broadened claims",
+            "reason": "The rewrite removes the attribution ('Google claims') and the temporal qualifier ('right now'), drops the qualifier 'slightly' about fewer rendering options, changes 'same model access' to 'similar model access,' and broadens 'creative agencies' to 'agencies.' These changes alter the meaning and scope beyond the source text.",
+            "source_ids": [
+              "b000116"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1369,
+          "output_tokens": 948,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "rejected",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1369,
+              "output_tokens": 948,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "7d8d0ac242be089961d214423072646de77ad2a9eee4ff0d5403fc9fdfbca611",
+              "output_limit": 8192,
+              "latency_ms": 13850
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 13850
+        }
+      },
+      "provider_outputs": [
+        {
+          "status": "completed",
+          "output_text": "{\"edits\":{\"b000116\":{\"verdict\":\"unsupported\",\"category\":\"Lost qualifiers and attribution; broadened claims\",\"reason\":\"The rewrite removes the attribution ('Google claims') and the temporal qualifier ('right now'), drops the qualifier 'slightly' about fewer rendering options, changes 'same model access' to 'similar model access,' and broadens 'creative agencies' to 'agencies.' These changes alter the meaning and scope beyond the source text.\",\"source_ids\":[\"b000116\"]}}}"
+        }
+      ]
+    },
+    {
+      "case": "attribution_faithful_control",
+      "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+      "changes": [
+        {
+          "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+          "chunk_id": "d3e6b045d634da83189e18c1f9def82feb1386be6561ceab03004c3f17d5c5f3",
+          "block_id": "b000116",
+          "before": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies.",
+          "after": "The Google Ultra plan includes approximately 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies.",
+          "reason": "Specified plan limits and alternatives making high-quality cinematic video accessible to various users.",
+          "evidence": [
+            {
+              "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+              "block_id": "b000116",
+              "quote": "The Google Ultra plan includes around 10 minutes of premium 1080p footage monthly in total, which Google claims are their highest limits for Veo 3 right now. Third-party plans offer more affordable alternatives with slightly fewer rendering options but the same model access. They’re ideal for prosumers or creative agencies."
+            }
+          ],
+          "review_flags": [],
+          "heading_level": null,
+          "source_id": "b000116"
+        }
+      ],
+      "result": {
+        "status": "passed",
+        "reason": "source_relative_check",
+        "findings": [
+          {
+            "block_id": "b000116",
+            "verdict": "supported",
+            "category": "Stylistic paraphrase",
+            "reason": "The only change is replacing 'around' with 'approximately,' which preserves the original meaning and qualifiers without adding or removing claims.",
+            "source_ids": [
+              "b000116"
+            ]
+          }
+        ],
+        "telemetry": {
+          "model": "gpt-5",
+          "reasoning_effort": "low",
+          "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+          "schema_version": "fidelity-slots-v4",
+          "batch_size": 8,
+          "calls": 1,
+          "input_tokens": 1379,
+          "output_tokens": 183,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "batches": [
+            {
+              "offset": 0,
+              "status": "passed",
+              "reason": "source_relative_check",
+              "model": "gpt-5",
+              "reasoning_effort": "low",
+              "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+              "calls": 1,
+              "input_tokens": 1379,
+              "output_tokens": 183,
+              "estimated_cost_usd": null,
+              "usage_complete": true,
+              "schema_version": "fidelity-slots-v4",
+              "schema_hash": "7d8d0ac242be089961d214423072646de77ad2a9eee4ff0d5403fc9fdfbca611",
+              "output_limit": 8192,
+              "latency_ms": 3100
+            }
+          ],
+          "requested_edits": 1,
+          "reviewed_edits": 1,
+          "latency_ms": 3100
+        }
+      },
+      "provider_outputs": [
+        {
+          "status": "completed",
+          "output_text": "{\"edits\":{\"b000116\":{\"verdict\":\"supported\",\"category\":\"Stylistic paraphrase\",\"reason\":\"The only change is replacing 'around' with 'approximately,' which preserves the original meaning and qualifiers without adding or removing claims.\",\"source_ids\":[\"b000116\"]}}}"
+        }
+      ]
+    }
+  ]
+}

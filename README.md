@@ -118,7 +118,7 @@ separate from generated body content.
 
 The webapp adds query-independent `source_role_context` metadata for HTML controls whose ARIA ancestry is omitted from upstream blocks. This overlay leaves core parser/scorer fields unchanged. The `body-content-v4` rewrite boundary protects site chrome, forms and controls using source DOM paths, normalized roles and conservative navigation/footer class/ID tokens; article headers inside `main`/`article` remain editable.
 
-The separate `gpt-4.1` source-relative fidelity gate reviews sequential batches of at most eight edits against their original chunks and rejects cross-chunk support. Labels and topical plausibility cannot establish new benefits or guarantees. Promotion requires the recorded fidelity profile to match the current policy; historical recommendations need fresh evaluation after a policy change. The judge remains fallible.
+The separate `gpt-5` source-relative fidelity gate (`fidelity-slots-v4`, low reasoning effort) reviews sequential batches of at most eight edits against their original chunks and rejects cross-chunk support. Labels and topical plausibility cannot establish new benefits or guarantees. Promotion requires the recorded fidelity profile to match the current policy; historical recommendations need fresh evaluation after a policy change. The judge remains fallible.
 
 `app/scoring.py` verifies the trusted v7 model before deserialization, the ordered 55-feature contract and packaged module fingerprints. Original and proposed structured documents are scored over the same query set and immutable source inventory. Scoring is separate from extraction and HTTP handling. Missing/incompatible models or embeddings produce explicit unavailability.
 
@@ -237,7 +237,7 @@ Choose the rewriter, reflection model and seed prompt; edit limits before Start.
 
 Only the baseline's first editorial paragraph evolves; its remaining instructions and mechanical harness stay fixed. Prompt registry entries are model-specific and content-addressed. Baselines reproduce v7 bytes. Experimental entries are selectable in Content Studio; promotion updates a local model default only when a complete 30-page candidate improves baseline mean without increasing failure rate. Generated prompts/defaults and run data are ignored local files. `PROMPT_REGISTRY_ROOT` overrides generated registry storage.
 
-Both research and ordinary real drafts use the same source-relative `gpt-4.1-mini` fidelity gate. Unsupported or uncertain edits reject the whole proposal. Research retains the original page and measured score; semantic rejection is feedback, while judge/provider failures count toward the technical breaker. A passed gate is an LLM judgment, not factual verification. This adds a provider call for changed drafts.
+Both research and ordinary real drafts use the same source-relative `gpt-5` fidelity gate (low reasoning effort, batches of at most eight edits). Unsupported or uncertain edits reject the whole proposal. Research retains the original page and measured score; semantic rejection is feedback, while judge/provider failures count toward the technical breaker. A passed gate is an LLM judgment, not factual verification. This adds separately reported provider review calls for changed drafts.
 
 For a bounded live wiring check, explicitly run:
 

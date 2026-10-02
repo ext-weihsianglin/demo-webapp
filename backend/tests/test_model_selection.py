@@ -14,7 +14,7 @@ def model_config(monkeypatch):
     monkeypatch.delenv('OPENAI_REWRITE_MODELS', raising=False)
 
 @pytest.mark.parametrize('selected', ['gpt-4.1-mini','gpt-4.1','gpt-4.1-nano','gpt-5','gpt-5-mini','gpt-5-nano',None])
-def test_dropdown_model_routes_to_client_and_telemetry(selected, monkeypatch):
+def test_dropdown_model_routes_to_client_and_telemetry(selected, monkeypatch, draft_stub):
     from app import main
     stub=StubClient()
     monkeypatch.setattr(main,'rewrite',lambda *args,**kwargs:rewrite(*args,client=stub,**kwargs))

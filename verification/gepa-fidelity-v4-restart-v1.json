@@ -1,0 +1,39 @@
+{
+  "backend_pid": 30628,
+  "backend_restarted": true,
+  "current_code_profile": {
+    "model": "gpt-5",
+    "prompt_hash": "111b3eadb5183ecace00a2571b5eb5a571398390800c4f4a6ca3704c1efcbebb",
+    "schema_version": "fidelity-slots-v4",
+    "output_budget": {
+      "minimum": 8192,
+      "maximum": 16000,
+      "per_edit": 128
+    },
+    "batch_size": 8,
+    "reasoning_effort": "low",
+    "schema_limits": {
+      "enum_values": 1000,
+      "schema_characters": 120000,
+      "large_enum_characters": 15000
+    },
+    "uncertain_policy": "reject_whole_proposal"
+  },
+  "run_id": "db4545d1d3bf468c94e0d92341ce6c63",
+  "budget": {
+    "attempts": 88,
+    "reserved": 0,
+    "completed": 88,
+    "technical_failures": 5,
+    "stop_reason": "attempt_budget",
+    "limit": 100
+  },
+  "source_rejections_preserved": true,
+  "registry_selected_id": "gpt-4.1-mini--rewrite-page-v7",
+  "promotion_http_status": 400,
+  "rewrite_calls": 0,
+  "heldout_calls": 0,
+  "limits": [
+    "Profile recorded from the same checkout imported after actual backend startup; no new live draft was sent through the restarted webapp."
+  ]
+}

@@ -10,7 +10,7 @@ from gepa import optimize
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.prompt_registry import PromptRegistry
 from app.rewriting import model_options, Settings, EDIT_BOUNDARY_VERSION
-from app.fidelity import PROMPT as GATE_PROMPT, MODEL as GATE_MODEL, SCHEMA_VERSION, OUTPUT_BUDGET, BATCH_SIZE
+from app.fidelity import PROMPT as GATE_PROMPT, MODEL as GATE_MODEL, SCHEMA_VERSION, OUTPUT_BUDGET, BATCH_SIZE, REASONING_EFFORT, SCHEMA_LIMITS
 from app.prompt_registry import digest
 from app.gepa.datasets import load_dataset, root
 from app.gepa.storage import RunStore, safe_id
@@ -22,7 +22,8 @@ TERMINAL={'completed','stopped','failed','interrupted'}
 
 def fidelity_profile():
     return {'model':GATE_MODEL,'prompt_hash':digest(GATE_PROMPT),'schema_version':SCHEMA_VERSION,
-            'output_budget':OUTPUT_BUDGET,'batch_size':BATCH_SIZE,'uncertain_policy':'reject_whole_proposal'}
+            'output_budget':OUTPUT_BUDGET,'batch_size':BATCH_SIZE,'reasoning_effort':REASONING_EFFORT,
+            'schema_limits':SCHEMA_LIMITS,'uncertain_policy':'reject_whole_proposal'}
 
 
 class RunConfig(BaseModel):

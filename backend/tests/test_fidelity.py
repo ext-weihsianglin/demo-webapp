@@ -46,6 +46,63 @@ def test_supported_verdict_still_requires_known_source_references():
     assert check_fidelity(document(),changes(),client=Judge('unsupported',source_ids=['invented']))['status']=='unavailable'
 
 
+def test_reasoning_judge_dispatch_and_saved_profile_match():
+    from app.gepa.runs import fidelity_profile
+    class Capture(Judge):
+        def create(self, **request):
+            self.request = request
+            return super().create(**request)
+    client = Capture('supported')
+    result = check_fidelity(document(), changes(), client=client)
+    profile = fidelity_profile()
+    assert client.request['model'] == profile['model'] == 'gpt-5'
+    assert client.request['reasoning'] == {'effort':'low'}
+    assert profile['reasoning_effort'] == result['telemetry']['reasoning_effort'] == 'low'
+    assert client.request['max_output_tokens'] == profile['output_budget']['minimum'] == 8192
+    assert result['telemetry']['batches'][0]['output_limit'] == client.request['max_output_tokens']
+
+
+def test_provider_schema_cannot_emit_chunk_hashes_or_cross_chunk_sources():
+    import json
+    from jsonschema import Draft202012Validator, ValidationError
+    doc=document()
+    doc['blocks'].append({'block_id':'b2','text':'A different treatment may help.'})
+    doc['chunks'].append({'chunk_id':'c2','block_ids':['b2']})
+    edits=changes()+[{**changes()[0],'source_id':'b2','chunk_id':'c2'}]
+    class Capture:
+        responses=property(lambda self:self)
+        def create(self, **request):
+            self.schema=request['text']['format']['schema']
+            return NS(status='completed',output=[],usage=None,output_text=json.dumps({'edits':{
+                identity:{'verdict':'supported','category':'paraphrase','reason':'Meaning preserved.',
+                          'source_ids':[identity]} for identity in ('b1','b2')}}))
+    client=Capture()
+    assert check_fidelity(doc,edits,client=client)['status']=='passed'
+    validator=Draft202012Validator(client.schema)
+    body={'edits':{identity:{'verdict':'supported','category':'paraphrase','reason':'Meaning preserved.',
+                           'source_ids':[identity]} for identity in ('b1','b2')}}
+    validator.validate(body)
+    for refs in (['c1'],['b2'],[],['invented']):
+        body['edits']['b1']['source_ids']=refs
+        with pytest.raises(ValidationError):
+            validator.validate(body)
+    body['edits']['b1'].update(verdict='unsupported',source_ids=[])
+    validator.validate(body)
+
+
+def test_oversized_fidelity_reference_schema_fails_before_dispatch():
+    doc={'snapshot_id':'huge','blocks':[{'block_id':f'b{i}','text':'May help.'} for i in range(1000)],
+         'chunks':[{'chunk_id':'c1','block_ids':[f'b{i}' for i in range(1000)]}]}
+    class NoCall:
+        responses=property(lambda self:self)
+        def create(self, **request):
+            raise AssertionError('An oversized source-reference schema reached the provider')
+    edit={**changes()[0],'source_id':'b0'}
+    result=check_fidelity(doc,[edit],client=NoCall())
+    assert result['status']=='unavailable' and result['reason']=='fidelity_schema_limit'
+    assert result['telemetry']['calls']==0
+
+
 def test_bounded_judge_batches_cover_every_edit_and_aggregate_usage():
     import json
     doc = {'snapshot_id':'large','blocks':[{'block_id':f'b{i}','text':'The treatment may help.'} for i in range(120)],
