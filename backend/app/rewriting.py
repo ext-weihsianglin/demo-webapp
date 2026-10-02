@@ -17,7 +17,7 @@ from app.language_guard import confident_language, compare_language
 from app.source_context import protected_roles, container_roles
 
 PROMPT_VERSION = 'rewrite-page-v7'
-EDIT_BOUNDARY_VERSION = 'body-content-v4'
+EDIT_BOUNDARY_VERSION = 'body-content-v5'
 PROMPT = (Path(__file__).parent / 'prompts' / f'{PROMPT_VERSION}.txt').read_text()
 
 SUPPORTED_REWRITE_MODELS = ('gpt-4.1-mini', 'gpt-4.1', 'gpt-4.1-nano', 'gpt-5', 'gpt-5-mini', 'gpt-5-nano')
@@ -137,9 +137,11 @@ class RewriteFailure(Exception):
         super().__init__(message)
 
 
-def _protected_html_context(node):
+def _protected_html_context(node, editorial_form=None):
     # Use parser-owned provenance; never fetch or execute the original HTML.
     path = (node.get('source_locator') or {}).get('dom_path', '')
+    if editorial_form and path.startswith(editorial_form + '/'):
+        path = path[len(editorial_form):]
     tags = [part.split('[', 1)[0].lower() for part in path.split('/') if part]
     controls = {'a', 'nav', 'footer', 'form', 'button', 'input', 'select', 'textarea', 'option', 'summary'}
     if any(tag in controls for tag in tags) or node.get('tag') in controls:
@@ -150,7 +152,7 @@ def _protected_html_context(node):
     attributes = node.get('attributes') or {}
     if protected_roles(attributes.get('role')) or container_roles(attributes):
         return True
-    return any(_protected_html_context(child) for child in node.get('inline_nodes', node.get('children', [])))
+    return any(_protected_html_context(child, editorial_form) for child in node.get('inline_nodes', node.get('children', [])))
 
 
 def editable(block, document):
@@ -158,7 +160,7 @@ def editable(block, document):
     return (block['type'] in ('paragraph', 'heading') and not block.get('parent_id')
             and not block.get('links') and block.get('inline_markdown', block['text']) == block['text']
             and not document.get('source_role_context', {}).get(block['block_id'])
-            and not _protected_html_context(block))
+            and not _protected_html_context(block, document.get('source_editorial_form_context', {}).get(block['block_id'])))
 
 
 def validate_edits(proposal, document, chunk, allow_structure):

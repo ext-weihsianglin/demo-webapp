@@ -195,11 +195,10 @@ def draft(source: DraftRequest):
         raise HTTPException(code, detail=result)
     gate = check_fidelity(analysis['document'], result['changes'])
     result['fidelity'] = gate
+    # The studio presents the assessment for human review, including failed or
+    # unavailable judgments. Research acceptance policy remains separate.
     if gate['status'] != 'passed':
-        raise HTTPException(422 if gate['status']=='rejected' else 502, detail={
-            'status':'fidelity_rejected' if gate['status']=='rejected' else 'fidelity_unavailable',
-            'summary':'Source-relative fidelity check did not pass; no draft applied.',
-            'fidelity':gate, 'telemetry':result['telemetry'], 'rejected_changes':result['changes']})
+        result['review_items'].append('Fidelity assessment requires review: ' + gate['status'] + '. Draft retained for inspection.')
     after = score_document(result['document'], source.content, source.format, source.queries, explain=True)
     comparison = compare_scores(analysis['p1'], after)
     result.update(target_queries=source.queries, p1_before=public_scores(analysis['p1']),
