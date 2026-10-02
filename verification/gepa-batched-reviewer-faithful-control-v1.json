@@ -1,0 +1,72 @@
+{
+  "model": "gpt-4.1",
+  "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+  "batch_size": 8,
+  "change": {
+    "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+    "chunk_id": "84c94dafeae436ee2c57a8f979f8576e437ec5455a02a325d3d4fcf1c5e612c9",
+    "block_id": "b000210",
+    "before": "The free tier provides roughly 20\u201330 short (5\u201310 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+    "after": "The free tier provides approximately 20\u201330 short (5\u201310 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts.",
+    "reason": "Specified Hailuo plan details regarding clip limits, watermark policies, and usage suitability.",
+    "evidence": [
+      {
+        "snapshot_id": "976962b8cca8fe3c2ebb99713715e4a711e2a2ceccc793765ca44283439c5c6c",
+        "block_id": "b000210",
+        "quote": "The free tier provides roughly 20\u201330 short (5\u201310 sec) watermarked clips. Standard removes the watermark and offers HD exports with fast queue access. Unlimited grants creators the ability to generate content without credit limits, suitable for short-form storytelling or daily social media posts."
+      }
+    ],
+    "review_flags": [],
+    "heading_level": null,
+    "source_id": "b000210"
+  },
+  "result": {
+    "status": "passed",
+    "reason": "source_relative_check",
+    "findings": [
+      {
+        "block_id": "b000210",
+        "verdict": "supported",
+        "category": "wording change (roughly to approximately)",
+        "reason": "The change from 'roughly' to 'approximately' is an equivalent wording adjustment and does not alter the factual meaning of the claim, which is supported by the source text.",
+        "source_ids": [
+          "b000210"
+        ]
+      }
+    ],
+    "telemetry": {
+      "model": "gpt-4.1",
+      "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+      "schema_version": "fidelity-slots-v3",
+      "batch_size": 8,
+      "calls": 1,
+      "input_tokens": 1215,
+      "output_tokens": 72,
+      "estimated_cost_usd": null,
+      "usage_complete": true,
+      "batches": [
+        {
+          "offset": 0,
+          "status": "passed",
+          "reason": "source_relative_check",
+          "model": "gpt-4.1",
+          "prompt_hash": "2a1e011b185a755cf930a32b2c23acce29289916899e7c7cf3f568f2257b4aa9",
+          "calls": 1,
+          "input_tokens": 1215,
+          "output_tokens": 72,
+          "estimated_cost_usd": null,
+          "usage_complete": true,
+          "schema_version": "fidelity-slots-v3",
+          "schema_hash": "0a8022c0bbd8184c55b5728ced7ca27ff0c408744ef353e28666a777ea4cbf54",
+          "output_limit": 4096,
+          "latency_ms": 2098
+        }
+      ],
+      "requested_edits": 1,
+      "reviewed_edits": 1,
+      "latency_ms": 2110
+    }
+  },
+  "held_out_calls": 0,
+  "p2_calls": 0
+}

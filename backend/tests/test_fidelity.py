@@ -46,25 +46,34 @@ def test_supported_verdict_still_requires_known_source_references():
     assert check_fidelity(document(),changes(),client=Judge('unsupported',source_ids=['invented']))['status']=='unavailable'
 
 
-def test_judge_schema_requires_every_edit_and_reserves_large_output():
+def test_bounded_judge_batches_cover_every_edit_and_aggregate_usage():
     import json
     doc = {'snapshot_id':'large','blocks':[{'block_id':f'b{i}','text':'The treatment may help.'} for i in range(120)],
            'chunks':[{'chunk_id':'c1','block_ids':[f'b{i}' for i in range(120)]}]}
     edits = [{**changes()[0],'source_id':f'b{i}'} for i in range(120)]
     class CompleteJudge:
+        requests = []
         responses = property(lambda self:self)
         def create(self, **request):
-            self.request = request
+            self.requests.append(request)
+            requested = json.loads(request['input'][0]['content'])['changes']
             return NS(status='completed',output=[],usage=NS(input_tokens=20,output_tokens=10),
                       output_text=json.dumps({'edits':{e['source_id']:{'verdict':'supported','category':'same_meaning',
-                          'reason':'Meaning preserved.','source_ids':[e['source_id']]} for e in edits}}))
+                          'reason':'Meaning preserved.','source_ids':[e['source_id']]} for e in requested}}))
     judge = CompleteJudge()
     result = check_fidelity(doc,edits,client=judge)
     assert result['status']=='passed' and len(result['findings'])==120
-    slots = judge.request['text']['format']['schema']['properties']['edits']
-    assert set(slots['required']) == {e['source_id'] for e in edits}
-    assert slots['additionalProperties'] is False
-    assert judge.request['max_output_tokens'] >= 120*100
+    assert len(judge.requests) == 15
+    covered = []
+    for request in judge.requests:
+        slots = request['text']['format']['schema']['properties']['edits']
+        assert len(slots['required']) <= 8 and slots['additionalProperties'] is False
+        covered.extend(slots['required'])
+    assert len(covered) == len(set(covered)) == 120
+    assert set(covered) == {e['source_id'] for e in edits}
+    assert result['telemetry']['calls'] == 15
+    assert result['telemetry']['input_tokens'] == 300
+    assert result['telemetry']['output_tokens'] == 150
 
 
 def test_incomplete_coverage_remains_unavailable():
@@ -90,3 +99,55 @@ def test_another_edited_chunk_cannot_support_a_claim():
     result = check_fidelity(doc,edits,client=CrossChunkJudge())
     assert result['status']=='unavailable'
     assert result['reason']=='invalid_judge_output'
+
+@pytest.mark.parametrize('later_verdict,expected', [('unsupported','rejected'), ('uncertain','rejected'), ('malformed','unavailable')])
+def test_later_batch_failure_never_accepts_supported_prefix(later_verdict, expected):
+    import json
+    doc = {'snapshot_id':'s1', 'blocks':[{'block_id':f'b{i}','text':'May help.'} for i in range(9)],
+           'chunks':[{'chunk_id':'c1','block_ids':[f'b{i}' for i in range(9)]}]}
+    edits = [{**changes()[0], 'source_id':f'b{i}'} for i in range(9)]
+    class LaterFailure:
+        calls = 0
+        responses = property(lambda self:self)
+        def create(self, **request):
+            self.calls += 1
+            rows = json.loads(request['input'][0]['content'])['changes']
+            verdict = 'supported' if self.calls == 1 else later_verdict
+            body = {'edits':{c['source_id']:{'verdict':verdict,'category':'scope',
+                'reason':'Qualifier was changed.','source_ids':[c['source_id']]} for c in rows}}
+            return NS(status='completed',output=[],usage=NS(input_tokens=20,output_tokens=10),
+                      output_text=json.dumps(body))
+    progress = []
+    result = check_fidelity(doc, edits, client=LaterFailure(), on_progress=progress.append)
+    assert result['status'] == expected
+    assert result['telemetry']['calls'] == 2
+    assert result['telemetry']['input_tokens'] == 40
+    assert len(result['findings']) == (8 if expected == 'unavailable' else 9)
+    assert all(p['status'] == 'unavailable' for p in progress)
+    assert progress[0]['telemetry']['calls'] == 1
+    assert len(progress[0]['findings']) == 8
+
+
+def test_interrupted_later_batch_preserves_completed_usage_in_progress():
+    import json
+    doc = {'snapshot_id':'s1', 'blocks':[{'block_id':f'b{i}','text':'May help.'} for i in range(9)],
+           'chunks':[{'chunk_id':'c1','block_ids':[f'b{i}' for i in range(9)]}]}
+    edits = [{**changes()[0], 'source_id':f'b{i}'} for i in range(9)]
+    class Interrupted:
+        calls = 0
+        responses = property(lambda self:self)
+        def create(self, **request):
+            self.calls += 1
+            if self.calls == 2:
+                raise RuntimeError('stopped before dispatch')
+            rows = json.loads(request['input'][0]['content'])['changes']
+            return NS(status='completed',output=[],usage=NS(input_tokens=20,output_tokens=10),
+                output_text=json.dumps({'edits':{c['source_id']:{'verdict':'supported','category':'same',
+                    'reason':'Meaning preserved.','source_ids':[c['source_id']]} for c in rows}}))
+    progress = []
+    with pytest.raises(RuntimeError, match='stopped before dispatch'):
+        check_fidelity(doc, edits, client=Interrupted(), on_progress=progress.append)
+    assert progress[-1]['status'] == 'unavailable'
+    assert progress[-1]['telemetry']['calls'] == 1
+    assert progress[-1]['telemetry']['input_tokens'] == 20
+    assert progress[-1]['telemetry']['reviewed_edits'] == 8

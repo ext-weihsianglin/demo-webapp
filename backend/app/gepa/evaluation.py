@@ -155,7 +155,8 @@ class PageEvaluator:
             technical = failure and outcome['status'] not in SEMANTIC_REWRITE_FAILURES
             if outcome['status'] == 'succeeded':
                 self.budget.check()
-                gate = check_fidelity(document,outcome['changes'],client=GuardedClient(self._client(),self.budget))
+                gate = check_fidelity(document,outcome['changes'],client=GuardedClient(self._client(),self.budget),
+                    on_progress=lambda partial: result.update(fidelity=partial))
                 result['fidelity'] = gate
                 failure = gate['status'] != 'passed'
                 technical = gate['status'] == 'unavailable'

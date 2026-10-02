@@ -277,11 +277,11 @@ def test_historical_recommendation_cannot_promote_under_new_edit_boundary(tmp_pa
         with pytest.raises(ValueError, match='edit boundary'):
             manager.promote('old-run', candidate['id'])
         assert registry.resolve(None, 'gpt-4.1-mini')['id'] == registry.baseline('gpt-4.1-mini')['id']
-    from app.fidelity import MODEL, PROMPT, SCHEMA_VERSION, OUTPUT_BUDGET
+    from app.fidelity import MODEL, PROMPT, SCHEMA_VERSION, OUTPUT_BUDGET, BATCH_SIZE
     from app.prompt_registry import digest
     store.write('manifest', {'edit_boundary_version':EDIT_BOUNDARY_VERSION, 'fidelity':{
         'model':MODEL,'prompt_hash':digest(PROMPT),'schema_version':SCHEMA_VERSION,
-        'output_budget':OUTPUT_BUDGET,'uncertain_policy':'reject_whole_proposal'}})
+        'output_budget':OUTPUT_BUDGET,'batch_size':BATCH_SIZE,'uncertain_policy':'reject_whole_proposal'}})
     assert manager.status('old-run')['promotion_compatible'] is True
     assert manager.status('old-run')['edit_boundary_version'] == EDIT_BOUNDARY_VERSION
     manager.promote('old-run', candidate['id'])
@@ -291,7 +291,7 @@ def test_historical_recommendation_cannot_promote_under_new_edit_boundary(tmp_pa
 def test_historical_recommendation_cannot_promote_with_changed_fidelity_policy(tmp_path):
     import pytest
     from app.rewriting import EDIT_BOUNDARY_VERSION
-    from app.fidelity import MODEL, PROMPT, SCHEMA_VERSION, OUTPUT_BUDGET
+    from app.fidelity import MODEL, PROMPT, SCHEMA_VERSION, OUTPUT_BUDGET, BATCH_SIZE
     from app.prompt_registry import digest
     registry = PromptRegistry(tmp_path/'registry')
     candidate = registry.create('gpt-4.1-mini','Clarify supported answers.','old-gate',[])
@@ -300,10 +300,11 @@ def test_historical_recommendation_cannot_promote_with_changed_fidelity_policy(t
     store.write('summary',{'id':'old-gate','status':'stopped','config':{'model':'gpt-4.1-mini'},
         'recommendation':candidate['id'],'candidates':[],'budget':{}})
     current = {'model':MODEL,'prompt_hash':digest(PROMPT),'schema_version':SCHEMA_VERSION,
-        'output_budget':OUTPUT_BUDGET,'uncertain_policy':'reject_whole_proposal'}
+        'output_budget':OUTPUT_BUDGET,'batch_size':BATCH_SIZE,'uncertain_policy':'reject_whole_proposal'}
     for profile in (None, {**current,'prompt_hash':'historical'}, {**current,'model':'old-model'},
                     {**current,'schema_version':'old-schema'}, {**current,'output_budget':{}},
-                    {**current,'uncertain_policy':'allow'}):
+                    {**current,'uncertain_policy':'allow'}, {**current,'batch_size':999},
+                    {k:v for k,v in current.items() if k!='batch_size'}):
         store.write('manifest',{'edit_boundary_version':EDIT_BOUNDARY_VERSION,'fidelity':profile})
         status = manager.status('old-gate')
         assert status['promotion_compatible'] is False
