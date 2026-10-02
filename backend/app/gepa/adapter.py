@@ -40,7 +40,7 @@ Do not copy example brands, topic categories, prices or claims into the reusable
 procedure. Few-shot examples are not enabled in this contract yet; do not embed
 source-specific demonstrations or page facts in the procedure.
 
-The served P1 v7 uses original-space query-to-document similarities plus context
+The served P1 v7.1 uses original-space query-to-document similarities plus context
 features. Consider accurate supported subjects, relationships and answers in
 editable body headings and paragraphs, not just word substitutions. Title/URL
 metadata, block structure, source inventory and parser warnings remain fixed.

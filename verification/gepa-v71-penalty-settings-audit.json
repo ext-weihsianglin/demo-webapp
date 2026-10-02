@@ -1,0 +1,49 @@
+{
+  "run_id": "0befe8c8a6ce417aa30a317946dbb4b2",
+  "config": {
+    "dataset_id": "validation-90-v71",
+    "model": "gpt-5-mini",
+    "reflection_model": "gpt-5-mini",
+    "prompt_id": "gpt-5-mini--rewrite-page-v7",
+    "candidates": 2,
+    "reflection_batch": 2,
+    "attempts": 100,
+    "concurrency": 10,
+    "strategy_characters": 6000,
+    "unsupported_penalty": 0.05,
+    "uncertain_penalty": 0.02,
+    "length_multiplier": 1.5,
+    "consecutive_failures": 3,
+    "failure_rate": 0.2,
+    "failure_minimum": 10,
+    "seed": 2,
+    "enable_live_calls": true
+  },
+  "dataset_hash": "d8e67a5a69c151a0e17ef53109ca7b4145e69cd93153290ba98373d94530bfdd",
+  "upstream": {
+    "repository": "https://github.com/ext-weihsianglin/content-optimization-system",
+    "revision": "6a9606d3febaf62f76c8448c44f91a120107e5a6",
+    "package_version": "0.3.0",
+    "serializer": "markdownify-structured-v1"
+  },
+  "p1": {
+    "version": "lr-semantic-v7.1",
+    "model_sha256": "d1c4b25480a1579239b8fd9c8bfa7d3beac11bfa2ec591d8540941b6f89493cc",
+    "serving_policy": "markdownify-v7.1"
+  },
+  "unchanged_snapshots_payloads_queries_roles": 89,
+  "removed_pages": [
+    "7dd971136d6d855b76d1ca876463d16e4320004118dff0e4268b18f1b2e5be27"
+  ],
+  "added_pages": [
+    "c3eb8f05f357db56f966feeda94be78c1eee0d7c846bd45da3ffb0d5b7b0c74f"
+  ],
+  "split_provenance": "All 9432 v7.1 row identities match v7 in order; v7 supplies frozen split assignments; same corpus manifest verified",
+  "embedding_cache": "/Users/ext-weihsiang.lin/Documents/profound/data/content-optimization-system/representations/shared-store",
+  "embedding_model": "text-embedding-3-large",
+  "embedding_dimensions": 3072,
+  "pca": false,
+  "context_budget": 128000,
+  "request_overhead_reserve": 2048,
+  "scope": "Settings and provenance audit; no quality conclusion"
+}
