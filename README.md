@@ -235,9 +235,9 @@ Preparation verifies source/split hashes and eligibility without provider calls,
 
 Choose the rewriter, reflection model and seed prompt; edit limits before Start. Defaults are 1,000 total page rewrite attempts, concurrency 30, two reflection pages per mutation and up to 50 proposed mutations. The first exhausted limit stops search; displayed event count does not limit optimization. Baseline selection consumes 30 attempts. Reflection, fidelity and embedding calls are additional and counted separately. Enable live research calls explicitly. Start/Stop, saved outcomes, prompt diffs, per-query original/baseline/candidate comparisons and JSON export are available. Stop saves in-flight results; restart leaves interrupted runs inspectable without resuming them. One backend process owns one active run.
 
-Only the baseline's first editorial paragraph evolves; its remaining instructions and mechanical harness stay fixed. Prompt registry entries are model-specific and content-addressed. Baselines reproduce v7 bytes. Experimental entries are selectable in Content Studio; promotion updates a local model default only when a complete 30-page candidate improves baseline mean without increasing failure rate. Generated prompts/defaults and run data are ignored local files. `PROMPT_REGISTRY_ROOT` overrides generated registry storage.
+Only the baseline's first editorial paragraph evolves; its remaining instructions and mechanical harness stay fixed. Prompt registry entries are model-specific and content-addressed. Baselines reproduce v7 bytes. Experimental entries are selectable in Content Studio; promotion updates a model default only when a complete 30-page candidate improves baseline mean without increasing failure rate. The complete `prompt-registry/` is versioned application configuration: commit candidate `prompt.json` artifacts and each promoted model’s `selected.json` pointer together. Promotion writes files but does not automatically commit or push them. Worktrees receive these changes through Git; server restarts retain them on disk. Run data remains ignored under `backend/data/`. `PROMPT_REGISTRY_ROOT` is an optional external storage override; copy any candidate/default changes back into the repository registry before committing them.
 
-Both research and ordinary real drafts use the same source-relative `gpt-5` fidelity gate (low reasoning effort, batches of at most eight edits). Unsupported or uncertain edits reject the whole proposal. Research retains the original page and measured score; semantic rejection is feedback, while judge/provider failures count toward the technical breaker. A passed gate is an LLM judgment, not factual verification. This adds separately reported provider review calls for changed drafts.
+Research and ordinary drafts use the same source-relative `gpt-5` fidelity assessment (low reasoning effort, batches of at most eight edits). In research, unsupported or uncertain edits reject the proposal. In Content Studio, the assessment is advisory and the draft remains available for review. Research retains the original page and measured score; semantic rejection is feedback, while judge/provider failures count toward the technical breaker. A passed gate is an LLM judgment, not factual verification. This adds separately reported provider review calls for changed drafts.
 
 For a bounded live wiring check, explicitly run:
 
@@ -250,3 +250,28 @@ It uses one reflection-page rewrite and one reflection mutation, with no selecti
 
 
 New GEPA runs use a query-driven procedure component (6,000 characters by default, configurable in the research tab). Expand **Reflection requests, queries and score feedback** to inspect saved complete reflection requests; candidate details show the rationale, trace reference and prompt diff. Complete-request token checks cover rewriting, reflection and fidelity. Grounded few-shot examples remain disabled. See [current implementation limits](docs/gepa-implementation.md#query-driven-procedure-monitoring--2026-10-02).
+
+
+## Query-aware prompt for manual QA
+
+In Content Studio, choose **gpt-4.1-mini**, then **Experimental f2ef0597** in
+**Rewrite prompt**. This is the exact expanded query-aware prompt from the
+three-page exploratory comparison; **Baseline v7** remains the shipped default.
+The candidate considers all queries, asks for small source-supported edits, and
+retains the fixed v7 guards. It does not ingest feature-importance matrices or
+change URL paths. It is hand-written, not GEPA-optimized.
+
+See [QA evidence and limitations](docs/query-aware-prompt-qa.md) before reviewing
+results. The comparison found unsupported edits; selection does not establish
+quality improvement. This PR leaves the existing fidelity policy in place.
+
+The committed artifact is discovered by the existing prompt catalog and dropdown.
+If you override `PROMPT_REGISTRY_ROOT`, copy the candidate's `p2/gpt-4.1-mini/candidates/`
+subdirectory into that registry to expose it there; existing local default
+pointers are preserved. Refresh the app after updating the checkout.
+
+### Studio fidelity review
+
+Drafts retain the source-relative fidelity assessment, including unsupported or uncertain edits and reviewer failures. These outcomes are advisory in Content Studio: the proposal, Markdown export and P1 before/after comparison remain available for human inspection. Structural/source-reference validation remains enforced. The assessment panel displays block IDs, findings and reviewer latency; a completed draft does not imply factual approval. GEPA acceptance policy remains separate.
+
+The P2 body-content-v5 boundary protects Google Translate interface containers and recognizes editorial regions within body-level ASP.NET Web Forms wrappers identified by a hidden `__VIEWSTATE` field. Ordinary forms and controls remain read-only. These source-context annotations do not modify upstream parsed blocks or P1 feature inputs.

@@ -11,9 +11,11 @@ UPSTREAM = {"repository": "https://github.com/ext-weihsianglin/content-optimizat
 def extract_document(content, format, href, hostname):
     document, chunks = parse_snapshot(content, href, hostname, source_format=format)
     if document['source']['format'] == 'html':
-        roles = html_role_context(content, document['blocks'])
+        roles, editorial_forms = html_role_context(content, document['blocks'])
         if roles:
             document['source_role_context'] = roles
+        if editorial_forms:
+            document['source_editorial_form_context'] = editorial_forms
     return document, chunks
 
 

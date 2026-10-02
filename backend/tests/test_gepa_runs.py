@@ -86,7 +86,7 @@ def test_real_gepa_mutates_selects_and_saves_without_reflection_leakage(tmp_path
     assert manager.registry.resolve(None,'gpt-4.1-mini')['id']==candidate['id']
     assert manager.store(run['id']).export()['events']
     assert manager.store(run['id']).read('manifest')['semantic_rewrite_failures'] == ['unsupported_output']
-    assert manager.store(run['id']).read('manifest')['edit_boundary_version'] == 'body-content-v4'
+    assert manager.store(run['id']).read('manifest')['edit_boundary_version'] == 'body-content-v5'
 
 
 def test_fidelity_penalty_scores_proposals_and_reaches_reflection_without_breaker(tmp_path,monkeypatch):

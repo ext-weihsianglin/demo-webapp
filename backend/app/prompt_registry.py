@@ -1,4 +1,4 @@
-"""Immutable model-specific editorial prompts and explicit local promotion."""
+"""Versioned model-specific prompts; promotion writes a Git-trackable default pointer."""
 from app.experiment_names import prompt_name
 from pathlib import Path
 import hashlib

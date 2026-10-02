@@ -167,7 +167,7 @@ def test_provider_cannot_rewrite_a_read_only_control_even_with_known_evidence():
     outcome = rewrite(document, chunks, 'How should I choose road shoes?', 'Preserve original', False, client=StubClient(control_edit))
     assert outcome['status'] == 'invalid_output'
     assert 'document' not in outcome and 'markdown' not in outcome
-    assert outcome['telemetry']['edit_boundary_version'] == 'body-content-v4'
+    assert outcome['telemetry']['edit_boundary_version'] == 'body-content-v5'
 
 
 @pytest.mark.parametrize('control', ['<p role="button">Subscribe now</p>', '<div role="button"><p>Subscribe now</p></div>'])

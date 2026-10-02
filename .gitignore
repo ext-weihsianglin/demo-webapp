@@ -9,5 +9,6 @@ __pycache__/
 *.tsbuildinfo
 backend/data/
 
-prompt-registry/p2/*/candidates/
-prompt-registry/p2/*/selected.json
+# Prompt candidates and selected defaults are versioned with the application.
+# Ignore only interrupted atomic-write files.
+prompt-registry/**/*.tmp
