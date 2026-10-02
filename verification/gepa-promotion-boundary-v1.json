@@ -1,0 +1,11 @@
+{
+  "historical_run": "14fb1db59c26428daa7f47866d7d2250",
+  "candidate_id": "gpt-4.1-mini--f2c1ae748d0a7f0e7af993d8",
+  "http_status": 400,
+  "response": {
+    "detail": "Research configuration or frozen artifact is invalid/unavailable"
+  },
+  "selected_id": "gpt-4.1-mini--rewrite-page-v7",
+  "edit_boundary_version": "body-content-v2",
+  "interpretation": "Actual restarted backend rejects obsolete recommendation via frontend proxy; baseline pointer remains selected. Dedicated coordinator regression establishes missing/old-version rejection and current-version acceptance."
+}
