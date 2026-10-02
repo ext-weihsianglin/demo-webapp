@@ -1,0 +1,361 @@
+{
+  "diagnostic_only": true,
+  "provider_calls": 0,
+  "feature_names": [
+    "title_similarity",
+    "h1_similarity",
+    "outline_similarity",
+    "page_similarity",
+    "path_similarity",
+    "section_max",
+    "section_top3_mean",
+    "section_median",
+    "section_q25",
+    "section_q75",
+    "log_prompt_words",
+    "prompt_question",
+    "prompt_comparison",
+    "prompt_how_to",
+    "path_depth",
+    "path_homepage",
+    "path_editorial",
+    "path_commerce",
+    "path_support_docs",
+    "log_word_count",
+    "log_title_words",
+    "log_heading_count",
+    "log_h1_count",
+    "log_list_items",
+    "log_table_count",
+    "log_paragraph_count",
+    "log_code_count",
+    "log_ordered_steps",
+    "headings_per_1000_words",
+    "list_items_per_1000_words",
+    "has_table",
+    "has_list",
+    "has_jsonld",
+    "has_article_schema",
+    "log_source_script_count",
+    "empty_title",
+    "retained_text_fraction",
+    "needs_review",
+    "possible_error_response",
+    "sparse_body",
+    "format_html",
+    "paragraph_log_median_words",
+    "paragraph_log_p90_words",
+    "short_paragraph_fraction",
+    "unique_word_fraction",
+    "numeric_word_fraction",
+    "question_heading_fraction",
+    "duplicate_heading_fraction",
+    "log_link_count",
+    "links_per_1000_words",
+    "heading_word_fraction",
+    "paragraph_word_fraction",
+    "list_item_word_fraction",
+    "table_word_fraction",
+    "code_word_fraction"
+  ],
+  "cases": [
+    {
+      "hostname": "grow.google",
+      "page_id": "0efcb5d3452ca9bd144a112e3bcf7be510785ca5d1aa8cd93d891f747f128d55",
+      "query_count": 9,
+      "score_reproduced_within": 1e-12,
+      "changed_input_features": [
+        "page_similarity",
+        "section_max",
+        "section_top3_mean",
+        "section_q75",
+        "log_word_count",
+        "headings_per_1000_words",
+        "list_items_per_1000_words",
+        "retained_text_fraction",
+        "unique_word_fraction",
+        "numeric_word_fraction",
+        "links_per_1000_words",
+        "heading_word_fraction",
+        "paragraph_word_fraction"
+      ],
+      "unchanged_input_count": 42,
+      "mean_logit_delta": 0.0005441569088876281,
+      "feature_contributions": [
+        {
+          "feature": "section_q75",
+          "mean_logit_delta": 0.00011277151293591759,
+          "max_abs_logit_delta": 0.0013419761342647136
+        },
+        {
+          "feature": "page_similarity",
+          "mean_logit_delta": 0.00017364534331217092,
+          "max_abs_logit_delta": 0.0007044241185828689
+        },
+        {
+          "feature": "section_max",
+          "mean_logit_delta": 7.401060250267155e-05,
+          "max_abs_logit_delta": 0.000666095422524044
+        },
+        {
+          "feature": "section_top3_mean",
+          "mean_logit_delta": -3.369562904642887e-05,
+          "max_abs_logit_delta": 0.0004651982843008854
+        },
+        {
+          "feature": "retained_text_fraction",
+          "mean_logit_delta": 0.0003128806093923497,
+          "max_abs_logit_delta": 0.0003128806093923497
+        },
+        {
+          "feature": "unique_word_fraction",
+          "mean_logit_delta": -0.0001806537636358379,
+          "max_abs_logit_delta": 0.0001806537636358379
+        },
+        {
+          "feature": "headings_per_1000_words",
+          "mean_logit_delta": 8.69825071875479e-05,
+          "max_abs_logit_delta": 8.69825071875479e-05
+        },
+        {
+          "feature": "list_items_per_1000_words",
+          "mean_logit_delta": -4.161930505943649e-05,
+          "max_abs_logit_delta": 4.161930505943649e-05
+        },
+        {
+          "feature": "heading_word_fraction",
+          "mean_logit_delta": 3.9858123354905904e-05,
+          "max_abs_logit_delta": 3.9858123354905904e-05
+        },
+        {
+          "feature": "log_word_count",
+          "mean_logit_delta": -1.9132454524176617e-05,
+          "max_abs_logit_delta": 1.9132454524176617e-05
+        },
+        {
+          "feature": "paragraph_word_fraction",
+          "mean_logit_delta": 1.6746516459159203e-05,
+          "max_abs_logit_delta": 1.6746516459159203e-05
+        },
+        {
+          "feature": "numeric_word_fraction",
+          "mean_logit_delta": 3.6736701414195414e-06,
+          "max_abs_logit_delta": 3.673670141419541e-06
+        },
+        {
+          "feature": "links_per_1000_words",
+          "mean_logit_delta": -1.310824132680127e-06,
+          "max_abs_logit_delta": 1.310824132680127e-06
+        }
+      ]
+    },
+    {
+      "hostname": "www.lindy.ai",
+      "page_id": "92e678faacd11130d26a0f4600a9f42a8bb3fb3f36b2787417bae88e6c19e79a",
+      "query_count": 10,
+      "score_reproduced_within": 1e-12,
+      "changed_input_features": [
+        "page_similarity",
+        "section_median",
+        "section_q75",
+        "log_word_count",
+        "headings_per_1000_words",
+        "list_items_per_1000_words",
+        "retained_text_fraction",
+        "unique_word_fraction",
+        "numeric_word_fraction",
+        "links_per_1000_words",
+        "heading_word_fraction",
+        "paragraph_word_fraction",
+        "table_word_fraction"
+      ],
+      "unchanged_input_count": 42,
+      "mean_logit_delta": -0.0010872385865189807,
+      "feature_contributions": [
+        {
+          "feature": "page_similarity",
+          "mean_logit_delta": 0.0002599413304873658,
+          "max_abs_logit_delta": 0.003924242460292557
+        },
+        {
+          "feature": "retained_text_fraction",
+          "mean_logit_delta": -0.00105943010826619,
+          "max_abs_logit_delta": 0.0010594301082661902
+        },
+        {
+          "feature": "section_median",
+          "mean_logit_delta": -9.01659704226792e-05,
+          "max_abs_logit_delta": 0.0006203288633496746
+        },
+        {
+          "feature": "section_q75",
+          "mean_logit_delta": -4.350041873432254e-05,
+          "max_abs_logit_delta": 0.0004350041873432254
+        },
+        {
+          "feature": "headings_per_1000_words",
+          "mean_logit_delta": -0.000153856605855737,
+          "max_abs_logit_delta": 0.000153856605855737
+        },
+        {
+          "feature": "heading_word_fraction",
+          "mean_logit_delta": -7.12969182064724e-05,
+          "max_abs_logit_delta": 7.129691820647239e-05
+        },
+        {
+          "feature": "log_word_count",
+          "mean_logit_delta": 6.23371329458e-05,
+          "max_abs_logit_delta": 6.23371329458e-05
+        },
+        {
+          "feature": "paragraph_word_fraction",
+          "mean_logit_delta": -3.81828746892439e-05,
+          "max_abs_logit_delta": 3.818287468924391e-05
+        },
+        {
+          "feature": "unique_word_fraction",
+          "mean_logit_delta": 3.507019416062303e-05,
+          "max_abs_logit_delta": 3.507019416062304e-05
+        },
+        {
+          "feature": "list_items_per_1000_words",
+          "mean_logit_delta": 3.133703366704951e-05,
+          "max_abs_logit_delta": 3.133703366704951e-05
+        },
+        {
+          "feature": "table_word_fraction",
+          "mean_logit_delta": -1.5766571517583846e-05,
+          "max_abs_logit_delta": 1.5766571517583846e-05
+        },
+        {
+          "feature": "numeric_word_fraction",
+          "mean_logit_delta": -6.7439429011686125e-06,
+          "max_abs_logit_delta": 6.743942901168612e-06
+        },
+        {
+          "feature": "links_per_1000_words",
+          "mean_logit_delta": 3.019132813602518e-06,
+          "max_abs_logit_delta": 3.0191328136025178e-06
+        }
+      ]
+    },
+    {
+      "hostname": "tech.co",
+      "page_id": "2bb4591118effbfb8d09d04596192a33660aa27645c7f3f31a4c99e469a5affe",
+      "query_count": 10,
+      "score_reproduced_within": 1e-12,
+      "changed_input_features": [
+        "page_similarity",
+        "section_max",
+        "section_top3_mean",
+        "section_median",
+        "section_q25",
+        "section_q75",
+        "log_word_count",
+        "headings_per_1000_words",
+        "list_items_per_1000_words",
+        "retained_text_fraction",
+        "paragraph_log_p90_words",
+        "unique_word_fraction",
+        "numeric_word_fraction",
+        "links_per_1000_words",
+        "heading_word_fraction",
+        "paragraph_word_fraction",
+        "table_word_fraction"
+      ],
+      "unchanged_input_count": 38,
+      "mean_logit_delta": 0.0008056210139242182,
+      "feature_contributions": [
+        {
+          "feature": "retained_text_fraction",
+          "mean_logit_delta": 0.0018209663643345378,
+          "max_abs_logit_delta": 0.0018209663643345376
+        },
+        {
+          "feature": "page_similarity",
+          "mean_logit_delta": 0.0002110556097087106,
+          "max_abs_logit_delta": 0.0016985054374100091
+        },
+        {
+          "feature": "paragraph_log_p90_words",
+          "mean_logit_delta": -0.0011025955849273245,
+          "max_abs_logit_delta": 0.0011025955849273243
+        },
+        {
+          "feature": "section_top3_mean",
+          "mean_logit_delta": -6.429351156515394e-05,
+          "max_abs_logit_delta": 0.0004422129659005186
+        },
+        {
+          "feature": "section_max",
+          "mean_logit_delta": -5.298380025518484e-05,
+          "max_abs_logit_delta": 0.00043625602302058906
+        },
+        {
+          "feature": "section_median",
+          "mean_logit_delta": -2.4674496183336e-05,
+          "max_abs_logit_delta": 0.00042343269361429226
+        },
+        {
+          "feature": "headings_per_1000_words",
+          "mean_logit_delta": 0.00017742481262656194,
+          "max_abs_logit_delta": 0.00017742481262656194
+        },
+        {
+          "feature": "unique_word_fraction",
+          "mean_logit_delta": -0.00016917730569545214,
+          "max_abs_logit_delta": 0.00016917730569545214
+        },
+        {
+          "feature": "section_q75",
+          "mean_logit_delta": 3.1056843007412875e-05,
+          "max_abs_logit_delta": 0.00016114298258259414
+        },
+        {
+          "feature": "log_word_count",
+          "mean_logit_delta": -0.00010615189433296858,
+          "max_abs_logit_delta": 0.00010615189433296858
+        },
+        {
+          "feature": "heading_word_fraction",
+          "mean_logit_delta": 4.3011632355217314e-05,
+          "max_abs_logit_delta": 4.3011632355217314e-05
+        },
+        {
+          "feature": "list_items_per_1000_words",
+          "mean_logit_delta": -4.2479803128921004e-05,
+          "max_abs_logit_delta": 4.2479803128921004e-05
+        },
+        {
+          "feature": "paragraph_word_fraction",
+          "mean_logit_delta": 3.405777647032275e-05,
+          "max_abs_logit_delta": 3.405777647032274e-05
+        },
+        {
+          "feature": "table_word_fraction",
+          "mean_logit_delta": 3.063590100730764e-05,
+          "max_abs_logit_delta": 3.063590100730764e-05
+        },
+        {
+          "feature": "section_q25",
+          "mean_logit_delta": 6.648667758128962e-06,
+          "max_abs_logit_delta": 2.7696581296168997e-05
+        },
+        {
+          "feature": "numeric_word_fraction",
+          "mean_logit_delta": 1.6942749743197686e-05,
+          "max_abs_logit_delta": 1.6942749743197686e-05
+        },
+        {
+          "feature": "links_per_1000_words",
+          "mean_logit_delta": -3.822946998825952e-06,
+          "max_abs_logit_delta": 3.822946998825952e-06
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Additive contributions explain frozen classifier output, not content quality.",
+    "Three fixed reflection controls cannot establish an attainable ceiling."
+  ]
+}

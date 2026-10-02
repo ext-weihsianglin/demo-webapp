@@ -22,26 +22,43 @@ products, brands, industries, query topics or source-specific facts in the strat
 Learn an editing method from their outcomes. P1 gains count only after the fixed
 fidelity gate passes; use rejected edits to learn what to leave unchanged and
 prefer focused useful improvements over broad unsupported expansion.
+The served P1 v7 uses original-space query-to-document embedding similarities and
+document/context measurements, not the older lexical query-coverage features.
+Useful editable signals include H1/outline similarity and whole-page/section
+similarity. Prefer source-supported subject clarification in existing editable
+body headings and coherent answer-bearing paragraphs over synonym substitution.
+A heading may name only the subject actually supported by its original chunk;
+never enlarge its factual scope or promise a benefit. Keep every paragraph's
+existing facts, attributions, caveats and language intact while making the
+supported subject, relationship or answer easier to understand.
+Feature importance and coefficient signs are hypotheses, not editing guarantees;
+judge each strategy by observed mean P1 and every query regression. Title metadata,
+URL/query values, block counts, lists/tables and parser warnings are fixed here.
+Do not target sparse-body flags, word-count ratios or vocabulary statistics by
+padding, deleting facts, repetition, keyword stuffing or inventing structure.
 One unsupported edit rejects the entire proposal and erases its potential gain.
 Broad summarization and consolidation can introduce unsupported details even when
 called concise. Prefer an operational policy for a small number of already relevant
-body paragraphs: remove ambiguity or reorder existing statements; preserve the
-paragraph's factual scope, attribution, numbers and qualifiers. Leave unrelated
-blocks unchanged. Do not manufacture explanations, benefits or decision criteria.
+body headings and paragraphs: clarify source-supported subjects and relationships,
+remove ambiguity or reorder existing statements; preserve factual scope,
+attribution, numbers and qualifiers. Leave unrelated blocks unchanged.
+Do not manufacture explanations, benefits or decision criteria.
 The strategy must describe HOW to edit, not WHAT the example pages are about.
-An abstract policy can select one to three paragraphs, clarify wording using their
-existing facts, and leave every other slot null. Derive the policy from outcomes;
+An abstract policy can clarify up to two existing body headings and one to three
+related paragraphs using their existing facts, leaving every other slot null.
+At least one useful supported paragraph edit is required by the fixed harness;
+a headings-only proposal cannot succeed. Derive the policy from outcomes;
 do not copy this example automatically. Before returning, remove domain nouns,
 product categories and named activities borrowed from the diagnostic pages.
 Use proposed_edit_count and proposed_edits_by_type to assess whether the rewriter
 followed the strategy: a small-edit instruction can still produce page-wide edits.
 Counts cover mechanically validated edit traces; null means the trace was
 unavailable, not that the provider proposed zero edits.
-For a focused policy, make its scope operational: the limit applies to non-null
-paragraph replacements TOTAL across the whole page, all queries and all sections,
-not per query or section. Leave heading slots and all unselected slots null.
-Prefer rewording facts already in each selected paragraph over expanding headings
-or short labels into prose. A short topic label is not a factual paragraph.
+For a focused policy, make its scope operational: any heading and paragraph limits
+apply TOTAL across the whole page, all queries and all sections, not per query or
+section. Leave all unselected slots null. Preserve existing heading levels and
+block order. Prefer clarifying supported meaning over expanding short labels into
+prose. A short topic label is not evidence for new factual claims.
 Never weaken fixed security, schema, evidence, preservation,
 language or fidelity constraints. Do not encourage fabricated claims, repetition,
 keyword stuffing, unsupported clickbait or answering queries unsupported by source.
